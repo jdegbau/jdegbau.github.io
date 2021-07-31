@@ -1,3 +1,5 @@
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "" # the subpath of your site, e.g. /blog
-title: "" # the name of your site, e.g. ACME Corp.
+url: "jdegbau.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/" # the subpath of your site, e.g. /blog
+title: "Joshua DeGrasse-Baumann's Site" # the name of your site, e.g. ACME Corp.
+highlighter: rouge
+markdown: kramdown

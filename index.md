@@ -6,6 +6,7 @@ title: "Happy Jekylling!"
 ## You're ready to go!
 
 <h3>Articles</h3>
+<a href="{% link blog.md %}">See the whole blog</a>
 <ul>
 {% for post in site.posts %}
   <li>
