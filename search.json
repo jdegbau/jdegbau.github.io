@@ -8,6 +8,8 @@
       "url"      : "{{ site.baseurl }}{{ post.url }}",
       "category" : "{{ post.category }}",
       "tags"     : "{{ post.tags | join: ', ' }}",
+      "excerpt"  : "{{ post.excerpt }}",
+      "permalink": "{{ post.permalink }}",
       "date"     : "{{ post.date }}"
 
     } {% unless forloop.last %},{% endunless %}

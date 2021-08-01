@@ -18,6 +18,8 @@ permalink: /search/
 SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
+  searchResultTemplate: '<div><a href="{url}"><h1>{title}</h1></a><span>{permalink}</span></div>',
+  noResultsText: ("You stumped me!"),
   json: '/search.json'
 })
 </script>

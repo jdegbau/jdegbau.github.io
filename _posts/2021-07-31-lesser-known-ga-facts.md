@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 8 Lesser Known Facts About Google Analytics
-excerpt: Contact Form 7 has depricated support for its built-in redirection solution. Learn how to recreate it with JavaScript and PHP.
+excerpt: Google Analytics does some weird stuff, man.
 permalink: /blog/lesser-known-google-analytics-facts/
+featured-image: https://jdegbau.com/wp-content/uploads/8-Lesser-Known-Facts-About-Google-Analytics-Sessions.jpg
 ---
 
 ![8 Lesser Known Facts About Google Analytics](https://jdegbau.com/wp-content/uploads/8-Lesser-Known-Facts-About-Google-Analytics-Sessions.jpg) 
