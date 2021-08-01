@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <link rel="preload" as="image" href="{{ page.featured-image }}">
   </head>

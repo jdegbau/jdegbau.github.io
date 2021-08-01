@@ -23,3 +23,4 @@ SimpleJekyllSearch({
   json: '/search.json'
 })
 </script>
+<!-- Learn more here: https://github.com/christian-fei/Simple-Jekyll-Search -->
