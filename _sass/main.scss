@@ -8,13 +8,13 @@ body {
   font-family: $bodyFont;
 }
 
+// Blog Cards
+
 #blog-cards {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
-
-// Blog Card Styles
 
 .featured-image {
   height: 100px;
@@ -31,32 +31,13 @@ body {
   padding: 1rem;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 3fr 1fr auto;
-  grid-template-rows: 1fr 1.5fr auto;
-  grid-auto-columns: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "Content Content Sidebar"
-    "Content Content Sidebar"
-    "Footer Footer Footer";
+// Reading Progress Bar
+
+#progress-bar {
+  background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+  width: 0;
+  height: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
-
-.Content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    ". . ."
-    ". . ."
-    ". . .";
-  grid-area: Content;
-}
-
-.Sidebar { grid-area: Sidebar; }
-
-.Footer { grid-area: Footer; }
