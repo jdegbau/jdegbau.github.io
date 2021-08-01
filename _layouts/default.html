@@ -6,7 +6,7 @@
     <title>{{ page.title }} - {{ site.title }}</title>
     <link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    <link rel="preload" as="image" href="{{ page.featured-image }}">
+    {%if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
   </head>
   <body>
     <div id="progress-bar"></div>
