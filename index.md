@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Happy Jekylling!"
+title: "The Home of Joshua DeGrasse-Baumann"
 ---
 
-## You're ready to go!
+## Hello! I'm Josh!
 
 <h3>Articles</h3>
 <a href="{% link blog.md %}">See the whole blog</a>
