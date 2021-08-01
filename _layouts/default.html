@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
   </head>
   <body>
-    <h1>{{ page.title }}</h1>
-    {{ content }}
+    <div class="container">
+      <div class="content">
+        <h1>{{ page.title }}</h1>
+        {{ content }}
+      </div> <!-- end .content -->
+      <div id="sidebar"></div> <!-- end #sidebar -->
+      <div id="footer"></div> <!-- end #footer -->
+    </div> <!-- end .container -->
   </body>
 </html>

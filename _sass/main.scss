@@ -30,3 +30,33 @@ body {
   background: rgb(223, 222, 222);
   padding: 1rem;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr auto;
+  grid-template-rows: 1fr 1.5fr auto;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Content Content Sidebar"
+    "Content Content Sidebar"
+    "Footer Footer Footer";
+}
+
+.Content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+  grid-area: Content;
+}
+
+.Sidebar { grid-area: Sidebar; }
+
+.Footer { grid-area: Footer; }

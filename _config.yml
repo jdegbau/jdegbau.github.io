@@ -1,5 +1,9 @@
-url: "jdegbau.github.io"
+url: "https://jdegbau.github.io"
 baseurl: "/"
 title: "Joshua DeGrasse-Baumann's Site"
 highlighter: rouge
 markdown: kramdown
+plugins:
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
