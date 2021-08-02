@@ -1,0 +1,2 @@
+{% assign words = content | number_of_words %}
+{{ words | divided_by:180 }} min read
