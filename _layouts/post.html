@@ -3,6 +3,6 @@ layout: default
 ---
 
 <main id=content>
-    <p>{{ page.date }} - Written by {{ page.author }} - {% include read-time.md %}</p>
+    <p>{{ page.date | date: "%b %-d %Y"}} - Written by {{ page.author }} - {% include read-time.md %}</p>
     {{ content }}
 </main>
