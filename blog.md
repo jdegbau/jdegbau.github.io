@@ -9,7 +9,7 @@ permalink: /blog/
     <a href="{{ post.url }}"><h2 class="title">{{ post.title }}</h2></a>
     <p class="date">{{ post.date | date: "%B %e, %Y" }}</p>
     <p class="excerpt">{{ post.excerpt }}</p>
-    <div class="featured-image"></div>
+    <img class="featured-image" src="{{ post.featured-image }}" />
   </div>
 {% endfor %}
 </div> <!-- end #blog-cards -->

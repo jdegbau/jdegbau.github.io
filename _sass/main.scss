@@ -17,7 +17,6 @@ body {
 }
 
 .featured-image {
-  height: 100px;
   width: 100%;
   background: rgb(151, 39, 36);
   margin: 0.5rem 0;
@@ -29,6 +28,12 @@ body {
   justify-content: space-between;
   background: rgb(223, 222, 222);
   padding: 1rem;
+}
+
+// Blog Post-Specific Styles
+
+#featured-image {
+  max-width: 100%;
 }
 
 // Reading Progress Bar

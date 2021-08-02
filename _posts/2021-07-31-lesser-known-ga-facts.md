@@ -5,8 +5,6 @@ permalink: /blog/lesser-known-google-analytics-facts/
 featured-image: https://jdegbau.com/wp-content/uploads/8-Lesser-Known-Facts-About-Google-Analytics-Sessions.jpg
 ---
 
-![8 Lesser Known Facts About Google Analytics](https://jdegbau.com/wp-content/uploads/8-Lesser-Known-Facts-About-Google-Analytics-Sessions.jpg) 
-
 Sessions in Google Analytics are deceptively simple. It's just the number of visits to your website, right? Yes, but... No. At their heart, sessions _are_ meant to tell you how many people visited your website during a given time frame or meeting certain criteria. And in the vast majority of instances, that's exactly what they do. But sessions are also an artificial number created when certain conditions within a piece of code are met (e.g., when an initial hit is sent via the Google Analytics tracking code). Unfortunately, this code doesn't always match up with what the average user would consider a session on your website. Let's take a look at eight lesser known facts about Google Analytics sessions and how they might impact your data.
 
 ## 1. A Session Ends If The Campaign Data Changes
