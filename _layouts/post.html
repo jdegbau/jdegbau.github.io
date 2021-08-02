@@ -1,6 +1,10 @@
 ---
 layout: default
 ---
-<p>{{ page.date }} - Written by {{ page.author }}</p>
 
-{{ content }}
+<div class="left-sidebar">Left Sidebar</div>
+<main id=content>
+    <p>{{ page.date }} - Written by {{ page.author }}</p>
+    {{ content }}
+</main>
+<div class="right-sidebar" contenteditable>Right Sidebar</div>

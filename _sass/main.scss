@@ -41,3 +41,34 @@ body {
   top: 0;
   left: 0;
 }
+
+// Grid Style
+
+body {
+  display: grid;
+  height: 100vh;
+  grid-template: auto 1fr auto / auto 1fr auto
+}
+
+// etc
+
+.left-sidebar {
+  grid-column: 1 / 2;
+}
+
+main {
+  grid-column: 2 / 3;
+}
+
+.right-sidebar {
+  grid-column: 3 / 4;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.left-sidebar,
+.right-sidebar {
+  padding: 1rem;
+}

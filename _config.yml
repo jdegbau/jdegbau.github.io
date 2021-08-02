@@ -1,9 +1,19 @@
-url: "https://jdegbau.github.io/"
+url: "https://jdegbau.github.io"
 baseurl: "/"
 title: "Joshua DeGrasse-Baumann's Site"
 highlighter: rouge
 markdown: kramdown
+
+# Plugins
 plugins:
   - jekyll-redirect-from
 whitelist:
   - jekyll-redirect-from
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      author: Joshua DeGrasse-Baumann

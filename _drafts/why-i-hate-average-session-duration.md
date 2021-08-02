@@ -3,7 +3,6 @@ layout: post
 title: Why I Hate Average Session Duration
 excerpt: Contact Form 7 has depricated support for its built-in redirection solution. Learn how to recreate it with JavaScript and PHP.
 permalink: /blog/why-i-hate-average-session-duration/
-author: Joshua DeGrasse-Baumann
 ---
 
 How long are users spending on your website? If you’re trusting the number you see in Google Analytics, you’ve probably got a more bleak picture than what the actual number is.
