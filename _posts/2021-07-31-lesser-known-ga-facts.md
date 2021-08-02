@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 8 Lesser Known Facts About Google Analytics
 excerpt: Google Analytics does some weird stuff, man.
 permalink: /blog/lesser-known-google-analytics-facts/

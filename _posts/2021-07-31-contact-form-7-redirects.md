@@ -1,5 +1,4 @@
 ---
-layout: default
 title: (Solved) Redirecting Contact Form 7 Forms
 excerpt: Contact Form 7 has depricated support for its built-in redirection solution. Learn how to recreate it with JavaScript and PHP.
 permalink: /blog/contact-form-7-redirects/
