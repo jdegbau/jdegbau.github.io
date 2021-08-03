@@ -1,1 +1,8 @@
+<nav id="main-nav">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li {% if page.url contains '/blog/' %}class="active"{% endif %}><a href="/blog/">Blog</a></li>
+        <li {% if page.url contains '/about' %}class="active"{% endif %}><a href="/about/">About</a></li>
+    </ul>
+</nav>
 <span>&copy; {{ site.time | date: '%Y' }} <a href="/">Joshua DeGrasse-Baumann</a></span>
