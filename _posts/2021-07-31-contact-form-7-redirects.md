@@ -1,10 +1,9 @@
 ---
-title: (Solved) Redirecting Contact Form 7 Forms
+title: Redirecting Contact Form 7 Forms
+SEO_title: (Solved) Redirecting Contact Form 7 Forms - Joshua DeGrasse-Baumann
 excerpt: Contact Form 7 has depricated support for its built-in redirection solution. Learn how to recreate it with JavaScript and PHP.
 permalink: /blog/contact-form-7-redirects/
-redirect_from: 
-  - /cf7/
-  - /test-me/
+redirect_from: /contact-form-7-thank-you-page-redirects/
 ---
 
 > **Note:** This post originally appeared on [the Rocket Clicks blog](https://www.rocketclicks.com/client-education/contact-form-7-thank-page-redirects/). The version below has been slightly modified from that original version.

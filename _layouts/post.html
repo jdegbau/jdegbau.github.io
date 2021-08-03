@@ -4,6 +4,6 @@ layout: default
 
 <main id=content>
     <p>{{ page.date | date: "%b %-d %Y"}} - Written by {{ page.author }} - {% include read-time.md %}</p>
-    <img id="featured-image" src="{{ page.featured-image }}" alt="{{page.title}}" />
+    <img id="featured-image" src="{{ page.featured_image }}" alt="{{page.title}}" />
     {{ content }}
 </main>
