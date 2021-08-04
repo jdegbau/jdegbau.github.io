@@ -28,12 +28,7 @@ permalink: /blog/
               <footer class="card-footer">
                 <time class="card-footer-item" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%B %e, %Y" }}</time>
                 <p class="card-footer-item">
-                  {% assign words = post.content | number_of_words %}
-                  {% if words < 180 %}
-                  1 min read
-                  {% else %}
-                  {{ words | divided_by:180 }} min read
-                  {% endif %}             
+                  {% include read-time.md %}         
                 </p>
               </footer>
             </div>
