@@ -8,32 +8,16 @@ body {
   font-family: $bodyFont;
 }
 
-/* // Blog Cards
+// Blog Card Overrides
 
-#blog-cards {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.featured-image {
-  width: 100%;
-  background: rgb(151, 39, 36);
-  margin: 0.5rem 0;
-}
-
-.card {
-  display: flex;
+#blog-cards .card {
+  display:flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: rgb(223, 222, 222);
-  padding: 1rem;
-} */
+  height: 100%;
+}
 
-// Blog Post-Specific Styles
-
-#featured-image {
-  max-width: 100%;
+#blog-cards .card-footer {
+  margin-top: auto;
 }
 
 // Reading Progress Bar
@@ -45,6 +29,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 2;
 }
 
 /* ======== BULMA ======== */
@@ -4701,16 +4686,6 @@ fieldset[disabled] .select select:hover {
 
 .breadcrumb.has-succeeds-separator li + li::before {
   content: "\0227B";
-}
-
-#blog-cards .card {
-  display:flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-#blog-cards .card-footer {
-  margin-top: auto;
 }
 
 .card {

@@ -1,10 +1,10 @@
 <div id="sidebar-content">
-<nav id="main-nav">
-    <ul>
-        <li><a href="/">About</a></li>
-        <li {% if page.url contains '/blog/' %}class="active"{% endif %}><a href="/blog/">Blog</a></li>
-        <li {% if page.url contains '/about' %}class="active"{% endif %}><a href="/contact/">Contact</a></li>
-    </ul>
-</nav>
-<span>&copy; {{ site.time | date: '%Y' }} <a href="/">Joshua DeGrasse-Baumann</a></span>
+    <nav id="main-nav" class="menu">
+        <ul class="menu-list">
+            <li><a {% if page.url == '/' %}class="is-active"{% endif %} href="/">About</a></li>
+            <li><a {% if page.url contains '/blog/' %}class="is-active"{% endif %} href="/blog/">Blog</a></li>
+            <li><a {% if page.dir contains '/contact/' %}class="is-active"{% endif %} href="/contact/">Contact</a></li>
+        </ul>
+    </nav>
+<footer class="footer"><span>&copy; {{ site.time | date: '%Y' }} <a href="/">Joshua DeGrasse-Baumann</a></span></footer>
 </div>

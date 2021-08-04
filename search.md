@@ -6,7 +6,7 @@ permalink: /search/
 
 <!-- Html Elements for Search -->
 <div id="search-container">
-<input type="text" id="search-input" placeholder="search...">
+<input type="text" id="search-input" class="input" placeholder="search...">
 <ul id="results-container"></ul>
 </div>
 

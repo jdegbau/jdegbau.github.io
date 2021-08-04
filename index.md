@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "The Home of Joshua DeGrasse-Baumann"
+permalink: /
 ---
 
 ## Hello! I'm Josh!

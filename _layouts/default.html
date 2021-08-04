@@ -8,13 +8,12 @@
     {% else %}
     <title>{{ page.title }} - {{ site.title }}</title>
     {% endif %}
-    <link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    {%if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
+    {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
+    {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
   </head>
   <body>
     <div id="progress-bar"></div>
-    <div class="columns is-8">
+    <div class="columns is-gapless section">
       <div class="column is-8">
         <h1 class="title">{{ page.title }}</h1>
         <section class="content">
@@ -23,5 +22,6 @@
       </div>
       <div id="sidebar" class="column">{% include sidebar.html %}</div> <!-- end #sidebar -->
     </div>
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
   </body>
 </html>
