@@ -8,6 +8,35 @@ body {
   font-family: $bodyFont;
 }
 
+// Mobile Sidebar Nav
+span#toggle-span {
+  top: 5px;
+  right: 5px;
+  position: fixed;
+  z-index: 3;
+  background: lightgray
+}
+
+div#sidebar.open {
+  display: block!important;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background: white!important;
+  height: 100vh;
+  transition: background 1s 0s ease;
+}
+
+#sidebar.open #sidebar-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+}
+
 // Blog Card Overrides
 
 #blog-cards .card {

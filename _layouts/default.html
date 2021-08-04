@@ -10,9 +10,13 @@
     {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
+    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="progress-bar"></div>
+    <span id="toggle-span" class="icon is-large is-hidden-desktop" alt="open navigation">
+      <i id="toggle" class="fas fa-bars"></i>
+  </span>
     <div class="columns is-gapless section">
       <div class="column is-8">
         <h1 class="title">{{ page.title }}</h1>
@@ -20,8 +24,8 @@
           {{ content }}
         </section>
       </div>
-      <div id="sidebar" class="column">{% include sidebar.html %}</div> <!-- end #sidebar -->
+      <div id="sidebar" class="column is-hidden-mobile">{% include sidebar.html %}</div> <!-- end #sidebar -->
     </div>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-  </body>
+    <script src="/assets/js/mobile-nav.js" crossorigin="anonymous"></script>
 </html>
