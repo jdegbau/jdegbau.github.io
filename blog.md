@@ -3,13 +3,41 @@ layout: default
 title: Josh's Blog
 permalink: /blog/
 ---
-<div id="blog-cards">
-{% for post in site.posts %}
-  <div class="card">
-    <a href="{{ post.url }}"><h2 class="title">{{ post.title }}</h2></a>
-    <p class="date">{{ post.date | date: "%B %e, %Y" }}</p>
-    <p class="excerpt">{{ post.excerpt }}</p>
-    <img class="featured-image" src="{{ post.featured_image }}" />
-  </div>
-{% endfor %}
-</div> <!-- end #blog-cards -->
+
+<div class="section" id="blog-cards">
+        <div class="columns">
+        <div class="row columns is-multiline">
+        {% for post in site.posts %}
+          <div class="column is-4">
+            <div class="card large">
+              <a href="{{ post.url }}"><div class="card-image">
+                <figure class="image is-16by9">
+                  <img src="{{ post.featured_image }}" alt="{{ post.title }}">
+                </figure>
+              </div></a>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <a href="{{ post.url }}"><p class="title is-4 no-padding">{{ post.title }}</p></a>
+                  </div>
+                </div>
+                  <div class="content">
+                  {{ post.excerpt }}
+                  </div>
+              </div>
+              <footer class="card-footer">
+                <time class="card-footer-item" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%B %e, %Y" }}</time>
+                <p class="card-footer-item">
+                  {% assign words = post.content | number_of_words %}
+                  {% if words < 180 %}
+                  1 min read
+                  {% else %}
+                  {{ words | divided_by:180 }} min read
+                  {% endif %}             
+                </p>
+              </footer>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
