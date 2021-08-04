@@ -8,7 +8,7 @@ permalink: /blog/
         <div class="columns">
         <div class="row columns is-multiline">
         {% for post in site.posts %}
-          <div class="column is-4">
+          <div class="column is-6">
             <div class="card large">
               <a href="{{ post.url }}"><div class="card-image">
                 <figure class="image is-16by9">
