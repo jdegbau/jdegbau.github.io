@@ -10,7 +10,6 @@
     {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
-    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
   </head>
   <body>
     <div id="progress-bar"></div>
@@ -27,5 +26,6 @@
       <div id="sidebar" class="column is-hidden-mobile">{% include sidebar.html %}</div> <!-- end #sidebar -->
     </div>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    <script src="/assets/js/mobile-nav.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/mobile-nav.js"></script>
 </html>

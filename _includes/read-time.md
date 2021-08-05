@@ -11,7 +11,7 @@
     {% endif %}
 {% else %}
     {% comment %}
-    This else statement is used to add read time to the cards on blog.md
+    This else statement is used to add read time to the cards on blog.md-note the "post.content" instead of "content"
     {% endcomment %}
     {% assign words = post.content | number_of_words %}
     {% if words < 180 %}
