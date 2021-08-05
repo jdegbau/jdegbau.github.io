@@ -10,7 +10,7 @@
     {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
-    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
   </head>
   <body>
     <div id="progress-bar"></div>
