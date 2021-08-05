@@ -7,7 +7,6 @@ markdown: kramdown
 # Plugins
 plugins:
   - jekyll-redirect-from
-  - jekyll-compress-images
 whitelist:
   - jekyll-redirect-from
 
