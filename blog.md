@@ -26,7 +26,7 @@ permalink: /blog/
                   </div>
               </div>
               <footer class="card-footer">
-                <time class="card-footer-item" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%B %e, %Y" }}</time>
+                <time class="card-footer-item" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%b %-d, %Y" }}</time>
                 <p class="card-footer-item">
                   {% include read-time.md %}         
                 </p>

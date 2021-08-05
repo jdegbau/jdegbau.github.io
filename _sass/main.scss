@@ -8,8 +8,13 @@ body {
   font-family: $bodyFont;
 }
 
+// Sidebar
+#sidebar {
+  text-align: center;
+}
+
 // Mobile Sidebar Nav
-span#toggle-span {
+span#toggle {
   top: 5px;
   right: 5px;
   position: fixed;

@@ -14,13 +14,13 @@
   </head>
   <body>
     <div id="progress-bar"></div>
-    <span id="toggle-span" class="icon is-large is-hidden-desktop" alt="open navigation">
-      <i id="toggle" class="fas fa-bars"></i>
+    <span id="toggle" class="icon is-large is-hidden-tablet" alt="open navigation">
+      <i id="toggle-icon" class="fas fa-bars"></i>
   </span>
     <div class="columns is-gapless section">
       <div class="column is-8">
-        <h1 class="title">{{ page.title }}</h1>
-        <section class="content">
+        <section class="content container is-fluid">
+          <h1 class="title">{{ page.title }}</h1>
           {{ content }}
         </section>
       </div>
