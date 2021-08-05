@@ -1,10 +1,5 @@
----
-layout: default
-title: Search
-permalink: /search/
----
-
 <!-- Html Elements for Search -->
+<div id="search">
 <div id="search-container" class="field">
   <p class="control has-icons-right">
     <input type="text" id="search-input" class="input" placeholder="Search...">
@@ -15,6 +10,7 @@ permalink: /search/
 </div>
 
 <ul id="results-container"></ul>
+</div> <!-- end #search -->
 
 <!-- Script pointing to search-script.js -->
 <script src="/assets/js/instant-search.min.js" type="text/javascript"></script>

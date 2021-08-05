@@ -35,7 +35,6 @@ function openNav() {
 	sidebar.classList.add('open');
     toggleIcon.classList.remove('fa-bars');
     toggleIcon.classList.add('fa-times');
-    document.body.setAttribute('scroll', 'no');
 	changeAltText('close navigation');
 	toggleButton.removeEventListener('click', openNav);
 	toggleButton.addEventListener('click', closeNav);

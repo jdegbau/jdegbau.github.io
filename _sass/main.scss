@@ -31,7 +31,7 @@ div#sidebar.open {
   z-index: 2;
   background: white!important;
   height: 100vh;
-  transition: background 1s 0s ease;
+  transition: background 4s 4s ease;
 }
 
 #sidebar.open #sidebar-content {
@@ -64,6 +64,22 @@ div#sidebar.open {
   top: 0;
   left: 0;
   z-index: 2;
+}
+
+// Search
+
+div#search {
+  position: relative;
+}
+
+#search-container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+#results-container {
+  position: absolute;
+  width: 100%;
 }
 
 /* ======== BULMA ======== */
