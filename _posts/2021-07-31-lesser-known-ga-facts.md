@@ -1,7 +1,7 @@
 ---
-title: 8 Lesser Known Facts About Google Analytics
+title: 8 Lesser Known Facts About Google Analytics Sessions
 excerpt: Google Analytics does some weird stuff, man.
-permalink: /blog/lesser-known-google-analytics-facts/
+permalink: /blog/lesser-known-google-analytics-session-facts/
 featured_image: /assets/img/8-Lesser-Known-Facts-About-Google-Analytics-Sessions.jpg
 redirect_from: /facts-about-google-analytics-sessions/
 ---
