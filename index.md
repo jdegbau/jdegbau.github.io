@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: "The Home of Joshua DeGrasse-Baumann"
 permalink: /
 ---
