@@ -1,9 +1,10 @@
 ---
 title: 8 Lesser Known Facts About Google Analytics Sessions
 excerpt: Google Analytics does some weird stuff, man.
-permalink: /blog/lesser-known-google-analytics-session-facts/
 featured_image: /assets/img/8-Lesser-Known-Facts-About-Google-Analytics-Sessions.jpg
-redirect_from: /facts-about-google-analytics-sessions/
+redirect_from: 
+    - /facts-about-google-analytics-sessions/
+slug: /lesser-known-google-analytics-session-facts/
 ---
 
 Sessions in Google Analytics are deceptively simple. It’s just the number of visits to your website, right?

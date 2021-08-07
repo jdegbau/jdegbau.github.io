@@ -19,3 +19,4 @@ defaults:
     values:
       author: Joshua DeGrasse-Baumann
       layout: post
+      permalink: /blog/:slug/
