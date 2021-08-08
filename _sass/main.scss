@@ -89,8 +89,8 @@ div#search {
 
 // Code Highlighter
 
-figure.highlight {text-align: left; margin: 0 }
-figure.highlight pre {white-space: pre-wrap }
+figure.highlight { text-align: left!important; margin: 0!important }
+figure.highlight pre { white-space: pre-wrap }
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #008000 } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */

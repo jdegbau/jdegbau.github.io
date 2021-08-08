@@ -82,6 +82,7 @@ add_action( 'wp_footer', 'redirect_cf7' );
 
 function redirect_cf7() {
 ?>
+
 <script type="text/javascript">
 document.addEventListener( 'wpcf7mailsent', function( event ) {
     if ( '947' == event.detail.contactFormId ) { // Sends sumissions on form 947 to the first thank you page
