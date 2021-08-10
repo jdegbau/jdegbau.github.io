@@ -21,7 +21,8 @@ layout: wrapper
     "image": "{{site.url}}{{ page.featured_image }}",  
     "author": {
         "@type": "Person",
-        "name": "{{ page.author }}"
+        "name": "{{ page.author }}",
+        "url": "{{ site.url }}"
     },
     "datePublished": "{{ page.date | date: "%Y-%m-%d"}}"
 }
