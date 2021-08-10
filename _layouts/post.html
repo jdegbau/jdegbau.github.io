@@ -7,3 +7,22 @@ layout: wrapper
     <img src="{{ page.featured_image }}" alt="{{page.title}}" />
 </figure>
 {{ content }}
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{{ page.url }}"
+    },
+    "headline": "{{ page.title }}",
+    "description": "{{ page.excerpt }}",
+    "image": "{{site.url}}{{ page.featured_image }}",  
+    "author": {
+        "@type": "Person",
+        "name": "{{ page.author }}"
+    },
+    "datePublished": "{{ page.date | date: "%Y-%m-%d"}}"
+}
+</script>
