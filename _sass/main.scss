@@ -5,7 +5,7 @@
 
 #sidebar-content {
   position: sticky;
-  top: 90px;
+  top: 95px;
 }
 
 // Blog Card Overrides
@@ -27,14 +27,14 @@
   width: 0;
   height: 5px;
   position: fixed;
-  top: 84px;
+  top: 90px;
   left: 0;
   z-index: 2;
 }
 
 @media (max-width: 1023px) {
   #progress-bar {
-    top: 52px;
+    top: 58px;
   }
 }
 
@@ -52,6 +52,12 @@ div#search {
 #results-container {
   position: absolute;
   width: 100%;
+}
+
+@media (max-width: 1023px) {
+  #results-container {
+    position: initial;
+  }
 }
 
 // Code Highlighter

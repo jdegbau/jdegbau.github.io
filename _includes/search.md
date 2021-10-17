@@ -19,7 +19,7 @@
 SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
-  searchResultTemplate: '<a href="{permalink}"><article class="message is-small has-text-left"><div class="message-header"><p>{title}</p></div><div class="message-body">{excerpt}</div></article></a>',
+  searchResultTemplate: '<a class="is-paddingless" href="{permalink}"><article class="message is-small has-text-left"><div class="message-header"><p>{title}</p></div><div class="message-body">{excerpt}</div></article></a>',
   noResultsText: ("You stumped me!"),
   json: '/search.json'
 })
