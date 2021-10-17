@@ -1,0 +1,26 @@
+<nav class="navbar menu is-fixed-top is-spaced" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+	  <a class="navbar-item" href="https://bulma.io">
+		<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+	  </a>
+  
+	  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+		<span aria-hidden="true"></span>
+		<span aria-hidden="true"></span>
+		<span aria-hidden="true"></span>
+	  </a>
+	</div>
+  
+	<div id="navbarBasicExample" class="navbar-menu menu-list">
+		<div class="navbar-start">
+			<a href="/" class="navbar-item{% if page.url == '/' %} is-active{% endif %}">About</a>
+	  
+			<a href="/blog/" class="navbar-item{% if page.url contains '/blog/' %} is-active{% endif %}">Blog</a>
+	
+			<a class="navbar-item{% if page.dir contains '/contact/' %} is-active{% endif %}" href="/contact/">Contact</a>
+		</div>
+	  <div class="navbar-end">
+		{% include search.md %}
+	  </div>
+	</div>
+  </nav>

@@ -1,55 +1,25 @@
-var winX = null;
-var winY = null;
+document.addEventListener('DOMContentLoaded', () => {
 
-window.addEventListener('scroll', function () {
-    if (winX !== null && winY !== null) {
-        window.scrollTo(winX, winY);
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+    
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+    
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+    
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+    
+        });
+      });
     }
+    
 });
-
-function disableWindowScroll() {
-    winX = window.scrollX;
-    winY = window.scrollY;
-}
-
-function enableWindowScroll() {
-    winX = null;
-    winY = null;
-}
-
-var toggleButton = document.getElementById('toggle');
-var toggleIcon = toggleButton.querySelectorAll('i')[0];
-var sidebar = document.getElementById('sidebar');
-
-toggleButton.addEventListener('click', openNav);
-
-// Change the alt text for the #toggle button (for screen readers)
-
-function changeAltText(altText) {
-	toggleButton.setAttribute('alt', altText);
-}
-
-// Open drawer when #toggle button is clicked
-
-function openNav() {
-	sidebar.classList.add('open');
-    toggleIcon.classList.remove('fa-bars');
-    toggleIcon.classList.add('fa-times');
-	changeAltText('close navigation');
-	toggleButton.removeEventListener('click', openNav);
-	toggleButton.addEventListener('click', closeNav);
-    disableWindowScroll();
-}
-
-// Close drawer when #toggle-open button is clicked
-
-function closeNav() {
-	sidebar.classList.remove('open');
-    toggleIcon.classList.remove('fa-times');
-    toggleIcon.classList.add('fa-bars');
-	changeAltText('open navigation');
-	toggleButton.id = 'toggle';
-	toggleButton.removeEventListener('click', closeNav);
-	toggleButton.addEventListener('click', openNav);
-    enableWindowScroll();
-}

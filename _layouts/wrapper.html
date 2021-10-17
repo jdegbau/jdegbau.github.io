@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: "en-US" }}" class="has-navbar-fixed-top">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -12,6 +12,7 @@
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
   </head>
   <body>
+    {% include navigation.html %}
     <div id="progress-bar"></div>
     <span id="toggle" class="icon is-large is-hidden-tablet" alt="open navigation">
       <i id="toggle-icon" class="fas fa-bars"></i>
@@ -23,8 +24,9 @@
           {{ content }}
         </section>
       </div>
-      <div id="sidebar" class="column is-hidden-mobile">{% include sidebar.html %}</div> <!-- end #sidebar -->
+      <div id="sidebar" class="column">{% include sidebar.html %}</div> <!-- end #sidebar -->
     </div>
+    <footer class="footer"><span>&copy; {{ site.time | date: '%Y' }} <a href="/">Joshua DeGrasse-Baumann</a></span></footer>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
     <script src="/assets/js/mobile-nav.js"></script>

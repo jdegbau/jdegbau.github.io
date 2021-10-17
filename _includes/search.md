@@ -1,4 +1,3 @@
-<!-- Html Elements for Search -->
 <div id="search">
 <div id="search-container" class="field">
   <p class="control has-icons-right">
