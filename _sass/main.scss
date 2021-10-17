@@ -8,6 +8,10 @@
   top: 95px;
 }
 
+#profile-photo {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
 // Blog Card Overrides
 
 #blog-cards .card {
