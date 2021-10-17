@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     {% if page.SEO_title %}
     <title>{{ page.SEO_title }}</title>
     {% else %}
@@ -11,16 +12,14 @@
     {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" href="/assets/img/favicon.gif" type="image/gif" >
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap" rel="stylesheet">
   </head>
   <body>
     {% include navigation.html %}
     <div id="progress-bar"></div>
-    <div class="columns is-gapless section">
+    <div class="columns section">
       <div class="column is-four-fifths">
-        <section class="content container is-fluid">
+        <section class="content container">
           <h1 class="title">{{ page.title }}</h1>
           {{ content }}
         </section>
