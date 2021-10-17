@@ -1,10 +1,8 @@
 ---
 layout: page
-title: "The Home of Joshua DeGrasse-Baumann"
+title: "Hello! I'm Josh!"
 permalink: /
 ---
-
-## Hello! I'm Josh!
 
 <h3>Articles</h3>
 <ul>

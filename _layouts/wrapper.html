@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     {% if page.SEO_title %}
     <title>{{ page.SEO_title }}</title>
     {% else %}
@@ -10,13 +11,12 @@
     {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap" rel="stylesheet">
   </head>
   <body>
     {% include navigation.html %}
     <div id="progress-bar"></div>
-    <span id="toggle" class="icon is-large is-hidden-tablet" alt="open navigation">
-      <i id="toggle-icon" class="fas fa-bars"></i>
-  </span>
     <div class="columns is-gapless section">
       <div class="column is-four-fifths">
         <section class="content container is-fluid">
