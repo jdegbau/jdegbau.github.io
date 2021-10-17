@@ -12,7 +12,7 @@
 	</div>
   
 	<div id="navbar-menu-list" class="navbar-menu menu-list">
-		<div class="navbar-start">
+		<div class="navbar-start mx-auto">
 			<a href="/" class="navbar-item{% if page.url == '/' %} is-active{% endif %}">About</a>
 	  
 			<a href="/blog/" class="navbar-item{% if page.url contains '/blog/' %} is-active{% endif %}">Blog</a>
@@ -34,6 +34,7 @@
 		span#logo-cursor {
 		opacity: 0;
 		animation: blink 1s linear infinite alternate;
+		display: inline-block;
 		}
 
 		@keyframes blink {
