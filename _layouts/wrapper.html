@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}" class="has-navbar-fixed-top">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable="no">
+    <meta name="viewport" content="width=device-width, initial-scale=1>
     <meta charset="utf-8">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,12 +9,23 @@
     <title>{{ page.SEO_title }}</title>
     {% else %}
     <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="icon" href="/assets/img/favicon.gif" type="image/gif">
     {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
-    <link rel="icon" href="/assets/img/favicon.gif" type="image/gif" >
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NM6JBXF');</script>
+    <!-- End Google Tag Manager -->
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NM6JBXF"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     {% include navigation.html %}
     <div id="progress-bar"></div>
     <div class="columns section is-gapless">
