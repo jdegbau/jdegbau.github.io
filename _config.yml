@@ -7,6 +7,7 @@ markdown: kramdown
 # Plugins
 plugins:
   - jekyll-redirect-from
+  - jekyll-minifier
 whitelist:
   - jekyll-redirect-from
 
