@@ -3,11 +3,12 @@ baseurl: "/"
 title: "Joshua DeGrasse-Baumann's Site"
 highlighter: rouge
 markdown: kramdown
-
+sass:
+  style: compressed
+  
 # Plugins
 plugins:
   - jekyll-redirect-from
-  - jekyll-minifier
 whitelist:
   - jekyll-redirect-from
 
