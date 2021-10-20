@@ -1,7 +1,7 @@
 <nav class="navbar menu is-fixed-top is-spaced has-shadow" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 	  <a class="navbar-item" href="/">
-		<p>(<span id="logo-argument">jdegbau</span>) => {<span id="logo-cursor">|</span>}</p>
+		<span id="logo-function">(<span id="logo-argument">jdegbau</span>) => {<span id="logo-cursor"></span>}</span>
 	  </a>
   
 	  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-list">
@@ -24,34 +24,3 @@
 	  </div>
 	</div>
   </nav>
-
-  <style>
-	  .navbar-brand {
-		  font-size: 1.75em;
-		  font-family: 'JetBrains Mono', monospace;
-	  }
-
-		span#logo-cursor {
-		opacity: 0;
-		animation: blink 1s linear infinite alternate;
-		display: inline-block;
-		}
-
-		@keyframes blink {
-		50% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-		}
-
-		span#logo-argument {
-			color: #de935e;
-		}
-
-		span.navbar-brand {
-			color: #C5C8C6;
-		}
-
-  </style>

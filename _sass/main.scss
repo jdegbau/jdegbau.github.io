@@ -90,6 +90,50 @@ div#search {
   }
 }
 
+// Navigation
+
+.navbar-brand {
+  font-size: 1.75em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+span#logo-cursor::after {
+  height: 1.75rem;
+  width: 2px;
+  background: black;
+  display: inline-block;
+  content: "";
+  margin: -4px;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+span#logo-cursor {
+  opacity: 0;
+  animation: blink 1s linear infinite alternate;
+  display: inline-block;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+span#logo-function {
+  color: $black;
+}
+span#logo-argument {
+  color: #de935e;
+}
+
+span.navbar-brand {
+  color: #C5C8C6;
+}
+
 // Code Highlighter
 
 figure.highlight { text-align: left!important; margin: 0!important }
