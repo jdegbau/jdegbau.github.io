@@ -10,9 +10,9 @@
     <title>{{ page.SEO_title }}</title>
     {% else %}
     <title>{{ page.title }} - {{ site.title }}</title>
+    {% endif %}
     <link rel="icon" href="/assets/img/favicon.gif?v=2" type="image/gif">
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    {% endif %}
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
     <!-- Google Tag Manager -->
