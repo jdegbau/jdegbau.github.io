@@ -4,18 +4,43 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
 
 // Set your brand colors
-$rcRed: rgb(216, 68, 71);
-$pink: #FA7C91;
-$brown: #757763;
-
-// Update Bulma's global variables
+$orange: #de935e;
+$black: #090909;
+$white: #c5c8c6;
 $family-sans-serif: "Nunito", sans-serif;
 $family-monospace: "JetBrains Mono", monospace;
 
-// Update some of Bulma's component variables
+@import "./utilities/initial-variables.sass";
+
+// Update Bulma's derived variables
+@import "./utilities/functions.sass";
+
+$primary: $orange;
+$scheme-main: $black;
+$scheme-main-bis: $black-bis;
+$scheme-main-ter: $black-ter;
+$scheme-invert: $white;
+$scheme-invert-bis: $white-bis;
+$scheme-invert-ter: $white-ter;
+
+$text: $grey-lighter;
+$text-invert: findColorInvert($text);
+$text-light: findDarkColor($white);
+$text-strong: findLightColor($grey);
+
+$link: $primary;
+$navbar-item-hover-background-color: $scheme-main-ter;
+
+$background: $black-ter;
+$card-background-color: $scheme-main-ter;
+
+@import "./utilities/derived-variables.sass";
 
 // Import only what you need from Bulma
-@import "./utilities/_all.sass";
+@import "./utilities/animations.sass";
+@import "./utilities/controls.sass";
+@import "./utilities/extends.sass";
+@import "./utilities/mixins.sass";
 @import "./base/_all.sass";
 @import "./components/_all.sass";
 @import "./elements/_all.sass";
@@ -53,7 +78,7 @@ $family-monospace: "JetBrains Mono", monospace;
 // Reading Progress Bar
 
 #progress-bar {
-  background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+  background-image: linear-gradient(to right, $black 0%, $orange 31%, $white 100%);
   width: 0;
   height: 5px;
   position: fixed;
@@ -68,7 +93,9 @@ $family-monospace: "JetBrains Mono", monospace;
   }
 }
 
-// Search
+/*----------
+Search
+----------*/
 
 div#search {
   position: relative;
@@ -100,7 +127,7 @@ div#search {
 span#logo-cursor::after {
   height: 1.75rem;
   width: 2px;
-  background: black;
+  background: $white;
   display: inline-block;
   content: "";
   margin: -4px;
@@ -124,7 +151,7 @@ span#logo-cursor {
 }
 
 span#logo-function {
-  color: $black;
+  color: #de6868;
 }
 span#logo-argument {
   color: #de935e;
@@ -132,6 +159,12 @@ span#logo-argument {
 
 span.navbar-brand {
   color: #C5C8C6;
+}
+
+// Skills
+
+#skills img {
+  margin-inline: .5rem;
 }
 
 // Code Highlighter
