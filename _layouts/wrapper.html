@@ -11,6 +11,7 @@
     {% else %}
     <title>{{ page.title }} - {{ site.title }}</title>
     {% endif %}
+    <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml">
     <link rel="icon" href="/assets/img/favicon.gif?v=2" type="image/gif">
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
@@ -31,7 +32,7 @@
     {% include navigation.html %}
     <div id="progress-bar"></div>
     <div class="columns section is-gapless">
-      <div class="column is-four-fifths is-gapless">
+      <div class="column is-three-quarters is-gapless">
         <section class="content container">
           <h1 class="title">{{ page.title }}</h1>
           {{ content }}
