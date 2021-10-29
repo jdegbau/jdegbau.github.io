@@ -11,12 +11,9 @@
     {% else %}
     <title>{{ page.title }} - {{ site.title }}</title>
     {% endif %}
-    {% if page.noindex %}
-    <meta name="robots" content="noindex">
-    {% endif %}
+    {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
     <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml">
-    <link rel="icon" href="/assets/img/favicon.gif?v=2" type="image/gif">
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <link rel="icon" href="/assets/img/favicon.gif" type="image/gif">
     {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
     <!-- Google Tag Manager -->
@@ -44,6 +41,7 @@
       <div id="sidebar" class="column m-4">{% include sidebar.html %}</div> <!-- end #sidebar -->
     </div>
     <footer class="footer"><span>&copy; {{ site.time | date: '%Y' }} <a href="/">Joshua DeGrasse-Baumann</a></span></footer>
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
     <script src="/assets/js/mobile-nav.js"></script>
     <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
