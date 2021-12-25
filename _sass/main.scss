@@ -4,9 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
 
 // Brand colors
-$orange: #de935e;
-$black: #090909;
-$white: #c5c8c6;
+$orange: #FD7014;
+$black: #222831;
+$white: #EEEEEE;
 $family-sans-serif: "Nunito", sans-serif;
 $family-monospace: "JetBrains Mono", monospace;
 
@@ -73,6 +73,24 @@ $card-background-color: $scheme-main-ter;
 
 #blog-cards .card-footer {
   margin-top: auto;
+}
+
+// Skip Nav Link
+
+.skip-nav-link {
+  color: #0f0f0f;
+  background: #f0f0f0;
+  position: absolute;
+  transform: translateY(-250%);
+  border-radius: 0 0 .25rem .25rem;
+  z-index: 31;
+  padding: .5rem;
+  left: .5rem;
+  transition: transform .5s ease-in;
+}
+
+.skip-nav-link:focus {
+  transform: translateY(-130%);
 }
 
 // Reading Progress Bar
@@ -154,11 +172,11 @@ span#logo-function {
   color: #de6868;
 }
 span#logo-argument {
-  color: #de935e;
+  color: $orange;
 }
 
 span.navbar-brand {
-  color: #C5C8C6;
+  color: $white;
 }
 
 // Skills

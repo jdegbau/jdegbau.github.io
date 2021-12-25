@@ -1,26 +1,30 @@
-<nav class="navbar menu is-fixed-top is-spaced has-shadow" role="navigation" aria-label="main navigation">
-	<div class="navbar-brand">
-	  <a class="navbar-item" href="/">
-		<span id="logo-function">(<span id="logo-argument">jdegbau</span>) => {<span id="logo-cursor"></span>}</span>
-	  </a>
-  
-	  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-list">
-		<span aria-hidden="true"></span>
-		<span aria-hidden="true"></span>
-		<span aria-hidden="true"></span>
-	  </a>
-	</div>
-  
-	<div id="navbar-menu-list" class="navbar-menu menu-list">
-		<div class="navbar-start mx-auto">
-			<a href="/" class="navbar-item{% if page.url == '/' %} is-active{% endif %}">About</a>
+<header>
+	<a href="#main-content" class="skip-nav-link">Skip to Content</a>
+
+	<nav class="navbar menu is-fixed-top is-spaced has-shadow" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+		  <a class="navbar-item" href="/">
+			<span id="logo-function">(<span id="logo-argument">jdegbau</span>) => {<span id="logo-cursor"></span>}</span>
+		  </a>
 	  
-			<a href="/blog/" class="navbar-item{% if page.url contains '/blog/' %} is-active{% endif %}">Blog</a>
-	
-			<a class="navbar-item{% if page.dir contains '/contact/' %} is-active{% endif %}" href="/contact/">Contact</a>
+		  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-list">
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+		  </a>
 		</div>
-	  <div class="navbar-end ml-0">
-		{% include search.md %}
-	  </div>
-	</div>
-  </nav>
+	  
+		<div id="navbar-menu-list" class="navbar-menu menu-list">
+			<div class="navbar-start mx-auto">
+				<a href="/" class="navbar-item{% if page.url == '/' %} is-active{% endif %}">About</a>
+		  
+				<a href="/blog/" class="navbar-item{% if page.url contains '/blog/' %} is-active{% endif %}">Blog</a>
+		
+				<a class="navbar-item{% if page.dir contains '/contact/' %} is-active{% endif %}" href="/contact/">Contact</a>
+			</div>
+		  <div class="navbar-end ml-0">
+			{% include search.md %}
+		  </div>
+		</div>
+	  </nav>
+</header>
