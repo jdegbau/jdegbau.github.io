@@ -9,21 +9,29 @@ slug: /site-search-bookmarklet/
 
 I'm super lazy and got tired of typing "site:{domain} {query}" into a new Google tab, so I wrote a quick bookmarklet to speed it up! Figured I'd share in case anyone is similarly keyboard disinclined:
 
-{% highlight javascript %}
-javascript: (function() {    
-    
-    let query = prompt('What are you searching for?');
+```javascript
+javascript: (function() {
 
-    if (!query) {
-        return
-    }
+let domain = prompt('Which domain would you like to search?', document.location.host);
 
-    let domain = document.location.host;
+if (!domain) {
 
-    window.open("https://www.google.com/search?q=site:" + domain + "+" + query, "_blank")
-    
+return
+
+}
+
+let query = prompt( 'What are you searching for?');
+
+if (!query) {
+
+return;
+
+}
+
+open("https://www.google.com/search?q=site:" + domain + "+" + query, "_blank");
+
 })();
-{% endhighlight %}
+```
 
 Just add this as the URL for a new bookmark, click that bookmark and you'll be prompted for a search query. It'll then do a site search for whatever site you're already on!
 
