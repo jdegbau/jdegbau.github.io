@@ -23,9 +23,9 @@ $scheme-invert: $black;
 $scheme-invert-bis: $black-bis;
 $scheme-invert-ter: $black-ter;
 
-$text: $grey-lighter;
+$text: $grey-darker;
 $text-invert: findColorInvert($text);
-$text-light: findDarkColor($white);
+$text-light: findDarkColor($black);
 $text-strong: findLightColor($grey);
 
 $link: $primary;
@@ -115,7 +115,7 @@ $card-background-color: $scheme-main-ter;
 Copy Code Block
 ----------*/
 
-figure.highlight pre {
+div.highlight pre {
   position: relative;
 }
 
