@@ -243,7 +243,7 @@ span.navbar-brand {
 
 div.highlight { text-align: left!important; margin: 0!important }
 div.highlight pre { white-space: pre-wrap }
-.highlight { background-color: #222831; color: #dbdbdb; }
+.highlight { background-color: #222831; color: #dbdbdb; font-family: $family-monospace; }
 .highlight .c { color: #75715e } /* Comment */
 .highlight .err { color: #F44336; } /* Error */
 .highlight .k { color: #FD7014 } /* Keyword */

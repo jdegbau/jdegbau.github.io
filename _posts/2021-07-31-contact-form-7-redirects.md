@@ -44,7 +44,8 @@ Most businesses, you’ll have a single thank you page that acts as the confirma
 Ultimately, we’re still doing exactly what the old method did; we’re just doing it manually this time. Let’s get started.
 
 Copy and paste the following code at the bottom of your functions.php file:
-{% highlight php %}
+
+```php
 add_action( 'wp_footer', 'redirect_cf7' );
 
 function redirect_cf7() {
@@ -58,7 +59,7 @@ document.addEventListener( 'wpcf7mailsent', function( event ) {
 
 <?php
 }
-{% endhighlight %}
+```
 
 **Before you save your file**, change `https://www.example.com/thank-you/` (in the fifth line) to your thank you page URL.
 
@@ -77,7 +78,7 @@ The good news is: there’s a work around for that, too. This will, however, req
 
 Start with pasting this code into your functions.php file:
 
-{% highlight php %}
+```php
 add_action( 'wp_footer', 'redirect_cf7' );
 
 function redirect_cf7() {
@@ -97,7 +98,7 @@ document.addEventListener( 'wpcf7mailsent', function( event ) {
 
 <?php
 }
-{% endhighlight %}
+```
 
 Like before, we’re creating a ‘listener’ to fire a specific code when someone submits a form. This time, however, we’re using conditional if…else JavaScript statements to further specify our criteria.
 
