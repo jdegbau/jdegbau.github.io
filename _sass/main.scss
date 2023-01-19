@@ -143,26 +143,12 @@ div.highlight pre {
     opacity: 1
 }
 
-
 .highlight button.copy {
   position: absolute;
   top: 1em;
   right: 1em;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
   text-transform: uppercase;
-  border-radius: 4px;
   transition: opacity 0.2s ease-in-out;
-  cursor: pointer;
-  border: 1px solid #FD7014;
-}
-
-.highlight button.copy:hover {
-  background-color: #222831;
-  color: #dbdbdb;
 }
 
 /*----------
