@@ -26,7 +26,7 @@ $scheme-invert-ter: $black-ter;
 $text: $grey-darker;
 $text-invert: findColorInvert($text);
 $text-light: findDarkColor($black);
-$text-strong: findLightColor($grey);
+$text-strong: findDarkColor($grey);
 
 $link: $primary;
 $navbar-item-hover-background-color: $scheme-main-ter;
