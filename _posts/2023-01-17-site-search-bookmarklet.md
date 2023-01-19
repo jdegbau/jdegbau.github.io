@@ -11,25 +11,19 @@ I'm super lazy and got tired of typing "site:{domain} {query}" into a new Google
 
 ```javascript
 javascript: (function() {
+	let domain = prompt('Which domain would you like to search?', document.location.host);
 
-let domain = prompt('Which domain would you like to search?', document.location.host);
+	if (!domain) {
+		return
+	}
 
-if (!domain) {
+	let query = prompt( 'What are you searching for?');
 
-return
+	if (!query) {
+		return;
+	}
 
-}
-
-let query = prompt( 'What are you searching for?');
-
-if (!query) {
-
-return;
-
-}
-
-open("https://www.google.com/search?q=site:" + domain + "+" + query, "_blank");
-
+	open("https://www.google.com/search?q=site:" + domain + "+" + query, "_blank");
 })();
 ```
 

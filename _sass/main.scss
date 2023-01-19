@@ -199,7 +199,7 @@ div#search {
 span#logo-cursor::after {
   height: 1.75rem;
   width: 2px;
-  background: $white;
+  background: $black;
   display: inline-block;
   content: "";
   margin: -4px;
@@ -230,7 +230,7 @@ span#logo-argument {
 }
 
 span.navbar-brand {
-  color: $white;
+  color: $black;
 }
 
 // Skills
