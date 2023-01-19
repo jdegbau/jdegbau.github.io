@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Contact Me | Joshua DeGrasse-Baumann
+title: Contact Me
 permalink: /contact/
 ---
 ## Let Me Know How I Can Help!
