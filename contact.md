@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Contact Me
+title: How Can I Help You?
+SEO_title: Contact Me | Joshua DeGrasse-Baumann
 permalink: /contact/
 ---
-## Let Me Know How I Can Help!
 
 <form action="https://formcarry.com/s/1Z7gBO7piB" method="POST" accept-charset="UTF-8">
     <div class="columns">
