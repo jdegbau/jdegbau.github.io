@@ -22,3 +22,9 @@ defaults:
       author: Joshua DeGrasse-Baumann
       layout: post
       permalink: /blog/:slug/
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "pages"
+    values:
+      include_in_sitemap: true
