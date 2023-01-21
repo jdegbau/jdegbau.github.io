@@ -37,9 +37,19 @@ permalink: /contact/
         </div>
     </div>
     <input type="hidden" name="_gotcha">
+    <input type="hidden" id="captchaResponse" name="g-recaptcha-response" />
     <div class="field">
         <div class="control">
             <button class="button is-link">Submit</button>
         </div>
     </div>
 </form>
+
+<script>
+	grecaptcha.ready(function() {
+		grecaptcha.execute('6LcqzBQkAAAAAIY-WkCc5I0VZ0gB5_h7oblR-06K', {action: 'homepage'})
+		.then(function(token) {
+			document.getElementById('captchaResponse').value = token;
+		});
+	});
+</script>
