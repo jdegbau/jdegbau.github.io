@@ -12,10 +12,12 @@
     {% for page in site.pages %}
     {% if page.layout != nil %}
     {% if page.layout != 'none' %}
-    {% if page.include_in_sitemap == true %}
+    {% if page.exclude_from_sitemap != true %}
+    {% if page.redirect_to != nil %}
     <url>
         <loc>{{ site.url }}{{ page.url | remove: 'index.html' }}</loc>
     </url>
+    {% endif %}
     {% endif %}
     {% endif %}
     {% endif %}
