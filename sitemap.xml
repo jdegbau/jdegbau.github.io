@@ -13,7 +13,7 @@
     {% if page.layout != nil %}
     {% if page.layout != 'none' %}
     {% if page.exclude_from_sitemap != true %}
-    {% if page.redirect_to != nil %}
+    {% if page.redirect_to != "" %}
     <url>
         <loc>{{ site.url }}{{ page.url | remove: 'index.html' }}</loc>
     </url>
