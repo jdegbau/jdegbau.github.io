@@ -112,46 +112,6 @@ $card-background-color: $scheme-main-ter;
 }
 
 /*----------
-Copy Code Block
-----------*/
-
-div.highlight pre {
-  position: relative;
-}
-
-.highlight button {
-    opacity: 0
-}
-
-.highlight:hover button {
-    opacity: 1
-}
-
-.highlight>button:active, .highlight button:focus {
-    opacity: 1
-}
-
-.highlight button {
-    opacity: 0
-}
-
-.highlight:hover button {
-    opacity: 1
-}
-
-.highlight button:active, .highlight button:focus {
-    opacity: 1
-}
-
-.highlight button.copy {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  text-transform: uppercase;
-  transition: opacity 0.2s ease-in-out;
-}
-
-/*----------
 Search
 ----------*/
 
@@ -225,10 +185,51 @@ span.navbar-brand {
   margin-inline: .5rem;
 }
 
+/*----------
+Copy Code Block
+----------*/
+
+div.highlight pre {
+  position: relative;
+}
+
+.highlight button {
+    opacity: 0
+}
+
+.highlight:hover button {
+    opacity: 1
+}
+
+.highlight>button:active, .highlight button:focus {
+    opacity: 1
+}
+
+.highlight button {
+    opacity: 0
+}
+
+.highlight:hover button {
+    opacity: 1
+}
+
+.highlight button:active, .highlight button:focus {
+    opacity: 1
+}
+
+.highlight button.copy {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease-in-out;
+}
+
 // Code Highlighter
 
 div.highlight { text-align: left!important; margin: 0!important }
 div.highlight pre { white-space: pre-wrap }
+pre.highlight { margin-bottom: 16px; }
 .highlight { background-color: #222831; color: #dbdbdb; font-family: $family-monospace; }
 .highlight .c { color: #75715e } /* Comment */
 .highlight .err { color: #F44336; } /* Error */
