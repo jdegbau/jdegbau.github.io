@@ -4,9 +4,10 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
 
 // Brand colors
-$orange: #FD7014;
-$black: #222831;
-$white: #EEEEEE;
+$orange: #ff4d00;
+$blue: #152A49;
+$black: #141414;
+$white: #f1f1f1;
 $family-sans-serif: "Nunito", sans-serif;
 $family-monospace: "JetBrains Mono", monospace;
 
@@ -23,15 +24,14 @@ $scheme-invert: $black;
 $scheme-invert-bis: $black-bis;
 $scheme-invert-ter: $black-ter;
 
-$text: $grey-darker;
+$text: $black;
 $text-invert: findColorInvert($text);
 $text-light: findDarkColor($grey);
-$text-strong: findDarkColor($black);
 
 $link: $primary;
-$navbar-item-hover-background-color: $scheme-main-ter;
+$navbar-item-hover-color: $white;
+$navbar-item-hover-background-color: $blue;
 
-$background: $black-ter;
 $card-background-color: $scheme-main-ter;
 
 @import "./utilities/derived-variables.sass";
