@@ -28,8 +28,11 @@ $text: $black;
 $text-invert: findColorInvert($text);
 $text-light: findDarkColor($grey);
 
+$border-light: $black-ter;
+
 $link: $primary;
 $navbar-item-hover-color: $white;
+$navbar-item-active-color: $primary;
 $navbar-item-hover-background-color: $blue;
 
 $card-background-color: $scheme-main-ter;
@@ -289,3 +292,10 @@ pre.highlight { margin-bottom: 16px; }
 .highlight .vg { color: #FD7014 } /* Name.Variable.Global */
 .highlight .vi { color: #FD7014 } /* Name.Variable.Instance */
 .highlight .il { color: #00B5D8 } /* Literal.Number.Integer.Long */
+
+@media(max-width: 768px) {
+  .columns.is-reversed-mobile {
+    flex-direction: column-reverse;
+    display: flex;
+  }
+}

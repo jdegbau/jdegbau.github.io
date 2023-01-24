@@ -10,7 +10,7 @@ permalink: /blog/
       <div class="card large">
         <a href="{{ post.url }}"><div class="card-image">
           <figure class="image is-16by9 mx-0">
-            <img src="{{ post.featured_image }}" alt="{{ post.title }}">
+            <img src="{% if post.featured_image %}{{ post.featured_image }}{% else %}/assets/img/default-blog-hero.gif{% endif %}" alt="{{ post.title }}">
           </figure>
         </div></a>
         <div class="card-content">
