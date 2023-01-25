@@ -31,6 +31,13 @@ $text-light: findDarkColor($grey);
 $border-light: $black-ter;
 
 $link: $primary;
+$link-hover: $blue;
+main a {
+  font-weight: bold;
+}
+main a:hover {
+  text-decoration: underline;
+}
 $navbar-item-hover-color: $white;
 $navbar-item-active-color: $primary;
 $navbar-item-hover-background-color: $blue;
@@ -63,7 +70,13 @@ $card-background-color: $scheme-main-ter;
 }
 
 #profile-photo {
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  clip-path: polygon(70% 0, 100% 50%, 70% 100%, 0% 100%, 20% 50%, 0% 0%);
+  transition: clip-path 1s
+}
+
+#profile-photo:hover {
+  clip-path: polygon(100% 0%, 80% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+
 }
 
 // Blog Card Overrides
@@ -293,9 +306,15 @@ pre.highlight { margin-bottom: 16px; }
 .highlight .vi { color: #FD7014 } /* Name.Variable.Instance */
 .highlight .il { color: #00B5D8 } /* Literal.Number.Integer.Long */
 
-@media(max-width: 768px) {
+@media(max-width: $tablet) {
   .columns.is-reversed-mobile {
     flex-direction: column-reverse;
     display: flex;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .columns {
+      margin: initial!important;
   }
 }
