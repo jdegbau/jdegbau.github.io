@@ -112,7 +112,7 @@ $card-background-color: $scheme-main-ter;
 // Reading Progress Bar
 
 #progress-bar {
-  background-image: linear-gradient(to right, $black 0%, $orange 31%, $white 100%);
+  background-image: linear-gradient(to right, $blue 0%, $orange 33.3%);
   width: 0;
   height: 5px;
   position: fixed;
@@ -317,4 +317,71 @@ pre.highlight { margin-bottom: 16px; }
   .columns {
       margin: initial!important;
   }
+}
+
+// Table of Contents
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* TOC container */
+.toc {
+  padding: 1em;
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 10px #ddd;
+  border-radius: 5px;
+  margin-bottom: 1em;
+}
+
+/* TOC headings */
+.toc p {
+  margin-top: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ff4d00;
+  text-transform: uppercase;
+}
+
+/* TOC links */
+.toc a {
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* TOC links hover */
+.toc a:hover {
+  color: #ff4d00;
+}
+
+/* TOC list */
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* TOC list items */
+.toc li {
+  margin-bottom: 0.5em;
+}
+
+/* TOC list item links */
+.toc li a {
+  font-size: 0.9em;
+  padding-left: 1em;
+  position: relative;
+}
+
+/* TOC list item links hover */
+.toc li a:hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 100%;
+  background-color: #ff4d00;
 }

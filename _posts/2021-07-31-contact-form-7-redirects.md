@@ -10,14 +10,7 @@ slug: /contact-form-7-redirects/
 
 Contact Form 7 (CF7) is one of the most popular contact form plugin options for WordPress-based businesses. However, Contact Form 7 users should know that the process for sending users to a thank you page after a successful form submission has changed. According to the developer’s documentation, [they deprecated/removed that functionality at the end of 2017](https://contactform7.com/2017/06/07/on-sent-ok-is-deprecated/).
 
-Contents:
-
-* [The Old Method: What Changed?](#TheOldMethodWhatChanged)
-* [New Method: One Thank You Page](#NewMethodOneThankYouPage)
-* [New Method: Multiple Forms, Unique Thank You Pages](#NewMethodMultipleFormsUniqueThankYouPages)
-* [New Method: One Form, Multiple Thank You Pages](#NewMethodOneFormMultipleThankYouPages)
-* [Tracking Using Google Analytics Events](#TrackingUsingGoogleAnalyticsEvents)
-* [Using a Plugin](#UsingaPlugin)
+{% include toc.md %}
 
 The updated contact form doesn’t impact the ability for users to submit forms (and for you to receive those submissions), but it _can_ have a dramatic impact on your ability to accurately track these submissions in Google Analytics and other analytics programs.
 
