@@ -3,12 +3,16 @@ baseurl: "/"
 title: "Joshua DeGrasse-Baumann's Site"
 highlighter: rouge
 markdown: kramdown
+paginate: 9
+paginate_path: "/blog/:num/"
 sass:
   style: compressed
   
 # Plugins
 plugins:
   - jekyll-redirect-from
+  - jekyll-paginate
+
 whitelist:
   - jekyll-redirect-from
 

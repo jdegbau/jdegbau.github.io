@@ -1,0 +1,65 @@
+---
+layout: page
+title: Josh's Blog
+---
+
+<div class="row columns is-multiline" id="blog-cards">
+  {% for post in paginator.posts %}
+    <div class="column is-one-third">
+      <div class="card large">
+        <a href="{{ post.url }}"><div class="card-image">
+          <figure class="image is-16by9 mx-0">
+            <img src="{% if post.featured_image %}{{ post.featured_image }}{% else %}/assets/img/default-blog-hero.gif{% endif %}" alt="{{ post.title }}">
+          </figure>
+        </div></a>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <a href="{{ post.url }}"><p class="title is-4 no-padding">{{ post.title }}</p></a>
+            </div>
+          </div>
+            <div class="content">
+            {{ post.excerpt }}
+            </div>
+        </div>
+        <footer class="card-footer">
+          <time class="card-footer-item" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <p class="card-footer-item">
+            {% include read-time.md %}         
+          </p>
+        </footer>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- pagination -->
+{% if paginator.total_pages > 1 %}
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+      <ul class="pagination-list">
+        {% if paginator.previous_page %}
+        <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="pagination-previous">&laquo; Prev</a></li>
+      {% else %}
+    <li><a class="pagination-previous" disabled>&laquo; Prev</a></li>
+      {% endif %}
+        {% for page in (1..paginator.total_pages) %}
+          {% if page == paginator.page %}
+            <li><a class="pagination-link is-current">{{ page }}</a></li>
+          {% elsif page == 1 %}
+            <li><a href="/blog/" class="pagination-link">{{ page }}</a></li>
+          {% else %}
+            <li><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}" class="pagination-link">{{ page }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if paginator.next_page %}
+        <li><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="pagination-next">Next &raquo;</a></li>
+      {% else %}
+    <li><a class="pagination-next" disabled>Next &raquo;</a></li>
+      {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+{% endif %}
