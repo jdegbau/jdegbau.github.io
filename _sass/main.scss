@@ -1,7 +1,16 @@
 @charset "utf-8";
 
 // Import Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
+@import url('/assets/fonts/JetBrains_Mono.woff2');
+
+@font-face {
+  font-family: JetBrains Mono;
+  src: url('/assets/fonts/JetBrains_Mono.woff2') format('woff2 supports variations'),
+       url('/assets/fonts/JetBrains_Mono.woff2') format('woff2-variations');
+  font-weight: 100 200 300 400 500 700 800;
+  font-display: swap;
+  font-style: normal;
+}
 
 // Brand colors
 $orange: #ff4d00;
@@ -155,7 +164,7 @@ div#search {
 
 .navbar-brand {
   font-size: 1.75em;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: $family-monospace;
 }
 
 span#logo-cursor::after {
