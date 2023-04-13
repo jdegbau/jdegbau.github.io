@@ -5,7 +5,7 @@ SEO_title: Contact Me | Joshua DeGrasse-Baumann
 permalink: /contact/
 ---
 
-<div class="tabs is-centered is-medium is-fullwidth is-boxed">
+<div class="tabs is-centered is-small is-fullwidth is-boxed">
   <ul class="mx-0">
     <li class="is-active" data-label="form">
       <a>
