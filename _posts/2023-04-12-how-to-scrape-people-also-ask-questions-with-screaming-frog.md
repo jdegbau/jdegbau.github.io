@@ -6,7 +6,6 @@ excerpt: Learn how to use Screaming Frog to scrape People Also Ask questions dir
 featured_image: 
 redirect_from: 
 ---
-# Using Screaming Frog to Collect People Also Ask Questions from Google Search Results
 
 ## Configuring Screaming Frog
 
