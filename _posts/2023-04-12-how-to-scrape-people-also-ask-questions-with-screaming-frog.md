@@ -11,6 +11,8 @@ redirect_from:
 
 Let's start by setting up our Screaming Frog configuration to work around a few quirks. Follow these steps to tweak the basic settings:
 
+> Want to skip the set up? You can download [my Screaming Frog configuration here](/assets/other/PAA Scraper.seospiderconfig).
+
 1. Under **Configuration > robots.txt > Settings**, change the dropdown to "Ignore robots.txt."
 2. Under **Configuration > Speed**, change "Max Threads" to 1 (this is technically optional, but it should help prevent running into CAPTCHA errors for larger lists).
 3. Under **Configuration > User-Agent**, change "Pre-set User-Agents" to one of the standard browser user-agents. We recommend Chrome.
