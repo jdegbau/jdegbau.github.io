@@ -3,7 +3,7 @@ title: How to Scrape People Also Ask Questions With Screaming Frog
 SEO_title: Scraping People Also Ask With Screaming Frog
 slug: /how-to-scrape-people-also-ask-questions-with-screaming-frog/
 excerpt: Learn how to use Screaming Frog to scrape People Also Ask questions directly from SERPs.
-featured_image: 
+featured_image: /assets/img/screaming-frog-paa-scrape.jpeg
 redirect_from: 
 ---
 
