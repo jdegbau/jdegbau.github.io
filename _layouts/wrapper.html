@@ -15,7 +15,7 @@
     {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
     <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml">
     <link rel="icon" href="/assets/img/favicon.gif" type="image/gif">
-    {% if page.title != "Page Not Found" %}<link rel=“canonical” href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
+    {% if page.title != "Page Not Found" %}<link rel="canonical" href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
