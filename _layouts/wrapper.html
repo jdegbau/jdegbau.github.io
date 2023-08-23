@@ -20,6 +20,18 @@
     <link rel="icon" href="/assets/img/favicon.gif" type="image/gif">
     {% if page.title != "Page Not Found" %}<link rel="canonical" href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
+    <meta property="og:title" content="{{ page.title }}" />
+    {% if page.excerpt %}
+    <meta property="og:description" content="{{ page.excerpt }}">
+    {% endif %}
+    {% if page.featured-image %}
+    <meta property="og:image" content="{{ page.featured-image }}" />
+    {% else %}
+    <meta property="og:image" content="/assets/img/default-blog-hero.gif" />
+    {% endif %}
+    <meta property="og:url" content="{{ site.url }}{{ page.canonical | default: page.url }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.title }}">
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
