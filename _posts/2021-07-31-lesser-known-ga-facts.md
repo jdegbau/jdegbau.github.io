@@ -80,7 +80,7 @@ One of the biggest flaws with Google Analytics is that it’s incredibly easy to
 
 The trade-off with the simplicity of installing a Google Analytics code via a small piece of JavaScript is that it’s easy for someone with even minimal coding experience to manipulate that code with bogus data.
 
-Unfortunately, there’s not much you can do to proactively prevent this from happening. That’s why it’s so important to [regularly audit your Google Analytics account](https://jdegbau.com/services/google-analytics-audits/).
+Unfortunately, there’s not much you can do to proactively prevent this from happening. That’s why it’s so important to regularly audit your Google Analytics account.
 
 6\. Sessions Are Limited to 500 Hits
 ------------------------------------
