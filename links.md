@@ -27,10 +27,18 @@ permalink: /links/
         }
         .box {
             width: 100%;
-            max-width: 300px;
+            max-width: 900px;
         }
         .button.is-fullwidth {
             margin-top: 10px;
+        }
+        .favicon {
+            width: 24px; /* Adjust size as necessary */
+            height: 24px; /* Adjust size as necessary */
+            vertical-align: middle;
+            border-radius: 50%; /* Optional: makes the favicon circular */
+            border: 1px solid #ff4d00; /* Optional: remove if you prefer a border */
+            background: #fff;
         }
     </style>
 </head>
@@ -38,6 +46,7 @@ permalink: /links/
     <section class="hero is-fullheight">
         <div class="hero-body">
             <div class="box">
+                <img class="container mb-4" width="200px" height="250px" src="/assets/img/joshua-degrasse-baumann.JPG" alt="Josh and Bailey" style="display: block;border-radius: 50%;">
                 <h1 class="title has-text-centered">Joshua DeGrasse-Baumann</h1>
                 <a class="button is-link is-rounded is-outlined is-fullwidth" href="https://jdegbau.com"><img src="" alt="favicon" class="favicon mr-2"> My Personal Website</a>
                 <a class="button is-link is-rounded is-outlined is-fullwidth" href="https://bilt.page/r/URCB-UEF8"><img src="" alt="favicon" class="favicon mr-2"> Bilt Credit Card</a>
