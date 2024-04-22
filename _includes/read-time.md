@@ -2,7 +2,7 @@
     {% comment %}
     This if statement is used to add read time to individual blog posts
     {% endcomment %}
-    {% assign words = content | number_of_words %}
+    {% assign words = page.content | number_of_words %}
     {% if words < 180 %}
     1 min read
     {% else %}

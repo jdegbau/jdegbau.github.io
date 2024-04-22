@@ -28,6 +28,12 @@
     <meta property="og:url" content="{{ site.url }}{{ page.canonical | default: page.url }}">
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Joshua DeGrasse-Baumann's Blog">
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="{{ page.author }}" />
+    {% if page.layout == "post" %}
+    <meta name="twitter:label2" content="Reading time" />
+    <meta name="twitter:data2" content="{{ page.content | number_of_words | divided_by:180 }} min read" />
+    {% endif %}
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
