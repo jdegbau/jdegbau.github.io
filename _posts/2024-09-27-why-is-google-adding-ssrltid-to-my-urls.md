@@ -61,6 +61,7 @@ Similar to the indexing question, the answer here is _mostly_ no. As long as you
 While Google can ignore canonical tags, I'm yet to see any widespread issues of rampant content duplication issues across any of my clients—and nothing that suggests impacts to overall performance.
 
 > **Recommended Action:** As above, make sure your pages have proper canonical tags on them.
+
 ## Does `srsltid` Impact Crawl Budget?
 Again, the answer here is _probably_ not. Googlebot is not actively crawling these URLs from search, so it's not trying to crawl them on your site.
 
