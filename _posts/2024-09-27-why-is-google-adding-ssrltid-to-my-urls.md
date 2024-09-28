@@ -1,14 +1,14 @@
 ---
-title: Why Is Google Adding SSRLTID To My URLs?
-SEO_title: Why Is Google Adding SSRLTID To My URLs?
-slug: /why-is-google-adding-ssrltid-to-my-urls/
+title: Why Is Google Adding SRSLTID To My URLs?
+SEO_title: Why Is Google Adding SRSLTID To My URLs?
+slug: /why-is-google-adding-srsltid-to-my-urls/
 excerpt: Seeing a strange srsltid parameter on your URLs in Google Search? Learn more about what this parameter means and if it's hurting your SEO.
 featured_image: 
 redirect_from:
 ---
 Over the last month or so, ecommerce sites have been dealing with an issue tied to a mysterious `srsltid` parameter that is being appended to their URLs in search. But where did this parameter come from and what does it do?
 
-The `srsltid` parameter is typically seen in [URLs when traffic is referred from Google Shopping Free Listing campaigns](https://support.google.com/analytics/answer/11479699?hl=en). It's a tracking parameter that helps Google and advertisers understand the source of the click. Essentially, when a user clicks on a free product listing, the `srsltid` parameter is appended to the URL to provide insights into where that click originated. This is functionally the same as a `gclid` parameter that's appended to ads. The key difference is... you don't typically see the `gclid` parameter *on the search results page*—which is what's started to happen with `srsltid`:
+The `srsltid` parameter is typically seen in [URLs when traffic is referred from Google Shopping Free Listing campaigns](https://support.google.com/analytics/answer/11479699?hl=en). It's a tracking parameter that helps Google and advertisers understand the source of the click. Essentially, when a user clicks on a free product listing, the `srsltid` parameter is appended to the URL to provide insights into where that click originated. This is functionally the same as a `gclid` parameter that's appended to ads. The key difference is... you don't typically see the `gclid` parameter *on the search results page*—which is what's started to happen with `srsltid`.
 
 Now, that's strange enough—but even more odd is that these parameters are being appended to many URLs for sites instead of being isolated to products in shopping feeds.
 
