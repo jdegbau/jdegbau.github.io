@@ -2,7 +2,7 @@
 title: Why Is Google Adding SSRLTID To My URLs?
 SEO_title: Why Is Google Adding SSRLTID To My URLs?
 slug: /why-is-google-adding-ssrltid-to-my-urls/
-excerpt: Seeing a strange "srsltid" parameter on your URLs in Google Search? Learn more about what this parameter means and if it's hurting your SEO.
+excerpt: Seeing a strange srsltid parameter on your URLs in Google Search? Learn more about what this parameter means and if it's hurting your SEO.
 featured_image: 
 redirect_from:
 ---
