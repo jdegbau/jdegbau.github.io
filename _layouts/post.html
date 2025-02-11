@@ -16,7 +16,7 @@ layout: wrapper
     "@type": "BlogPosting",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ site.url }}{{ page.url }}"
+        "@id": "{{ site.url }}{{ page.url }}#blog-posting"
     },
     "headline": "{{ page.title }}",
     "description": "{{ page.excerpt }}",
@@ -24,7 +24,8 @@ layout: wrapper
     "author": {
         "@type": "Person",
         "name": "{{ page.author }}",
-        "url": "{{ site.url }}"
+        "url": "{{ site.url }}",
+        "@id": "{{ site.url }}#person"
     },
     "datePublished": "{{ page.date | date: "%Y-%m-%d"}}"
 }
