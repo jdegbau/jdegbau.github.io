@@ -5,6 +5,7 @@ excerpt: Copy my free site search bookmarklet to make site searching a little le
 redirect_from: 
 featured_image: 
 slug: /site-search-bookmarklet/
+category: Technical SEO
 ---
 
 I'm super lazy and got tired of typing "site:{domain} {query}" into a new Google tab, so I wrote a quick bookmarklet to speed it up! Figured I'd share in case anyone is similarly keyboard disinclined:

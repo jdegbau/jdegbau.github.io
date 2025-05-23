@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<div class="container">
+  <section class="section">
+    <h1 class="title">Category: {{ page.category_name }}</h1>
+    <hr>
+    <ul>
+      {% for post in site.posts %}
+        {% if post.category == page.category_name %}
+          <li>
+            <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+            <p class="is-size-7 has-text-grey">{{ post.date | date: "%B %d, %Y" }}</p>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+</div>

@@ -3,6 +3,11 @@ layout: wrapper
 ---
 
 <p class="subtitle is-6">{{ page.date | date: "%b %-d, %Y"}} - Written by {{ page.author }} - {% include read-time.md %}</p>
+{% if page.category %}
+<p class="is-size-6">
+  Category: <a href="/blog/category/{{ page.category | slugify }}/">{{ page.category }}</a>
+</p>
+{% endif %}
 {% if page.featured_image %}
 <figure class="image is-16x9">
     <img src="{{ page.featured_image }}" alt="{{page.title}}" fetchpriority="high" />
