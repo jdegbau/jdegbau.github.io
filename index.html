@@ -6,7 +6,35 @@ excerpt: Joshua DeGrasse-Baumann is an SEO consultant and data enthusiast. Learn
 permalink: /
 ---
 
-<h3>Articles</h3>
+<section class="section">
+  <div class="container">
+    <p>Welcome to my personal site! I'm Josh, an SEO consultant and data enthusiast. I write about SEO, web analytics, and sometimes web development. Learn more about my work and how I can help your business.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h3>Featured Articles</h3>
+    <ul>
+      {% for post in site.posts limit:3 %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          {% if post.excerpt %}
+            <p>{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <a href="/seo-helpline/" class="button is-primary is-medium">Need SEO Help?</a>
+  </div>
+</section>
+
+<h3>All Articles</h3>
 <ul>
 {% for post in site.posts %}
   <li>
