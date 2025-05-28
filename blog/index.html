@@ -4,21 +4,6 @@ title: Josh's Blog
 excerpt: Check out interesting insights, tips, and guides related to SEO, data analytics, and automation written by Joshua DeGrasse-Baumann.
 ---
 
-<section class="section">
-  <div class="container">
-    <h2 class="title is-4">Categories</h2>
-    {% assign categories = site.posts | map: 'category' | uniq | compact %}
-    <div class="tags">
-      {% for category in categories %}
-        {% if category != "" %}
-          <span class="tag is-info is-medium">
-            <a href="/blog/category/{{ category | slugify }}/" class="has-text-white">{{ category }}</a>
-          </span>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
 
 <div class="row columns is-multiline" id="blog-cards">
   {% for post in paginator.posts %}

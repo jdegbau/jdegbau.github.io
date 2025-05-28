@@ -5,7 +5,6 @@ slug: /how-to-scrape-people-also-ask-questions-with-screaming-frog/
 excerpt: Learn how to use Screaming Frog to scrape People Also Ask questions directly from SERPs.
 featured_image: /assets/img/screaming-frog-paa-scrape.jpeg
 redirect_from: 
-category: Screaming Frog
 ---
 
 ## Configuring Screaming Frog

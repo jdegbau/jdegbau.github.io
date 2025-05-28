@@ -5,7 +5,6 @@ featured_image: /assets/img/8-Lesser-Known-Facts-About-Google-Analytics-Sessions
 redirect_from: 
     - /facts-about-google-analytics-sessions/
 slug: /lesser-known-google-analytics-session-facts/
-category: Google Analytics
 ---
 
 Sessions in Google Analytics are deceptively simple. It’s just the number of visits to your website, right?
