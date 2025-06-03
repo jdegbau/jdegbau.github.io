@@ -4,9 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      /* Critical CSS to prevent FOUC */
+      .skip-nav-link {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        background: #f0f0f0;
+        color: #0f0f0f;
+        z-index: 31;
+        border-radius: 0 0 .25rem .25rem;
+        left: .5rem;
+        transition: transform .5s ease-in;
+      }
+      .skip-nav-link:focus {
+        position: absolute;
+        width: auto;
+        height: auto;
+        clip: auto;
+        white-space: normal;
+        margin: 0;
+        padding: .5rem;
+        transform: translateY(-130%);
+      }
+      html, body {
+        background: #f1f1f1;
+        color: #141414;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+      }
+      .columns {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -0.75rem;
+      }
+      .column {
+        flex: 1 1 0;
+        padding: 0 0.75rem;
+        min-width: 0;
+      }
+      .section {
+        padding: 1.5rem 1.5rem;
+      }
+      .footer {
+        background: #f1f1f1;
+        color: #141414;
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        font-size: 1rem;
+        text-align: center;
+      }
+      .title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 1rem 0;
+      }
+      .subtitle {
+        font-family: "Nunito", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0.5rem 0;
+      }
+      a {
+        color: #ff4d00;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 1023px) {
+        .columns.is-reversed-mobile {
+          flex-direction: column-reverse;
+          display: flex;
+        }
+        .columns {
+          flex-direction: column;
+        }
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <link rel="preload" href="/assets/fonts/JetBrains_Mono.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}"></noscript>
     {% if page.SEO_title %}
     <title>{{ page.SEO_title }}</title>
     {% else %}
@@ -81,7 +171,7 @@
       <div class="columns is-reversed-mobile">
         <div class="column">
           <p>&copy; {{ site.time | date: '%Y' }} <a href="/">Joshua DeGrasse-Baumann</a></p>
-          <a href="https://twitter.com/jdegbau" aria-label="Follow me on Twitter""><i class="fa-brands fa-twitter fa-2x m-1"></i></a>
+          <a href="https://x.com/jdegbau" aria-label="Follow me on 𝕏""><i class="fa-brands fa-x-twitter fa-2x m-1"></i></a>
           <a href="https://www.linkedin.com/in/jdegbau/" aria-label="Follow me on LinkedIn"><i class="fa-brands fa-linkedin fa-2x m-1"></i></a>
           <a href="https://github.com/jdegbau" aria-label="Follow me on GitHub"><i class="fa-brands fa-github fa-2x m-1"></i></a>
           <a href="https://www.instagram.com/jdegbau/" aria-label="Follow me on Instagram"><i class="fa-brands fa-instagram fa-2x m-1"></i></a>

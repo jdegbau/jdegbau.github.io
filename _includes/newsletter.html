@@ -26,5 +26,39 @@
     <div style="position: absolute; left: -5000px;" aria-hidden="true">
       <input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" />
     </div>
-    <script src="https://sendfox.com/js/form.js"></script>
+    <!-- Lazy load SendFox script only when form is visible -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('mp8k5q');
+        if (!form) return;
+        var loaded = false;
+        function loadSendFoxScript() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://sendfox.com/js/form.js';
+          s.defer = true;
+          document.body.appendChild(s);
+        }
+        // Use IntersectionObserver if available
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+              loadSendFoxScript();
+              observer.disconnect();
+            }
+          });
+          observer.observe(form);
+        } else {
+          // Fallback: load on scroll
+          window.addEventListener('scroll', function onScroll() {
+            var rect = form.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              loadSendFoxScript();
+              window.removeEventListener('scroll', onScroll);
+            }
+          });
+        }
+      });
+    </script>
   </form>  
