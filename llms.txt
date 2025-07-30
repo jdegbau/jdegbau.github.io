@@ -1,0 +1,20 @@
+# Joshua DeGrasse‑Baumann
+
+> Personal site of Josh DeGrasse‑Baumann: an SEO strategist, data enthusiast, and web developer. Contains professional profile, blog posts, and consulting services.
+
+## About Joshua DeGrasse‑Baumann
+Josh ia an SEO strategist and data enthusiast. He currently lives in Milwaukee, WI. He love nothing more than spending time with his dog Bailey, often curling up with her while reading a good book or playing video games.
+
+## Bio and Consulting  
+- [About Josh](https://jdegbau.com/about-josh/) : SEO strategist, data analytics & developer background.  
+- [SEO Helpline](https://jdegbau.com/seo-helpline/) : Book a quick consultation session for SEO or data guidance.
+
+## Blog & Insights  
+- [Blog](https://jdegbau.com/blog/) : Expert posts on SEO tactics, analytics, automation.  
+- [Why Is Google Adding SRSLTID To My URLs?](https://jdegbau.com/blog/why-is-google-adding-srsltid-to-my-urls/) : Explains Google’s SRSLTID parameter impact.  
+- [How to Scrape People Also Ask Questions With Screaming Frog](https://jdegbau.com/blog/how-to-scrape-people-also-ask-questions-with-screaming-frog/) : Practical PAA scraping tutorial.
+
+## Tools & Resources
+- [Quick Google Site Search Bookmarklet](https://jdegbau.com/blog/quick-google-site-search-bookmarklet) : Bookmarklet makes site searching easier.  
+- [Less Known Google Analytics Session Facts](https://jdegbau.com/blog/8-lesser-known-facts-about-google-analytics-sessions) : Hidden analytics behaviors explained.  
+- [Redirecting Contact Form 7 Forms](https://jdegbau.com/blog/redirecting-contact-form-7-forms/) : Guide to redirecting CF7 submissions.
