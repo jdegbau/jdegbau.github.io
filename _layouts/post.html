@@ -2,13 +2,22 @@
 layout: wrapper
 ---
 
-<p class="subtitle is-6">{{ page.date | date: "%b %-d, %Y"}} - Written by {{ page.author }} - {% include read-time.md %}</p>
-{% if page.featured_image %}
-<figure class="image is-16x9">
-    <img src="{{ page.featured_image }}" alt="{{page.title}}" fetchpriority="high" />
-</figure>
-{% endif %}
-{{ content }}
+
+<div class="columns blog-layout">
+    <div class="column is-one-quarter blog-left" style="position: sticky; top: 0;">
+        <p class="subtitle is-6">{{ page.date | date: "%b %-d, %Y"}} - Written by {{ page.author }} - {% include read-time.md %}</p>
+        {% if page.featured_image %}
+            <figure class="image is-4by5 mb-4">
+                <img src="{{ page.featured_image }}" alt="{{page.title}}" fetchpriority="high" style="width:100%;height:auto;border-radius:8px;" />
+            </figure>
+        {% endif %}
+        {% include toc.md %}
+    </div>
+    <div class="column is-three-quarters blog-main">
+        {{ content }}
+        {% include ai-summarize.md %}
+    </div>
+</div>
 
 <script type="application/ld+json">
 {
