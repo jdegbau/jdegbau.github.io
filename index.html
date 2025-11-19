@@ -44,16 +44,6 @@ permalink: /
 </ul>
 
 <script type="application/ld+json">
-  {
-    "@context" : "https://schema.org",
-    "@type" : "WebSite",
-    "name" : "Joshua DeGrasse-Baumann's Blog",
-    "alternateName" : "jdegbau",
-    "url" : "https://jdegbau.com/"
-  }
-</script>
-
-<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -63,26 +53,50 @@ permalink: /
       "name": "Joshua DeGrasse-Baumann",
       "givenName": "Joshua",
       "familyName": "DeGrasse-Baumann",
-      "alternateName": [
-        "Josh",
-        "jdegbau"
-      ],
+      "alternateName": ["Josh", "jdegbau"],
       "url": "https://jdegbau.com/",
-      "description": "SEO strategist and data enthusiast specializing in Google Analytics, Google Tag Manager, and marketing measurement strategy.",
+      "image": "https://jdegbau.com/assets/img/joshua-degrasse-baumann.JPG",
+      "description": "SEO strategist and data enthusiast specializing in Google Analytics, Google Tag Manager, marketing measurement, and SEO strategy.",
       "jobTitle": "Lead SEO Strategist",
       "worksFor": {
         "@type": "Organization",
+        "@id": "https://www.fireandspark.com/#organization",
         "name": "Fire&Spark",
-        "url": "https://www.fireandspark.com/"
+        "url": "https://www.fireandspark.com/",
+        "sameAs": [
+          "https://www.linkedin.com/company/fireandspark/",
+          "https://twitter.com/fireandspark"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "50 Milk St Fl 16",
+          "addressLocality": "Boston",
+          "addressRegion": "MA",
+          "postalCode": "02109",
+          "addressCountry": "USA"
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Milwaukee",
+        "addressRegion": "WI",
+        "addressCountry": "USA"
       },
       "sameAs": [
         "https://x.com/jdegbau",
+        "https://twitter.com/jdegbau",
         "https://www.linkedin.com/in/jdegbau",
-        "https://github.com/jdegbau",
         "https://www.instagram.com/jdegbau/",
-        "https://about.me/jdegbau"
+        "https://www.threads.net/@jdegbau",
+        "https://github.com/jdegbau",
+        "https://about.me/jdegbau",
+        "https://g.co/kgs/o5cPgXa",
+        "https://www.rocketclicks.com/team-member/joshua-degrasse-baumann/"
       ],
       "knowsAbout": [
+        "SEO",
+        "Digital Marketing",
+        "Web Analytics",
         "Google Analytics",
         "Google Analytics 4",
         "Google Tag Manager",
@@ -91,35 +105,52 @@ permalink: /
         "event tracking",
         "conversion tracking",
         "SEO analytics",
-        "web analytics implementation"
-      ]
+        "web analytics implementation",
+        "Content Strategy",
+        "Programmatic SEO"
+      ],
+      "alumniOf": {
+        "@type": "Organization",
+        "@id": "https://www.rocketclicks.com/#organization",
+        "name": "Rocket Clicks",
+        "url": "https://www.rocketclicks.com",
+        "sameAs": [
+          "https://www.linkedin.com/company/rocket-clicks/",
+          "https://twitter.com/rocketclicks"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "W134N5522 Campbell Dr",
+          "addressLocality": "Menomonee Falls",
+          "addressRegion": "WI",
+          "postalCode": "53051",
+          "addressCountry": "USA"
+        }
+      }
     },
+
     {
       "@type": "WebSite",
       "@id": "https://jdegbau.com/#website",
       "url": "https://jdegbau.com/",
       "name": "Joshua DeGrasse-Baumann | SEO, Data, and Development",
+      "alternateName": "jdegbau",
       "inLanguage": "en",
       "publisher": {
         "@id": "https://jdegbau.com/#person"
       }
     },
+
     {
       "@type": "WebPage",
       "@id": "https://jdegbau.com/#homepage",
       "url": "https://jdegbau.com/",
       "name": "Joshua DeGrasse-Baumann | SEO, Analytics, and Measurement Strategy",
-      "description": "Josh is an SEO consultant and data enthusiast who helps businesses improve their Google Analytics and Google Tag Manager setups and build better marketing measurement strategies.",
+      "description": "Josh is an SEO consultant and data enthusiast who helps businesses improve their Google Analytics, Google Tag Manager setups, and overall marketing measurement strategies.",
       "inLanguage": "en",
-      "isPartOf": {
-        "@id": "https://jdegbau.com/#website"
-      },
-      "mainEntity": {
-        "@id": "https://jdegbau.com/#analytics-measurement-service"
-      },
-      "about": {
-        "@id": "https://jdegbau.com/#person"
-      },
+      "isPartOf": { "@id": "https://jdegbau.com/#website" },
+      "about": { "@id": "https://jdegbau.com/#person" },
+      "mainEntity": { "@id": "https://jdegbau.com/#analytics-measurement-service" },
       "keywords": [
         "Google Analytics consulting",
         "Google Tag Manager consulting",
@@ -129,17 +160,16 @@ permalink: /
         "SEO and analytics"
       ]
     },
+
     {
       "@type": "Service",
       "@id": "https://jdegbau.com/#analytics-measurement-service",
       "name": "Analytics and Marketing Measurement Consulting",
       "serviceType": "Digital analytics and marketing measurement consulting",
       "url": "https://jdegbau.com/",
-      "description": "Consulting services to audit, implement, and improve Google Analytics and Google Tag Manager setups, design event and conversion tracking, and build robust marketing measurement strategies for marketing teams and businesses.",
-      "provider": {
-        "@id": "https://jdegbau.com/#person"
-      },
+      "provider": { "@id": "https://jdegbau.com/#person" },
       "areaServed": "Worldwide",
+      "description": "Consulting services to audit, implement, and improve Google Analytics and Google Tag Manager setups, design event and conversion tracking, and build robust marketing measurement strategies.",
       "category": [
         "Google Analytics consulting",
         "Google Tag Manager consulting",
@@ -163,40 +193,40 @@ permalink: /
             "@type": "Offer",
             "@id": "https://jdegbau.com/#ga-audit-offer",
             "name": "Google Analytics / GA4 Health Audit",
+            "url": "https://jdegbau.com/contact/",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
             "itemOffered": {
               "@type": "Service",
               "name": "Google Analytics / GA4 implementation and health audit",
               "serviceType": "Web analytics audit"
-            },
-            "url": "https://jdegbau.com/contact/",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            }
           },
           {
             "@type": "Offer",
             "@id": "https://jdegbau.com/#gtm-implementation-offer",
             "name": "Google Tag Manager Implementation & Cleanup",
+            "url": "https://jdegbau.com/contact/",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
             "itemOffered": {
               "@type": "Service",
               "name": "Google Tag Manager implementation and container cleanup",
               "serviceType": "Tag management"
-            },
-            "url": "https://jdegbau.com/contact/",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            }
           },
           {
             "@type": "Offer",
             "@id": "https://jdegbau.com/#measurement-strategy-offer",
             "name": "Marketing Measurement Strategy Session",
+            "url": "https://jdegbau.com/seo-helpline/",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
             "itemOffered": {
               "@type": "Service",
               "name": "Marketing measurement strategy and tracking blueprint",
               "serviceType": "Marketing analytics consulting"
-            },
-            "url": "https://jdegbau.com/seo-helpline/",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            }
           }
         ]
       }
@@ -204,68 +234,3 @@ permalink: /
   ]
 }
 </script>
-
-<!-- <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Person",
-    "@id": "https://jdegbau.com/#person",
-    "name": "Joshua DeGrasse-Baumann",
-    "url": "https://jdegbau.com/",
-    "image": "https://jdegbau.com/assets/img/joshua-degrasse-baumann.JPG",
-    "sameAs": [
-      "https://g.co/kgs/o5cPgXa",
-      "https://twitter.com/jdegbau",
-      "https://www.instagram.com/jdegbau/",
-      "https://www.threads.net/@jdegbau",
-      "https://www.linkedin.com/in/jdegbau/",
-      "https://github.com/jdegbau",
-      "https://www.rocketclicks.com/team-member/joshua-degrasse-baumann/"
-    ],
-    "jobTitle": "Lead SEO Strategist",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Fire&Spark",
-      "@id": "https://www.fireandspark.com/#organization",
-      "url": "https://www.fireandspark.com/",
-      "sameAs": [
-        "https://www.linkedin.com/company/fireandspark/",
-        "https://twitter.com/fireandspark"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "50 Milk St Fl 16",
-        "addressLocality": "Boston",
-        "addressRegion": "MA",
-        "postalCode": "02109",
-        "addressCountry": "USA"
-      }
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Milwaukee",
-      "addressRegion": "WI",
-      "addressCountry": "USA"
-    },
-    "description": "Joshua DeGrasse-Baumann is a seasoned SEO strategist with extensive experience in optimizing online presence for businesses.",
-    "knowsAbout": ["SEO", "Digital Marketing", "Web Analytics", "Content Strategy", "Google Analytics", "Programmatic SEO"],
-    "alumniOf": {
-      "@type": "Organization",
-      "name": "Rocket Clicks",
-      "@id": "https://www.rocketclicks.com/#organization",
-      "url": "https://www.rocketclicks.com",
-      "sameAs": [
-        "https://www.linkedin.com/company/rocket-clicks/",
-        "https://twitter.com/rocketclicks"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "W134N5522 Campbell Dr",
-        "addressLocality": "Menomonee Falls",
-        "addressRegion": "WI",
-        "postalCode": "53051",
-        "addressCountry": "USA"
-      }
-    }
-  }
-</script> -->
