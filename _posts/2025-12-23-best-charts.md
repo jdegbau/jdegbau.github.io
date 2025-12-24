@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SEO Data Visualization Guide: How to Choose the Right Chart for SEO Reporting"
+title: "SEO Data Visualization Guide"
 seo_title: "SEO Data Visualization Guide for Reporting & Analytics"
 slug: seo-data-visualization-guide
 description: "Learn how to choose the right data visualization for SEO reporting. This guide covers charts for traffic trends, keyword analysis, attribution, and executive SEO dashboards."
@@ -398,6 +398,48 @@ Below are common chart types you’ll use in SEO reporting, plus real SEO exampl
 		</div>
 	</div>
 
+	<!-- Fuel Guage -->
+    <div class="column is-12-tablet is-6-desktop">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">⛽ Fuel gauge</p>
+            </header>
+
+            <div class="card-content">
+                <p class="has-text-grey mb-4">
+                    Show progress toward a goal or overall SEO health at a glance.
+                </p>
+
+                <div class="viz-chart-frame">
+                    <canvas id="fuelGaugeChart" width="666" height="560"></canvas>
+                </div>
+                <p class="has-text-centered has-text-weight-semibold mt-3">
+                    72% SEO Health
+                </p>
+
+
+                <hr>
+
+                <div class="content">
+                    <p><strong>SEO use cases</strong></p>
+                    <ul>
+                        <li>Overall SEO health score</li>
+                        <li>Quarterly goal progress tracking</li>
+                        <li>Indexation or coverage completeness</li>
+                        <li>Technical debt burn-down</li>
+                    </ul>
+
+                    <div class="tags is-centered">
+                        <span class="tag is-primary is-rounded">Executive</span>
+                        <span class="tag is-primary is-rounded">KPI</span>
+                        <span class="tag is-primary is-rounded">Status</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 	<!-- Treemap -->
 	<div class="column is-12">
 		<div class="card">
@@ -781,6 +823,28 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
+    new Chart(document.getElementById('fuelGaugeChart'), {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [72, 28], // 72% filled
+                backgroundColor: ['#ff4d00', '#f1f1f1'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '70%',
+            rotation: -90,
+            circumference: 180,
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            }
+        }
+    });
+
 	new Chart(document.getElementById('treemapChart'), {
 		type: 'treemap',
 		data: {
@@ -828,4 +892,247 @@ document.addEventListener('DOMContentLoaded', function() {
 		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
 	});
 });
+</script>
+
+<div class="container">
+
+		<!-- Full-width heading -->
+		<div class="content mb-5">
+			<h2 class="title is-3">Radar Chart (Spider Chart)</h2>
+		</div>
+
+		<div class="columns is-variable is-8 is-multiline">
+
+			<!-- COPY COLUMN -->
+			<div class="column is-12 is-6-desktop is-order-2-mobile">
+				<div class="content">
+					<p>
+						A radar chart (sometimes called a spider chart) compares
+						<strong>multiple qualitative or semi-quantitative dimensions</strong>
+						across a small number of entities. Each axis represents a different variable,
+						and the resulting shape highlights <strong>strengths, weaknesses, and imbalance</strong> at a glance.
+					</p>
+
+					<p>
+						In SEO reporting, radar charts are most effective when the objective is
+						<strong>strategic diagnosis</strong>, not metric precision. They help explain <em>why</em>
+						outcomes differ and where competitive advantage is being created—especially for audiences that need to
+						make prioritization decisions quickly.
+					</p>
+
+					<div class="columns is-variable is-6">
+						<div class="column">
+							<p class="mb-2"><strong>Use a radar chart if:</strong></p>
+							<ul>
+								<li>You are comparing <strong>2–4 entities</strong> across strategic dimensions</li>
+								<li>You want to highlight <strong>tradeoffs and imbalance</strong>, not exact deltas</li>
+								<li>The audience is making <strong>investment or prioritization decisions</strong></li>
+							</ul>
+						</div>
+						<div class="column">
+							<p class="mb-2"><strong>Avoid a radar chart if:</strong></p>
+							<ul>
+								<li>You need to track performance over time</li>
+								<li>Small numeric differences matter</li>
+								<li>You are comparing many entities at once</li>
+							</ul>
+						</div>
+					</div>
+
+					<h3 class="title is-5">Sample scenario: Competitive SEO posture analysis</h3>
+
+					<p>
+						In this example, a radar chart compares a site against two direct competitors for a
+						<strong>high-intent keyword cluster</strong>.
+					</p>
+
+					<ol>
+						<li><strong>Content–Intent Fit</strong></li>
+						<li><strong>Authority &amp; Trust Signals</strong></li>
+						<li><strong>Link Authority (Quality-Weighted)</strong></li>
+						<li><strong>Technical &amp; UX Foundation</strong></li>
+						<li><strong>Conversion Readiness</strong></li>
+					</ol>
+
+					<p>
+						Plotted together, the chart reveals <strong>where competitors are actually winning</strong>
+						and which gaps matter most.
+					</p>
+
+					<div class="notification is-light">
+						<p class="mb-2"><strong>Decision this supports:</strong></p>
+						<p>
+							This visualization helps determine <strong>where to invest next</strong> rather than debating rankings.
+						</p>
+					</div>
+
+					<h3 class="title is-5">Other use cases</h3>
+					<ul>
+						<li>Before vs. after optimization comparisons</li>
+						<li>Page template evaluations</li>
+						<li>Market or vertical comparisons</li>
+						<li>Executive summaries</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- VISUALIZATION COLUMN -->
+			<div class="column is-12 is-6-desktop is-order-1-mobile">
+				<div class="viz-sticky-wrap">
+					<div class="card">
+						<header class="card-header">
+							<p class="card-header-title">Competitive SEO Radar Chart</p>
+						</header>
+
+						<div class="card-content">
+							<div class="viz-chart-frame" style="position: relative; height: 360px;">
+								<canvas id="seoRadarChart"></canvas>
+							</div>
+
+							<hr>
+
+							<p class="is-size-7 has-text-grey mb-3">
+								Sample comparison across five strategic SEO dimensions (0–10 scale).
+							</p>
+
+							<div class="notification is-light is-size-7">
+								<strong>How to read this chart:</strong>
+								<p class="mt-1">
+									Focus on imbalance. The widest gaps indicate where competitive advantage is being created
+									and which one or two levers are most likely to change outcomes.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<style>
+					/* Sticky behavior: sticks at top, releases at section end */
+					.viz-section .viz-sticky-wrap{
+						position: sticky;
+						top: 1.25rem;
+					}
+
+					/* Mobile ordering helpers (Bulma does not include these) */
+					@media screen and (max-width: 1023px){
+						.is-order-1-mobile{ order: 1; }
+						.is-order-2-mobile{ order: 2; }
+
+						/* Disable sticky on mobile to avoid awkward scroll behavior */
+						.viz-section .viz-sticky-wrap{
+							position: static;
+						}
+					}
+				</style>
+			</div>
+
+		</div>
+	</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+	// Brand colors from your SASS file
+	const BRAND = {
+		orange: '#ff4d00',
+		blue: '#152A49',
+		black: '#141414',
+		white: '#f1f1f1'
+	};
+
+	// Helper: hex -> rgba
+	function hexToRgba(hex, alpha){
+		const h = hex.replace('#','');
+		const r = parseInt(h.substring(0,2), 16);
+		const g = parseInt(h.substring(2,4), 16);
+		const b = parseInt(h.substring(4,6), 16);
+		return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+	}
+
+	new Chart(document.getElementById('seoRadarChart'), {
+		type: 'radar',
+		data: {
+			labels: [
+				'Content–Intent Fit',
+				'Authority & Trust',
+				'Link Authority',
+				'Technical & UX',
+				'Conversion Readiness'
+			],
+			datasets: [
+				{
+					label: 'Your Site',
+					data: [6, 5, 6, 8, 5],
+					fill: true,
+					backgroundColor: hexToRgba(BRAND.orange, 0.14),
+					borderColor: BRAND.orange,
+					pointBackgroundColor: BRAND.orange,
+					pointBorderColor: BRAND.white,
+					pointHoverBackgroundColor: BRAND.white,
+					pointHoverBorderColor: BRAND.orange
+				},
+				{
+					label: 'Competitor A',
+					data: [7, 8, 9, 6, 6],
+					fill: true,
+					backgroundColor: hexToRgba(BRAND.blue, 0.12),
+					borderColor: BRAND.blue,
+					pointBackgroundColor: BRAND.blue,
+					pointBorderColor: BRAND.white,
+					pointHoverBackgroundColor: BRAND.white,
+					pointHoverBorderColor: BRAND.blue
+				},
+				{
+					label: 'Competitor B',
+					data: [8, 6, 6, 7, 8],
+					fill: true,
+					backgroundColor: hexToRgba(BRAND.black, 0.08),
+					borderColor: BRAND.black,
+					pointBackgroundColor: BRAND.black,
+					pointBorderColor: BRAND.white,
+					pointHoverBackgroundColor: BRAND.white,
+					pointHoverBorderColor: BRAND.black
+				}
+			]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				r: {
+					min: 0,
+					max: 10,
+					ticks: {
+						stepSize: 2,
+						showLabelBackdrop: false,
+						color: BRAND.black
+					},
+					angleLines: {
+						color: hexToRgba(BRAND.black, 0.18)
+					},
+					grid: {
+						color: hexToRgba(BRAND.black, 0.18)
+					},
+					pointLabels: {
+						color: BRAND.black
+					}
+				}
+			},
+			plugins: {
+				legend: {
+					position: 'bottom',
+					labels: {
+						color: BRAND.black
+					}
+				},
+				tooltip: {
+					callbacks: {
+						label: function(context) {
+							return `${context.dataset.label}: ${context.raw}/10`;
+						}
+					}
+				}
+			}
+		}
+	});
 </script>
