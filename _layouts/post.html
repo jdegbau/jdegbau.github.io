@@ -13,17 +13,19 @@ layout: wrapper
 </section>
 {% endif %}
 
-<div class="container post-meta" style="margin-top:0.25rem;margin-bottom:1rem;">
-    <p class="subtitle is-6 has-text-grey">
-        {{ page.date | date: "%b %-d, %Y" }} &middot; Written by {{ page.author }} &middot; {% include read-time.md %}
-    </p>
-</div>
+{% include post-meta.html %}
 
 <section class="section">
     <div class="container">
         <div class="content blog-main">
             {{ content }}
         </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% include author-box.html %}
     </div>
 </section>
 

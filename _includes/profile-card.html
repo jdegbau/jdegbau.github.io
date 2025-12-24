@@ -1,0 +1,12 @@
+<aside id="profile-card" class="card" style="margin-top:1.5rem;text-align:center;">
+  <div class="card-content">
+    <img id="profile-photo" width="{{ site.data.sidebar.profile_photo_width }}" height="{{ site.data.sidebar.profile_photo_height }}" src="{{ site.data.sidebar.profile_photo }}" alt="Josh and Bailey" loading="lazy" />
+    <div id="skills" class="content" style="margin-top:.75rem;">
+      <p class="is-size-5">Skills</p>
+      {% for s in site.data.sidebar.skills %}
+        <img width="24" height="24" alt="{{ s.alt }}" src="{{ s.src }}" loading="lazy" style="margin:.25rem;" />
+      {% endfor %}
+    </div>
+    <a href="{{ site.data.sidebar.cta.href }}" class="{{ site.data.sidebar.cta.classes }}" style="margin-top:.75rem;display:inline-block;"><i class="fa-solid fa-phone mr-2" aria-hidden="true"></i>{{ site.data.sidebar.cta.text }}</a>
+  </div>
+</aside>

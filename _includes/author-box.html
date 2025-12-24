@@ -1,0 +1,28 @@
+<div class="box author-box">
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-96x96">
+        <img src="{{ site.data.sidebar.profile_photo }}" alt="{{ site.data.sidebar.author_name }}">
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ site.data.sidebar.author_name }}</strong>
+          <br>
+          {{ site.data.sidebar.author_bio }}
+        </p>
+      </div>
+      <div class="tags" style="margin-top:.5rem;">
+        <div class="skills" aria-hidden="true" style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
+          {% for s in site.data.sidebar.skills %}
+            <img src="{{ s.src }}" alt="{{ s.alt }}" width="24" height="24" class="skill-icon" loading="lazy" style="display:inline-block;border-radius:4px;" />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="media-right">
+      <a href="{{ site.data.sidebar.cta.href }}" class="{{ site.data.sidebar.cta.classes }}">{{ site.data.sidebar.cta.text }}</a>
+    </div>
+  </article>
+</div>

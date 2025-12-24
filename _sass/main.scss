@@ -88,6 +88,113 @@ $card-background-color: $scheme-main-ter;
 
 }
 
+// Profile card (used inline in posts). Sidebar selectors remain for legacy builds.
+#profile-card {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+#profile-card .card-content {
+  padding: 1rem;
+}
+
+/* Author box styles */
+.author-box img {
+  border-radius: 8px;
+  object-fit: cover;
+}
+.author-box .skill-icon {
+  width: 24px;
+  height: 24px;
+}
+.author-box .tags .tag {
+  margin-right: .35rem;
+}
+
+/* Sticky post meta */
+.post-meta {
+  position: sticky;
+  top: 95px;
+  z-index: 30;
+  background: #f1f1f1cc;
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: .35rem 0;
+  font-size: .95rem;
+}
+
+.post-meta .container {
+  padding-left: .75rem;
+  padding-right: .75rem;
+}
+
+/* meta item centering + vertical dividers */
+.post-meta .meta-inner { display:flex; align-items:center; justify-content:space-evenly; }
+.post-meta .meta-left { display:flex; align-items:center; }
+.post-meta .meta-left .meta-item { display:flex; align-items:center; justify-content:center; padding:0 .5rem; }
+/* use explicit inline `.meta-sep` elements between items */
+.post-meta .meta-left .meta-sep {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(15,23,42,0.45);
+  margin: 0 .5rem;
+  font-size: .9rem;
+  line-height: 1;
+}
+.post-meta .meta-right { display:flex; align-items:center; }
+.post-meta .meta-right { border-left: 1px solid rgba(16,24,40,0.06); margin-left:.75rem; padding-left:.75rem; }
+.post-meta .meta-right .share-icons a { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; background:#fff; border:1px solid rgba(0,0,0,0.04); }
+
+@media (max-width: 768px) {
+  .post-meta .meta-left { flex-wrap:wrap; }
+  .post-meta .meta-left .meta-item { padding:0 .5rem; }
+  .post-meta .meta-right { border-left: none; margin-left:0; padding-left:0; }
+}
+
+/* Compact refinements for the post-meta card to reduce visual bulk */
+.post-meta.card {
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(16,24,40,0.04);
+  margin: 0.4rem 0;
+}
+
+.post-meta .card-content {
+  padding: 0.45rem 0.6rem;
+}
+
+.post-meta {
+  font-size: 0.92rem;
+  padding: 0; /* card-content now controls padding */
+}
+
+.post-meta .meta-item {
+  padding: 0 .5rem; /* smaller horizontal padding */
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-meta .post-sticky-title { font-weight:600; font-size:0.96rem; max-width:36ch; }
+
+.post-meta .meta-right .icon i,
+.post-meta .meta-right .share-icons a i { font-size:14px; }
+
+.post-meta .meta-right .share-icons a { width:30px; height:30px; border-radius:6px; }
+.post-meta .ai-inline .ai-btn { width:26px; height:26px; }
+
+@media (max-width: 768px) {
+  .post-meta.card { border-radius:6px; }
+  .post-meta .card-content { padding: .35rem .5rem; }
+  .post-meta .post-sticky-title { display:none; }
+}
+
+@media (max-width: 1023px) {
+  .post-meta { top: 58px; }
+  .post-meta .meta-inner { flex-direction: column; align-items: flex-start; gap:.5rem; }
+}
+
 // Visually hidden class to hide elements from visual users, but keep them for screen readers
 .visually-hidden {
   position: absolute;
@@ -104,8 +211,8 @@ $card-background-color: $scheme-main-ter;
 // Blog Card Overrides
 
 #blog-cards .card {
-  display:flex;
-  flex-direction: column;
+    left: 0;
+    z-index: 1000; // ensure progress bar sits above sticky meta
   height: 100%;
 }
 
@@ -118,26 +225,40 @@ $card-background-color: $scheme-main-ter;
 .skip-nav-link {
   color: #0f0f0f;
   background: #f0f0f0;
-  position: absolute;
-  transform: translateY(-250%);
-  border-radius: 0 0 .25rem .25rem;
-  z-index: 31;
-  padding: .5rem;
-  left: .5rem;
-  transition: transform .5s ease-in;
-}
 
-.skip-nav-link:focus {
+  .post-meta {
+    position: sticky;
+    top: 96px; /* sit just below the progress bar (90px + gap) */
+    z-index: 900; /* below the progress bar */
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+    padding: .35rem .5rem;
+    margin: .5rem 0;
+    font-size: .95rem;
+  }
   transform: translateY(-130%);
 }
 
 // Reading Progress Bar
 
+  .post-meta .container {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
 #progress-bar {
   background-image: linear-gradient(to right, $blue 0%, $orange 33.3%);
   width: 0;
   height: 5px;
   position: fixed;
+  .post-meta .meta-inner { align-items:center; }
+  .post-meta .meta-left span { color: #6b7280; }
+  .post-meta .meta-right a { color: inherit; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; background:#fff; border:1px solid rgba(0,0,0,0.04); box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+  .post-meta .meta-right a:hover { transform: translateY(-1px); box-shadow:0 8px 22px rgba(16,24,40,0.08); }
+  .post-meta .ai-inline .ai-btn { width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; border-radius:6px; }
+  .post-meta .ai-inline i { font-size:12px; }
   top: 90px;
   left: 0;
   z-index: 2;
@@ -221,6 +342,40 @@ span.navbar-brand {
 
 #skills img {
   margin-inline: .5rem;
+}
+
+/* Logos section */
+.logos-section .logos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+  justify-items: center;
+  margin-top: 1rem;
+}
+.logos-section .logo-item {
+  max-width: 180px;
+  opacity: 0.9;
+  transition: opacity .2s ease, transform .2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+}
+.logos-section .logo-item img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(0.2) brightness(0.9);
+}
+.logos-section .logo-item:hover { opacity: 1; transform: translateY(-4px); filter: none; }
+
+@media (max-width: 900px) {
+  .logos-section .logos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .logos-section .logos-grid { grid-template-columns: 1fr; }
+  .logos-section .logo-item img { max-height: 48px; }
 }
 
 /*----------

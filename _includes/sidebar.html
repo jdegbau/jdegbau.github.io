@@ -1,18 +1,3 @@
-<aside id="sidebar-content" class="card">
-    <div class="card-content">
-        <img id="profile-photo" width="200px" height="250px" src="/assets/img/joshua-degrasse-baumann.JPG" alt="Josh and Bailey" loading="lazy" />
-        <div id="skills" class="content">
-            <p class="is-size-5">Skills</p>
-            <img width="24px" height="24px" alt="Google Analytics skill icon" src="/assets/img/google-analytics.png" loading="lazy">
-            <img width="24px" height="24px" alt="Google Tag Manager skill icon" src="/assets/img/tag-manager.png" loading="lazy">
-            <img width="24px" height="24px" alt="CSS skill icon" src="/assets/img/css.png" loading="lazy">
-            <img width="24px" height="24px" alt="JavaScript skill icon" src="/assets/img/javascript.png" loading="lazy">
-            <img width="24px" height="24px" alt="ChatGPT (OpenAI) skill icon" src="/assets/img/openai.png" loading="lazy">
-        </div>
-        <a href="/seo-helpline/" class="button is-medium is-rounded is-outlined is-fullwidth is-primary"><i class="fa-solid fa-phone mr-2" aria-hidden="true"></i>SEO Helpline</a>
-      </div>
-    
-        {% if page.date %}
-            {% include ai-summarize-sidebar.html %}
-        {% endif %}
-</aside>
+<!-- Sidebar removed: content migrated to _data/sidebar.yml and new includes.
+     Use _includes/profile-card.html and _includes/ai-summarize-sidebar.html where appropriate.
+     Keeping this file present as a no-op to avoid include errors in custom templates. -->
