@@ -3,20 +3,29 @@ layout: wrapper
 ---
 
 
-<div class="columns blog-layout">
-    <div class="column is-one-quarter blog-left" style="position: sticky; top: 0;">
-        <p class="subtitle is-6">{{ page.date | date: "%b %-d, %Y"}} - Written by {{ page.author }} - {% include read-time.md %}</p>
-        {% if page.featured_image %}
-            <figure class="image is-4by5 mb-4">
-                <img src="{{ page.featured_image }}" alt="{{page.title}}" fetchpriority="high" style="width:100%;height:auto;border-radius:8px;" />
-            </figure>
-        {% endif %}
+{% if page.featured_image %}
+<section class="section post-header">
+    <div class="container">
+        <figure class="image is-3by1 mb-4" style="border-radius:8px;overflow:hidden;">
+            <img src="{{ page.featured_image }}" alt="{{ page.title }}" fetchpriority="high" style="width:100%;height:auto;object-fit:cover;" />
+        </figure>
     </div>
-    <div class="column is-three-quarters blog-main">
-        {{ content }}
-        {% include ai-summarize.md %}
-    </div>
+</section>
+{% endif %}
+
+<div class="container post-meta" style="margin-top:0.25rem;margin-bottom:1rem;">
+    <p class="subtitle is-6 has-text-grey">
+        {{ page.date | date: "%b %-d, %Y" }} &middot; Written by {{ page.author }} &middot; {% include read-time.md %}
+    </p>
 </div>
+
+<section class="section">
+    <div class="container">
+        <div class="content blog-main">
+            {{ content }}
+        </div>
+    </div>
+</section>
 
 <script type="application/ld+json">
 {

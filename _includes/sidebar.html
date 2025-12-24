@@ -11,4 +11,8 @@
         </div>
         <a href="/seo-helpline/" class="button is-medium is-rounded is-outlined is-fullwidth is-primary"><i class="fa-solid fa-phone mr-2" aria-hidden="true"></i>SEO Helpline</a>
       </div>
+    
+        {% if page.date %}
+            {% include ai-summarize-sidebar.html %}
+        {% endif %}
 </aside>

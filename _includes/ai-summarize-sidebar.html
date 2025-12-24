@@ -1,0 +1,25 @@
+{% assign post_url = site.url | append: page.url %}
+
+<div class="ai-summarize-sidebar" style="margin-top:1.5rem;padding:1rem;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,0.05);">
+  <p style="font-weight:700;margin:0 0 .75rem 0;font-size:0.95rem;display:flex;align-items:center;gap:.5rem;">Get an AI Summary</p>
+
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+    <a class="ai-btn" href="https://chatgpt.com/?prompt=Summarize+this+url%3A+{{ post_url | url_encode }}" target="_blank" rel="noopener noreferrer" title="ChatGPT" style="width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;background:#10b981;box-shadow:0 2px 6px rgba(16,185,129,0.18);">
+      <i class="fa-solid fa-robot" aria-hidden="true"></i>
+    </a>
+
+    <a class="ai-btn" href="https://claude.ai/new?q=Summarize%20this%20url%3A%20{{ post_url | url_encode }}" target="_blank" rel="noopener noreferrer" title="Claude" style="width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;background:#7c3aed;box-shadow:0 2px 6px rgba(124,58,237,0.18);">
+      <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+    </a>
+
+    <a class="ai-btn" href="https://www.perplexity.ai/search/new?q=Summarize%20this%20url%3A%20{{ post_url | url_encode }}" target="_blank" rel="noopener noreferrer" title="Perplexity" style="width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;background:#f97316;box-shadow:0 2px 6px rgba(249,115,22,0.18);">
+      <i class="fa-solid fa-compass" aria-hidden="true"></i>
+    </a>
+
+    <a class="ai-btn" href="https://www.google.com/search?udm=50&aep=11&q=Summarize%20this%20url%3A%20{{ post_url | url_encode }}" target="_blank" rel="noopener noreferrer" title="Google AI" style="width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;background:#4285F4;box-shadow:0 2px 6px rgba(66,133,244,0.18);">
+      <i class="fa-brands fa-google" aria-hidden="true"></i>
+    </a>
+  </div>
+
+  <p style="margin:.75rem 0 0 0;font-size:0.82rem;color:#666;">Open in your preferred AI assistant to get a quick summary.</p>
+</div>
