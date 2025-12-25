@@ -1,0 +1,50 @@
+.section.post-header
+  padding: 0
+
+.post-featured
+  position: relative
+  overflow: hidden
+  /* full-bleed: span the entire viewport width while staying centered */
+  width: 100vw
+  margin-left: calc(50% - 50vw)
+  min-height: 40vh
+  max-height: 60vh
+
+  &__img
+    display: block
+    width: 100%
+    height: 100%
+    object-fit: cover
+    -o-object-fit: cover
+    position: relative
+    z-index: 0
+
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    background: linear-gradient(to bottom, rgba(241,241,241,0) 0%, #f1f1f1 95%)
+    pointer-events: none
+    z-index: 1
+
+/* Make the post content overlap the featured image and add rounded top corners */
+.post-featured + .section
+  .container
+    .content.blog-main
+      margin-top: -3.5rem
+      border-top-left-radius: $card-radius
+      border-top-right-radius: $card-radius
+      padding-top: 2.25rem
+      background-clip: padding-box
+
+@media (max-width: 768px)
+  .post-featured + .section
+    .container
+      .content.blog-main
+        margin-top: -2rem
+        padding-top: 1.25rem
+        border-top-left-radius: ( $card-radius / 1.25 )
+        border-top-right-radius: ( $card-radius / 1.25 )

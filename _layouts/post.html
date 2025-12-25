@@ -2,20 +2,17 @@
 layout: wrapper
 ---
 
+{% include post-meta.html %}
 
 {% if page.featured_image %}
 <section class="section post-header">
-    <div class="container">
-        <figure class="image is-3by1 mb-4" style="border-radius:8px;overflow:hidden;">
-            <img src="{{ page.featured_image }}" alt="{{ page.title }}" fetchpriority="high" style="width:100%;height:auto;object-fit:cover;" />
-        </figure>
+    <div class="post-featured" role="img" aria-label="{{ page.title }}">
+        <img src="{{ page.featured_image }}" alt="{{ page.title }}" fetchpriority="high" class="post-featured__img" />
     </div>
 </section>
 {% endif %}
 
-{% include post-meta.html %}
-
-<section class="section">
+<section class="section post-body">
     <div class="container">
         <div class="content blog-main">
             {{ content }}
