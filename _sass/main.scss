@@ -348,7 +348,7 @@ span.navbar-brand {
 /* Logos section */
 .logos-section .logos-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
   align-items: center;
   justify-items: center;
@@ -369,7 +369,6 @@ span.navbar-brand {
   object-fit: contain;
   filter: grayscale(0.2) brightness(0.9);
 }
-.logos-section .logo-item:hover { opacity: 1; transform: translateY(-4px); filter: none; }
 
 @media (max-width: 900px) {
   .logos-section .logos-grid { grid-template-columns: repeat(2, 1fr); }
@@ -576,4 +575,8 @@ html {
   position: relative;
   border-radius: 16px 16px 0 0;
   z-index: 2;
+}
+
+main {
+  max-width: 100%;
 }
