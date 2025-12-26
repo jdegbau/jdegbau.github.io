@@ -1,28 +1,37 @@
-<div class="box author-box">
-  <article class="media">
-    <figure class="media-left">
-      <p class="image is-96x96">
-        <img src="{{ site.data.sidebar.profile_photo }}" alt="{{ site.data.sidebar.author_name }}">
+<div class="box p-5">
+  <div class="columns is-vcentered is-mobile is-multiline">
+    
+    <div class="column is-narrow is-12-mobile has-text-centered">
+      <figure class="image is-96x96 is-inline-block">
+        <img class="is-rounded" src="{{ site.data.sidebar.profile_photo }}" alt="{{ site.data.sidebar.author_name }}">
+      </figure>
+    </div>
+
+    <div class="column has-text-centered-mobile">
+      <h3 class="title is-5 mb-2">{{ site.data.sidebar.author_name }}</h3>
+      <p class="is-6 has-text-grey mb-3">
+        {{ site.data.sidebar.author_bio }}
       </p>
-    </figure>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>{{ site.data.sidebar.author_name }}</strong>
-          <br>
-          {{ site.data.sidebar.author_bio }}
-        </p>
-      </div>
-      <div class="tags" style="margin-top:.5rem;">
-        <div class="skills" aria-hidden="true" style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
-          {% for s in site.data.sidebar.skills %}
-            <img src="{{ s.src }}" alt="{{ s.alt }}" width="24" height="24" class="skill-icon" loading="lazy" style="display:inline-block;border-radius:4px;" />
-          {% endfor %}
+      
+      <div class="field is-grouped is-grouped-multiline is-justify-content-center-mobile">
+        {% for s in site.data.sidebar.skills %}
+        <div class="control">
+          <div class="tags has-addons">
+            <span class="tag is-white p-1">
+              <img src="{{ s.src }}" alt="{{ s.alt }}" width="24" height="24" loading="lazy">
+            </span>
+          </div>
         </div>
+        {% endfor %}
       </div>
     </div>
-    <div class="media-right">
-      <a href="{{ site.data.sidebar.cta.href }}" class="{{ site.data.sidebar.cta.classes }}">{{ site.data.sidebar.cta.text }}</a>
+
+    <div class="column is-narrow-tablet is-12-mobile">
+      <a href="{{ site.data.sidebar.cta.href }}" 
+         class="button {{ site.data.sidebar.cta.classes }} is-fullwidth-mobile is-medium">
+        {{ site.data.sidebar.cta.text }}
+      </a>
     </div>
-  </article>
+
+  </div>
 </div>
