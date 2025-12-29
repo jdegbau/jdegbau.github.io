@@ -210,13 +210,31 @@ $card-background-color: $scheme-main-ter;
 
 // Blog Card Overrides
 
-#blog-cards .card {
-  left: 0;
-  height: 100%;
-}
+#blog-cards {
+  .column {
+    display: flex; // Ensures columns in the row are equal height
+  }
 
-#blog-cards .card-footer {
-  margin-top: auto;
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; // Forces the card to fill the column height
+    width: 100%;
+  }
+
+  .card-content {
+    flex-grow: 1; // This pushes the footer to the bottom
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    flex-grow: 1; // Ensures the excerpt area takes up available space
+  }
+
+  .card-footer {
+    margin-top: auto; // Safety fallback for footer alignment
+  }
 }
 
 // Skip Nav Link
