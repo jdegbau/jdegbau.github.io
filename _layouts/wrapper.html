@@ -94,7 +94,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preload" href="/assets/fonts/JetBrains_Mono.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}"></noscript>
     {% if page.SEO_title %}
     <title>{{ page.SEO_title }}</title>
