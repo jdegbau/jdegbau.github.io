@@ -2794,7 +2794,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
     .viz-sticky-wrap {
         position: sticky;
-        top: 1.25rem;
+        top: 154px
     }
 
     @media screen and (max-width: 1023px) {
