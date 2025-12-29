@@ -211,8 +211,7 @@ $card-background-color: $scheme-main-ter;
 // Blog Card Overrides
 
 #blog-cards .card {
-    left: 0;
-    z-index: 1000; // ensure progress bar sits above sticky meta
+  left: 0;
   height: 100%;
 }
 
