@@ -18,26 +18,6 @@ This guide helps you:
 
 ## Interactive chart picker
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0"></script>
-
-<style>
-/* Minimal CSS: Bulma doesn't ship "pill button group selected" behavior */
-.viz-chip.is-selected {
-	box-shadow: inset 0 0 0 2px currentColor;
-}
-.viz-chart-frame {
-	height: 280px;
-}
-.viz-chart-frame canvas {
-	max-width: 100%;
-	max-height: 100%;
-}
-@media (max-width: 768px) {
-	.viz-chart-frame { height: 240px; }
-}
-</style>
-
 <div class="box">
 	<p class="has-text-grey mb-4">
 		Answer the questions below and you’ll get a recommended chart type and why it works.
@@ -46,7 +26,7 @@ This guide helps you:
 	<div class="columns is-multiline">
 		<div class="column is-12">
 			<div class="box is-shadowless" style="border: 1px solid rgba(0,0,0,0.06);">
-				<h3 class="title is-6 mb-3">1) What type of data relationship are you showing?</h3>
+				<h3 class="title is-6 mb-3">What type of data relationship are you showing?</h3>
 				<div class="buttons are-small is-flex-wrap-wrap viz-options" data-question="relationship">
 					<button class="button is-rounded viz-chip" data-value="change">Change over time</button>
 					<button class="button is-rounded viz-chip" data-value="comparison">Comparison between items</button>
@@ -60,7 +40,7 @@ This guide helps you:
 
 		<div class="column is-12">
 			<div class="box is-shadowless" style="border: 1px solid rgba(0,0,0,0.06);">
-				<h3 class="title is-6 mb-3">2) How many data points/categories do you have?</h3>
+				<h3 class="title is-6 mb-3">How many data points/categories do you have?</h3>
 				<div class="buttons are-small is-flex-wrap-wrap viz-options" data-question="datapoints">
 					<button class="button is-rounded viz-chip" data-value="few">Few (2–5)</button>
 					<button class="button is-rounded viz-chip" data-value="moderate">Moderate (6–15)</button>
@@ -71,7 +51,7 @@ This guide helps you:
 
 		<div class="column is-12">
 			<div class="box is-shadowless" style="border: 1px solid rgba(0,0,0,0.06);">
-				<h3 class="title is-6 mb-3">3) Who is your audience?</h3>
+				<h3 class="title is-6 mb-3">Who is your audience?</h3>
 				<div class="buttons are-small is-flex-wrap-wrap viz-options" data-question="audience">
 					<button class="button is-rounded viz-chip" data-value="executive">Executives/C-suite</button>
 					<button class="button is-rounded viz-chip" data-value="technical">Technical team</button>
@@ -92,480 +72,60 @@ This guide helps you:
 
 ---
 
-## Chart gallery (live examples)
-
-Below are common chart types you’ll use in SEO reporting, plus real SEO examples of when to use them.
-
-<div class="columns is-multiline">
-	<!-- Line -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">📈 Line chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Best for showing trends and changes over time.</p>
-				<div class="viz-chart-frame">
-					<canvas id="lineChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Organic traffic growth over months/years</li>
-						<li>Keyword ranking changes over time</li>
-						<li>Core Web Vitals trends</li>
-						<li>Before/after an algorithm update or migration</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Trends</span>
-						<span class="tag is-primary is-rounded">Time series</span>
-						<span class="tag is-primary is-rounded">Progress</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bar -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">📊 Bar chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Best for comparing discrete categories.</p>
-				<div class="viz-chart-frame">
-					<canvas id="barChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Traffic by channel comparison</li>
-						<li>Top pages by sessions</li>
-						<li>Keyword difficulty comparison</li>
-						<li>Competitor authority comparison</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Comparison</span>
-						<span class="tag is-primary is-rounded">Categories</span>
-						<span class="tag is-primary is-rounded">Rankings</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Horizontal Bar -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">📶 Horizontal bar chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Perfect for ranking lists and long labels.</p>
-				<div class="viz-chart-frame">
-					<canvas id="hBarChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Top keywords by search volume</li>
-						<li>Pages ranked by organic sessions</li>
-						<li>Referring domains by contribution</li>
-						<li>Content gaps by opportunity size</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Rankings</span>
-						<span class="tag is-primary is-rounded">Top N</span>
-						<span class="tag is-primary is-rounded">Long labels</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Donut -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">🍩 Donut/pie chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Best for showing composition and proportions.</p>
-				<div class="viz-chart-frame">
-					<canvas id="donutChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Traffic source mix</li>
-						<li>Device distribution</li>
-						<li>Content type mix</li>
-						<li>Dofollow vs nofollow share</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Composition</span>
-						<span class="tag is-primary is-rounded">Proportions</span>
-						<span class="tag is-primary is-rounded">Small N</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Stacked -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">📚 Stacked bar chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Compare totals while showing composition.</p>
-				<div class="viz-chart-frame">
-					<canvas id="stackedChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Traffic by device across months/quarters</li>
-						<li>Rank buckets (Top 3, 4–10, 11–20) over time</li>
-						<li>Content performance by category</li>
-						<li>Backlink growth by type</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Part-to-whole</span>
-						<span class="tag is-primary is-rounded">Time + mix</span>
-						<span class="tag is-primary is-rounded">Multi-dim</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Scatter -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">⚬ Scatter plot</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Show the relationship between two variables.</p>
-				<div class="viz-chart-frame">
-					<canvas id="scatterChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Search volume vs keyword difficulty</li>
-						<li>Word count vs organic traffic</li>
-						<li>Authority vs traffic by domain</li>
-						<li>Identifying “sweet spot” opportunities</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Correlation</span>
-						<span class="tag is-primary is-rounded">Outliers</span>
-						<span class="tag is-primary is-rounded">Opportunities</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Area -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">🏔️ Area chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Show cumulative totals over time.</p>
-				<div class="viz-chart-frame">
-					<canvas id="areaChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Cumulative organic sessions over a campaign</li>
-						<li>Indexed pages growth</li>
-						<li>Backlink acquisition over time</li>
-						<li>Organic-attributed revenue accumulation</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Cumulative</span>
-						<span class="tag is-primary is-rounded">Growth</span>
-						<span class="tag is-primary is-rounded">Volume</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bubble -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">🫧 Bubble chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Compare three dimensions simultaneously.</p>
-				<div class="viz-chart-frame">
-					<canvas id="bubbleChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Keywords: volume × difficulty × rank</li>
-						<li>Pages: traffic × conversions × bounce rate</li>
-						<li>Competitors: visibility × authority × content volume</li>
-						<li>Opportunities: impact × effort × confidence</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">3 variables</span>
-						<span class="tag is-primary is-rounded">Prioritization</span>
-						<span class="tag is-primary is-rounded">Analysis</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Radar -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">🎯 Radar chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Compare multiple attributes across categories.</p>
-				<div class="viz-chart-frame">
-					<canvas id="radarChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Competitor profiles across metrics</li>
-						<li>Site health audit scorecards</li>
-						<li>Content quality assessments</li>
-						<li>Experience metric comparisons</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Multi-metric</span>
-						<span class="tag is-primary is-rounded">Profiles</span>
-						<span class="tag is-primary is-rounded">Audits</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Waterfall -->
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">🌊 Waterfall chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Show how incremental changes lead to a final value.</p>
-				<div class="viz-chart-frame">
-					<canvas id="waterfallChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Traffic change attribution</li>
-						<li>Conversion funnel drop-offs</li>
-						<li>YoY change decomposition</li>
-						<li>Rank-to-traffic impact explanation</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Attribution</span>
-						<span class="tag is-primary is-rounded">Change</span>
-						<span class="tag is-primary is-rounded">Story</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Fuel Guage -->
-    <div class="column is-12-tablet is-6-desktop">
-        <div class="card">
-            <header class="card-header">
-                <p class="card-header-title">⛽ Fuel gauge</p>
-            </header>
-
-            <div class="card-content">
-                <p class="has-text-grey mb-4">
-                    Show progress toward a goal or overall SEO health at a glance.
-                </p>
-
-                <div class="viz-chart-frame">
-                    <canvas id="fuelGaugeChart" width="666" height="560"></canvas>
-                </div>
-                <p class="has-text-centered has-text-weight-semibold mt-3">
-                    72% SEO Health
-                </p>
-
-
-                <hr>
-
-                <div class="content">
-                    <p><strong>SEO use cases</strong></p>
-                    <ul>
-                        <li>Overall SEO health score</li>
-                        <li>Quarterly goal progress tracking</li>
-                        <li>Indexation or coverage completeness</li>
-                        <li>Technical debt burn-down</li>
-                    </ul>
-
-                    <div class="tags is-centered">
-                        <span class="tag is-primary is-rounded">Executive</span>
-                        <span class="tag is-primary is-rounded">KPI</span>
-                        <span class="tag is-primary is-rounded">Status</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-	<!-- Treemap -->
-	<div class="column is-12">
-		<div class="card">
-			<header class="card-header">
-				<p class="card-header-title">🗂️ Treemap chart</p>
-			</header>
-			<div class="card-content">
-				<p class="has-text-grey mb-4">Show hierarchy as nested rectangles by size.</p>
-				<div class="viz-chart-frame" style="height: 340px;">
-					<canvas id="treemapChart"></canvas>
-				</div>
-				<hr>
-				<div class="content">
-					<p><strong>SEO use cases</strong></p>
-					<ul>
-						<li>Traffic distribution by content category and subcategory</li>
-						<li>Keyword portfolio by topic clusters</li>
-						<li>Backlink profile by referring domain category</li>
-						<li>Site architecture by section size</li>
-					</ul>
-					<div class="tags is-centered">
-						<span class="tag is-primary is-rounded">Hierarchy</span>
-						<span class="tag is-primary is-rounded">Proportions</span>
-						<span class="tag is-primary is-rounded">Portfolio</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
----
-
 ## Quick compare matrix
 
+<style>
+    /* Labels reflect suitability for the task */
+    .tag.is-ideal { background-color: #10b981; color: white; font-weight: bold; width: 80px; }
+    .tag.is-capable { background-color: #f59e0b; color: white; width: 80px; }
+    .tag.is-poor { background-color: #94a3b8; color: white; width: 80px; }
+</style>
+
 <div class="table-container">
-	<table class="table is-striped is-hoverable is-fullwidth">
-		<thead>
-			<tr>
-				<th>Chart type</th>
-				<th>Trends</th>
-				<th>Compare</th>
-				<th>Composition</th>
-				<th>Distribution</th>
-				<th>Best for</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr><td>📈 Line</td><td>★★★</td><td>★★</td><td>★</td><td>★</td><td>Traffic over time, ranking trends</td></tr>
-			<tr><td>📊 Bar</td><td>★★</td><td>★★★</td><td>★</td><td>★★</td><td>Channel comparison, page performance</td></tr>
-			<tr><td>📶 Horizontal bar</td><td>★</td><td>★★★</td><td>★</td><td>★★</td><td>Top lists, keyword rankings</td></tr>
-			<tr><td>🍩 Donut/Pie</td><td>★</td><td>★★</td><td>★★★</td><td>★</td><td>Traffic sources, device split</td></tr>
-			<tr><td>📚 Stacked bar</td><td>★★</td><td>★★</td><td>★★★</td><td>★</td><td>Traffic by device over time</td></tr>
-			<tr><td>⚬ Scatter</td><td>★</td><td>★★</td><td>★</td><td>★★★</td><td>Keyword opportunity analysis</td></tr>
-			<tr><td>🏔️ Area</td><td>★★★</td><td>★★</td><td>★★</td><td>★</td><td>Cumulative traffic, growth</td></tr>
-			<tr><td>🫧 Bubble</td><td>★</td><td>★★★</td><td>★</td><td>★★★</td><td>Multi-variable keyword analysis</td></tr>
-			<tr><td>🎯 Radar</td><td>★</td><td>★★★</td><td>★</td><td>★</td><td>Competitor profiles, audits</td></tr>
-			<tr><td>🌊 Waterfall</td><td>★★</td><td>★</td><td>★★</td><td>★</td><td>Traffic change attribution</td></tr>
-			<tr><td>🗂️ Treemap</td><td>★</td><td>★★</td><td>★★★</td><td>★★</td><td>Content hierarchy, topic clusters</td></tr>
-		</tbody>
-	</table>
+    <table class="table is-striped is-fullwidth has-text-centered">
+        <thead>
+            <tr>
+                <th>Chart type</th>
+                <th>Trends</th>
+                <th>Compare</th>
+                <th>Composition</th>
+                <th>Distribution</th>
+                <th>Best for</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Line</td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-poor">Poor</span></td><td>Traffic over time, ranking trends</td></tr>
+            <tr><td>Bar</td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td>Channel comparison, page performance</td></tr>
+            <tr><td>Donut</td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-poor">Poor</span></td><td>Traffic sources, device split</td></tr>
+            <tr><td>Scatter</td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-ideal">Ideal</span></td><td>Keyword opportunity analysis</td></tr>
+            <tr><td>Radar</td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-poor">Poor</span></td><td>Competitor profiles, strategic audits</td></tr>
+            <tr><td>Waterfall</td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td>Traffic change attribution</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="box mt-4 has-background-light">
+    <h4 class="title is-7 has-text-grey is-uppercase mb-3">Matrix Key: What we are measuring</h4>
+    <div class="columns is-multiline is-mobile">
+        <div class="column is-6-mobile is-3-tablet">
+            <p class="is-size-7"><strong>Trends:</strong> How well it tracks SEO growth/decay over time.</p>
+        </div>
+        <div class="column is-6-mobile is-3-tablet">
+            <p class="is-size-7"><strong>Compare:</strong> Clarity when comparing multiple pages or competitors.</p>
+        </div>
+        <div class="column is-6-mobile is-3-tablet">
+            <p class="is-size-7"><strong>Composition:</strong> Visualizing traffic splits (e.g., Device or Channel share).</p>
+        </div>
+        <div class="column is-6-mobile is-3-tablet">
+            <p class="is-size-7"><strong>Distribution:</strong> Mapping keyword difficulty vs. volume density.</p>
+        </div>
+    </div>
 </div>
 
 ---
 
-## Data storytelling best practices for SEO
-
-<div class="columns is-multiline">
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="box">
-			<h3 class="title is-6">Lead with the insight</h3>
-			<p class="has-text-grey">Put the takeaway in the title, not just “Traffic over time.”</p>
-		</div>
-	</div>
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="box">
-			<h3 class="title is-6">One chart, one message</h3>
-			<p class="has-text-grey">If you need trends and breakdowns, split them.</p>
-		</div>
-	</div>
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="box">
-			<h3 class="title is-6">Use color strategically</h3>
-			<p class="has-text-grey">Reserve your accent color for what you want stakeholders to notice.</p>
-		</div>
-	</div>
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="box">
-			<h3 class="title is-6">Show context</h3>
-			<p class="has-text-grey">Comparisons make increases meaningful: prior period, benchmarks, or events.</p>
-		</div>
-	</div>
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="box">
-			<h3 class="title is-6">Don’t overwhelm</h3>
-			<p class="has-text-grey">Executives want 3–5 metrics. Keep the rest for appendices.</p>
-		</div>
-	</div>
-	<div class="column is-12-tablet is-6-desktop">
-		<div class="box">
-			<h3 class="title is-6">Annotate key events</h3>
-			<p class="has-text-grey">Mark launches, migrations, and updates so spikes make sense immediately.</p>
-		</div>
-	</div>
-</div>
-
----
-
-## Quick reference
-
-Here’s a cheat sheet for when you need to decide fast:
-
-| Your Goal | Best Chart | Why |
-|-----------|------------|-----|
-| Show growth over time | Line chart | Clearest trend visualization |
-| Compare channels/pages | Bar chart | Easy side-by-side comparison |
-| Show traffic sources | Donut chart | Part-to-whole at a glance |
-| Find keyword opportunities | Scatter plot | Volume vs difficulty relationship |
-| Compare vs competitors | Radar chart | Multi-metric comparison |
-| Explain traffic changes | Waterfall chart | Attribution story |
-| Show content hierarchy | Treemap | Proportional nested categories |
-
-## Final thoughts
-
-The best visualization is the one that makes your insight immediately obvious.
-
-Before you finalize any chart, ask: **Can someone understand the key takeaway in 5 seconds?** If not, simplify.
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -646,263 +206,16 @@ document.addEventListener('DOMContentLoaded', function() {
 			updateRecommendation();
 		});
 	});
-
-	// Chart.js defaults (keep neutral; let your Bulma theme do most of the brand work)
-	Chart.defaults.color = 'rgba(20, 20, 20, 0.65)';
-	Chart.defaults.borderColor = 'rgba(21, 42, 73, 0.15)';
-
-	const chartColors = {
-		primary: '#152A49',   // $blue
-		secondary: '#ff4d00', // $orange
-		tertiary: '#10b981',
-		quaternary: '#f59e0b',
-		negative: '#ef4444',
-		positive: '#10b981'
-	};
-
-	new Chart(document.getElementById('lineChart'), {
-		type: 'line',
-		data: {
-			labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-			datasets: [{
-				data: [12000,15000,18000,22000,28000,35000],
-				borderColor: chartColors.secondary,
-				backgroundColor: 'rgba(255, 77, 0, 0.10)',
-				fill: true,
-				tension: 0.4
-			}]
-		},
-		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-	});
-
-	new Chart(document.getElementById('barChart'), {
-		type: 'bar',
-		data: {
-			labels: ['Organic','Direct','Referral','Social','Email'],
-			datasets: [{
-				data: [45000,22000,15000,8000,5000],
-				backgroundColor: [chartColors.primary, chartColors.secondary, chartColors.tertiary, chartColors.quaternary, '#ec4899']
-			}]
-		},
-		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-	});
-
-	new Chart(document.getElementById('hBarChart'), {
-		type: 'bar',
-		data: {
-			labels: ['best seo tools','keyword research','link building','on-page seo','technical seo'],
-			datasets: [{
-				data: [12100,9900,8100,6600,5400],
-				backgroundColor: chartColors.primary
-			}]
-		},
-		options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-	});
-
-	new Chart(document.getElementById('donutChart'), {
-		type: 'doughnut',
-		data: {
-			labels: ['Organic','Direct','Referral','Social'],
-			datasets: [{
-				data: [55,25,12,8],
-				backgroundColor: [chartColors.primary, chartColors.secondary, chartColors.tertiary, chartColors.quaternary]
-			}]
-		},
-		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-	});
-
-	new Chart(document.getElementById('stackedChart'), {
-		type: 'bar',
-		data: {
-			labels: ['Q1','Q2','Q3','Q4'],
-			datasets: [
-				{ label: 'Desktop', data: [30000,35000,32000,38000], backgroundColor: chartColors.primary },
-				{ label: 'Mobile', data: [25000,32000,40000,45000], backgroundColor: chartColors.secondary },
-				{ label: 'Tablet', data: [5000,4500,4000,3500], backgroundColor: chartColors.tertiary }
-			]
-		},
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			scales: { x: { stacked: true }, y: { stacked: true } },
-			plugins: { legend: { position: 'bottom' } }
-		}
-	});
-
-	new Chart(document.getElementById('scatterChart'), {
-		type: 'scatter',
-		data: {
-			datasets: [{
-				data: [
-					{x:5000,y:25},{x:12000,y:45},{x:8000,y:35},
-					{x:3000,y:15},{x:15000,y:65},{x:9000,y:40},
-					{x:6000,y:20},{x:4000,y:55},{x:11000,y:30}
-				],
-				backgroundColor: chartColors.secondary
-			}]
-		},
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			scales: {
-				x: { title: { display: true, text: 'Search volume' } },
-				y: { title: { display: true, text: 'Keyword difficulty' } }
-			},
-			plugins: { legend: { display: false } }
-		}
-	});
-
-	new Chart(document.getElementById('areaChart'), {
-		type: 'line',
-		data: {
-			labels: ['Week 1','Week 2','Week 3','Week 4','Week 5','Week 6'],
-			datasets: [{
-				data: [50,120,210,350,480,650],
-				borderColor: chartColors.tertiary,
-				backgroundColor: 'rgba(16, 185, 129, 0.18)',
-				fill: true,
-				tension: 0.4
-			}]
-		},
-		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-	});
-
-	new Chart(document.getElementById('bubbleChart'), {
-		type: 'bubble',
-		data: {
-			datasets: [{
-				data: [
-					{x:8000,y:25,r:15},{x:12000,y:35,r:20},
-					{x:5000,y:15,r:10},{x:15000,y:50,r:25},
-					{x:9000,y:30,r:12}
-				],
-				backgroundColor: 'rgba(21, 42, 73, 0.35)'
-			}]
-		},
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			scales: {
-				x: { title: { display: true, text: 'Search volume' } },
-				y: { title: { display: true, text: 'Difficulty' } }
-			},
-			plugins: { legend: { display: false } }
-		}
-	});
-
-	new Chart(document.getElementById('radarChart'), {
-		type: 'radar',
-		data: {
-			labels: ['Authority','Content','Technical','Backlinks','Speed','UX'],
-			datasets: [
-				{ label: 'Your site', data: [75,85,70,65,80,72], borderColor: chartColors.primary, backgroundColor: 'rgba(21, 42, 73, 0.12)' },
-				{ label: 'Competitor', data: [82,70,85,90,68,75], borderColor: chartColors.secondary, backgroundColor: 'rgba(255, 77, 0, 0.10)' }
-			]
-		},
-		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-	});
-
-	new Chart(document.getElementById('waterfallChart'), {
-		type: 'bar',
-		data: {
-			labels: ['Start','New Content','Tech Fixes','Link Building','Core Update','End'],
-			datasets: [
-				{ data: [0,50000,58000,70000,82000,0], backgroundColor: 'transparent' },
-				{
-					data: [50000,8000,12000,12000,-7000,75000],
-					backgroundColor: [chartColors.primary, chartColors.positive, chartColors.positive, chartColors.positive, chartColors.negative, chartColors.secondary]
-				}
-			]
-		},
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			scales: { x: { stacked: true }, y: { stacked: true } },
-			plugins: { legend: { display: false } }
-		}
-	});
-
-    new Chart(document.getElementById('fuelGaugeChart'), {
-        type: 'doughnut',
-        data: {
-            datasets: [{
-                data: [72, 28], // 72% filled
-                backgroundColor: ['#ff4d00', '#f1f1f1'],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            cutout: '70%',
-            rotation: -90,
-            circumference: 180,
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: { enabled: false }
-            }
-        }
-    });
-
-	/* new Chart(document.getElementById('treemapChart'), {
-		type: 'treemap',
-		data: {
-			datasets: [{
-				tree: [
-					{ category: 'Blog', subcategory: 'How-to Guides', traffic: 45000 },
-					{ category: 'Blog', subcategory: 'Industry News', traffic: 28000 },
-					{ category: 'Blog', subcategory: 'Case Studies', traffic: 18000 },
-					{ category: 'Products', subcategory: 'Product Pages', traffic: 35000 },
-					{ category: 'Products', subcategory: 'Comparison', traffic: 22000 },
-					{ category: 'Resources', subcategory: 'Templates', traffic: 15000 },
-					{ category: 'Resources', subcategory: 'Tools', traffic: 12000 },
-					{ category: 'About', subcategory: 'Company', traffic: 8000 }
-				],
-				key: 'traffic',
-				groups: ['category','subcategory'],
-				backgroundColor(ctx) {
-					if (ctx.type !== 'data') return 'transparent';
-					const colors = {
-						'Blog': 'rgba(255, 77, 0, 0.75)',
-						'Products': 'rgba(21, 42, 73, 0.75)',
-						'Resources': 'rgba(16, 185, 129, 0.70)',
-						'About': 'rgba(245, 158, 11, 0.75)'
-					};
-					const item = ctx.raw;
-					const category = item.g || item._data?.category;
-					return colors[category] || 'rgba(21, 42, 73, 0.55)';
-				},
-				borderColor: 'rgba(255, 255, 255, 0.95)',
-				borderWidth: 2,
-				spacing: 1,
-				labels: {
-					display: true,
-					formatter: (ctx) => (ctx.type === 'data' ? (ctx.raw.g || '') : ''),
-					color: '#ffffff',
-					font: { size: 11, weight: 'bold' }
-				},
-				captions: {
-					display: true,
-					color: '#ffffff',
-					font: { size: 13, weight: 'bold' }
-				}
-			}]
-		},
-		options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-	}); */
-});
 </script>
 
 <div class="container">
 
-		<!-- Full-width heading -->
 		<div class="content mb-5">
 			<h2 class="title is-3">Radar Chart (Spider Chart)</h2>
 		</div>
 
 		<div class="columns is-variable is-8 is-multiline">
 
-			<!-- COPY COLUMN -->
 			<div class="column is-12 is-6-desktop is-order-2-mobile">
 				<div class="content">
 					<p>
@@ -975,7 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 			</div>
 
-			<!-- VISUALIZATION COLUMN -->
 			<div class="column is-12 is-6-desktop is-order-1-mobile">
 				<div class="viz-sticky-wrap">
 					<div class="card">
@@ -1004,31 +316,12 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 				</div>
-
-				<style>
-					/* Sticky behavior: sticks at top, releases at section end */
-					.viz-section .viz-sticky-wrap{
-						position: sticky;
-						top: 1.25rem;
-					}
-
-					/* Mobile ordering helpers (Bulma does not include these) */
-					@media screen and (max-width: 1023px){
-						.is-order-1-mobile{ order: 1; }
-						.is-order-2-mobile{ order: 2; }
-
-						/* Disable sticky on mobile to avoid awkward scroll behavior */
-						.viz-section .viz-sticky-wrap{
-							position: static;
-						}
-					}
-				</style>
 			</div>
 
 		</div>
 	</div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
 	// Brand colors from your SASS file
@@ -1255,9 +548,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
-
 <script>
     const ctx = document.getElementById('seoTreemapChart').getContext('2d');
 
@@ -1312,20 +602,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2.5rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -1432,7 +708,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     const COLORS = {
@@ -1493,22 +769,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .is-order-1-mobile { order: 1; }
-        .is-order-2-mobile { order: 2; }
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -1605,7 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     const BRAND_COLORS = {
@@ -1665,20 +925,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -1778,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     const BRAND_BLUE = '#152A49';
@@ -1828,22 +1074,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .is-order-1-mobile { order: 1; }
-        .is-order-2-mobile { order: 2; }
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -1941,7 +1171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     new Chart(document.getElementById('seoLineChart'), {
@@ -1997,20 +1227,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -2111,7 +1327,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     new Chart(document.getElementById('seoBarChart'), {
@@ -2151,22 +1367,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .is-order-1-mobile { order: 1; }
-        .is-order-2-mobile { order: 2; }
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -2277,7 +1477,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     new Chart(document.getElementById('seoStackedBarChart'), {
@@ -2325,20 +1525,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -2438,7 +1624,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
 
@@ -2481,22 +1667,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .is-order-1-mobile { order: 1; }
-        .is-order-2-mobile { order: 2; }
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -2599,7 +1769,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     new Chart(document.getElementById('seoDoughnutChart'), {
@@ -2634,20 +1804,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<style>
-    .viz-sticky-wrap {
-        position: sticky;
-        top: 1.25rem;
-    }
-
-    @media screen and (max-width: 1023px) {
-        .viz-sticky-wrap {
-            position: static;
-            margin-bottom: 2rem;
-        }
-    }
-</style>
 
 <div class="container">
 
@@ -2751,7 +1907,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
     const GAUGE_COLORS = {
@@ -2791,15 +1947,292 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 
+<div class="container">
+
+    <div class="content mb-5">
+        <h2 class="title is-3">Combo Bar + Line Chart</h2>
+    </div>
+
+    <div class="columns is-variable is-8 is-multiline">
+
+        <div class="column is-12 is-6-desktop">
+            <div class="viz-sticky-wrap">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Organic Growth vs. Paid Reduction</p>
+                    </header>
+
+                    <div class="card-content">
+                        <div class="viz-chart-frame" style="position: relative; height: 360px;">
+                            <canvas id="seoComboChart"></canvas>
+                        </div>
+
+                        <hr>
+
+                        <p class="is-size-7 has-text-grey mb-3">
+                            Side-by-side comparison of traffic sources vs. blended CPC efficiency.
+                        </p>
+
+                        <div class="notification is-light is-size-7">
+                            <strong>How to read this chart:</strong>
+                            <p class="mt-1">
+                                Notice the <strong>"Efficiency Cross"</strong>: As the green bars (Organic) overtake the grey bars (Paid), the <strong>Orange Line (CPC)</strong> drops, proving that SEO is capturing high-value intent at a fraction of the cost.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-12 is-6-desktop">
+            <div class="content">
+                <p>
+                    A combo chart is the ultimate tool for <strong>Efficiency Modeling</strong>. It allows you to plot volume metrics (Traffic) alongside value metrics (CPC) to show how organic growth impacts the bottom line.
+                </p>
+
+                <p>
+                    In this scenario, we visualize how SEO <strong>reduces paid investment</strong> over time. By capturing organic rankings for expensive "money keywords," we can reduce our bidding floor, effectively lowering the average cost-per-click across the entire digital ecosystem.
+                </p>
+
+                <div class="columns is-variable is-6">
+                    <div class="column">
+                        <p class="mb-2"><strong>Use a combo chart if:</strong></p>
+                        <ul>
+                            <li>You need to show <strong>Efficiency Gains</strong></li>
+                            <li>You are comparing <strong>Quantity vs. Cost</strong></li>
+                            <li>You want to prove that SEO <strong>subsidizes Paid Search</strong></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <p class="mb-2"><strong>Avoid a combo chart if:</strong></p>
+                        <ul>
+                            <li>The Y-axes scales are too similar (it confuses the eye)</li>
+                            <li>You have more than two bar categories (bars become too thin)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="title is-5">Sample scenario: The "SEO Subsidy" Effect</h3>
+
+                <p>
+                    This chart proves that SEO is a <strong>deflationary force</strong> on marketing spend. 
+                </p>
+
+                <ol>
+                    <li><strong>Organic (Blue Bar):</strong> Shows steady growth as content authority builds.</li>
+                    <li><strong>Paid (Grey Bar):</strong> Shows a controlled reduction as we stop paying for keywords we now rank for organically.</li>
+                    <li><strong>Avg. CPC (Orange Line):</strong> Trends <strong>downward</strong> as the "Blended Cost" of traffic improves, proving a higher ROI on the total marketing budget.</li>
+                </ol>
+
+                <div class="notification is-light">
+                    <p class="mb-2"><strong>Decision this supports:</strong></p>
+                    <p>
+                        Supports the decision to <strong>reallocate PPC budget</strong> into technical SEO or content production to further drive down blended customer acquisition costs (CAC).
+                    </p>
+                </div>
+
+                <h3 class="title is-5">Other use cases</h3>
+                <ul>
+                    <li><strong>Total Leads vs. Cost Per Lead:</strong> Volume (bars) vs. Efficiency (line)</li>
+                    <li><strong>Site Speed vs. Bounce Rate:</strong> Load time (line) vs. Engagement (bars)</li>
+                    <li><strong>Market Share vs. Ad Spend:</strong> Share of Voice (bars) vs. Monthly Budget (line)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    new Chart(document.getElementById('seoComboChart'), {
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [
+                {
+                    type: 'line',
+                    label: 'Avg. CPC ($)',
+                    // Descending data to show reduced cost over time
+                    data: [5.20, 4.80, 4.10, 3.40, 2.90, 2.10],
+                    borderColor: BRAND.orange,
+                    backgroundColor: BRAND.orange,
+                    borderWidth: 3,
+                    yAxisID: 'y_cpc',
+                    tension: 0.3,
+                    pointRadius: 4,
+                    zIndex: 10
+                },
+                {
+                    type: 'bar',
+                    label: 'Organic Traffic',
+                    data: [2100, 3200, 4500, 5900, 7200, 8800],
+                    backgroundColor: BRAND.blue,
+                    yAxisID: 'y_traffic',
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.6
+                },
+                {
+                    type: 'bar',
+                    label: 'Paid Traffic',
+                    data: [8500, 8000, 6500, 5000, 3500, 2000],
+                    backgroundColor: BRAND.grey,
+                    yAxisID: 'y_traffic',
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                y_traffic: {
+                    type: 'linear',
+                    position: 'left',
+                    beginAtZero: true,
+                    title: { display: true, text: 'Monthly Sessions' },
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                y_cpc: {
+                    type: 'linear',
+                    position: 'right',
+                    beginAtZero: true,
+                    suggestedMax: 7,
+                    title: { display: true, text: 'CPC (USD)' },
+                    grid: { display: false },
+                    ticks: {
+                        callback: function(value) { return '$' + value; }
+                    }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+
+<section class="section">
+    <div class="container">
+        <div class="content mb-6">
+            <h2 class="title is-3 has-text-centered">Data Storytelling Best Practices for SEO</h2>
+            <p class="has-text-centered has-text-grey is-size-5">How to transform raw data into executive-level narratives.</p>
+        </div>
+
+        <div class="columns is-multiline">
+            <div class="column is-12-tablet is-4-desktop">
+                <div class="card is-fullheight shadow-hover">
+                    <div class="card-content">
+                        <div class="icon-text mb-3">
+                            <span class="icon has-text-info is-large"><i class="fas fa-2x fa-lightbulb"></i></span>
+                            <h3 class="title is-5 ml-2">Lead with the Insight</h3>
+                        </div>
+                        <p class="is-size-6 mb-4">Put the takeaway in the title. Don't describe the chart; explain the conclusion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12-tablet is-4-desktop">
+                <div class="card is-fullheight shadow-hover">
+                    <div class="card-content">
+                        <div class="icon-text mb-3">
+                            <span class="icon has-text-info is-large"><i class="fas fa-2x fa-bullseye"></i></span>
+                            <h3 class="title is-5 ml-2">One Chart, One Message</h3>
+                        </div>
+                        <p class="is-size-6 mb-4">Avoid "Franken-charts." If you need to show both a trend and a breakdown, use two visualizations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12-tablet is-4-desktop">
+                <div class="card is-fullheight shadow-hover">
+                    <div class="card-content">
+                        <div class="icon-text mb-3">
+                            <span class="icon has-text-info is-large"><i class="fas fa-2x fa-palette"></i></span>
+                            <h3 class="title is-5 ml-2">Use Color Strategically</h3>
+                        </div>
+                        <p class="is-size-6 mb-4">Mute baseline data with greys and reserve your bold brand color for the metric you want them to notice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12-tablet is-4-desktop">
+                <div class="card is-fullheight shadow-hover">
+                    <div class="card-content">
+                        <div class="icon-text mb-3">
+                            <span class="icon has-text-info is-large"><i class="fas fa-2x fa-history"></i></span>
+                            <h3 class="title is-5 ml-2">Show Context</h3>
+                        </div>
+                        <p class="is-size-6 mb-4">A number without a comparison is meaningless. Always include Year-over-Year (YoY) or forecast benchmarks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12-tablet is-4-desktop">
+                <div class="card is-fullheight shadow-hover">
+                    <div class="card-content">
+                        <div class="icon-text mb-3">
+                            <span class="icon has-text-info is-large"><i class="fas fa-2x fa-filter"></i></span>
+                            <h3 class="title is-5 ml-2">Don’t Overwhelm</h3>
+                        </div>
+                        <p class="is-size-6 mb-4">Executives focus on 3–5 "North Star" metrics. Move granular data (Crawl errors, 404s) to an appendix.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12-tablet is-4-desktop">
+                <div class="card is-fullheight shadow-hover">
+                    <div class="card-content">
+                        <div class="icon-text mb-3">
+                            <span class="icon has-text-info is-large"><i class="fas fa-2x fa-comment-dots"></i></span>
+                            <h3 class="title is-5 ml-2">Annotate Key Events</h3>
+                        </div>
+                        <p class="is-size-6 mb-4">Call out algorithm updates, site migrations, or PR spikes directly on the chart to explain volatility instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+---
+
+## Final thoughts
+
+The best visualization is the one that makes your insight immediately obvious.
+
+Before you finalize any chart, ask: **Can someone understand the key takeaway in 5 seconds?** If not, simplify.
+
 <style>
+/* Minimal CSS: Bulma doesn't ship "pill button group selected" behavior */
+.viz-chip.is-selected {
+	box-shadow: inset 0 0 0 2px currentColor;
+}
+.viz-chart-frame {
+	height: 280px;
+}
+.viz-chart-frame canvas {
+	max-width: 100%;
+	max-height: 100%;
+}
+@media (max-width: 768px) {
+	.viz-chart-frame { height: 240px; }
+}
     .viz-sticky-wrap {
         position: sticky;
-        top: 154px
+        top: 150px;
     }
 
     @media screen and (max-width: 1023px) {
-        .is-order-1-mobile { order: 1; }
-        .is-order-2-mobile { order: 2; }
         .viz-sticky-wrap {
             position: static;
             margin-bottom: 2rem;
