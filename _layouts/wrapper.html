@@ -94,7 +94,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preload" href="/assets/fonts/JetBrains_Mono.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}"></noscript>
     {% if page.SEO_title %}
     <title>{{ page.SEO_title }}</title>
@@ -109,19 +109,16 @@
     <link rel="icon" href="/assets/img/favicon.gif" type="image/gif">
     {% if page.title != "Page Not Found" %}<link rel="canonical" href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
     {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
-    {% comment %}Assign variables for easier use and default values{% endcomment %}
+    
     {% assign page_title = page.title | default: site.title %}
     {% if page.SEO_title %}{% assign page_title = page.SEO_title %}{% endif %}
-
     {% assign page_excerpt = page.excerpt | default: site.description %}
     {% if page.SEO_description %}{% assign page_excerpt = page.SEO_description %}{% endif %}
-    
     {% assign page_url = page.url | absolute_url %}
-    
     {% if page.featured_image %}
       {% assign og_image = page.featured_image | absolute_url %}
     {% else %}
-      {% assign og_image = "/assets/img/default-blog-hero.gif" | absolute_url %} {% comment %} Make sure this default image exists or change path {% endcomment %}
+      {% assign og_image = "/assets/img/default-blog-hero.gif" | absolute_url %}
     {% endif %}
 
     <meta property="og:title" content="{{ page_title | escape }}" />
@@ -130,40 +127,26 @@
     <meta property="og:image" content="{{ og_image }}" />
     {% if page.date %}<meta property="og:type" content="article" />{% else %}<meta property="og:type" content="website" />{% endif %}
     <meta property="og:site_name" content="{{ site.title | escape }}" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ page_title | escape }}" />
     <meta name="twitter:description" content="{{ page_excerpt | strip_html | truncatewords: 50 | escape }}" />
     <meta name="twitter:image" content="{{ og_image }}" />
-    {% comment %} Optional: Add Twitter site/creator handles if available in _config.yml {% endcomment %}
-    {% comment %} 
-    {% if site.twitter_username %}
-      <meta name="twitter:site" content="@{{ site.twitter_username }}" />
-      <meta name="twitter:creator" content="@{{ site.twitter_username }}" />
-    {% endif %}
-    {% endcomment %}
-    <!-- Google Tag Manager -->
+
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NM6JBXF');</script>
-    <!-- End Google Tag Manager -->
-  </head>
+    </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NM6JBXF"
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     {% include navigation.html %}
-    <div class="columns section">
-      <main class="column">
-        <section class="content container">
-          <h1 class="title">{{ page.title }}</h1>
-          {{ content }}
-        </section>
-      </main>
-    </div>
+
+    <main id="main-content" role="main">
+        {{ content }}
+    </main>
+
     <footer class="footer">
       <div class="columns is-reversed-mobile">
         <div class="column">
@@ -185,4 +168,5 @@
     <script src="/assets/js/mobile-nav.js" defer></script>
     <script src="/assets/js/copy-code-block.js" defer></script>
     <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw" defer></script>
+  </body>
 </html>
