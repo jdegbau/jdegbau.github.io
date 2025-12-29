@@ -3,18 +3,18 @@
     
     <div class="column is-narrow is-12-mobile has-text-centered">
       <figure class="image is-96x96 is-inline-block">
-        <img class="is-rounded" src="{{ site.data.sidebar.profile_photo }}" alt="{{ site.data.sidebar.author_name }}">
+        <img class="is-rounded" src="{{ site.data.author.profile_photo }}" alt="{{ site.data.author.author_name }}">
       </figure>
     </div>
 
     <div class="column has-text-centered-mobile">
-      <h3 class="title is-5 mb-2">{{ site.data.sidebar.author_name }}</h3>
+      <h3 class="title is-5 mb-2">{{ site.data.author.author_name }}</h3>
       <p class="is-6 has-text-grey mb-3">
-        {{ site.data.sidebar.author_bio }}
+        {{ site.data.author.author_bio }}
       </p>
       
       <div class="field is-grouped is-grouped-multiline is-justify-content-center-mobile">
-        {% for s in site.data.sidebar.skills %}
+        {% for s in site.data.author.skills %}
         <div class="control">
           <div class="tags has-addons">
             <span class="tag is-white p-1">
@@ -27,9 +27,9 @@
     </div>
 
     <div class="column is-narrow-tablet is-12-mobile">
-      <a href="{{ site.data.sidebar.cta.href }}" 
-         class="button {{ site.data.sidebar.cta.classes }} is-fullwidth-mobile is-medium">
-        {{ site.data.sidebar.cta.text }}
+      <a href="{{ site.data.author.cta.href }}" 
+         class="button {{ site.data.author.cta.classes }} is-fullwidth-mobile is-medium">
+        {{ site.data.author.cta.text }}
       </a>
     </div>
 
