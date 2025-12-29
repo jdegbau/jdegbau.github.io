@@ -14,16 +14,22 @@
 		  </a>
 		</div>
 	  
-		<div id="navbar-menu-list" class="navbar-menu menu-list">
-			<div class="navbar-start mx-auto">
-				<a href="/" class="navbar-item{% if page.url == '/' %} is-active{% endif %}">About</a>
-		  
-				<a href="/blog/" class="navbar-item{% if page.url contains '/blog/' %} is-active{% endif %}">Blog</a>
-
-				<a href="https://store.jdegbau.com/" class="navbar-item{% if page.url contains '/store/' %} is-active{% endif %}">Ready-Made GTM Templates</a>
-		
-				<a class="navbar-item{% if page.dir contains '/contact/' %} is-active{% endif %}" href="/contact/">Contact</a>
-			</div>
+		<div id="navbar-menu-list" class="navbar-menu">
+                <div class="navbar-start mx-auto">
+                    {% assign nav_pages = "/,About|/blog/,Blog|https://store.jdegbau.com/,Ready-Made GTM Templates|/contact/,Contact" | split: "|" %}
+                    
+                    {% for item in nav_pages %}
+                        {% assign parts = item | split: "," %}
+                        {% assign path = parts[0] %}
+                        {% assign label = parts[1] %}
+                        
+                        <a href="{{ path }}" 
+                           class="navbar-item {% if page.url contains path and path != '/' %}is-active{% elsif page.url == '/' and path == '/' %}is-active{% endif %}">
+                            {{ label }}
+                        </a>
+                    {% endfor %}
+                </div>
+				
 		  <div class="navbar-end ml-0">
 			{% include search.md %}
 		  </div>
