@@ -4,6 +4,7 @@ title: "SEO Data Visualization Guide"
 seo_title: "SEO Data Visualization Guide for Reporting & Analytics"
 slug: seo-data-visualization-guide
 excerpt: "Learn how to choose the right data visualization for SEO reporting. This guide covers charts for traffic trends, keyword analysis, attribution, and executive SEO dashboards."
+featured_image: /assets/img/seo-data-viz.png
 ---
 
 
