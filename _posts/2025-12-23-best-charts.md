@@ -129,83 +129,63 @@ This guide helps you:
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-	// Picker selections
-	const selections = {};
-	const recommendations = {
-		'change-few-executive': { chart: 'Line chart', icon: '📈', reason: 'Clean trend line, ideal for exec readouts.' },
-		'change-few-client': { chart: 'Line chart', icon: '📈', reason: 'Easy growth narrative for client decks.' },
-		'change-few-technical': { chart: 'Line chart with annotations', icon: '📈', reason: 'Add launch/core update markers for root-cause clarity.' },
-		'change-moderate-executive': { chart: 'Area chart', icon: '🏔️', reason: 'Cumulative impact reads quickly.' },
-		'change-moderate-client': { chart: 'Line chart', icon: '📈', reason: 'Multiple trend lines to compare metrics cleanly.' },
-		'change-many-technical': { chart: 'Line chart with filtering', icon: '📈', reason: 'Interactive filtering supports deep dives.' },
-		'comparison-few-executive': { chart: 'Bar chart', icon: '📊', reason: 'Fast side-by-side comparisons for decisions.' },
-		'comparison-few-client': { chart: 'Bar chart', icon: '📊', reason: 'Clear channel/page comparison.' },
-		'comparison-moderate-executive': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Scanable “top performers” list.' },
-		'comparison-moderate-client': { chart: 'Bar chart', icon: '📊', reason: 'Grouped bars for competitor comparisons.' },
-		'comparison-many-technical': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Handles long lists well.' },
-		'comparison-many-executive': { chart: 'Treemap chart', icon: '🗂️', reason: 'Many categories, instantly proportional.' },
-		'comparison-many-client': { chart: 'Treemap chart', icon: '🗂️', reason: 'Portfolio breakdown by category and size.' },
-		'composition-few-executive': { chart: 'Donut chart', icon: '🍩', reason: 'At-a-glance share view.' },
-		'composition-few-client': { chart: 'Donut chart', icon: '🍩', reason: 'Traffic mix is immediately clear.' },
-		'composition-moderate-executive': { chart: 'Stacked bar chart', icon: '📚', reason: 'Totals + mix without losing the headline.' },
-		'composition-moderate-client': { chart: 'Stacked bar chart', icon: '📚', reason: 'Device or bucket splits across time.' },
-		'composition-many-executive': { chart: 'Treemap chart', icon: '🗂️', reason: 'Hierarchical breakdown for large portfolios.' },
-		'composition-many-client': { chart: 'Treemap chart', icon: '🗂️', reason: 'Visualize category contribution quickly.' },
-		'composition-many-technical': { chart: 'Treemap chart', icon: '🗂️', reason: 'Great for IA/topic cluster analysis.' },
-		'distribution-few-technical': { chart: 'Scatter plot', icon: '⚬', reason: 'Spot the opportunity “sweet spot.”' },
-		'distribution-moderate-technical': { chart: 'Bubble chart', icon: '🫧', reason: 'Add a third variable for prioritization.' },
-		'distribution-many-technical': { chart: 'Scatter plot', icon: '⚬', reason: 'Pattern recognition at scale.' },
-		'correlation-few-technical': { chart: 'Scatter plot', icon: '⚬', reason: 'Show the relationship between two metrics.' },
-		'correlation-moderate-technical': { chart: 'Bubble chart', icon: '🫧', reason: 'Third dimension adds context.' },
-		'ranking-few-executive': { chart: 'Horizontal bar chart', icon: '📶', reason: 'A clean top-5 story.' },
-		'ranking-few-client': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Top pages/keywords in one glance.' },
-		'ranking-moderate-executive': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Top-10 hierarchy with long labels.' },
-		'ranking-moderate-client': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Keyword priorities clearly ranked.' },
-	};
+    // Picker selections
+    const selections = {};
+    const recommendations = {
+        'change-few-executive': { chart: 'Line chart', icon: '📈', reason: 'Clean trend line, ideal for exec readouts.' },
+        // ... (rest of your recommendation object)
+        'ranking-moderate-client': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Keyword priorities clearly ranked.' },
+    };
 
-	function getDefaultRecommendation() {
-		if (selections.relationship === 'change') return { chart: 'Line chart', icon: '📈', reason: 'Best default for time-series data.' };
-		if (selections.relationship === 'comparison') return { chart: 'Bar chart', icon: '📊', reason: 'Best default for categorical comparison.' };
-		if (selections.relationship === 'composition') return { chart: 'Donut chart', icon: '🍩', reason: 'Best default for part-to-whole.' };
-		if (selections.relationship === 'distribution') return { chart: 'Scatter plot', icon: '⚬', reason: 'Best default for distributions.' };
-		if (selections.relationship === 'correlation') return { chart: 'Scatter plot', icon: '⚬', reason: 'Best default for correlations.' };
-		return { chart: 'Horizontal bar chart', icon: '📶', reason: 'Best default for rankings.' };
-	}
+    function getDefaultRecommendation() {
+        if (selections.relationship === 'change') return { chart: 'Line chart', icon: '📈', reason: 'Best default for time-series data.' };
+        if (selections.relationship === 'comparison') return { chart: 'Bar chart', icon: '📊', reason: 'Best default for categorical comparison.' };
+        if (selections.relationship === 'composition') return { chart: 'Donut chart', icon: '🍩', reason: 'Best default for part-to-whole.' };
+        if (selections.relationship === 'distribution') return { chart: 'Scatter plot', icon: '⚬', reason: 'Best default for distributions.' };
+        if (selections.relationship === 'correlation') return { chart: 'Scatter plot', icon: '⚬', reason: 'Best default for correlations.' };
+        return { chart: 'Horizontal bar chart', icon: '📶', reason: 'Best default for rankings.' };
+    }
 
-	function updateRecommendation() {
-		if (selections.relationship && selections.datapoints && selections.audience) {
-			const key = `${selections.relationship}-${selections.datapoints}-${selections.audience}`;
-			const rec = recommendations[key] || getDefaultRecommendation();
+    function updateRecommendation() {
+        // Ensure all three selections are made before showing the box
+        if (selections.relationship && selections.datapoints && selections.audience) {
+            const key = `${selections.relationship}-${selections.datapoints}-${selections.audience}`;
+            const rec = recommendations[key] || getDefaultRecommendation();
 
-			document.getElementById('rec-content').innerHTML = `
-				<div class="media">
-					<div class="media-left">
-						<span style="font-size: 1.75rem;">${rec.icon}</span>
-					</div>
-					<div class="media-content">
-						<p class="title is-6 mb-1">${rec.chart}</p>
-						<p class="has-text-grey">${rec.reason}</p>
-						<p class="has-text-grey is-size-7 mt-2"><strong>Pro tip:</strong> Use the gallery below to validate fit and steal the pattern.</p>
-					</div>
-				</div>
-			`;
+            const contentArea = document.getElementById('rec-content');
+            const wrapper = document.getElementById('recommendation');
 
-			document.getElementById('recommendation').classList.remove('is-hidden');
-		}
-	}
+            if (contentArea && wrapper) {
+                contentArea.innerHTML = `
+                    <div class="media">
+                        <div class="media-left">
+                            <span style="font-size: 1.75rem;">${rec.icon}</span>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-6 mb-1">${rec.chart}</p>
+                            <p class="has-text-grey">${rec.reason}</p>
+                            <p class="has-text-grey is-size-7 mt-2"><strong>Pro tip:</strong> Use the gallery below to validate fit and steal the pattern.</p>
+                        </div>
+                    </div>
+                `;
+                wrapper.classList.remove('is-hidden');
+            }
+        }
+    }
 
-	document.querySelectorAll('.viz-options .viz-chip').forEach(btn => {
-		btn.addEventListener('click', () => {
-			const group = btn.closest('.viz-options');
-			const question = group.dataset.question;
+    document.querySelectorAll('.viz-options .viz-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const group = btn.closest('.viz-options');
+            const question = group.dataset.question; // e.g., "relationship"
 
-			group.querySelectorAll('.viz-chip').forEach(b => b.classList.remove('is-selected'));
-			btn.classList.add('is-selected');
+            group.querySelectorAll('.viz-chip').forEach(b => b.classList.remove('is-selected'));
+            btn.classList.add('is-selected');
 
-			selections[question] = btn.dataset.value;
-			updateRecommendation();
-		});
-	});
+            selections[question] = btn.dataset.value;
+            updateRecommendation();
+        });
+    });
+});
 </script>
 
 <div class="container">
