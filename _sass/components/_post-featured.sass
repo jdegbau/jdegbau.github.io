@@ -41,10 +41,11 @@
       background-clip: padding-box
 
 @media (max-width: 768px)
-  .post-featured + .section
-    .container
-      .content.blog-main
-        margin-top: -2rem
-        padding-top: 1.25rem
-        border-top-left-radius: ( $card-radius / 1.25 )
-        border-top-right-radius: ( $card-radius / 1.25 )
+  .post-featured
+    min-height: 30vh
+    max-height: calc(100vh - 120px)
+
+@media (max-width: 480px)
+  .post-featured
+    min-height: 25vh
+    max-height: calc(100vh - 100px)

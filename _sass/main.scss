@@ -181,13 +181,24 @@ $card-background-color: $scheme-main-ter;
 .post-meta .meta-right .icon i,
 .post-meta .meta-right .share-icons a i { font-size:14px; }
 
-.post-meta .meta-right .share-icons a { width:30px; height:30px; border-radius:6px; }
-.post-meta .ai-inline .ai-btn { width:26px; height:26px; }
+.post-meta .meta-right .share-icons a { width:30px; height:30px; border-radius:6px; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+.post-meta .ai-inline .ai-btn { width:26px; height:26px; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 
 @media (max-width: 768px) {
   .post-meta.card { border-radius:6px; }
-  .post-meta .card-content { padding: .35rem .5rem; }
+  .post-meta .card-content { padding: .5rem .5rem; }
   .post-meta .post-sticky-title { display:none; }
+  .post-meta { font-size: 0.85rem; }
+  .post-meta .level { flex-direction: column; }
+  .post-meta .level-left { width: 100%; }
+  .post-meta .level-right { width: 100%; border-left: none; margin-left: 0; padding-left: 0; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #dbdbdb; }
+}
+
+@media (max-width: 480px) {
+  .post-meta { font-size: 0.75rem; }
+  .post-meta .meta-segment { padding: 0.5rem 0.2rem; }
+  .post-meta .meta-right .share-icons a { min-width: 40px; min-height: 40px; }
+  .post-meta .card-content { padding: .4rem .3rem; }
 }
 
 @media (max-width: 1023px) {
@@ -586,6 +597,36 @@ html {
   font-family: "JetBrains Mono";
 }
 
+@media (max-width: 768px) {
+  .title, .is-1, h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  h4 {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title, .is-1, h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+}
+
 .post-body {
   margin-top: -20%;
   margin-left: auto;
@@ -596,6 +637,24 @@ html {
   border-radius: 16px;
   z-index: 2;
   padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .post-body {
+    margin-top: -12%;
+    max-width: 95%;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-body {
+    margin-top: -6%;
+    max-width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+  }
 }
 
 main {
