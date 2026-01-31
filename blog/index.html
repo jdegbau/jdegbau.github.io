@@ -11,7 +11,7 @@ excerpt: Check out interesting insights, tips, and guides related to SEO, data a
       <div class="card large">
         <a href="{{ post.url }}"><div class="card-image">
           <figure class="image is-16by9 mx-0">
-            <img src="{% if post.featured_image %}{{ post.featured_image }}{% else %}/assets/img/default-blog-hero.gif{% endif %}" alt="{{ post.title }}">
+            <img src="{% if post.featured_image %}{{ post.featured_image }}{% else %}/assets/img/default-blog-hero.gif{% endif %}" alt="{{ post.title }}" loading="lazy" decoding="async">
           </figure>
         </div></a>
         <div class="card-content">

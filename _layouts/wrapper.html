@@ -81,6 +81,7 @@
       a:hover {
         text-decoration: underline;
       }
+      img { max-width: 100%; height: auto; display: block; }
       @media (max-width: 1023px) {
         .columns.is-reversed-mobile {
           flex-direction: column-reverse;
@@ -108,7 +109,7 @@
     <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml">
     <link rel="icon" href="/assets/img/favicon.gif" type="image/gif">
     {% if page.title != "Page Not Found" %}<link rel="canonical" href={{ site.url }}{{ page.canonical | default: page.url }} />{% endif %}
-    {% if page.featured-image %}<link rel="preload" as="image" href="{{ page.featured-image }}">{% endif %}
+    {% if page.featured_image %}<link rel="preload" as="image" href="{{ page.featured_image | relative_url }}">{% endif %}
     
     {% assign page_title = page.title | default: site.title %}
     {% if page.SEO_title %}{% assign page_title = page.SEO_title %}{% endif %}
@@ -169,5 +170,20 @@
     <script src="/assets/js/copy-code-block.js" defer></script>
     <script src="/assets/js/progress-bar.min.js" defer></script>
     <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw" defer></script>
+    <script>
+      (function(){
+        try {
+          // Add lazy-loading and async decoding for images that don't declare intent
+          var imgs = document.querySelectorAll('img:not([loading])');
+          imgs.forEach(function(img){
+            // Preserve explicit eager/fetchpriority images (LCP)
+            if (img.getAttribute('loading') === 'eager') return;
+            if (img.getAttribute('fetchpriority') === 'high') return;
+            img.setAttribute('loading','lazy');
+            img.setAttribute('decoding','async');
+          });
+        } catch(e){}
+      })();
+    </script>
   </body>
 </html>
