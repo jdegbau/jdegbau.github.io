@@ -17,8 +17,18 @@ $orange: #ff4d00;
 $blue: #152A49;
 $black: #141414;
 $white: #f1f1f1;
+$grey-light: #f0f0f0;
+$grey-medium: #dbdbdb;
 $family-sans-serif: "Nunito", sans-serif;
 $family-monospace: "JetBrains Mono", monospace;
+
+// Design tokens for consistency
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$shadow-sm: 0 1px 2px rgba($black, 0.04);
+$shadow-md: 0 6px 16px rgba(16, 24, 40, 0.04);
+$shadow-lg: 0 8px 22px rgba(16, 24, 40, 0.08);
 
 @import "./utilities/initial-variables.sass";
 
@@ -144,7 +154,7 @@ $card-background-color: $scheme-main-ter;
 }
 .post-meta .meta-right { display:flex; align-items:center; }
 .post-meta .meta-right { border-left: 1px solid rgba(16,24,40,0.06); margin-left:.75rem; padding-left:.75rem; }
-.post-meta .meta-right .share-icons a { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; background:#fff; border:1px solid rgba(0,0,0,0.04); }
+.post-meta .meta-right .share-icons a { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:$border-radius-sm; background:$white; border:1px solid rgba(0,0,0,0.04); box-shadow:$shadow-sm; }
 
 @media (max-width: 768px) {
   .post-meta .meta-left { flex-wrap:wrap; }
@@ -154,8 +164,8 @@ $card-background-color: $scheme-main-ter;
 
 /* Compact refinements for the post-meta card to reduce visual bulk */
 .post-meta.card {
-  border-radius: 8px;
-  box-shadow: 0 6px 16px rgba(16,24,40,0.04);
+  border-radius: $border-radius-sm;
+  box-shadow: $shadow-md;
   margin: 0.4rem 0;
 }
 
@@ -185,7 +195,7 @@ $card-background-color: $scheme-main-ter;
 .post-meta .ai-inline .ai-btn { width:26px; height:26px; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 
 @media (max-width: 768px) {
-  .post-meta.card { border-radius:6px; }
+  .post-meta.card { border-radius:$border-radius-sm; }
   .post-meta .card-content { padding: .5rem .5rem; }
   .post-meta .post-sticky-title { display:none; }
   .post-meta { font-size: 0.85rem; }
@@ -634,9 +644,10 @@ html {
   max-width: 90%;
   background: $white;
   position: relative;
-  border-radius: 16px;
+  border-radius: $border-radius-lg;
   z-index: 2;
   padding: 2rem;
+  box-shadow: $shadow-md;
 }
 
 @media (max-width: 768px) {
@@ -644,7 +655,7 @@ html {
     margin-top: -12%;
     max-width: 95%;
     padding: 1.5rem 1rem;
-    border-radius: 12px;
+    border-radius: $border-radius-md;
   }
 }
 
@@ -653,7 +664,7 @@ html {
     margin-top: -6%;
     max-width: 100%;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: $border-radius-sm;
   }
 }
 
