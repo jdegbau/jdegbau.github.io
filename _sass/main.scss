@@ -587,11 +587,15 @@ html {
 }
 
 .post-body {
-  margin-top: -50px;
+  margin-top: -20%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
   background: $white;
   position: relative;
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
   z-index: 2;
+  padding: 2rem;
 }
 
 main {
