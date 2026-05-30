@@ -166,76 +166,82 @@ permalink: /about-josh/
 </div>
 
 <script type="application/ld+json">
-  {
-    "@context" : "https://schema.org",
-    "@type" : "WebSite",
-    "name" : "Joshua DeGrasse-Baumann's Blog",
-    "alternateName" : "jdegbau",
-    "url" : "https://jdegbau.com/"
-  }
-</script>
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Person",
-    "@id": "https://jdegbau.com/#person",
-    "name": "Joshua DeGrasse-Baumann",
-    "url": "https://jdegbau.com/",
-    "image": "https://jdegbau.com/assets/img/joshua-degrasse-baumann.JPG",
-    "sameAs": [
-      "https://g.co/kgs/o5cPgXa",
-      "https://twitter.com/jdegbau",
-      "https://www.instagram.com/jdegbau/",
-      "https://www.threads.net/@jdegbau",
-      "https://www.linkedin.com/in/jdegbau/",
-      "https://github.com/jdegbau",
-      "https://www.rocketclicks.com/team-member/joshua-degrasse-baumann/"
-    ],
-    "jobTitle": "Lead SEO Strategist",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Fire&Spark",
-      "@id": "https://www.fireandspark.com/#organization",
-      "url": "https://www.fireandspark.com/",
-      "sameAs": [
-        "https://www.linkedin.com/company/fireandspark/",
-        "https://twitter.com/fireandspark"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "50 Milk St Fl 16",
-        "addressLocality": "Boston",
-        "addressRegion": "MA",
-        "postalCode": "02109",
-        "addressCountry": "USA"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://jdegbau.com/about-josh/",
+      "url": "https://jdegbau.com/about-josh/",
+      "name": "About Joshua DeGrasse-Baumann",
+      "description": "Joshua DeGrasse-Baumann is an SEO consultant, data enthusiast, and web developer specializing in helping businesses improve their online visibility and performance.",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://jdegbau.com/#website" },
+      "mainEntity": { "@id": "https://jdegbau.com/#person" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://jdegbau.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About",
+            "item": "https://jdegbau.com/about-josh/"
+          }
+        ]
       }
     },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Milwaukee",
-      "addressRegion": "WI",
-      "addressCountry": "USA"
-    },
-    "description": "Joshua DeGrasse-Baumann is a seasoned SEO strategist with extensive experience in optimizing online presence for businesses.",
-    "knowsAbout": ["SEO", "Digital Marketing", "Web Analytics", "Content Strategy", "Google Analytics", "Programmatic SEO"],
-    "alumniOf": {
-      "@type": "Organization",
-      "name": "Rocket Clicks",
-      "@id": "https://www.rocketclicks.com/#organization",
-      "url": "https://www.rocketclicks.com",
-      "sameAs": [
-        "https://www.linkedin.com/company/rocket-clicks/",
-        "https://twitter.com/rocketclicks"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "W134N5522 Campbell Dr",
-        "addressLocality": "Menomonee Falls",
-        "addressRegion": "WI",
-        "postalCode": "53051",
-        "addressCountry": "USA"
-      }
+    {
+      "@type": "ItemList",
+      "name": "Services offered by Joshua DeGrasse-Baumann",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Service",
+            "name": "SEO Strategy",
+            "description": "Comprehensive audits, keyword research, and implementation plans that improve site visibility and performance in search results.",
+            "provider": { "@id": "https://jdegbau.com/#person" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Service",
+            "name": "Data Analysis",
+            "description": "Turning complex web analytics into clear, actionable insights that drive decision-making and business growth.",
+            "provider": { "@id": "https://jdegbau.com/#person" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Service",
+            "name": "Web Development",
+            "description": "Creating and optimizing websites with a focus on user experience, performance, and search engine friendliness.",
+            "provider": { "@id": "https://jdegbau.com/#person" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Service",
+            "name": "Programmatic SEO",
+            "description": "Leveraging automation and data-driven approaches to scale SEO efforts efficiently for larger websites.",
+            "provider": { "@id": "https://jdegbau.com/#person" }
+          }
+        }
+      ]
     }
-  }
+  ]
+}
 </script>
