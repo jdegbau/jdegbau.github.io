@@ -35,21 +35,62 @@ layout: wrapper
 
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "{{ site.url }}{{ page.url }}#blog-posting",
+      "url": "{{ site.url }}{{ page.url }}",
+      "headline": "{{ page.title | escape }}",
+      "name": "{{ page.title | escape }}",
+      "description": "{{ page.excerpt | strip_html | strip_newlines | escape }}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{% if page.featured_image %}{{ site.url }}{{ page.featured_image }}{% else %}{{ site.url }}/assets/img/default-blog-hero.gif{% endif %}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@id": "https://jdegbau.com/#person"
+      },
+      "publisher": {
+        "@id": "https://jdegbau.com/#person"
+      },
+      "datePublished": "{{ page.date | date: "%Y-%m-%dT%H:%M:%S+00:00" }}",
+      "dateModified": "{% if page.last_modified %}{{ page.last_modified | date: "%Y-%m-%dT%H:%M:%S+00:00" }}{% else %}{{ page.date | date: "%Y-%m-%dT%H:%M:%S+00:00" }}{% endif %}",
+      "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ site.url }}{{ page.url }}#blog-posting"
-    },
-    "headline": "{{ page.title }}",
-    "description": "{{ page.excerpt }}",
-    "image": "{{site.url}}{{ page.featured_image }}",  
-    "author": {
-        "@type": "Person",
-        "name": "{{ page.author }}",
-        "url": "{{ site.url }}",
-        "@id": "{{ site.url }}#person"
-    },
-    "datePublished": "{{ page.date | date: "%Y-%m-%d"}}"
+        "@id": "{{ site.url }}{{ page.url }}"
+      },
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://jdegbau.com/#website"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://jdegbau.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://jdegbau.com/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ page.title | escape }}",
+            "item": "{{ site.url }}{{ page.url }}"
+          }
+        ]
+      }{% if page.tags and page.tags.size > 0 %},
+      "keywords": "{{ page.tags | join: ', ' }}"{% endif %}
+    }
+  ]
 }
 </script>
