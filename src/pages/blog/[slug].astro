@@ -18,8 +18,20 @@ if (!post) {
 const seoTitle = post.seoTitle ?? post.title;
 const description = post.excerpt;
 const image = post.featuredImage;
+const canonical = `/blog/${slug}/`;
+const keywords = post.keywords?.length ? post.keywords : post.tags;
 ---
-<BaseLayout seoTitle={seoTitle} description={description} image={image}>
+<BaseLayout
+  seoTitle={seoTitle}
+  description={description}
+  image={image}
+  imageAlt={`Featured image for ${post.title}`}
+  date={post.date}
+  canonical={canonical}
+  keywords={keywords}
+  type="article"
+  authorName="Joshua DeGrasse-Baumann"
+>
   <nav slot="nav">
     <Navigation>
       <Search />
@@ -28,7 +40,12 @@ const image = post.featuredImage;
   <section class="section post-header">
     <div class="container">
       <h1 class="title">{post.title}</h1>
-      <PostMeta title={post.title} date={new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} readingTime="" url={post.url} />
+      <PostMeta
+        title={post.title}
+        date={new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+        readingTime={post.readingTime}
+        url={post.url}
+      />
       <div class="content blog-main">
         <post.component />
       </div>

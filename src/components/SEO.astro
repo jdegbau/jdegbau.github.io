@@ -1,0 +1,92 @@
+---
+const {
+  title,
+  description,
+  canonical,
+  image,
+  imageAlt,
+  noindex,
+  date,
+  seoTitle,
+  type,
+  authorName,
+  keywords,
+  schema,
+} = Astro.props;
+const siteUrl = 'https://jdegbau.com';
+const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
+const pageDescription = description ?? 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
+const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
+const pageImage = image ?? '/assets/img/default-blog-hero.gif';
+const pageImageUrl = pageImage.startsWith('http')
+  ? pageImage
+  : `${siteUrl}${pageImage.startsWith('/') ? '' : '/'}${pageImage}`;
+const pageImageAlt = imageAlt ?? pageTitle;
+const pageType = type ?? (date ? 'article' : 'website');
+const pageLocale = 'en_US';
+const pageKeywords = Array.isArray(keywords)
+  ? keywords.join(', ')
+  : typeof keywords === 'string'
+  ? keywords
+  : 'SEO, analytics, Google Analytics, Google Tag Manager, measurement';
+const pageAuthor = authorName ?? 'Joshua DeGrasse-Baumann';
+const twitterSite = '@jdegbau';
+const twitterCreator = pageAuthor.startsWith('@') ? pageAuthor : '@jdegbau';
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@type': pageType === 'article' ? 'Article' : 'WebPage',
+  '@id': `${pageUrl}#${pageType === 'article' ? 'article' : 'webpage'}`,
+  url: pageUrl,
+  headline: pageTitle,
+  name: pageTitle,
+  description: pageDescription,
+  inLanguage: 'en',
+  author: {
+    '@type': 'Person',
+    name: pageAuthor,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: pageAuthor,
+    '@id': `${siteUrl}/#person`,
+  },
+  image: {
+    '@type': 'ImageObject',
+    url: pageImageUrl,
+    caption: pageImageAlt,
+  },
+  ...(date && pageType === 'article'
+    ? {
+        datePublished: new Date(date).toISOString(),
+        dateModified: new Date(date).toISOString(),
+      }
+    : {}),
+};
+const jsonLd = schema ?? defaultSchema;
+---
+<title>{pageTitle}</title>
+<meta name="description" content={pageDescription} />
+{noindex ? <meta name="robots" content="noindex" /> : null}
+{pageKeywords ? <meta name="keywords" content={pageKeywords} /> : null}
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+<link rel="icon" href="/assets/img/favicon.gif" type="image/gif" />
+<link rel="canonical" href={pageUrl} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
+<meta property="og:url" content={pageUrl} />
+<meta property="og:image" content={pageImageUrl} />
+<meta property="og:image:alt" content={pageImageAlt} />
+<meta property="og:type" content={pageType === 'article' ? 'article' : 'website'} />
+<meta property="og:site_name" content="Joshua DeGrasse-Baumann | SEO, Data, and Development" />
+<meta property="og:locale" content={pageLocale} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={twitterSite} />
+<meta name="twitter:creator" content={twitterCreator} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDescription} />
+<meta name="twitter:image" content={pageImageUrl} />
+<meta name="twitter:image:alt" content={pageImageAlt} />
+{date ? <meta property="article:published_time" content={new Date(date).toISOString()} /> : null}
+<script type="application/ld+json">
+  {JSON.stringify(jsonLd)}
+</script>

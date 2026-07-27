@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Image from '../../components/Image.astro';
 import Navigation from '../../components/Navigation.astro';
 import Search from '../../components/Search.astro';
 import { getAllPosts } from '../../lib/posts';
@@ -9,7 +10,14 @@ const sortedPosts = posts;
 const seoTitle = "Josh's Blog";
 const description = 'Check out interesting insights, tips, and guides related to SEO, data analytics, and automation written by Joshua DeGrasse-Baumann.';
 ---
-<BaseLayout seoTitle={seoTitle} description={description}>
+<BaseLayout
+  seoTitle={seoTitle}
+  description={description}
+  canonical="/blog/"
+  image="/assets/img/default-blog-hero.gif"
+  imageAlt="Blog landing page hero image"
+  keywords={["blog", "SEO", "analytics", "data", "automation"]}
+>
   <nav slot="nav">
     <Navigation>
       <Search />
@@ -26,7 +34,13 @@ const description = 'Check out interesting insights, tips, and guides related to
               <a href={`/blog/${post.slug}/`}>
                 <div class="card-image">
                   <figure class="image is-16by9 mx-0">
-                    <img src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'} alt={post.title} loading="lazy" decoding="async" />
+                    <Image
+                      src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'}
+                      alt={post.title}
+                      loading="lazy"
+                      decoding="async"
+                      class="is-rounded"
+                    />
                   </figure>
                 </div>
               </a>
@@ -40,7 +54,7 @@ const description = 'Check out interesting insights, tips, and guides related to
               </div>
               <footer class="card-footer">
                 <time class="card-footer-item" dateTime={new Date(post.date).toISOString().split('T')[0]}>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
-                <p class="card-footer-item">{post.readingTime ?? ''}</p>
+                <p class="card-footer-item">{post.readingTime ? `${post.readingTime} min read` : ''}</p>
               </footer>
             </div>
           </div>

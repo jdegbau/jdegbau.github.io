@@ -1,4 +1,5 @@
 ---
+import SEO from '../components/SEO.astro';
 const {
   title,
   description,
@@ -11,8 +12,8 @@ const {
 const siteUrl = 'https://jdegbau.com';
 const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
 const pageDescription = description ?? 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
-const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
 const pageImage = image ?? '/assets/img/default-blog-hero.gif';
+const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
 ---
 <!DOCTYPE html>
 <html lang="en" class="has-navbar-fixed-top">
@@ -64,26 +65,20 @@ const pageImage = image ?? '/assets/img/default-blog-hero.gif';
     <link rel="preload" href="/assets/fonts/JetBrains_Mono.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="/assets/css/main.css" /></noscript>
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    {noindex ? <meta name="robots" content="noindex" /> : null}
-    <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-    <link rel="icon" href="/assets/img/favicon.gif" type="image/gif" />
-    <link rel="canonical" href={pageUrl} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
-    <meta property="og:url" content={pageUrl} />
-    <meta property="og:image" content={pageImage} />
-    <meta property="og:type" content={date ? 'article' : 'website'} />
-    <meta property="og:site_name" content="Joshua DeGrasse-Baumann | SEO, Data, and Development" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={pageImage} />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      noindex={noindex}
+      date={date}
+      seoTitle={seoTitle}
+    />
     <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NM6JBXF');` }} />
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NM6JBXF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <a href="#main-content" class="skip-nav-link">Skip to main content</a>
     <slot name="nav" />
     <main id="main-content" role="main">
       <slot />
