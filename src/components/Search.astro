@@ -1,0 +1,83 @@
+---
+---
+<div id="search" class="search-component">
+  <div id="search-container" class="field">
+    <p class="control has-icons-right">
+      <input type="text" id="search-input" class="input" placeholder="Search..." aria-label="Search posts" />
+      <span class="icon is-small is-right">
+        <i class="fas fa-search"></i>
+      </span>
+    </p>
+  </div>
+  <ul id="results-container" class="search-results"></ul>
+</div>
+<script>
+  const searchInput = document.getElementById('search-input');
+  const resultsContainer = document.getElementById('results-container');
+  let posts = [];
+
+  async function loadPosts() {
+    if (posts.length > 0) return;
+    try {
+      const response = await fetch('/search.json');
+      if (!response.ok) throw new Error('Failed to load search data');
+      posts = await response.json();
+    } catch (error) {
+      console.error(error);
+      posts = [];
+    }
+  }
+
+  function formatResult(post) {
+    return `
+      <li class="search-result">
+        <a class="is-paddingless" href="${post.permalink}">
+          <article class="message is-small has-text-left">
+            <div class="message-header"><p>${post.title}</p></div>
+            <div class="message-body">${post.excerpt}</div>
+          </article>
+        </a>
+      </li>
+    `;
+  }
+
+  function renderResults(results) {
+    if (!results.length) {
+      resultsContainer.innerHTML = `
+        <li class="search-result">
+          <article class="message is-small has-text-left">
+            <div class="message-header"><p>Oops! You stumped me!</p></div>
+            <div class="message-body">No matching results found.</div>
+          </article>
+        </li>
+      `;
+      return;
+    }
+
+    resultsContainer.innerHTML = results.map(formatResult).join('');
+  }
+
+  function normalize(value) {
+    return value.toLowerCase();
+  }
+
+  async function handleSearch(event) {
+    const query = normalize(event.target.value.trim());
+    await loadPosts();
+
+    if (!query) {
+      resultsContainer.innerHTML = '';
+      return;
+    }
+
+    const filtered = posts.filter((post) => {
+      const title = normalize(post.title);
+      const excerpt = normalize(post.excerpt || '');
+      return title.includes(query) || excerpt.includes(query);
+    });
+
+    renderResults(filtered.slice(0, 10));
+  }
+
+  searchInput.addEventListener('input', handleSearch);
+</script>

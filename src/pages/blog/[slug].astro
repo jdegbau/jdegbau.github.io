@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Search from '../../components/Search.astro';
+import PostMeta from '../../components/PostMeta.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import { getAllPosts, getPostBySlug } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  return getAllPosts().map((post) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getPostBySlug(slug);
+if (!post) {
+  throw new Error(`Blog post not found: ${slug}`);
+}
+const seoTitle = post.seoTitle ?? post.title;
+const description = post.excerpt;
+const image = post.featuredImage;
+---
+<BaseLayout seoTitle={seoTitle} description={description} image={image}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+  <section class="section post-header">
+    <div class="container">
+      <h1 class="title">{post.title}</h1>
+      <PostMeta title={post.title} date={new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} readingTime="" url={post.url} />
+      <div class="content blog-main">
+        <post.component />
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <AuthorBox />
+    </div>
+  </section>
+</BaseLayout>

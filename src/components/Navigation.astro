@@ -1,0 +1,41 @@
+---
+const navPages = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+  { href: '/blog/', label: 'Blog' },
+  { href: 'https://store.jdegbau.com/', label: 'Ready-Made GTM Templates', external: true },
+  { href: '/contact/', label: 'Contact' },
+];
+const currentPath = Astro.url.pathname;
+function isActive(href) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+<header>
+  <a href="#main-content" class="skip-nav-link">Skip to Content</a>
+  <nav class="navbar menu is-fixed-top is-spaced has-shadow" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <span id="logo-function">(<span id="logo-argument">jdegbau</span>) => {<span id="logo-cursor"></span>}</span>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-list">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbar-menu-list" class="navbar-menu">
+      <div class="navbar-start mx-auto">
+        {navPages.map((item) => (
+          <a href={item.href} class={`navbar-item ${isActive(item.href) ? 'is-active' : ''}`} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <div class="navbar-end ml-0">
+        <slot />
+      </div>
+    </div>
+  </nav>
+</header>

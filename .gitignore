@@ -4,6 +4,9 @@ _site
 .jekyll-metadata
 vendor
 .DS_Store
+node_modules
+.astro
+dist
 _posts/.obsidian/workspace.json
 .gitignore
 _posts/.obsidian/app.json

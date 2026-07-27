@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
+
+const seoTitle = 'My Favorite Links';
+const description = 'Curated links and useful resources from Joshua DeGrasse-Baumann.';
+---
+<BaseLayout seoTitle={seoTitle} description={description} noindex={true}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="box" style="max-width: 900px; margin: 0 auto; text-align: center; padding: 3rem 2rem;">
+        <img class="image" src="/assets/img/joshua-degrasse-baumann.JPG" alt="Josh and Bailey" style="display:block; margin: 0 auto 1.5rem; width:200px; height:200px; object-fit: cover; border-radius:50%;" />
+        <h1 class="title">Joshua DeGrasse-Baumann</h1>
+        <div class="buttons is-flex is-flex-direction-column is-align-items-stretch">
+          <a class="button is-link is-rounded is-outlined" href="https://jdegbau.com" target="_blank" rel="noopener noreferrer">
+            <img class="favicon mr-2" src="" alt="favicon" style="width:24px; height:24px; vertical-align:middle; border-radius:50%; border:1px solid #ff4d00; background:#fff; margin-right: 0.5rem;" /> My Personal Website
+          </a>
+          <a class="button is-link is-rounded is-outlined" href="https://bilt.page/r/URCB-UEF8" target="_blank" rel="noopener noreferrer">
+            <img class="favicon mr-2" src="" alt="favicon" style="width:24px; height:24px; vertical-align:middle; border-radius:50%; border:1px solid #ff4d00; background:#fff; margin-right: 0.5rem;" /> Bilt Credit Card
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a.button').forEach(function (link) {
+        var favicon = link.querySelector('.favicon');
+        if (!favicon) return;
+        try {
+          var url = new URL(link.href);
+          favicon.src = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(url.hostname);
+        } catch (e) {
+          // ignore invalid URLs
+        }
+      });
+    });
+  </script>
+
+  <Footer slot="footer" />
+</BaseLayout>

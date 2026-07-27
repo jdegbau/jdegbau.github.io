@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
+
+const seoTitle = 'SEO Game';
+const description = 'Redirecting to the SEO Game landing page.';
+---
+<BaseLayout seoTitle={seoTitle} description={description}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <h1 class="title">Redirecting to SEO Game</h1>
+      <p>If you are not redirected automatically, <a href="https://www.seogame.fun/lol/level8found200ok">click here</a>.</p>
+    </div>
+  </section>
+
+  <script>
+    window.location.replace('https://www.seogame.fun/lol/level8found200ok');
+  </script>
+
+  <Footer slot="footer" />
+</BaseLayout>

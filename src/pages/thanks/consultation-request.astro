@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Search from '../../components/Search.astro';
+import Footer from '../../components/Footer.astro';
+
+const seoTitle = 'Thanks for Scheduling!';
+const description = 'Thanks for scheduling your consultation with Joshua DeGrasse-Baumann.';
+---
+<BaseLayout seoTitle={seoTitle} description={description} noindex={true}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <h1 class="title">Looking Forward to Chatting!</h1>
+      <p>Thanks for scheduling your consultation. I’ll be in touch soon to discuss next steps.</p>
+      <a href="/" class="button is-primary">Back to home</a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

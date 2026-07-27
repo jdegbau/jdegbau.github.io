@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
+
+const seoTitle = 'Page Not Found';
+const description = 'The page you are looking for cannot be found.';
+---
+<BaseLayout seoTitle={seoTitle} description={description}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <h1 class="title">404</h1>
+      <p>Sorry, the page you requested could not be found.</p>
+      <a href="/" class="button is-primary">Return home</a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import { author } from '../data/author';
+---
+<div class="box p-5" style="border-radius: 16px; box-shadow: 0 6px 16px rgba(16, 24, 40, 0.04);">
+  <div class="columns is-vcentered is-mobile is-multiline">
+    <div class="column is-narrow is-12-mobile has-text-centered">
+      <figure class="image is-96x96 is-inline-block">
+        <img class="is-rounded" src={author.profilePhoto} alt={author.name} loading="lazy" decoding="async" />
+      </figure>
+    </div>
+    <div class="column has-text-centered-mobile">
+      <h3 class="title is-5 mb-2">{author.name}</h3>
+      <p class="is-6 has-text-grey mb-3">{author.bio}</p>
+      <div class="field is-grouped is-grouped-multiline is-justify-content-center-mobile">
+        {author.skills.map((skill) => (
+          <div class="control">
+            <div class="tags has-addons">
+              <span class="tag is-white p-1">
+                <img src={skill.src} alt={skill.alt} width="24" height="24" loading="lazy" />
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="column is-narrow-tablet is-12-mobile">
+      <a href={author.cta.href} class={author.cta.classes}>{author.cta.text}</a>
+    </div>
+  </div>
+</div>

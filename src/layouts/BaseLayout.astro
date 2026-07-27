@@ -1,0 +1,111 @@
+---
+const {
+  title,
+  description,
+  canonical,
+  image,
+  noindex,
+  date,
+  seoTitle,
+} = Astro.props;
+const siteUrl = 'https://jdegbau.com';
+const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
+const pageDescription = description ?? 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
+const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
+const pageImage = image ?? '/assets/img/default-blog-hero.gif';
+---
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style>
+      /* Critical CSS to prevent FOUC */
+      .skip-nav-link {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        background: #f0f0f0;
+        color: #0f0f0f;
+        z-index: 31;
+        border-radius: 0 0 .25rem .25rem;
+        left: .5rem;
+        transition: transform .5s ease-in;
+      }
+      .skip-nav-link:focus {
+        position: absolute;
+        width: auto;
+        height: auto;
+        clip: auto;
+        white-space: normal;
+        margin: 0;
+        padding: .5rem;
+        transform: translateY(-130%);
+      }
+      html, body {
+        background: #f1f1f1;
+        color: #141414;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preload" href="/assets/fonts/JetBrains_Mono.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/assets/css/main.css" /></noscript>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    {noindex ? <meta name="robots" content="noindex" /> : null}
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+    <link rel="icon" href="/assets/img/favicon.gif" type="image/gif" />
+    <link rel="canonical" href={pageUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={pageImage} />
+    <meta property="og:type" content={date ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Joshua DeGrasse-Baumann | SEO, Data, and Development" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={pageImage} />
+    <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NM6JBXF');` }} />
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NM6JBXF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <slot name="nav" />
+    <main id="main-content" role="main">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/mobile-nav.min.js" defer></script>
+    <script src="/assets/js/copy-code-block.min.js" defer></script>
+    <script src="/assets/js/progress-bar.min.js" defer></script>
+    <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw" defer></script>
+    <script>
+      (() => {
+        try {
+          const imgs = document.querySelectorAll('img:not([loading])');
+          imgs.forEach((img) => {
+            if (img.getAttribute('loading') === 'eager') return;
+            if (img.getAttribute('fetchpriority') === 'high') return;
+            img.setAttribute('loading', 'lazy');
+            img.setAttribute('decoding', 'async');
+          });
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

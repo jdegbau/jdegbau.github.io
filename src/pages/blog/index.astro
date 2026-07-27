@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Search from '../../components/Search.astro';
+import { getAllPosts } from '../../lib/posts';
+
+const posts = getAllPosts();
+const sortedPosts = posts;
+const seoTitle = "Josh's Blog";
+const description = 'Check out interesting insights, tips, and guides related to SEO, data analytics, and automation written by Joshua DeGrasse-Baumann.';
+---
+<BaseLayout seoTitle={seoTitle} description={description}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">{seoTitle}</h1>
+      <p>{description}</p>
+      <div class="row columns is-multiline" id="blog-cards">
+        {sortedPosts.map((post) => (
+          <div class="column is-one-third">
+            <div class="card large">
+              <a href={`/blog/${post.slug}/`}>
+                <div class="card-image">
+                  <figure class="image is-16by9 mx-0">
+                    <img src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'} alt={post.title} loading="lazy" decoding="async" />
+                  </figure>
+                </div>
+              </a>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <a href={post.url}><p class="title is-4 no-padding">{post.title}</p></a>
+                  </div>
+                </div>
+                <div class="content">{post.excerpt}</div>
+              </div>
+              <footer class="card-footer">
+                <time class="card-footer-item" dateTime={new Date(post.date).toISOString().split('T')[0]}>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+                <p class="card-footer-item">{post.readingTime ?? ''}</p>
+              </footer>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
+
+const seoTitle = 'Schedule a Call';
+const description = 'Have an urgent SEO or data question? Schedule a one-hour call with the SEO Helpline and get an expert consultation for just $100.';
+---
+<BaseLayout seoTitle={seoTitle} description={description}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Schedule a Call</h1>
+      <p>Have an urgent SEO or data question? Schedule a one-hour call with the SEO Helpline and get an expert consultation for just $100.</p>
+      <div id="tidycal-embed" data-path="jdegbau/seo-helpline-consultation"></div>
+      <script src="https://asset-tidycal.b-cdn.net//js/embed.js"></script>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

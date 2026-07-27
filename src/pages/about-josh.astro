@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
+
+const seoTitle = "About Joshua DeGrasse-Baumann";
+const description = 'About Joshua DeGrasse-Baumann.';
+---
+<BaseLayout seoTitle={seoTitle} description={description}>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <h1 class="title">Page moved</h1>
+      <p>This page has moved to <a href="/about/">/about/</a>.</p>
+    </div>
+  </section>
+
+  <script>
+    window.location.replace('/about/');
+  </script>
+
+  <Footer slot="footer" />
+</BaseLayout>
