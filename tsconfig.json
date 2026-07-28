@@ -2,7 +2,13 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "jsx": "preserve",
-    "types": ["vite/client"]
+    "types": [
+      "vite/client"
+    ]
   },
-  "include": ["src/**/*", "astro.config.mjs"]
+  "include": [
+    "src/**/*",
+    "astro.config.mjs",
+    "./worker-configuration.d.ts"
+  ]
 }
