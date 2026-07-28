@@ -12,12 +12,39 @@ function isActive(href) {
   return currentPath.startsWith(href);
 }
 ---
+<style>
+  #logo-function {
+    font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    font-weight: 700;
+    color: #152A49;
+    letter-spacing: 0.01em;
+  }
+
+  #logo-argument {
+    color: #ff4d00;
+  }
+
+  #logo-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.08em;
+    vertical-align: middle;
+    background: currentColor;
+    animation: logoCursorBlink 1s steps(1) infinite;
+  }
+
+  @keyframes logoCursorBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+</style>
 <header>
   <a href="#main-content" class="skip-nav-link">Skip to Content</a>
   <nav class="navbar menu is-fixed-top is-spaced has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <span id="logo-function">(<span id="logo-argument">jdegbau</span>) => {<span id="logo-cursor"></span>}</span>
+        <span id="logo-function">(<span id="logo-argument">jdegbau</span>) =&gt; &#123;<span id="logo-cursor"></span>&#125;</span>
       </a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-list">
         <span aria-hidden="true"></span>
