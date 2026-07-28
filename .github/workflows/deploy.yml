@@ -25,6 +25,11 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Prepare GitHub Pages files
+        run: |
+          touch dist/.nojekyll
+          if [ -f CNAME ]; then cp CNAME dist/CNAME; fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v5
         with:
@@ -32,3 +37,4 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           keep_files: false
+          force_orphan: true
