@@ -25,15 +25,22 @@ function isActive(href) {
   }
 
   #logo-cursor {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    margin: 0 0.18rem;
+    vertical-align: middle;
+  }
+
+  #logo-cursor::after {
+    content: "";
     display: inline-block;
-    width: 0.58ch;
+    width: 2px;
     height: 0.95em;
-    margin: 0 0.05em 0 0.08em;
-    vertical-align: text-bottom;
     background: currentColor;
     border-radius: 1px;
     animation: logoCursorBlink 1s steps(1) infinite;
-    transform: translateY(0.02em);
   }
 
   @keyframes logoCursorBlink {
