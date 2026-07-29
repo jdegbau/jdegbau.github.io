@@ -21,3 +21,10 @@ _posts/.obsidian/community-plugins.json
 _posts/.obsidian/plugins/templater-obsidian/main.js
 _posts/.obsidian/plugins/templater-obsidian/manifest.json
 _posts/.obsidian/plugins/templater-obsidian/styles.css
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
