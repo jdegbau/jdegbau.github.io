@@ -1,0 +1,33 @@
+---
+import Image from './Image.astro';
+
+const { post } = Astro.props;
+---
+<div class="column is-one-third">
+  <div class="card large">
+    <a href={post.url}>
+      <div class="card-image">
+        <figure class="image is-16by9 mx-0">
+          <Image
+            src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'}
+            alt={post.title}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </a>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <a href={post.url}><p class="title is-4 no-padding">{post.title}</p></a>
+        </div>
+      </div>
+      <div class="content">{post.excerpt}</div>
+    </div>
+    <footer class="card-footer">
+      <time class="card-footer-item" dateTime={new Date(post.date).toISOString().split('T')[0]}>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+      <p class="card-footer-item">{post.readingTime ? `${post.readingTime} min read` : ''}</p>
+    </footer>
+  </div>
+</div>
