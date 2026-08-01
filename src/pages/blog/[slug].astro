@@ -4,21 +4,34 @@ import Navigation from '../../components/Navigation.astro';
 import Search from '../../components/Search.astro';
 import PostMeta from '../../components/PostMeta.astro';
 import AuthorBox from '../../components/AuthorBox.astro';
+import Image from '../../components/Image.astro';
 import { getAllPosts, getPostBySlug } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  return getAllPosts().map((post) => ({ params: { slug: post.slug } }));
+  return getAllPosts().flatMap((post) => {
+    const paths = [{ params: { slug: post.slug } }];
+    if (post.legacySlug && post.legacySlug !== post.slug) {
+      paths.push({ params: { slug: post.legacySlug } });
+    }
+    return paths;
+  });
 }
 
 const { slug } = Astro.params;
 const post = getPostBySlug(slug);
+
 if (!post) {
   throw new Error(`Blog post not found: ${slug}`);
 }
+
+if (slug !== post.slug) {
+  return Astro.redirect(post.url, 301);
+}
+
 const seoTitle = post.seoTitle ?? post.title;
 const description = post.excerpt;
 const image = post.featuredImage;
-const canonical = `/blog/${slug}/`;
+const canonical = post.url;
 const keywords = post.keywords?.length ? post.keywords : post.tags;
 ---
 <BaseLayout

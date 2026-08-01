@@ -1,0 +1,22 @@
+---
+import { getAllPosts, getPostBySlug } from '../lib/posts';
+
+export async function getStaticPaths() {
+  return getAllPosts().flatMap((post) => {
+    const paths = [{ params: { slug: post.slug } }];
+    if (post.legacySlug && post.legacySlug !== post.slug) {
+      paths.push({ params: { slug: post.legacySlug } });
+    }
+    return paths;
+  });
+}
+
+const { slug } = Astro.params;
+const post = getPostBySlug(slug);
+
+if (!post) {
+  throw new Error(`Blog post not found: ${slug}`);
+}
+
+return Astro.redirect(post.url, 301);
+---
