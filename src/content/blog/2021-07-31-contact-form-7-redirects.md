@@ -38,21 +38,26 @@ Ultimately, we’re still doing exactly what the old method did; we’re just do
 
 Copy and paste the following code at the bottom of your functions.php file:
 
-```php
-add_action( 'wp_footer', 'redirect_cf7' );
+<div class="copyable-code-block">
+  <div class="copyable-code-block__header">
+    <span class="copyable-code-block__lang">php</span>
+    <button class="copyable-code-block__button button is-primary is-rounded is-outlined is-small" type="button" data-copy-code-block>Copy</button>
+  </div>
+  <pre><code>add_action( 'wp_footer', 'redirect_cf7' );
 
 function redirect_cf7() {
 ?>
 
-<script type="text/javascript">
+&lt;script type="text/javascript"&gt;
 document.addEventListener( 'wpcf7mailsent', function( event ) {
     location = 'https://www.example.com/thank-you/';
 }, false );
-</script>
+&lt;/script&gt;
 
-<?php
+&lt;?php
 }
-```
+</code></pre>
+</div>
 
 **Before you save your file**, change `https://www.example.com/thank-you/` (in the fifth line) to your thank you page URL.
 
@@ -71,13 +76,17 @@ The good news is: there’s a work around for that, too. This will, however, req
 
 Start with pasting this code into your functions.php file:
 
-```php
-add_action( 'wp_footer', 'redirect_cf7' );
+<div class="copyable-code-block">
+  <div class="copyable-code-block__header">
+    <span class="copyable-code-block__lang">php</span>
+    <button class="copyable-code-block__button button is-primary is-rounded is-outlined is-small" type="button" data-copy-code-block>Copy</button>
+  </div>
+  <pre><code>add_action( 'wp_footer', 'redirect_cf7' );
 
 function redirect_cf7() {
 ?>
 
-<script type="text/javascript">
+&lt;script type="text/javascript"&gt;
 document.addEventListener( 'wpcf7mailsent', function( event ) {
     if ( '947' == event.detail.contactFormId ) { // Sends sumissions on form 947 to the first thank you page
         location = 'https://www.example.com/thank-you-1/';
@@ -87,11 +96,12 @@ document.addEventListener( 'wpcf7mailsent', function( event ) {
         location = 'https://www.example.com/thank-you-3/';
     }
 }, false );
-</script>
+&lt;/script&gt;
 
-<?php
+&lt;?php
 }
-```
+</code></pre>
+</div>
 
 Like before, we’re creating a ‘listener’ to fire a specific code when someone submits a form. This time, however, we’re using conditional if…else JavaScript statements to further specify our criteria.
 

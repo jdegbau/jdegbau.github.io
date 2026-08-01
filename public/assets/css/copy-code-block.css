@@ -1,0 +1,57 @@
+.copyable-code-block {
+  margin: 1.5rem 0;
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(20, 20, 20, 0.04);
+}
+
+.copyable-code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background: #f7f7f7;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.06);
+}
+
+.copyable-code-block__lang {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #5c5c5c;
+}
+
+.copyable-code-block__button {
+  min-width: 4.5rem;
+  justify-content: center;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  border-color: rgba(21, 42, 73, 0.22);
+  color: #152a49;
+}
+
+.copyable-code-block__button:hover,
+.copyable-code-block__button:focus {
+  color: #152a49;
+  border-color: #152a49;
+}
+
+.copyable-code-block pre {
+  margin: 0;
+  padding: 1rem 1.1rem 1.1rem;
+  overflow-x: auto;
+  background: #fff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.copyable-code-block code {
+  color: #141414;
+  font-family: inherit;
+  white-space: pre;
+}
