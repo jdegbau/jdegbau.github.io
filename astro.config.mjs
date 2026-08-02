@@ -3,24 +3,25 @@ import { unified } from '@astrojs/markdown-remark';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkCopyableCode from './src/lib/rehype-copyable-code.mjs';
 
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://jdegbau.com',
+    site: 'https://jdegbau.com',
 
-  markdown: {
-      processor: unified({
-          remarkPlugins: [remarkGfm],
-          rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
-      }),
-  },
+    markdown: {
+        processor: unified({
+            remarkPlugins: [remarkGfm, remarkCopyableCode],
+            rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+        }),
+    },
 
-  vite: {
-      build: {
-          target: 'es2020',
-      },
-  },
+    vite: {
+        build: {
+            target: 'es2020',
+        },
+    },
 
-  adapter: cloudflare(),
+    adapter: cloudflare(),
 });
