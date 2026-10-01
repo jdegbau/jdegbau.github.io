@@ -1,0 +1,657 @@
+---
+const chartTypes = [
+  {
+    title: 'Radar',
+    category: 'Strategic comparison',
+    bestFor: 'Competitor posture',
+    summary: 'Best when you need to compare a few entities across multiple dimensions without over-indexing on exact numeric precision.',
+    preview: `
+      <div class="chart-preview chart-preview--radar" aria-hidden="true">
+        <svg viewBox="0 0 160 160" preserveAspectRatio="none" role="presentation">
+          <polygon points="80,20 131,48 125,110 80,140 30,110 24,50" fill="rgba(255, 77, 0, 0.14)" stroke="#ff4d00" stroke-width="1.5" />
+          <polygon points="80,36 115,57 110,102 80,124 45,100 40,58" fill="rgba(21, 42, 73, 0.10)" stroke="#152a49" stroke-width="1.5" />
+          <polygon points="80,44 103,64 99,96 80,112 57,96 54,62" fill="rgba(20,20,20,0.06)" stroke="#141414" stroke-width="1.5" />
+          <g stroke="rgba(255,255,255,0.35)" stroke-width="1">
+            <line x1="80" y1="20" x2="80" y2="140" />
+            <line x1="30" y1="110" x2="131" y2="48" />
+            <line x1="24" y1="50" x2="125" y2="110" />
+          </g>
+          <g fill="#e8ecf4" font-size="8" font-family="sans-serif">
+            <text x="80" y="12">A</text>
+            <text x="136" y="48">B</text>
+            <text x="130" y="118">C</text>
+            <text x="80" y="152">D</text>
+            <text x="18" y="50">E</text>
+          </g>
+        </svg>
+      </div>
+    `,
+  },
+  {
+    title: 'Treemap',
+    category: 'Portfolio analysis',
+    bestFor: 'Volume + trend',
+    summary: 'A strong fit for large content libraries where rectangle size and color can communicate both scale and momentum.',
+    preview: `
+      <div class="chart-preview chart-preview--treemap" aria-hidden="true">
+        <div class="treemap-block treemap-block--a">A</div>
+        <div class="treemap-block treemap-block--b">B</div>
+        <div class="treemap-block treemap-block--c">C</div>
+        <div class="treemap-block treemap-block--d">D</div>
+        <div class="treemap-block treemap-block--e">E</div>
+      </div>
+    `,
+  },
+  {
+    title: 'Waterfall',
+    category: 'Change attribution',
+    bestFor: 'Traffic reconciliation',
+    summary: 'Use this when the audience needs to understand how a net change was created step by step.',
+    preview: `
+      <div class="chart-preview chart-preview--waterfall" aria-hidden="true">
+        <span class="waterfall-bar waterfall-bar--baseline"></span>
+        <span class="waterfall-bar waterfall-bar--loss"></span>
+        <span class="waterfall-bar waterfall-bar--gain"></span>
+        <span class="waterfall-bar waterfall-bar--gain-small"></span>
+        <span class="waterfall-bar waterfall-bar--final"></span>
+      </div>
+    `,
+  },
+  {
+    title: 'Bubble',
+    category: 'Prioritization',
+    bestFor: 'Keywords / opportunity',
+    summary: 'Pairs three variables cleanly—position, volume, and value—when the goal is to identify the next best action.',
+    preview: `
+      <div class="chart-preview chart-preview--bubble" aria-hidden="true">
+        <span class="bubble bubble--big"></span>
+        <span class="bubble bubble--mid"></span>
+        <span class="bubble bubble--small"></span>
+        <span class="bubble bubble--tiny"></span>
+      </div>
+    `,
+  },
+  {
+    title: 'Scatter',
+    category: 'Hypothesis testing',
+    bestFor: 'Correlation analysis',
+    summary: 'Ideal for uncovering patterns, outliers, and non-linear relationships in numeric SEO data.',
+    preview: `
+      <div class="chart-preview chart-preview--scatter" aria-hidden="true">
+        <span class="scatter-dot scatter-dot--a"></span>
+        <span class="scatter-dot scatter-dot--b"></span>
+        <span class="scatter-dot scatter-dot--c"></span>
+        <span class="scatter-dot scatter-dot--d"></span>
+        <span class="scatter-dot scatter-dot--e"></span>
+        <span class="scatter-dot scatter-dot--f"></span>
+      </div>
+    `,
+  },
+  {
+    title: 'Line',
+    category: 'Trend tracking',
+    bestFor: 'Traffic & rankings over time',
+    summary: 'The most natural chart for showing momentum, seasonality, and lag between effort and impact.',
+    preview: `
+      <div class="chart-preview chart-preview--line" aria-hidden="true">
+        <svg viewBox="0 0 180 110" preserveAspectRatio="none" role="presentation">
+          <path d="M0 88 C 24 80, 32 62, 58 50 S 98 36, 116 28 S 154 18, 180 10" fill="none" stroke="#ff4d00" stroke-width="3" stroke-linecap="round"/>
+          <path d="M0 92 C 25 94, 52 86, 74 80 S 116 72, 134 66 S 160 64, 180 60" fill="none" stroke="#152a49" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 6"/>
+        </svg>
+      </div>
+    `,
+  },
+  {
+    title: 'Bar',
+    category: 'Categorical comparison',
+    bestFor: 'Top pages / site sections',
+    summary: 'The clearest default for discrete comparisons when the question is “which category is highest?”',
+    preview: `
+      <div class="chart-preview chart-preview--bar" aria-hidden="true">
+        <span class="bar bar--1"></span>
+        <span class="bar bar--2"></span>
+        <span class="bar bar--3"></span>
+        <span class="bar bar--4"></span>
+        <span class="bar bar--5"></span>
+      </div>
+    `,
+  },
+  {
+    title: 'Stacked bar',
+    category: 'Composition + scale',
+    bestFor: 'Ranking depth by hub',
+    summary: 'Useful when you need to show both total visibility and the mix of performance tiers inside that total.',
+    preview: `
+      <div class="chart-preview chart-preview--stacked" aria-hidden="true">
+        <span class="stack stack--1"><em></em></span>
+        <span class="stack stack--2"><em></em></span>
+        <span class="stack stack--3"><em></em></span>
+        <span class="stack stack--4"><em></em></span>
+      </div>
+    `,
+  },
+  {
+    title: 'Pie',
+    category: 'Part-to-whole',
+    bestFor: 'Share of voice',
+    summary: 'Most effective for a few large slices where the primary message is visible ownership at a glance.',
+    preview: `
+      <div class="chart-preview chart-preview--pie" aria-hidden="true">
+        <svg viewBox="0 0 140 140" preserveAspectRatio="none" role="presentation">
+          <circle cx="70" cy="70" r="42" fill="none" stroke="#152a49" stroke-width="26" stroke-dasharray="58 100" transform="rotate(-90 70 70)"/>
+          <circle cx="70" cy="70" r="42" fill="none" stroke="#ff4d00" stroke-width="26" stroke-dasharray="50 100" stroke-dashoffset="-58" transform="rotate(-90 70 70)"/>
+          <circle cx="70" cy="70" r="42" fill="none" stroke="#8a8a8a" stroke-width="26" stroke-dasharray="20 100" stroke-dashoffset="-108" transform="rotate(-90 70 70)"/>
+          <circle cx="70" cy="70" r="42" fill="none" stroke="#dfe5ee" stroke-width="26" stroke-dasharray="18 100" stroke-dashoffset="-128" transform="rotate(-90 70 70)"/>
+        </svg>
+      </div>
+    `,
+  },
+  {
+    title: 'Doughnut',
+    category: 'Dashboard status',
+    bestFor: 'Technical indexation health',
+    summary: 'A cleaner, more modern ring when you want a hero total number and a simple distribution behind it.',
+    preview: `
+      <div class="chart-preview chart-preview--donut" aria-hidden="true">
+        <svg viewBox="0 0 140 140" preserveAspectRatio="none" role="presentation">
+          <circle cx="70" cy="70" r="38" fill="none" stroke="#eef2f7" stroke-width="22"/>
+          <circle cx="70" cy="70" r="38" fill="none" stroke="#152a49" stroke-width="22" stroke-dasharray="58 100" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+          <circle cx="70" cy="70" r="38" fill="none" stroke="#8a8a8a" stroke-width="22" stroke-dasharray="30 100" stroke-dashoffset="-58" transform="rotate(-90 70 70)"/>
+          <circle cx="70" cy="70" r="38" fill="none" stroke="#ff4d00" stroke-width="22" stroke-dasharray="18 100" stroke-dashoffset="-88" transform="rotate(-90 70 70)"/>
+        </svg>
+        <span class="donut-total">1.2K</span>
+      </div>
+    `,
+  },
+  {
+    title: 'Gauge',
+    category: 'Threshold monitoring',
+    bestFor: 'LCP / health score',
+    summary: 'Use a gauge when the benchmark is known and the audience needs to know status at a glance.',
+    preview: `
+      <div class="chart-preview chart-preview--gauge" aria-hidden="true">
+        <div class="gauge-arc gauge-arc--good"></div>
+        <div class="gauge-arc gauge-arc--warn"></div>
+        <div class="gauge-arc gauge-arc--bad"></div>
+        <div class="gauge-needle"></div>
+      </div>
+    `,
+  },
+  {
+    title: 'Combo',
+    category: 'Efficiency modeling',
+    bestFor: 'Volume vs. cost',
+    summary: 'A reliable choice when you want to prove the relationship between scale and efficiency in one frame.',
+    preview: `
+      <div class="chart-preview chart-preview--combo" aria-hidden="true">
+        <span class="combo-bar combo-bar--1"></span>
+        <span class="combo-bar combo-bar--2"></span>
+        <span class="combo-bar combo-bar--3"></span>
+        <span class="combo-line"></span>
+      </div>
+    `,
+  },
+];
+---
+
+<section class="jdb-section chart-assessment">
+  <div class="jdb-container jdb-container--wide">
+    <div class="jdb-section__head">
+      <p class="jdb-eyebrow">chart system</p>
+      <h2 class="jdb-section__title">Chart type assessment</h2>
+      <p class="jdb-section__sub">
+        The gallery below captures the same brand language used throughout this article: navy for baseline structure, orange for emphasis, restrained gray for secondary signals, and rounded cards that feel dashboard-ready.
+      </p>
+    </div>
+
+    <div class="chart-grid">
+      {chartTypes.map((chart) => (
+        <article class="chart-card">
+          <div class="chart-card__head">
+            <p class="chart-card__eyebrow">{chart.category}</p>
+            <h3>{chart.title}</h3>
+          </div>
+
+          <p class="chart-card__summary">{chart.summary}</p>
+
+          <div class="chart-card__meta">
+            <span class="chart-card__pill">Best for: {chart.bestFor}</span>
+            <span class="chart-card__pill chart-card__pill--muted">Style: on-brand</span>
+          </div>
+
+          <div class="chart-card__preview" set:html={chart.preview} />
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .chart-assessment {
+    border-top-color: var(--jdb-line);
+    background: linear-gradient(180deg, rgba(21, 42, 73, 0.18), rgba(21, 42, 73, 0.04));
+  }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--jdb-s-5);
+  }
+
+  .chart-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jdb-s-4);
+    padding: var(--jdb-s-5);
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-xl);
+    background: linear-gradient(180deg, rgba(15,31,56,0.96), rgba(17,30,52,0.88));
+    box-shadow: var(--jdb-sh-sm);
+    min-height: 100%;
+  }
+
+  .chart-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jdb-s-2);
+  }
+
+  .chart-card__eyebrow {
+    margin: 0;
+    color: var(--jdb-orange-400);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: var(--jdb-fw-bold);
+  }
+
+  .chart-card h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 1rem + 0.4vw, 1.5rem);
+  }
+
+  .chart-card__summary {
+    margin: 0;
+    color: var(--jdb-fg-dim);
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .chart-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-2);
+  }
+
+  .chart-card__pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--jdb-r-pill);
+    background: rgba(255, 77, 0, 0.14);
+    border: 1px solid rgba(255, 77, 0, 0.28);
+    color: #fef3ec;
+    font-size: 0.75rem;
+    font-weight: var(--jdb-fw-semibold);
+  }
+
+  .chart-card__pill--muted {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--jdb-fg-muted);
+  }
+
+  .chart-card__preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 170px;
+    padding: var(--jdb-s-4);
+    border-radius: var(--jdb-r-lg);
+    border: 1px solid rgba(255,255,255,0.08);
+    background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(10,21,38,0.2));
+    overflow: hidden;
+  }
+
+  .chart-preview {
+    position: relative;
+    width: 100%;
+    max-width: 230px;
+    height: 140px;
+  }
+
+  .chart-preview svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .chart-preview--treemap {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.9fr;
+    grid-template-rows: 1fr 1.2fr 0.8fr;
+    gap: 4px;
+    background: rgba(255,255,255,0.02);
+    border-radius: var(--jdb-r-md);
+  }
+
+  .treemap-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: var(--jdb-fw-bold);
+    color: rgba(255,255,255,0.9);
+    border-radius: 8px;
+  }
+
+  .treemap-block--a {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    background: rgba(255, 77, 0, 0.88);
+  }
+
+  .treemap-block--b {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+    background: rgba(21, 42, 73, 0.9);
+  }
+
+  .treemap-block--c {
+    grid-column: 2 / 3;
+    grid-row: 2 / 4;
+    background: rgba(120, 133, 150, 0.85);
+  }
+
+  .treemap-block--d {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    background: rgba(62, 203, 138, 0.85);
+  }
+
+  .treemap-block--e {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+    background: rgba(27, 85, 51, 0.9);
+  }
+
+  .chart-preview--waterfall {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .waterfall-bar {
+    position: relative;
+    display: block;
+    width: 24px;
+    border-radius: 8px 8px 0 0;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .waterfall-bar--baseline {
+    height: 42%;
+    background: var(--jdb-navy-800);
+  }
+
+  .waterfall-bar--loss {
+    height: 30%;
+    background: rgba(230, 78, 72, 0.85);
+  }
+
+  .waterfall-bar--gain {
+    height: 52%;
+    background: rgba(79, 214, 138, 0.9);
+  }
+
+  .waterfall-bar--gain-small {
+    height: 64%;
+    background: rgba(255, 77, 0, 0.8);
+  }
+
+  .waterfall-bar--final {
+    height: 78%;
+    background: var(--jdb-navy-800);
+  }
+
+  .chart-preview--bubble {
+    border-radius: 50% 50% 0 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+  }
+
+  .bubble {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    background: rgba(255, 77, 0, 0.7);
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+
+  .bubble--big {
+    width: 62px;
+    height: 62px;
+    left: 56px;
+    top: 38px;
+    background: rgba(255, 77, 0, 0.72);
+  }
+
+  .bubble--mid {
+    width: 44px;
+    height: 44px;
+    left: 24px;
+    top: 62px;
+    background: rgba(21, 42, 73, 0.8);
+  }
+
+  .bubble--small {
+    width: 26px;
+    height: 26px;
+    left: 110px;
+    top: 70px;
+    background: rgba(120, 133, 150, 0.9);
+  }
+
+  .bubble--tiny {
+    width: 18px;
+    height: 18px;
+    left: 82px;
+    top: 24px;
+    background: rgba(255, 153, 102, 0.9);
+  }
+
+  .chart-preview--scatter {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  }
+
+  .chart-preview--scatter::before,
+  .chart-preview--scatter::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-radius: 8px;
+  }
+
+  .chart-preview--scatter::after {
+    background: none;
+    inset: 12px 12px 12px 12px;
+    border-left: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .scatter-dot {
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--jdb-orange-500);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+  }
+
+  .scatter-dot--a { left: 58px; top: 58px; }
+  .scatter-dot--b { left: 92px; top: 40px; }
+  .scatter-dot--c { left: 118px; top: 70px; }
+  .scatter-dot--d { left: 36px; top: 92px; }
+  .scatter-dot--e { left: 82px; top: 84px; }
+  .scatter-dot--f { left: 146px; top: 50px; }
+
+  .chart-preview--line svg {
+    border-radius: 8px;
+  }
+
+  .chart-preview--bar {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .bar {
+    display: block;
+    width: 22px;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, rgba(255, 77, 0, 0.9), rgba(255, 77, 0, 0.55));
+  }
+
+  .bar--1 { height: 36%; }
+  .bar--2 { height: 50%; }
+  .bar--3 { height: 64%; }
+  .bar--4 { height: 80%; }
+  .bar--5 { height: 94%; }
+
+  .chart-preview--stacked {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .stack {
+    position: relative;
+    display: block;
+    width: 26px;
+    height: 84%;
+    border-radius: 8px 8px 0 0;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+
+  .stack em {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: block;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(21, 42, 73, 0.92), rgba(21, 42, 73, 0.7));
+  }
+
+  .stack--1 { height: 78%; }
+  .stack--2 { height: 90%; }
+  .stack--3 { height: 76%; }
+  .stack--4 { height: 62%; }
+
+  .stack--1 em { height: 42%; background: var(--jdb-orange-500); }
+  .stack--2 em { height: 58%; background: var(--jdb-orange-400); }
+  .stack--3 em { height: 68%; background: rgba(21, 42, 73, 0.9); }
+  .stack--4 em { height: 55%; background: rgba(138,138,138,0.9); }
+
+  .chart-preview--pie,
+  .chart-preview--donut,
+  .chart-preview--gauge,
+  .chart-preview--combo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chart-preview--donut {
+    position: relative;
+  }
+
+  .donut-total {
+    position: absolute;
+    z-index: 1;
+    font-size: 0.8rem;
+    font-weight: var(--jdb-fw-bold);
+    color: var(--jdb-fg);
+  }
+
+  .gauge-arc {
+    position: absolute;
+    inset: 14px 14px 14px 14px;
+    border-radius: 50%;
+    border-top: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  }
+
+  .gauge-arc--good {
+    background: linear-gradient(180deg, rgba(21,42,73,0.95), rgba(21,42,73,0.75));
+    clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+    mask: radial-gradient(circle at 50% 80%, transparent 0 48%, black 49% 100%);
+  }
+
+  .gauge-arc--warn {
+    background: rgba(255, 77, 0, 0.95);
+    clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+    mask: radial-gradient(circle at 50% 80%, transparent 0 54%, black 55% 100%);
+  }
+
+  .gauge-arc--bad {
+    background: rgba(230, 78, 72, 0.9);
+    clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+    mask: radial-gradient(circle at 50% 80%, transparent 0 62%, black 63% 100%);
+  }
+
+  .gauge-needle {
+    position: absolute;
+    width: 4px;
+    height: 52px;
+    border-radius: 999px;
+    background: var(--jdb-orange-500);
+    transform: rotate(22deg) translateY(-4px);
+    transform-origin: center bottom;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+  }
+
+  .chart-preview--combo {
+    position: relative;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .combo-bar {
+    display: block;
+    width: 20px;
+    border-radius: 8px 8px 0 0;
+    background: rgba(21, 42, 73, 0.9);
+  }
+
+  .combo-bar--1 { height: 52%; }
+  .combo-bar--2 { height: 70%; }
+  .combo-bar--3 { height: 90%; }
+
+  .combo-line {
+    position: absolute;
+    left: 32px;
+    right: 26px;
+    bottom: 20px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(255,77,0,0), rgba(255,77,0,1), rgba(255,77,0,0));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+    transform: skewX(-18deg);
+  }
+
+  @media (max-width: 768px) {
+    .chart-card {
+      padding: var(--jdb-s-4);
+    }
+  }
+</style>

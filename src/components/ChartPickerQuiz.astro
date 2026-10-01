@@ -1,0 +1,167 @@
+---
+const questions = [
+  {
+    id: 'relationship',
+    label: 'What type of data relationship are you showing?',
+    options: [
+      { value: 'change', label: 'Change over time' },
+      { value: 'comparison', label: 'Comparison between items' },
+      { value: 'composition', label: 'Parts of a whole' },
+      { value: 'distribution', label: 'Distribution/spread' },
+      { value: 'correlation', label: 'Correlation/relationship' },
+      { value: 'ranking', label: 'Ranking/order' },
+    ],
+  },
+  {
+    id: 'datapoints',
+    label: 'How many data points/categories do you have?',
+    options: [
+      { value: 'few', label: 'Few (2–5)' },
+      { value: 'moderate', label: 'Moderate (6–15)' },
+      { value: 'many', label: 'Many (15+)' },
+    ],
+  },
+  {
+    id: 'audience',
+    label: 'Who is your audience?',
+    options: [
+      { value: 'executive', label: 'Executives/C-suite' },
+      { value: 'technical', label: 'Technical team' },
+      { value: 'client', label: 'Clients' },
+      { value: 'stakeholder', label: 'General stakeholders' },
+    ],
+  },
+];
+---
+
+<section class="jdb-section jdb-section--tight">
+  <div class="jdb-container jdb-container--narrow">
+    <div class="jdb-section__head jdb-section__head--center">
+      <p class="jdb-eyebrow">decision tool</p>
+      <h2 class="jdb-section__title">Interactive chart picker</h2>
+      <p class="jdb-section__sub">
+        Answer a few quick questions and this recommendation engine will suggest the chart type that best fits your SEO story.
+      </p>
+    </div>
+
+    <article class="jdb-quiz" data-chart-picker>
+      {questions.map((question, index) => (
+        <div class="jdb-quiz__q">
+          <div class="jdb-quiz__qnum">Q{index + 1}</div>
+          <h3 class="jdb-quiz__qtitle">{question.label}</h3>
+
+          <div class="jdb-quiz__options">
+            {question.options.map((option) => (
+              <button
+                type="button"
+                class="jdb-quiz__option"
+                data-question={question.id}
+                data-value={option.value}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="jdb-quiz__result" id="chart-picker-result">
+        <div class="jdb-quiz__result-label">Recommended visualization</div>
+        <div class="jdb-quiz__result-value" id="chart-picker-result-value"></div>
+        <p id="chart-picker-result-copy"></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    const selections = {};
+    const picker = document.querySelector('[data-chart-picker]');
+    if (!picker) return;
+
+    const result = document.getElementById('chart-picker-result');
+    const resultValue = document.getElementById('chart-picker-result-value');
+    const resultCopy = document.getElementById('chart-picker-result-copy');
+
+    const buttons = [...picker.querySelectorAll('.jdb-quiz__option')];
+
+    function getRecommendation() {
+      const relationship = selections.relationship;
+      const audience = selections.audience;
+
+      if (relationship === 'change') {
+        return {
+          chart: 'Line chart',
+          icon: '📈',
+          reason: 'Best for showing trend, seasonality, or momentum over time in a way executives can scan in seconds.'
+        };
+      }
+
+      if (relationship === 'comparison') {
+        return {
+          chart: 'Bar chart',
+          icon: '📊',
+          reason: 'Best for comparing discrete categories, such as pages, folders, or channels when the question is “which is highest?”'
+        };
+      }
+
+      if (relationship === 'composition') {
+        return {
+          chart: 'Donut chart',
+          icon: '🍩',
+          reason: 'Best for showing parts of a whole, especially when the audience needs a quick read on traffic or device share.'
+        };
+      }
+
+      if (relationship === 'distribution' || relationship === 'correlation') {
+        return {
+          chart: 'Scatter plot',
+          icon: '⚬',
+          reason: 'Best for testing relationships, outliers, and patterns in data—especially useful for keyword opportunity analysis.'
+        };
+      }
+
+      if (relationship === 'ranking') {
+        return {
+          chart: 'Horizontal bar chart',
+          icon: '📶',
+          reason: 'Best for ranking pages, keywords, or competitors clearly, with the highest priority positioned first.'
+        };
+      }
+
+      return {
+        chart: 'Bar chart',
+        icon: '📊',
+        reason: 'A dependable default when your goal is clarity and quick decisions across categories.'
+      };
+    }
+
+    function updateRecommendation() {
+      if (!selections.relationship || !selections.datapoints || !selections.audience) {
+        result.classList.remove('is-visible');
+        return;
+      }
+
+      const recommendation = getRecommendation();
+      resultValue.textContent = `${recommendation.icon} ${recommendation.chart}`;
+      resultCopy.textContent = recommendation.reason;
+      result.classList.add('is-visible');
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const question = button.dataset.question;
+        const value = button.dataset.value;
+        const optionGroup = button.parentElement;
+
+        optionGroup.querySelectorAll('.jdb-quiz__option').forEach((option) => {
+          option.classList.toggle('is-selected', option === button);
+        });
+
+        selections[question] = value;
+        updateRecommendation();
+      });
+    });
+  });
+</script>

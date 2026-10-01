@@ -3,11 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Search from '../components/Search.astro';
 import Footer from '../components/Footer.astro';
+import Logos from '../components/Logos.astro';
+import BlogCard from '../components/BlogCard.astro';
 import { getAllPosts } from '../lib/posts';
 
-const posts = getAllPosts().slice(0, 5);
-const seoTitle = "Hello! I'm Josh!";
-const description = 'Joshua DeGrasse-Baumann is an SEO consultant, data enthusiast, and web developer specializing in helping businesses improve their online visibility and performance.';
+const posts = getAllPosts().slice(0, 3);
+const seoTitle = "About Joshua DeGrasse-Baumann";
+const description = 'About Joshua DeGrasse-Baumann, including his work in SEO, analytics, and development.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
   <nav slot="nav">
@@ -16,164 +18,96 @@ const description = 'Joshua DeGrasse-Baumann is an SEO consultant, data enthusia
     </Navigation>
   </nav>
 
-  <section class="section">
-    <div class="container">
-      <div class="column">
-        <h1 class="title">Hello! I'm Josh!</h1>
-        <h2 class="subtitle is-3">SEO Strategist, Data Enthusiast, Developer</h2>
+  <section class="jdb-hero jdb-hero--intro">
+    <div class="jdb-container jdb-container--narrow">
+      <span class="jdb-eyebrow">about</span>
+      <h1>Hello. I’m Josh.</h1>
+      <p class="jdb-hero__lede">
+        I’m an SEO strategist, data enthusiast, and developer focused on helping teams turn messy information into useful decisions and better digital experiences.
+      </p>
+    </div>
+  </section>
 
-        <p>I help businesses unlock their digital potential through strategic SEO, data analysis, and web development solutions. Currently serving as Lead SEO Strategist at <a href="https://www.fireandspark.com/">Fire&Spark</a>, I specialize in creating customized search strategies that drive meaningful results.</p>
+  <section class="jdb-section">
+    <div class="jdb-container jdb-container--narrow">
+      <div class="jdb-prose">
+        <p>I help businesses unlock their digital potential through strategic SEO, data analysis, and web development. My work sits at the intersection of search visibility, analytics quality, and practical implementation.</p>
+        <p>At the moment, I work as a Lead SEO Strategist at Fire&amp;Spark, where I focus on building search strategies that support sustainable growth and better measurement across marketing stacks.</p>
+        <p>Before that, I spent time helping teams improve technical SEO, digital analytics, and content systems. I’m especially interested in the way clean data, thoughtful planning, and good web execution can compound over time.</p>
+      </div>
+    </div>
+  </section>
 
-        <p>With expertise in technical SEO, content optimization, and programmatic approaches, I turn complex data into actionable insights that help businesses thrive in competitive online landscapes.</p>
+  <Logos />
 
-        <h3 class="title is-4 mt-5">What I Do</h3>
-        <div class="columns is-multiline">
-          <div class="column is-half">
-            <div class="card has-shadow">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <span class="icon has-text-primary is-large">
-                      <i class="fa-solid fa-magnifying-glass fa-2x"></i>
-                    </span>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">SEO Strategy</p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p>Comprehensive audits, keyword research, and implementation plans that improve your site's visibility and performance in search results.</p>
-                </div>
-              </div>
-            </div>
+  <section class="jdb-section">
+    <div class="jdb-container">
+      <div class="jdb-section__head">
+        <span class="jdb-eyebrow">what I do</span>
+        <h2 class="jdb-section__title">A practical mix of strategy and execution</h2>
+      </div>
+      <div class="jdb-grid jdb-grid--2">
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--search" aria-hidden="true"></span></div>
+          <h3>SEO Strategy</h3>
+          <p>Technical audits, content planning, and implementation roadmaps for teams that want sustainable search growth.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span></div>
+          <h3>Analytics</h3>
+          <p>Google Analytics and GTM setup, event design, and reporting systems that help teams understand what’s really working.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--check" aria-hidden="true"></span></div>
+          <h3>Web Development</h3>
+          <p>High-quality implementation for sites that need clarity, performance, and better long-term maintainability.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--external" aria-hidden="true"></span></div>
+          <h3>Programmatic SEO</h3>
+          <p>Systems that pair data with structured content so search strategies can scale without losing quality.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="jdb-section">
+    <div class="jdb-container">
+      <div class="jdb-section__head">
+        <span class="jdb-eyebrow">experience</span>
+        <h2 class="jdb-section__title">Where I’ve been</h2>
+      </div>
+      <ul class="jdb-timeline">
+        <li class="jdb-timeline__item jdb-timeline__item--current">
+          <div class="jdb-timeline__role">Lead SEO Strategist</div>
+          <div class="jdb-timeline__meta">
+            <strong>Fire&amp;Spark</strong>
+            <span class="jdb-badge"><span class="jdb-badge__dot"></span> Current</span>
           </div>
-
-          <div class="column is-half">
-            <div class="card has-shadow">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <span class="icon has-text-info is-large">
-                      <i class="fa-solid fa-chart-line fa-2x"></i>
-                    </span>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">Data Analysis</p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p>Turning complex web analytics into clear, actionable insights that drive decision-making and business growth.</p>
-                </div>
-              </div>
-            </div>
+          <p>Helping marketing teams build smarter search and measurement systems across a wide range of client work.</p>
+        </li>
+        <li class="jdb-timeline__item">
+          <div class="jdb-timeline__role">SEO &amp; Digital Strategy</div>
+          <div class="jdb-timeline__meta">
+            <strong>Rocket Clicks</strong>
+            <span class="jdb-badge"><span class="jdb-badge__dot"></span> Prior</span>
           </div>
+          <p>Delivered SEO solutions and digital marketing strategy for diverse client portfolios with a strong focus on measurement and implementation.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-          <div class="column is-half">
-            <div class="card has-shadow">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <span class="icon has-text-success is-large">
-                      <i class="fa-solid fa-code fa-2x"></i>
-                    </span>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">Web Development</p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p>Creating and optimizing websites with a focus on user experience, performance, and search engine friendliness.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="column is-half">
-            <div class="card has-shadow">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <span class="icon has-text-warning is-large">
-                      <i class="fa-solid fa-robot fa-2x"></i>
-                    </span>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">Programmatic SEO</p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p>Leveraging automation and data-driven approaches to scale SEO efforts efficiently for larger websites.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="title is-4 mt-5">Professional Experience</h3>
-        <div class="columns is-multiline">
-          <div class="column is-full">
-            <div class="card has-shadow">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-48x48">
-                      <span class="icon has-background-primary has-text-white" style="padding: 10px; border-radius: 50%;">
-                        <i class="fa-solid fa-briefcase"></i>
-                      </span>
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">Lead SEO Strategist</p>
-                    <p class="subtitle is-6 has-text-primary-dark"><strong>Fire&Spark</strong> | Current Position</p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p>Leading SEO strategy development and implementation for clients across various industries, with a focus on sustainable, long-term growth.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="column is-full">
-            <div class="card has-shadow">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-48x48">
-                      <span class="icon has-background-grey-light has-text-white" style="padding: 10px; border-radius: 50%;">
-                        <i class="fa-solid fa-briefcase"></i>
-                      </span>
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">Previously</p>
-                    <p class="subtitle is-6 has-text-grey-dark"><strong>Rocket Clicks</strong></p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p>Delivered comprehensive SEO solutions and digital marketing strategies for diverse client portfolios.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="title is-4 mt-5">Latest Articles</h3>
-        <div class="content">
-          <ul class="post-list">
-            {posts.map((post) => (
-              <li>
-                <a href={post.url}>{post.title}</a>
-                <span class="post-meta"> - {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-              </li>
-            ))}
-          </ul>
-          <a href="/blog/" class="button is-primary is-outlined mt-3">View All Articles</a>
-        </div>
-
-        <h3 class="title is-4 mt-5">Need SEO Help?</h3>
-        <p>Whether you're facing an urgent SEO challenge or looking for strategic guidance, I'm here to help. Book a consultation through my SEO Helpline for personalized advice.</p>
-        <a href="/seo-helpline/" class="button is-primary mt-2"><i class="fa-solid fa-phone mr-2"></i>Schedule a Consultation</a>
+  <section class="jdb-section">
+    <div class="jdb-container">
+      <div class="jdb-section__head">
+        <span class="jdb-eyebrow">recent articles</span>
+        <h2 class="jdb-section__title">A few recent notes</h2>
+      </div>
+      <div class="jdb-postgrid">
+        {posts.map((post) => (
+          <BlogCard post={post} />
+        ))}
       </div>
     </div>
   </section>

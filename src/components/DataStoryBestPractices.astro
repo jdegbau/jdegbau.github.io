@@ -1,0 +1,98 @@
+---
+const defaultItems = [
+  {
+    icon: '💡',
+    title: 'Lead with the Insight',
+    body: 'Put the takeaway in the title. Don’t describe the chart; explain the conclusion.',
+  },
+  {
+    icon: '🎯',
+    title: 'One Chart, One Message',
+    body: 'Avoid “Franken-charts.” If you need to show both a trend and a breakdown, use two visualizations.',
+  },
+  {
+    icon: '🎨',
+    title: 'Use Color Strategically',
+    body: 'Mute baseline data with greys and reserve your brand color for the metric you want them to notice.',
+  },
+  {
+    icon: '🕘',
+    title: 'Show Context',
+    body: 'A number without a comparison is meaningless. Always include YoY or forecast benchmarks.',
+  },
+  {
+    icon: '🧭',
+    title: 'Don’t Overwhelm',
+    body: 'Executives focus on 3–5 “North Star” metrics. Move granular data to an appendix.',
+  },
+  {
+    icon: '📝',
+    title: 'Annotate Key Events',
+    body: 'Call out algorithm updates, site migrations, or PR spikes directly on the chart to explain volatility instantly.',
+  },
+];
+
+const { items = defaultItems } = Astro.props;
+---
+
+<section class="jdb-section jdb-section--tight">
+  <div class="jdb-container jdb-container--narrow">
+    <div class="jdb-section__head jdb-section__head--center">
+      <p class="jdb-eyebrow">storytelling guidance</p>
+      <h2 class="jdb-section__title">Data Storytelling Best Practices for SEO</h2>
+      <p class="jdb-section__sub">
+        How to turn raw SEO data into executive-level narratives that are easy to trust and act on.
+      </p>
+    </div>
+
+    <div class="jdb-grid jdb-grid--3 jdb-bestpractices__grid">
+      {items.map((item) => (
+        <article class="jdb-bestpractices__card">
+          <div class="jdb-bestpractices__icon" aria-hidden="true">{item.icon}</div>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .jdb-bestpractices__grid {
+    align-items: stretch;
+  }
+
+  .jdb-bestpractices__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jdb-s-3);
+    padding: var(--jdb-s-5);
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-xl);
+    background: linear-gradient(180deg, rgba(15,31,56,0.96), rgba(17,30,52,0.88));
+    box-shadow: var(--jdb-sh-sm);
+    min-height: 100%;
+  }
+
+  .jdb-bestpractices__card h3 {
+    margin: 0;
+    font-size: clamp(1.05rem, 0.96rem + 0.27vw, 1.35rem);
+  }
+
+  .jdb-bestpractices__card p {
+    margin: 0;
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-bestpractices__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--jdb-r-lg);
+    background: rgba(255, 77, 0, 0.14);
+    border: 1px solid rgba(255, 77, 0, 0.28);
+    font-size: 1.25rem;
+  }
+</style>

@@ -1,0 +1,174 @@
+---
+const { items = [] } = Astro.props;
+const visibleItems = items.filter((item) => item.level === 2);
+---
+
+<aside class="jdb-toc" aria-label="Table of contents">
+  <div class="jdb-toc__title">
+    <button class="jdb-toc__toggle" type="button" aria-expanded="true" aria-controls="jdb-toc-list">
+      <span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span>
+      <span>On this page</span>
+      <span class="jdb-toc__toggle-caret" aria-hidden="true">▾</span>
+    </button>
+  </div>
+  <ul class="jdb-toc__list" id="jdb-toc-list">
+    {visibleItems.map((item) => (
+      <li class={`jdb-toc__item jdb-toc__item--level-${item.level}`}>
+        <a href={`#${item.id}`} data-toc-link data-level={item.level}>
+          {item.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  .jdb-toc {
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+    padding: var(--jdb-s-5);
+    margin-bottom: var(--jdb-s-6);
+    overflow: visible;
+    max-height: none;
+  }
+
+  .jdb-toc__title {
+    margin-bottom: var(--jdb-s-3);
+  }
+
+  .jdb-toc__toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5ch;
+    border: 0;
+    background: transparent;
+    color: var(--jdb-fg-muted);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .jdb-toc__toggle-caret {
+    margin-left: auto;
+    transition: transform var(--jdb-t-fast);
+  }
+
+  .jdb-toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--jdb-line);
+  }
+
+  .jdb-toc__item {
+    list-style: none;
+  }
+
+  .jdb-toc__item + .jdb-toc__item {
+    margin-top: var(--jdb-s-1);
+  }
+
+  .jdb-toc__item a {
+    display: block;
+    padding: 0.4rem 0 0.4rem var(--jdb-s-4);
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-muted);
+    text-decoration: none;
+    transition: color var(--jdb-t-fast), border-color var(--jdb-t-fast);
+  }
+
+  .jdb-toc__item a:hover {
+    color: var(--jdb-fg);
+  }
+
+  .jdb-toc__item a.is-active {
+    color: var(--jdb-orange-400);
+    border-left-color: var(--jdb-orange-500);
+    font-weight: var(--jdb-fw-medium);
+  }
+
+  .jdb-toc__item--level-3 {
+    margin-left: var(--jdb-s-3);
+  }
+
+  .jdb-toc__item--level-3 a {
+    padding-left: calc(var(--jdb-s-4) + var(--jdb-s-2));
+    font-size: var(--jdb-fs-xs);
+  }
+
+  @media (max-width: 64rem) {
+    .jdb-toc__list {
+      display: block;
+    }
+
+    .jdb-toc.is-collapsed .jdb-toc__list {
+      display: none;
+    }
+
+    .jdb-toc.is-collapsed .jdb-toc__toggle-caret {
+      transform: rotate(-90deg);
+    }
+  }
+
+</style>
+
+<script>
+  const toc = document.querySelector('.jdb-toc');
+  const toggle = document.querySelector('.jdb-toc__toggle');
+  const tocList = document.querySelector('#jdb-toc-list');
+  const tocLinks = [...document.querySelectorAll('[data-toc-link]')];
+  const tocTargets = tocLinks
+    .map((link) => {
+      const id = link.getAttribute('href')?.replace('#', '');
+      return id ? document.getElementById(id) : null;
+    })
+    .filter(Boolean);
+
+  if (toggle && toc && tocList) {
+    const setCollapsed = (collapsed) => {
+      toc.classList.toggle('is-collapsed', collapsed);
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+    };
+
+    if (window.matchMedia('(max-width: 64rem)').matches) {
+      setCollapsed(true);
+    }
+
+    toggle.addEventListener('click', () => {
+      const collapsed = toc.classList.contains('is-collapsed');
+      setCollapsed(!collapsed);
+    });
+  }
+
+  if (tocTargets.length) {
+    const setActiveLink = (id) => {
+      tocLinks.forEach((link) => {
+        link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry) {
+          setActiveLink(visibleEntry.target.id);
+        }
+      },
+      {
+        rootMargin: '-20% 0px -55% 0px',
+        threshold: [0.1, 0.4, 0.7],
+      }
+    );
+
+    tocTargets.forEach((target) => observer.observe(target));
+  }
+</script>

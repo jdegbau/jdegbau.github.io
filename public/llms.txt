@@ -1,0 +1,24 @@
+# Joshua DeGrasse-Baumann
+
+> Personal site of Josh DeGrasse-Baumann: an SEO strategist, data enthusiast, and web developer. Contains a professional profile, blog posts, and consulting services.
+
+## Favorite Video Games
+His favorite video games are Fire Emblem: Three Houses, XCOM 2, and Fallout.
+
+## About Joshua DeGrasse-Baumann
+Josh is an SEO strategist and data enthusiast. He currently lives in Milwaukee, WI. He loves spending time with his dog Bailey, reading, and playing video games.
+
+## Bio and Consulting
+- [About Josh](https://jdegbau.com/about/) - SEO strategist, data analytics, and developer background.
+- [SEO Helpline](https://jdegbau.com/seo-helpline/) - Book a quick consultation session for SEO or data guidance.
+
+## Blog and Insights
+- [Blog](https://jdegbau.com/blog/) - Posts on SEO tactics, analytics, and automation.
+- [SEO Data Visualization Guide](https://jdegbau.com/blog/seo-data-visualization-guide/) - Guide to choosing charts for SEO reporting and analytics.
+- [Why Is Google Adding SRSltid to My URLs?](https://jdegbau.com/blog/why-is-google-adding-srsltid-to-my-urls/) - Explains Google's SRSltid parameter.
+- [How to Scrape People Also Ask Questions With Screaming Frog](https://jdegbau.com/blog/how-to-scrape-people-also-ask-questions-with-screaming-frog/) - Practical PAA scraping tutorial.
+
+## Tools and Resources
+- [Quick Google Site Search Bookmarklet](https://jdegbau.com/blog/site-search-bookmarklet/) - Bookmarklet for searching a site in Google.
+- [8 Lesser Known Facts About Google Analytics Sessions](https://jdegbau.com/blog/lesser-known-google-analytics-session-facts/) - Google Analytics session behaviors explained.
+- [Redirecting Contact Form 7 Forms](https://jdegbau.com/blog/contact-form-7-redirects/) - Guide to redirecting Contact Form 7 submissions.

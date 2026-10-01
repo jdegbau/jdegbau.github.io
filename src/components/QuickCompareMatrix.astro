@@ -1,0 +1,119 @@
+---
+const defaultRows = [
+  {
+    chartType: 'Line',
+    trends: 'Ideal',
+    compare: 'Capable',
+    composition: 'Poor',
+    distribution: 'Poor',
+    bestFor: 'Traffic over time, ranking trends',
+  },
+  {
+    chartType: 'Bar',
+    trends: 'Capable',
+    compare: 'Ideal',
+    composition: 'Poor',
+    distribution: 'Capable',
+    bestFor: 'Channel comparison, page performance',
+  },
+  {
+    chartType: 'Donut',
+    trends: 'Poor',
+    compare: 'Capable',
+    composition: 'Ideal',
+    distribution: 'Poor',
+    bestFor: 'Traffic sources, device split',
+  },
+  {
+    chartType: 'Scatter',
+    trends: 'Poor',
+    compare: 'Capable',
+    composition: 'Poor',
+    distribution: 'Ideal',
+    bestFor: 'Keyword opportunity analysis',
+  },
+  {
+    chartType: 'Radar',
+    trends: 'Poor',
+    compare: 'Ideal',
+    composition: 'Poor',
+    distribution: 'Poor',
+    bestFor: 'Competitor profiles, strategic audits',
+  },
+  {
+    chartType: 'Waterfall',
+    trends: 'Capable',
+    compare: 'Poor',
+    composition: 'Capable',
+    distribution: 'Poor',
+    bestFor: 'Traffic change attribution',
+  },
+];
+
+const {
+  rows = defaultRows,
+  title = 'Quick compare matrix',
+} = Astro.props;
+---
+
+<section class="jdb-quickcompare">
+  <h2>{title}</h2>
+
+  <div class="jdb-matrix-wrap">
+    <table class="jdb-matrix">
+      <thead>
+        <tr>
+          <th>Chart type</th>
+          <th>Trends</th>
+          <th>Compare</th>
+          <th>Composition</th>
+          <th>Distribution</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <th>{row.chartType}</th>
+            <td><span class={`jdb-rating jdb-rating--${row.trends.toLowerCase()}`}>{row.trends}</span></td>
+            <td><span class={`jdb-rating jdb-rating--${row.compare.toLowerCase()}`}>{row.compare}</span></td>
+            <td><span class={`jdb-rating jdb-rating--${row.composition.toLowerCase()}`}>{row.composition}</span></td>
+            <td><span class={`jdb-rating jdb-rating--${row.distribution.toLowerCase()}`}>{row.distribution}</span></td>
+            <td>{row.bestFor}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="jdb-fitcheck">
+    <div class="jdb-fitcheck__col jdb-fitcheck__col--use">
+      <div class="jdb-fitcheck__head">Use if</div>
+      <ul>
+        <li><strong>Trends:</strong> You need to show SEO growth or decay over time.</li>
+        <li><strong>Compare:</strong> You need to compare pages, channels, or competitors.</li>
+        <li><strong>Composition:</strong> You are visualizing share of traffic or device mix.</li>
+        <li><strong>Distribution:</strong> You need to explore density, clusters, or opportunity ranges.</li>
+      </ul>
+    </div>
+    <div class="jdb-fitcheck__col jdb-fitcheck__col--avoid">
+      <div class="jdb-fitcheck__head">Avoid if</div>
+      <ul>
+        <li><strong>Trends:</strong> The chart will be overloaded with too many categories.</li>
+        <li><strong>Compare:</strong> You need precise differences that a qualitative rating cannot support.</li>
+        <li><strong>Composition:</strong> Categories are too many or the view needs exact percentages.</li>
+        <li><strong>Distribution:</strong> You need a decision-ready signal instead of a pattern exploration.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .jdb-quickcompare {
+    margin-block: var(--jdb-s-7);
+  }
+
+  .jdb-quickcompare h2 {
+    margin-bottom: var(--jdb-s-4);
+  }
+</style>

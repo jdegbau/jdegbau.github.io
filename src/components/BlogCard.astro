@@ -1,48 +1,27 @@
 ---
 import Image from './Image.astro';
-
 const { post } = Astro.props;
 ---
-<div class="column is-one-third">
-  <div class="card large">
-    <a href={post.url}>
-      <div class="card-image">
-        <figure class="image is-16by9 mx-0 image-gradient">
-          <Image
-            src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'}
-            alt={post.title}
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="gradient-overlay"></div>
-        </figure>
-      </div>
-    </a>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-content">
-          <a href={post.url}><p class="title is-4 no-padding">{post.title}</p></a>
-        </div>
-      </div>
-      <div class="content">{post.excerpt}</div>
+<article class="jdb-post">
+  <a href={post.url} class="jdb-post__media" aria-label={`Read ${post.title}`}>
+    <Image
+      src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'}
+      alt={post.title}
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+  <div class="jdb-post__body">
+    <div class="jdb-post__tags">
+      {post.tags?.slice(0, 2).map((tag) => (
+        <span class="jdb-tag jdb-tag--muted">{tag}</span>
+      ))}
     </div>
-    <footer class="card-footer">
-      <time class="card-footer-item" dateTime={new Date(post.date).toISOString().split('T')[0]}>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
-      <p class="card-footer-item">{post.readingTime ? `${post.readingTime} min read` : ''}</p>
-    </footer>
+    <h3><a href={post.url}>{post.title}</a></h3>
+    <p>{post.excerpt || 'Read more on the blog.'}</p>
+    <div class="jdb-post__meta">
+      <time datetime={new Date(post.date).toISOString().split('T')[0]}> {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} </time>
+      <span>{post.readingTime ? `${post.readingTime} min read` : 'Read now'}</span>
+    </div>
   </div>
-</div>
-
-<style>
-  .image-gradient {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .gradient-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(241, 241, 241, 0) 0%, rgba(241, 241, 241, 1) 75%);
-    pointer-events: none;
-  }
-</style>
+</article>

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Search from '../components/Search.astro';
 import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
 
 const seoTitle = 'How Can I Help You?';
 const description = 'Contact Joshua DeGrasse-Baumann for SEO, analytics, and measurement consulting.';
@@ -14,59 +15,96 @@ const description = 'Contact Joshua DeGrasse-Baumann for SEO, analytics, and mea
     </Navigation>
   </nav>
 
-  <section class="section">
-    <div class="container">
-      <h1 class="title">How Can I Help You?</h1>
-      <form action="https://formcarry.com/s/1Z7gBO7piB" method="POST" accept-charset="UTF-8">
-        <div class="columns">
-          <div class="column">
-            <div class="field">
-              <label class="label">First Name</label>
-              <div class="control">
-                <input class="input is-medium" type="text" name="firstName" placeholder="First Name" />
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="field">
-              <label class="label">Last Name</label>
-              <div class="control">
-                <input class="input is-medium" type="text" name="lastName" placeholder="Last Name" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input is-medium" type="email" name="email" placeholder="Email" />
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Message</label>
-          <div class="control">
-            <textarea class="textarea is-medium" name="message" placeholder="Message"></textarea>
-          </div>
-        </div>
-        <input type="hidden" name="_gotcha" />
-        <input type="hidden" id="captchaResponse" name="g-recaptcha-response" />
-        <div class="field">
-          <div class="control">
-            <button class="button is-link">Submit</button>
-          </div>
-        </div>
-      </form>
-      <script src="https://www.google.com/recaptcha/api.js?render=6LcqzBQkAAAAAIY-WkCc5I0VZ0gB5_h7oblR-06K"></script>
-      <script>
-        grecaptcha.ready(function() {
-          grecaptcha.execute('6LcqzBQkAAAAAIY-WkCc5I0VZ0gB5_h7oblR-06K', {action: 'homepage'})
-          .then(function(token) {
-            document.getElementById('captchaResponse').value = token;
-          });
-        });
-      </script>
+  <section class="jdb-hero jdb-hero--intro contact-hero">
+    <div class="jdb-container jdb-container--wide">
+      <span class="jdb-eyebrow">contact</span>
+      <h1>Let's figure out what's next.</h1>
+      <p class="jdb-hero__lede">Tell me where SEO, analytics, or measurement feels stuck. I’ll help you find a practical way forward.</p>
     </div>
   </section>
 
+  <section class="jdb-section contact-section">
+    <div class="jdb-container jdb-container--wide">
+      <div class="contact-layout">
+        <aside class="contact-context">
+          <span class="jdb-eyebrow">what's on your mind?</span>
+          <h2>A useful first note can be short.</h2>
+          <p>Share the goal, what you’ve tried, and where you’re getting stuck. We can take it from there.</p>
+          <ul class="contact-context__topics">
+            <li>SEO strategy and technical issues</li>
+            <li>Analytics, attribution, and measurement</li>
+            <li>Web development and implementation</li>
+          </ul>
+          <div class="contact-context__links">
+            <a href="mailto:hello@jdegbau.com">hello@jdegbau.com</a>
+            <a href="/seo-helpline/">Need focused time? Book a call</a>
+          </div>
+        </aside>
+
+        <ContactForm action="https://formcarry.com/s/1Z7gBO7piB" />
+      </div>
+    </div>
+  </section>
+
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcqzBQkAAAAAIY-WkCc5I0VZ0gB5_h7oblR-06K"></script>
+  <script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LcqzBQkAAAAAIY-WkCc5I0VZ0gB5_h7oblR-06K', {action: 'homepage'})
+      .then(function(token) {
+        document.getElementById('captchaResponse').value = token;
+      });
+    });
+  </script>
+
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .contact-hero h1 { max-width: 18ch; }
+  .contact-hero .jdb-hero__lede { max-width: 55ch; }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(15rem, .75fr) minmax(0, 1.25fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .contact-context { padding-top: var(--jdb-s-5); }
+  .contact-context h2 { max-width: 16ch; font-size: var(--jdb-fs-2xl); }
+  .contact-context > p { max-width: 40ch; }
+
+  .contact-context__topics {
+    display: grid;
+    gap: var(--jdb-s-3);
+    margin: var(--jdb-s-6) 0;
+    padding: 0;
+    list-style: none;
+    color: var(--jdb-fg-dim);
+  }
+
+  .contact-context__topics li {
+    display: flex;
+    gap: var(--jdb-s-3);
+    align-items: baseline;
+  }
+
+  .contact-context__topics li::before {
+    color: var(--jdb-good);
+    content: '>';
+    font-family: var(--jdb-font-mono);
+  }
+
+  .contact-context__links {
+    display: grid;
+    justify-items: start;
+    gap: var(--jdb-s-3);
+    padding-top: var(--jdb-s-4);
+    border-top: 1px solid var(--jdb-line);
+  }
+
+  @media (max-width: 56rem) {
+    .contact-layout { grid-template-columns: 1fr; }
+    .contact-context { padding-top: 0; }
+  }
+</style>

@@ -1,5 +1,11 @@
 /// <reference types="vite/client" />
 
+export interface PostHeading {
+  id: string;
+  text: string;
+  level: number;
+}
+
 export interface Post {
   slug: string;
   legacySlug?: string;
@@ -13,6 +19,7 @@ export interface Post {
   tags?: string[];
   keywords?: string[];
   readingTime?: number;
+  headings?: PostHeading[];
 }
 
 const modules = import.meta.glob<{
@@ -47,6 +54,76 @@ function normalizeOptionalString(value: unknown, fallback: string) {
   return trimmed ? trimmed : fallback;
 }
 
+function slugifyHeading(text: string) {
+  return String(text ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
+function extractHeadings(rawContent: string): PostHeading[] {
+  const sanitizedContent = rawContent
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/~~~[\s\S]*?~~~/g, '');
+
+  const matches: Array<{ index: number; heading: PostHeading }> = [];
+
+  const addMatch = (heading: PostHeading | null, index: number) => {
+    if (!heading || !heading.text.trim()) {
+      return;
+    }
+
+    matches.push({
+      index,
+      heading: {
+        id: heading.id || slugifyHeading(heading.text),
+        text: heading.text.trim(),
+        level: heading.level,
+      },
+    });
+  };
+
+  for (const match of sanitizedContent.matchAll(/^(#{1,6})\s+(.+?)(?:\s+#+\s*)?$/gm)) {
+    const level = match[1].length;
+    const text = match[2].replace(/<[^>]+>/g, '').trim();
+    addMatch({ id: slugifyHeading(text), text, level }, match.index ?? 0);
+  }
+
+  for (const match of sanitizedContent.matchAll(/^([^\n]+)\r?\n(=+|-+)[ \t]*$/gm)) {
+    const level = match[2].startsWith('=') ? 1 : 2;
+    const text = match[1].replace(/<[^>]+>/g, '').trim();
+    addMatch({ id: slugifyHeading(text), text, level }, match.index ?? 0);
+  }
+
+  for (const match of sanitizedContent.matchAll(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi)) {
+    const level = Number(match[1]);
+    const openingTag = match[2] ?? '';
+    const idMatch = openingTag.match(/\s+id=["']([^"']+)["']/i);
+    const text = match[3].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+    addMatch({
+      id: idMatch ? idMatch[1] : slugifyHeading(text),
+      text,
+      level,
+    }, match.index ?? 0);
+  }
+
+  const seen = new Set<string>();
+  return matches
+    .sort((a, b) => a.index - b.index)
+    .filter(({ heading }) => {
+      const key = `${heading.level}:${heading.id}`;
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
+    })
+    .map(({ heading }) => heading);
+}
+
 const posts: Post[] = Object.entries(modules).map(([path, module]) => {
   const filename = path.split('/').pop() ?? '';
   const fileSlug = filename.replace(/\.md$/, '');
@@ -57,6 +134,7 @@ const posts: Post[] = Object.entries(modules).map(([path, module]) => {
   const readingTime =
     fm.readingTime ?? fm.reading_time ?? fm.readingtime ?? Math.max(1, Math.ceil(wordCount / 260));
   const slug = normalizeSlug(fm.slug, fileSlug);
+  const headings = extractHeadings(rawContent);
   return {
     slug,
     legacySlug: fileSlug,
@@ -70,6 +148,7 @@ const posts: Post[] = Object.entries(modules).map(([path, module]) => {
     tags: fm.tags ?? [],
     keywords: fm.keywords ?? fm.tags ?? [],
     readingTime,
+    headings,
   };
 });
 

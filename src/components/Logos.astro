@@ -1,15 +1,42 @@
-<section class="section logos-section">
-  <div class="container">
-    <div class="logos-grid" role="list">
-      <div class="logo-item" role="listitem">
+<section class="jdb-section jdb-section--tight">
+  <div class="jdb-container">
+    <div class="jdb-logo-grid" role="list" aria-label="Organizations Josh has worked with">
+      <div class="jdb-logo-item" role="listitem">
         <img src="/assets/img/logos/rocket-clicks-logo.png" alt="Rocket Clicks" loading="lazy" decoding="async" />
       </div>
-      <div class="logo-item" role="listitem">
-        <img src="/assets/img/logos/trk-logo.png" alt="TRK Creative Group" loading="lazy" decoding="async" />
-      </div>
-      <div class="logo-item" role="listitem">
+      <div class="jdb-logo-item" role="listitem">
         <img src="/assets/img/logos/fireandspark-logo.png" alt="Fire&Spark" loading="lazy" decoding="async" />
+      </div>
+      <div class="jdb-logo-item" role="listitem">
+        <img src="/assets/img/logos/trk-logo.png" alt="TRK Creative" loading="lazy" decoding="async" />
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .jdb-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(var(--jdb-s-3), 4vw, var(--jdb-s-8));
+    align-items: center;
+  }
+
+  .jdb-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jdb-logo-item img {
+    width: 100%;
+    max-width: 14rem;
+    height: 3rem;
+    object-fit: contain;
+    filter: grayscale(1) brightness(0) invert(1);
+    opacity: 0.72;
+    transition: opacity var(--jdb-t-fast);
+  }
+
+  .jdb-logo-item img:hover { opacity: 1; }
+</style>

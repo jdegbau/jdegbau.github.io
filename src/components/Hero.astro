@@ -1,0 +1,38 @@
+---
+import Image from './Image.astro';
+
+const {
+  variant = 'full',
+  backgroundImage,
+  imageSrc,
+  imageAlt = 'Hero image',
+  class: className,
+} = Astro.props;
+
+const classes = ['jdb-hero', `jdb-hero--${variant}`];
+if (className) {
+  classes.push(className);
+}
+---
+
+<section class={classes.join(' ')}>
+  {backgroundImage && (
+    <div class="jdb-hero__background" aria-hidden="true">
+      <div class="jdb-hero__background-image" style={`background-image: url('${backgroundImage}');`}></div>
+    </div>
+  )}
+
+  <div class="jdb-container jdb-container--wide">
+    <div class="jdb-hero__layout">
+      <div class="jdb-hero__content">
+        <slot />
+      </div>
+
+      {variant === 'split' && imageSrc && (
+        <div class="jdb-hero__media">
+          <Image src={imageSrc} alt={imageAlt} loading="eager" decoding="async" class="jdb-hero__image" />
+        </div>
+      )}
+    </div>
+  </div>
+</section>

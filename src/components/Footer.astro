@@ -1,48 +1,101 @@
 ---
-import { author } from '../data/author';
+const currentYear = new Date().getFullYear();
 ---
-<footer class="footer">
-  <div class="columns is-reversed-mobile">
-    <div class="column">
-      <p>&copy; {new Date().getFullYear()} <a href="/">Joshua DeGrasse-Baumann</a></p>
-      <a href="https://www.linkedin.com/in/jdegbau/" aria-label="Follow me on LinkedIn"><i class="fa-brands fa-linkedin fa-2x m-1"></i></a>
-      <a href="https://github.com/jdegbau" aria-label="Follow me on GitHub"><i class="fa-brands fa-github fa-2x m-1"></i></a>
-      <a href="https://www.instagram.com/jdegbau/" aria-label="Follow me on Instagram"><i class="fa-brands fa-instagram fa-2x m-1"></i></a>
-      <a href="https://www.threads.net/@jdegbau" aria-label="Follow me on Threads"><i class="fa-brands fa-threads fa-2x m-1"></i></a>
-      <a href="https://bsky.app/profile/jdegbau.com" aria-label="Follow me on Bluesky"><i class="fa-brands fa-bluesky fa-2x m-1"></i></a>
-      <a href="https://x.com/jdegbau" aria-label="Follow me on 𝕏"><i class="fa-brands fa-x-twitter fa-2x m-1"></i></a>
+<footer class="jdb-footer">
+  <div class="jdb-container">
+    <div class="jdb-footer__main">
+      <div>
+        <a class="jdb-logo" href="/" aria-label="Joshua DeGrasse-Baumann home">
+          <em>(</em><b>jdegbau</b><em>)</em><i> =&gt; </i><b>&#123;</b><span class="jdb-logo__cursor" aria-hidden="true"></span><b>&#125;</b>
+        </a>
+        <p class="jdb-footer__blurb">
+          I help teams improve search visibility, analytics quality, and technical execution through thoughtful strategy and practical implementation.
+        </p>
+        <div class="jdb-footer__social">
+          <a href="https://www.linkedin.com/in/jdegbau/" aria-label="Follow me on LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/jdegbau" aria-label="Follow me on GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.instagram.com/jdegbau/" aria-label="Follow me on Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.threads.net/@jdegbau" aria-label="Follow me on Threads">
+            <i class="fa-brands fa-threads"></i>
+          </a>
+          <a href="https://bsky.app/profile/jdegbau.com" aria-label="Follow me on Bluesky">
+            <i class="fa-brands fa-bluesky"></i>
+          </a>
+          <a href="https://x.com/jdegbau" aria-label="Follow me on X">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="jdb-footer__heading">Explore</h3>
+        <ul class="jdb-footer__list">
+          <li><a class="jdb-footer__link" href="/about/">About</a></li>
+          <li><a class="jdb-footer__link" href="/blog/">Blog</a></li>
+          <li><a class="jdb-footer__link" href="/contact/">Contact</a></li>
+          <li><a class="jdb-footer__link" href="/seo-helpline/">SEO Helpline</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="jdb-footer__heading">Areas</h3>
+        <ul class="jdb-footer__list">
+          <li><a class="jdb-footer__link" href="/seo-fetcher/">SEO Fetcher</a></li>
+          <li><a class="jdb-footer__link" href="https://store.jdegbau.com/" target="_blank" rel="noopener noreferrer">GTM Templates</a></li>
+          <li><a class="jdb-footer__link" href="/links/">Favorite Links</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="jdb-footer__heading">Get in touch</h3>
+        <ul class="jdb-footer__list">
+          <li><a class="jdb-footer__link" href="mailto:hello@jdegbau.com">hello@jdegbau.com</a></li>
+          <li><a class="jdb-footer__link" href="/seo-helpline/">Book a consultation</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="column">
-      <p class="subtitle is-4">Join My Newsletter!</p>
+  </div>
+
+  <div class="jdb-container">
+    <div class="jdb-newsletter">
+      <h3 class="jdb-newsletter__title">Join my newsletter</h3>
+      <p>Short notes on SEO, analytics, and the practical side of building better digital systems.</p>
       <form method="post" action="https://sendfox.com/form/3odzg9/mp8k5q" class="sendfox-form" id="mp8k5q" data-async="true" data-recaptcha="true">
-        <div class="columns is-mobile">
-          <div class="column">
-            <div class="control is-fullwidth">
-              <input class="input" type="text" id="sendfox_form_name" placeholder="First Name" name="first_name" required />
-            </div>
+        <div class="jdb-form__row">
+          <div class="jdb-field">
+            <label for="sendfox_form_name">First name</label>
+            <input class="jdb-input" type="text" id="sendfox_form_name" placeholder="First name" name="first_name" required />
           </div>
-          <div class="column">
-            <div class="control is-fullwidth">
-              <input class="input" type="text" id="sendfox_form_last_name" placeholder="Last Name" name="last_name" required />
-            </div>
+          <div class="jdb-field">
+            <label for="sendfox_form_last_name">Last name</label>
+            <input class="jdb-input" type="text" id="sendfox_form_last_name" placeholder="Last name" name="last_name" required />
           </div>
-        </div>
-        <div class="columns is-mobile">
-          <div class="column">
-            <div class="control is-fullwidth">
-              <input class="input" type="email" id="sendfox_form_email" placeholder="Email" name="email" required />
-            </div>
-          </div>
-          <div class="column">
-            <div class="control is-fullwidth">
-              <button class="button is-primary is-fullwidth" type="submit">Sign Me Up!</button>
-            </div>
+          <div class="jdb-field">
+            <label for="sendfox_form_email">Email</label>
+            <input class="jdb-input" type="email" id="sendfox_form_email" placeholder="Email" name="email" required />
           </div>
         </div>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-          <input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" />
+        <div class="jdb-newsletter__row">
+          <button class="jdb-btn jdb-btn--primary" type="submit">Sign me up</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <div class="jdb-statusbar">
+    <div class="jdb-container jdb-statusbar__inner">
+      <div class="jdb-statusbar__group">
+        <span class="jdb-statusbar__item"><span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span> main</span>
+        <span class="jdb-statusbar__item">UTF-8</span>
+        <span class="jdb-statusbar__item">updated {currentYear}</span>
+      </div>
+      <span class="jdb-statusbar__item">© {currentYear} Joshua DeGrasse-Baumann</span>
     </div>
   </div>
 </footer>

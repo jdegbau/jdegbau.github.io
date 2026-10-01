@@ -17,134 +17,31 @@ const pageSchema = {
     {
       '@type': 'Person',
       '@id': 'https://jdegbau.com/#person',
-      'name': 'Joshua DeGrasse-Baumann',
-      'givenName': 'Joshua',
-      'familyName': 'DeGrasse-Baumann',
-      'alternateName': ['Josh', 'jdegbau'],
-      'url': 'https://jdegbau.com/',
-      'image': 'https://jdegbau.com/assets/img/joshua-degrasse-baumann.JPG',
-      'description': 'SEO strategist and data enthusiast specializing in Google Analytics, Google Tag Manager, marketing measurement, and SEO strategy.',
-      'jobTitle': 'Lead SEO Strategist',
-      'worksFor': {
+      name: 'Joshua DeGrasse-Baumann',
+      givenName: 'Joshua',
+      familyName: 'DeGrasse-Baumann',
+      alternateName: ['Josh', 'jdegbau'],
+      url: 'https://jdegbau.com/',
+      image: 'https://jdegbau.com/assets/img/joshua-degrasse-baumann.JPG',
+      description: 'SEO strategist and data enthusiast specializing in Google Analytics, Google Tag Manager, marketing measurement, and SEO strategy.',
+      jobTitle: 'Lead SEO Strategist',
+      worksFor: {
         '@type': 'Organization',
         '@id': 'https://www.fireandspark.com/#organization',
-        'name': 'Fire&Spark',
-        'url': 'https://www.fireandspark.com/',
-        'sameAs': [
-          'https://www.linkedin.com/company/fireandspark/',
-          'https://twitter.com/fireandspark'
-        ],
-        'address': {
-          '@type': 'PostalAddress',
-          'streetAddress': '50 Milk St Fl 16',
-          'addressLocality': 'Boston',
-          'addressRegion': 'MA',
-          'postalCode': '02109',
-          'addressCountry': 'USA'
-        }
+        name: 'Fire&Spark',
+        url: 'https://www.fireandspark.com/',
       },
-      'address': {
-        '@type': 'PostalAddress',
-        'addressLocality': 'Milwaukee',
-        'addressRegion': 'WI',
-        'addressCountry': 'USA'
-      },
-      'sameAs': [
-        'https://x.com/jdegbau',
-        'https://twitter.com/jdegbau',
-        'https://www.linkedin.com/in/jdegbau',
-        'https://www.instagram.com/jdegbau/',
-        'https://www.threads.net/@jdegbau',
-        'https://github.com/jdegbau',
-        'https://about.me/jdegbau',
-        'https://g.co/kgs/o5cPgXa',
-        'https://www.rocketclicks.com/team-member/joshua-degrasse-baumann/'
-      ],
-      'knowsAbout': [
-        'SEO',
-        'Digital Marketing',
-        'Web Analytics',
-        'Google Analytics',
-        'Google Analytics 4',
-        'Google Tag Manager',
-        'marketing measurement',
-        'digital analytics strategy',
-        'event tracking',
-        'conversion tracking',
-        'SEO analytics',
-        'web analytics implementation',
-        'Content Strategy',
-        'Programmatic SEO'
-      ],
-      'alumniOf': {
-        '@type': 'Organization',
-        '@id': 'https://www.rocketclicks.com/#organization',
-        'name': 'Rocket Clicks',
-        'url': 'https://www.rocketclicks.com',
-        'sameAs': [
-          'https://www.linkedin.com/company/rocket-clicks/',
-          'https://twitter.com/rocketclicks'
-        ],
-        'address': {
-          '@type': 'PostalAddress',
-          'streetAddress': 'W134N5522 Campbell Dr',
-          'addressLocality': 'Menomonee Falls',
-          'addressRegion': 'WI',
-          'postalCode': '53051',
-          'addressCountry': 'USA'
-        }
-      }
     },
     {
       '@type': 'WebSite',
       '@id': 'https://jdegbau.com/#website',
-      'url': 'https://jdegbau.com/',
-      'name': 'Joshua DeGrasse-Baumann | SEO, Data, and Development',
-      'alternateName': 'jdegbau',
-      'inLanguage': 'en',
-      'publisher': {
-        '@id': 'https://jdegbau.com/#person'
-      }
+      url: 'https://jdegbau.com/',
+      name: 'Joshua DeGrasse-Baumann | SEO, Data, and Development',
+      alternateName: 'jdegbau',
+      inLanguage: 'en',
+      publisher: { '@id': 'https://jdegbau.com/#person' },
     },
-    {
-      '@type': 'WebPage',
-      '@id': 'https://jdegbau.com/#homepage',
-      'url': 'https://jdegbau.com/',
-      'name': 'Joshua DeGrasse-Baumann | SEO, Analytics, and Measurement Strategy',
-      'description': 'Josh is an SEO consultant and data enthusiast who helps businesses improve their Google Analytics, Google Tag Manager setups, and overall marketing measurement strategies.',
-      'inLanguage': 'en',
-      'isPartOf': { '@id': 'https://jdegbau.com/#website' },
-      'about': { '@id': 'https://jdegbau.com/#person' },
-      'mainEntity': { '@id': 'https://jdegbau.com/#analytics-measurement-service' },
-      'keywords': [
-        'Google Analytics consulting',
-        'Google Tag Manager consulting',
-        'marketing measurement strategy',
-        'digital analytics consulting',
-        'web analytics implementation',
-        'SEO and analytics'
-      ]
-    },
-    {
-      '@type': 'Service',
-      '@id': 'https://jdegbau.com/#analytics-measurement-service',
-      'name': 'Analytics and Marketing Measurement Consulting',
-      'serviceType': 'Digital analytics and marketing measurement consulting',
-      'url': 'https://jdegbau.com/',
-      'provider': { '@id': 'https://jdegbau.com/#person' },
-      'areaServed': 'Worldwide',
-      'description': 'Consulting services to audit, implement, and improve Google Analytics and Google Tag Manager setups, design event and conversion tracking, and build robust marketing measurement strategies.',
-      'category': [
-        'Google Analytics consulting',
-        'Google Tag Manager consulting',
-        'marketing measurement strategy'
-      ],
-      'audience': {
-        '@type': 'BusinessAudience',
-        'audienceType': ['Marketing teams', 'In-house analysts', 'Digital agencies', 'Founders and small businesses']
-      }
-    }
-  ]
+  ],
 };
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
@@ -154,39 +51,87 @@ const pageSchema = {
     </Navigation>
   </nav>
 
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Hello! I'm Josh!</h1>
-      <p>Welcome to my personal site! I'm Josh, an SEO consultant and data enthusiast. I write about SEO, web analytics, and sometimes web development. Learn more about my work and how I can help your business.</p>
+  <section class="jdb-hero jdb-hero--home">
+    <div class="jdb-container">
+      <div class="jdb-hero__inner">
+        <div class="jdb-hero__kicker">
+          <span class="jdb-icon jdb-icon--check" aria-hidden="true"></span>
+          Joshua DeGrasse-Baumann
+        </div>
+        <h1>
+          Hi! I'm Josh. <span class="jdb-cursor" aria-hidden="true"></span>
+        </h1>
+        <p class="jdb-hero__role">SEO Strategist • Data Enthusiast • Developer</p>
+        <p class="jdb-hero__lede">
+          I help businesses improve search visibility, data quality, and digital execution through thoughtful strategy, clean implementation, and practical experimentation.
+        </p>
+        <div class="jdb-hero__actions">
+          <a href="/seo-helpline/" class="jdb-btn jdb-btn--primary jdb-btn--lg">Book a consultation</a>
+          <a href="/blog/" class="jdb-btn jdb-btn--outline jdb-btn--lg">Read my writing</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>Featured Articles</h2>
-      <div class="columns is-multiline">
+  <Logos />
+
+  <section class="jdb-section">
+    <div class="jdb-container">
+      <div class="jdb-section__head">
+        <span class="jdb-eyebrow">what I do</span>
+        <h2 class="jdb-section__title">Focused on the parts that move the needle</h2>
+      </div>
+      <div class="jdb-grid jdb-grid--2">
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--search" aria-hidden="true"></span></div>
+          <h3>SEO Strategy</h3>
+          <p>Technical audits, keyword direction, content systems, and practical plans that improve visibility and quality.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span></div>
+          <h3>Analytics &amp; Measurement</h3>
+          <p>Google Analytics, Tag Manager, and reporting systems that help teams make better, faster decisions.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--check" aria-hidden="true"></span></div>
+          <h3>Web Development</h3>
+          <p>Clean, performant websites and tooling that support content, conversion, and sustainable growth.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--external" aria-hidden="true"></span></div>
+          <h3>Programmatic SEO</h3>
+          <p>Data-driven systems and automation ideas that let content teams scale with quality and control.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="jdb-section jdb-section--raised">
+    <div class="jdb-container">
+      <div class="jdb-section__head jdb-section__head--center">
+        <span class="jdb-eyebrow">recent work</span>
+        <h2 class="jdb-section__title">Featured writing</h2>
+        <p class="jdb-section__sub">Notes on SEO, analytics, web development, and digital strategy.</p>
+      </div>
+      <div class="jdb-postgrid">
         {featuredPosts.map((post) => (
           <BlogCard post={post} />
         ))}
       </div>
-      <Logos />
     </div>
   </section>
 
-  <section class="section">
-    <div class="container has-text-centered">
-      <a href="/seo-helpline/" class="button is-primary is-medium">Need SEO Help?</a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h3 class="title is-4">All Articles</h3>
-      <ul>
+  <section class="jdb-section">
+    <div class="jdb-container">
+      <div class="jdb-section__head jdb-section__head--center">
+        <span class="jdb-eyebrow">all posts</span>
+        <h2 class="jdb-section__title">A full archive of ideas and experiments</h2>
+      </div>
+      <div class="jdb-postgrid">
         {posts.map((post) => (
-          <li><a href={post.url}>{post.title}</a></li>
+          <BlogCard post={post} />
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 

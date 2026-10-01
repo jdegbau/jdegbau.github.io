@@ -1,0 +1,26 @@
+---
+const { items = [] } = Astro.props;
+---
+
+<section class="jdb-section jdb-section--tight">
+  <div class="jdb-container jdb-container--narrow">
+    <div class="jdb-section__head jdb-section__head--center">
+      <p class="jdb-eyebrow">common questions</p>
+      <h2 class="jdb-section__title">Data visualization & storytelling FAQs</h2>
+    </div>
+
+    {items.length > 0 && (
+      <div class="jdb-faq">
+        {items.map((item, index) => (
+          <details class="jdb-faq__item" open={index === 0}>
+            <summary>
+              <span>{item.question}</span>
+              <span class="jdb-icon jdb-icon--chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="jdb-faq__a" set:html={item.answer} />
+          </details>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

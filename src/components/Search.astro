@@ -1,84 +1,103 @@
 ---
 ---
-<div id="search" class="search-component">
-  <div id="search-container" class="field">
-    <label for="search-input" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;white-space:nowrap;">Search posts</label>
-    <p class="control has-icons-right">
-      <input type="search" id="search-input" class="input" placeholder="Search posts..." aria-label="Search posts" aria-controls="results-container" />
-      <span class="icon is-small is-right">
-        <i class="fas fa-search"></i>
-      </span>
-    </p>
-  </div>
-  <ul id="results-container" class="search-results" aria-live="polite" aria-atomic="true"></ul>
+<div class="jdb-search-trigger-wrap">
+  <button
+    type="button"
+    class="jdb-search-trigger"
+    data-jdb-search-trigger
+    aria-expanded="false"
+    aria-controls="jdb-searchpanel"
+  >
+    <span class="jdb-icon jdb-icon--search" aria-hidden="true"></span>
+    Search
+    <kbd>/</kbd>
+  </button>
 </div>
+
+<div class="jdb-searchpanel" id="jdb-searchpanel" data-jdb-searchpanel>
+  <div class="jdb-container">
+    <div class="jdb-searchpanel__inner">
+      <span class="jdb-icon jdb-icon--search" aria-hidden="true"></span>
+      <label class="jdb-sr-only" for="search-input">Search posts</label>
+      <input type="search" id="search-input" aria-label="Search posts" aria-controls="results-container" placeholder="Search posts..." />
+    </div>
+    <ul id="results-container" class="jdb-searchpanel__results" aria-live="polite" aria-atomic="true"></ul>
+  </div>
+</div>
+
 <script>
+  const searchPanel = document.querySelector('[data-jdb-searchpanel]');
+  const searchTrigger = document.querySelector('[data-jdb-search-trigger]');
   const searchInput = document.getElementById('search-input');
   const resultsContainer = document.getElementById('results-container');
-  let posts = [];
 
-  async function loadPosts() {
-    if (posts.length > 0) return;
-    try {
-      const response = await fetch('/search.json');
-      if (!response.ok) throw new Error('Failed to load search data');
-      posts = await response.json();
-    } catch (error) {
-      console.error(error);
-      posts = [];
-    }
-  }
-
-  function formatResult(post) {
-    return `
-      <li class="search-result">
-        <a class="is-paddingless" href="${post.permalink}">
-          <article class="message is-small has-text-left">
-            <div class="message-header"><p>${post.title}</p></div>
-            <div class="message-body">${post.excerpt}</div>
-          </article>
-        </a>
-      </li>
-    `;
-  }
-
-  function renderResults(results) {
-    if (!results.length) {
-      resultsContainer.innerHTML = `
-        <li class="search-result">
-          <article class="message is-small has-text-left">
-            <div class="message-header"><p>Oops! You stumped me!</p></div>
-            <div class="message-body">No matching results found.</div>
-          </article>
-        </li>
-      `;
-      return;
-    }
-
-    resultsContainer.innerHTML = results.map(formatResult).join('');
-  }
-
-  function normalize(value) {
-    return value.toLowerCase();
-  }
-
-  async function handleSearch(event) {
-    const query = normalize(event.target.value.trim());
-    await loadPosts();
-
-    if (!query) {
-      resultsContainer.innerHTML = '';
-      return;
-    }
-
-    const filtered = posts.filter((post) => {
-      const title = normalize(post.title);
-      const excerpt = normalize(post.excerpt || '');
-      return title.includes(query) || excerpt.includes(query);
+  if (searchPanel && searchTrigger && searchInput && resultsContainer) {
+    searchTrigger.addEventListener('click', () => {
+      const isOpen = searchPanel.classList.toggle('is-open');
+      searchTrigger.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) {
+        searchInput.focus();
+      }
     });
 
-    renderResults(filtered.slice(0, 10));
-  }
+    let posts = [];
 
-  searchInput.addEventListener('input', handleSearch);
+    async function loadPosts() {
+      if (posts.length > 0) return posts;
+      try {
+        const response = await fetch('/search.json');
+        if (!response.ok) throw new Error('Failed to load search data');
+        posts = await response.json();
+      } catch (error) {
+        console.error(error);
+        posts = [];
+      }
+      return posts;
+    }
+
+    function formatResult(post) {
+      return `
+        <li class="jdb-searchpanel__result">
+          <a href="${post.permalink}">
+            <strong>${post.title}</strong>
+            <span>${post.excerpt || ''}</span>
+          </a>
+        </li>
+      `;
+    }
+
+    function renderResults(results) {
+      if (!results.length) {
+        resultsContainer.innerHTML = `
+          <li class="jdb-searchpanel__result jdb-searchpanel__result--empty">
+            <strong>Oops! You stumped me!</strong>
+            <span>No matching results found.</span>
+          </li>
+        `;
+        return;
+      }
+
+      resultsContainer.innerHTML = results.map(formatResult).join('');
+    }
+
+    async function handleSearch(event) {
+      const query = (event.target.value || '').trim().toLowerCase();
+      await loadPosts();
+
+      if (!query) {
+        resultsContainer.innerHTML = '';
+        return;
+      }
+
+      const filtered = posts.filter((post) => {
+        const title = (post.title || '').toLowerCase();
+        const excerpt = (post.excerpt || '').toLowerCase();
+        return title.includes(query) || excerpt.includes(query);
+      });
+
+      renderResults(filtered.slice(0, 8));
+    }
+
+    searchInput.addEventListener('input', handleSearch);
+  }
 </script>

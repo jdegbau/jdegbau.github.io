@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
+import ChartTypeAssessment from '../components/ChartTypeAssessment.astro';
+import ChartPickerQuiz from '../components/ChartPickerQuiz.astro';
+import DataStoryBestPractices from '../components/DataStoryBestPractices.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import BlogCard from '../components/BlogCard.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import Hero from '../components/Hero.astro';
+import Image from '../components/Image.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import QuickCompareMatrix from '../components/QuickCompareMatrix.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const samplePost = {
+  title: 'SEO Data Visualization Guide',
+  excerpt: 'A practical guide to choosing the right chart type for SEO reporting and storytelling.',
+  date: '2025-12-23',
+  url: '/blog/seo-data-visualization-guide/',
+  featuredImage: '/assets/img/seo-data-viz.png',
+  tags: ['SEO', 'Data Visualization'],
+  readingTime: 6,
+};
+
+const sampleFaqs = [
+  {
+    question: 'How do I choose the right chart type for my SEO data?',
+    answer:
+      '<p>Choose a chart based on the relationship you want to highlight: line charts for trends, bar charts for comparisons, and scatter plots for correlations.</p>',
+  },
+  {
+    question: 'What is the 5-second rule?',
+    answer:
+      '<p>The primary insight should be visible within five seconds of viewing a chart. Strong titles, limited noise, and clear emphasis make that possible.</p>',
+  },
+  {
+    question: 'Why is context critical in SEO reporting?',
+    answer:
+      '<p>Context helps stakeholders understand whether a number is good or bad by comparing it against benchmarks, seasonal patterns, or YoY change.</p>',
+  },
+];
+
+const sampleTocItems = [
+  { id: 'overview', text: 'Overview', level: 2 },
+  { id: 'what-to-measure', text: 'What to measure', level: 2 },
+  { id: 'sample-workflows', text: 'Sample workflows', level: 2 },
+  { id: 'tools-and-templates', text: 'Tools and templates', level: 3 },
+  { id: 'next-steps', text: 'Next steps', level: 2 },
+];
+
+const sampleMatrixRows = [
+  { chartType: 'Line', trends: 'Ideal', compare: 'Capable', composition: 'Poor', distribution: 'Poor', bestFor: 'Traffic over time, ranking trends' },
+  { chartType: 'Bar', trends: 'Capable', compare: 'Ideal', composition: 'Poor', distribution: 'Capable', bestFor: 'Channel comparison, page performance' },
+  { chartType: 'Donut', trends: 'Poor', compare: 'Capable', composition: 'Ideal', distribution: 'Poor', bestFor: 'Traffic sources, device split' },
+];
+---
+<BaseLayout
+  title="Components"
+  description="Reusable component examples used across the site."
+  canonical="/components/"
+  image="/assets/img/default-blog-hero.gif"
+  noindex={true}
+>
+  <nav slot="nav">
+    <Navigation>
+      <Search />
+    </Navigation>
+  </nav>
+
+  <article>
+    <header class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--narrow">
+        <span class="jdb-eyebrow">library</span>
+        <h1>Reusable Components</h1>
+        <p class="jdb-section__sub">
+          A living gallery of the shared building blocks used across this site so new patterns stay consistent, reusable, and easy to extend.
+        </p>
+      </div>
+    </header>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-grid">
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2>BlogCard</h2>
+            </div>
+            <BlogCard post={samplePost} />
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2>AuthorBox</h2>
+            </div>
+            <AuthorBox />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-grid">
+          <div class="component-card component-card--full">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2>Hero</h2>
+            </div>
+            <Hero variant="full" backgroundImage="/assets/img/default-blog-hero.gif">
+              <span class="jdb-hero__eyebrow">component</span>
+              <h2>Full-width hero with optional background image</h2>
+              <p class="jdb-hero__lede">
+                This version is ideal for narrative introductions, feature launches, and post headers where the image should stretch edge-to-edge.
+              </p>
+              <div class="jdb-hero__actions">
+                <a href="/blog/" class="jdb-btn jdb-btn--primary jdb-btn--sm">View blog</a>
+              </div>
+            </Hero>
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2>Hero (split)</h2>
+            </div>
+            <Hero variant="split" imageSrc="/assets/img/default-blog-hero.gif" imageAlt="Example split hero image">
+              <span class="jdb-hero__eyebrow">component</span>
+              <h2>Text on the left, image on the right</h2>
+              <p class="jdb-hero__lede">
+                Use this when the headline needs more emphasis while the visual acts as a supporting anchor on the opposite side.
+              </p>
+              <div class="jdb-hero__actions">
+                <a href="/about/" class="jdb-btn jdb-btn--outline jdb-btn--sm">Learn more</a>
+              </div>
+            </Hero>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>ContactForm</h2>
+          </div>
+          <ContactForm demo />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>ChartTypeAssessment</h2>
+          </div>
+          <ChartTypeAssessment />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>ChartPickerQuiz</h2>
+          </div>
+          <ChartPickerQuiz />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>DataStoryBestPractices</h2>
+          </div>
+          <DataStoryBestPractices />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>FAQAccordion</h2>
+          </div>
+          <FAQAccordion items={sampleFaqs} />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>TableOfContents</h2>
+          </div>
+          <TableOfContents items={sampleTocItems} />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>QuickCompareMatrix</h2>
+          </div>
+          <QuickCompareMatrix rows={sampleMatrixRows} />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>Image</h2>
+          </div>
+          <div class="image-demo">
+            <Image
+              src="/assets/img/default-blog-hero.gif"
+              alt="Example image component"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--jdb-s-5);
+  }
+
+  .component-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jdb-s-4);
+    padding: var(--jdb-s-5);
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-xl);
+    background: linear-gradient(180deg, rgba(15,31,56,0.92), rgba(17,30,52,0.88));
+    box-shadow: var(--jdb-sh-sm);
+    transition: border-color var(--jdb-t-fast), box-shadow var(--jdb-t-fast), transform var(--jdb-t-fast);
+  }
+
+  .component-card:hover {
+    border-color: var(--jdb-orange-500);
+    box-shadow: var(--jdb-sh-md);
+    transform: translateY(-1px);
+  }
+
+  .component-card--full {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .component-card--full .component-card__head {
+    padding: var(--jdb-s-5) var(--jdb-s-5) 0;
+  }
+
+  .component-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jdb-s-2);
+  }
+
+  .component-card h2 {
+    margin: 0;
+  }
+
+  .image-demo {
+    border-radius: var(--jdb-r-lg);
+    overflow: hidden;
+    border: 1px solid var(--jdb-line-strong);
+  }
+</style>

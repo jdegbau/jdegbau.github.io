@@ -1,57 +1,77 @@
 .copyable-code-block {
-  margin: 1.5rem 0;
-  border: 1px solid rgba(20, 20, 20, 0.08);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 1px 3px rgba(20, 20, 20, 0.04);
+  margin: var(--jdb-s-7) 0;
+  display: block;
 }
 
-.copyable-code-block__header {
+.copyable-code-block.jdb-code {
+  border: 1px solid var(--jdb-line-strong);
+  border-radius: var(--jdb-r-lg);
+  overflow: hidden;
+  box-shadow: var(--jdb-sh-md);
+  background: #08111f;
+}
+
+.copyable-code-block .jdb-code__bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 1rem;
-  background: #f7f7f7;
-  border-bottom: 1px solid rgba(20, 20, 20, 0.06);
+  gap: var(--jdb-s-3);
+  padding: var(--jdb-s-3) var(--jdb-s-4);
+  background: var(--jdb-navy-900);
+  border-bottom: 1px solid var(--jdb-line);
 }
 
-.copyable-code-block__lang {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+.copyable-code-block .jdb-code__lang {
+  margin-right: auto;
+  font-family: var(--jdb-font-mono);
+  font-size: var(--jdb-fs-xs);
+  font-weight: var(--jdb-fw-semibold);
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: #5c5c5c;
+  color: var(--jdb-fg-muted);
 }
 
-.copyable-code-block__button {
-  min-width: 4.5rem;
+.copyable-code-block .jdb-code__copy {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  padding: 0.35rem 0.8rem;
-  border-color: rgba(21, 42, 73, 0.22);
-  color: #152a49;
+  gap: .45rem;
+  border: 1px solid var(--jdb-line-strong);
+  border-radius: var(--jdb-r-sm);
+  background: rgba(255, 255, 255, .03);
+  color: var(--jdb-fg-dim);
+  font-family: var(--jdb-font-mono);
+  font-size: var(--jdb-fs-xs);
+  padding: .4rem .7rem;
+  cursor: pointer;
 }
 
-.copyable-code-block__button:hover,
-.copyable-code-block__button:focus {
-  color: #152a49;
-  border-color: #152a49;
+.copyable-code-block .jdb-code__copy:hover,
+.copyable-code-block .jdb-code__copy:focus-visible {
+  color: #fff;
+  border-color: var(--jdb-orange-500);
+  background: rgba(255, 77, 0, .08);
 }
 
+.copyable-code-block .jdb-code__copy .jdb-icon {
+  width: .85em;
+  height: .85em;
+}
+
+.copyable-code-block .astro-code,
 .copyable-code-block pre {
-  margin: 0;
-  padding: 1rem 1.1rem 1.1rem;
-  overflow-x: auto;
-  background: #fff;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  white-space: pre;
+  overflow-x: visible !important;
+  padding: var(--jdb-s-5) var(--jdb-s-4) !important;
+  background: var(--jdb-navy-950) !important;
+  color: var(--jdb-fg-dim) !important;
+  border: 0 !important;
 }
 
-.copyable-code-block code {
-  color: #141414;
-  font-family: inherit;
+.copyable-code-block .astro-code code,
+.copyable-code-block pre code {
+  width: auto;
+  min-width: 0;
   white-space: pre;
+  padding: 0;
+  background: transparent !important;
+  color: inherit !important;
 }

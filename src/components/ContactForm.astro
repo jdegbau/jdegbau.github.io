@@ -1,0 +1,155 @@
+---
+const { action, demo = false } = Astro.props;
+---
+
+<form class="contact-form" action={action} method="POST" accept-charset="UTF-8">
+  <header class="contact-form__header">
+    <div>
+      <span class="jdb-eyebrow">new message</span>
+      <h2>Start the conversation</h2>
+      <p>I usually reply within two business days.</p>
+    </div>
+    <span class="contact-form__index" aria-hidden="true">01 / 01</span>
+  </header>
+
+  <div class="jdb-grid jdb-grid--2 contact-form__names">
+    <div class="contact-form__field">
+      <label for="firstName">First name</label>
+      <input id="firstName" type="text" name="firstName" autocomplete="given-name" placeholder="Your first name" required />
+    </div>
+    <div class="contact-form__field">
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" name="lastName" autocomplete="family-name" placeholder="Your last name" required />
+    </div>
+  </div>
+
+  <div class="contact-form__field">
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+  </div>
+
+  <div class="contact-form__field">
+    <label for="message">What would you like to work through?</label>
+    <textarea id="message" name="message" rows="6" placeholder="A little context helps me give you a useful reply." required></textarea>
+  </div>
+
+  <input type="hidden" name="_gotcha" />
+  <input type="hidden" id="captchaResponse" name="g-recaptcha-response" />
+
+  <footer class="contact-form__footer">
+    <button class="jdb-btn jdb-btn--primary jdb-btn--lg" type={demo ? 'button' : 'submit'} disabled={demo}>
+      Send message
+    </button>
+    <span class="contact-form__note">Your details are only used to reply.</span>
+  </footer>
+</form>
+
+<style>
+  .contact-form {
+    position: relative;
+    display: grid;
+    gap: var(--jdb-s-5);
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    overflow: hidden;
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-md);
+    background: linear-gradient(155deg, rgba(21, 42, 73, .96), rgba(15, 31, 56, .96));
+    box-shadow: var(--jdb-sh-md);
+  }
+
+  .contact-form::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--jdb-orange-500), rgba(255, 77, 0, .12) 72%, transparent);
+    content: '';
+  }
+
+  .contact-form__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--jdb-s-4);
+    padding-bottom: var(--jdb-s-4);
+    border-bottom: 1px solid var(--jdb-line);
+  }
+
+  .contact-form__header h2 {
+    margin: 0 0 var(--jdb-s-2);
+    font-size: var(--jdb-fs-xl);
+  }
+
+  .contact-form__header p,
+  .contact-form__note {
+    margin: 0;
+    color: var(--jdb-fg-muted);
+    font-size: var(--jdb-fs-sm);
+  }
+
+  .contact-form__index {
+    flex: 0 0 auto;
+    padding-top: .2rem;
+    color: var(--jdb-fg-muted);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+  }
+
+  .contact-form__names { gap: var(--jdb-s-4); }
+
+  .contact-form__field {
+    display: grid;
+    gap: var(--jdb-s-2);
+    min-width: 0;
+  }
+
+  .contact-form label {
+    color: var(--jdb-fg);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+  }
+
+  .contact-form input:not([type='hidden']):not([type='text'][name='_gotcha']),
+  .contact-form textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 54px;
+    padding: .85rem 1rem;
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-sm);
+    outline: none;
+    background: rgba(7, 17, 31, .58);
+    color: var(--jdb-fg);
+    font: inherit;
+    transition: border-color var(--jdb-t), box-shadow var(--jdb-t), background var(--jdb-t);
+  }
+
+  .contact-form textarea {
+    min-height: 168px;
+    resize: vertical;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: var(--jdb-fg-muted); opacity: .8; }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--jdb-orange-500);
+    background: rgba(7, 17, 31, .82);
+    box-shadow: var(--jdb-glow);
+  }
+
+  .contact-form__footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-4);
+    padding-top: var(--jdb-s-2);
+  }
+
+  @media (max-width: 36rem) {
+    .contact-form__header { flex-direction: column; }
+    .contact-form__footer { align-items: stretch; flex-direction: column; }
+    .contact-form__footer .jdb-btn { width: 100%; }
+  }
+</style>

@@ -16,177 +16,15 @@ This guide helps you:
 
 ---
 
-## Interactive chart picker
-
-<div class="box">
-<p class="has-text-grey mb-4">
-		Answer the questions below and you’ll get a recommended chart type and why it works.
-</p>
-
-<div class="columns is-multiline">
-<div class="column is-12">
-<div class="box is-shadowless" style="border: 1px solid rgba(0,0,0,0.06);">
-<h3 class="title is-6 mb-3">What type of data relationship are you showing?</h3>
-<div class="buttons are-small is-flex-wrap-wrap viz-options" data-question="relationship">
-<button class="button is-rounded viz-chip" data-value="change">Change over time</button>
-<button class="button is-rounded viz-chip" data-value="comparison">Comparison between items</button>
-<button class="button is-rounded viz-chip" data-value="composition">Parts of a whole</button>
-<button class="button is-rounded viz-chip" data-value="distribution">Distribution/spread</button>
-<button class="button is-rounded viz-chip" data-value="correlation">Correlation/relationship</button>
-<button class="button is-rounded viz-chip" data-value="ranking">Ranking/order</button>
-</div>
-</div>
-</div>
-
-<div class="column is-12">
-<div class="box is-shadowless" style="border: 1px solid rgba(0,0,0,0.06);">
-<h3 class="title is-6 mb-3">How many data points/categories do you have?</h3>
-<div class="buttons are-small is-flex-wrap-wrap viz-options" data-question="datapoints">
-<button class="button is-rounded viz-chip" data-value="few">Few (2–5)</button>
-<button class="button is-rounded viz-chip" data-value="moderate">Moderate (6–15)</button>
-<button class="button is-rounded viz-chip" data-value="many">Many (15+)</button>
-</div>
-</div>
-</div>
-
-<div class="column is-12">
-<div class="box is-shadowless" style="border: 1px solid rgba(0,0,0,0.06);">
-<h3 class="title is-6 mb-3">Who is your audience?</h3>
-<div class="buttons are-small is-flex-wrap-wrap viz-options" data-question="audience">
-<button class="button is-rounded viz-chip" data-value="executive">Executives/C-suite</button>
-<button class="button is-rounded viz-chip" data-value="technical">Technical team</button>
-<button class="button is-rounded viz-chip" data-value="client">Clients</button>
-<button class="button is-rounded viz-chip" data-value="stakeholder">General stakeholders</button>
-</div>
-</div>
-</div>
-</div>
-
-<article id="recommendation" class="message is-primary is-hidden">
-<div class="message-body">
-<h3 class="title is-5 mb-2">Recommended visualization</h3>
-<div id="rec-content"></div>
-</div>
-</article>
-</div>
-
 ---
 
 ## Quick compare matrix
-
-<style>
-    /* Labels reflect suitability for the task */
-    .tag.is-ideal { background-color: #10b981; color: white; font-weight: bold; width: 80px; }
-    .tag.is-capable { background-color: #f59e0b; color: white; width: 80px; }
-    .tag.is-poor { background-color: #94a3b8; color: white; width: 80px; }
-</style>
-
-<div class="table-container">
-<table class="table is-striped is-fullwidth has-text-centered">
-<thead>
-<tr>
-<th>Chart type</th>
-<th>Trends</th>
-<th>Compare</th>
-<th>Composition</th>
-<th>Distribution</th>
-<th>Best for</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Line</td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-poor">Poor</span></td><td>Traffic over time, ranking trends</td></tr>
-<tr><td>Bar</td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td>Channel comparison, page performance</td></tr>
-<tr><td>Donut</td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-poor">Poor</span></td><td>Traffic sources, device split</td></tr>
-<tr><td>Scatter</td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-ideal">Ideal</span></td><td>Keyword opportunity analysis</td></tr>
-<tr><td>Radar</td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-ideal">Ideal</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-poor">Poor</span></td><td>Competitor profiles, strategic audits</td></tr>
-<tr><td>Waterfall</td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td><span class="tag is-capable">Capable</span></td><td><span class="tag is-poor">Poor</span></td><td>Traffic change attribution</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="box mt-4 has-background-light">
-<h4 class="title is-7 has-text-grey is-uppercase mb-3">Matrix Key: What we are measuring</h4>
-<div class="columns is-multiline is-mobile">
-<div class="column is-6-mobile is-3-tablet">
-<p class="is-size-7"><strong>Trends:</strong> How well it tracks SEO growth/decay over time.</p>
-</div>
-<div class="column is-6-mobile is-3-tablet">
-<p class="is-size-7"><strong>Compare:</strong> Clarity when comparing multiple pages or competitors.</p>
-</div>
-<div class="column is-6-mobile is-3-tablet">
-<p class="is-size-7"><strong>Composition:</strong> Visualizing traffic splits (e.g., Device or Channel share).</p>
-</div>
-<div class="column is-6-mobile is-3-tablet">
-<p class="is-size-7"><strong>Distribution:</strong> Mapping keyword difficulty vs. volume density.</p>
-</div>
-</div>
-</div>
 
 ---
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Picker selections
-    const selections = {};
-    const recommendations = {
-        'change-few-executive': { chart: 'Line chart', icon: '📈', reason: 'Clean trend line, ideal for exec readouts.' },
-        // ... (rest of your recommendation object)
-        'ranking-moderate-client': { chart: 'Horizontal bar chart', icon: '📶', reason: 'Keyword priorities clearly ranked.' },
-    };
-
-    function getDefaultRecommendation() {
-        if (selections.relationship === 'change') return { chart: 'Line chart', icon: '📈', reason: 'Best default for time-series data.' };
-        if (selections.relationship === 'comparison') return { chart: 'Bar chart', icon: '📊', reason: 'Best default for categorical comparison.' };
-        if (selections.relationship === 'composition') return { chart: 'Donut chart', icon: '🍩', reason: 'Best default for part-to-whole.' };
-        if (selections.relationship === 'distribution') return { chart: 'Scatter plot', icon: '⚬', reason: 'Best default for distributions.' };
-        if (selections.relationship === 'correlation') return { chart: 'Scatter plot', icon: '⚬', reason: 'Best default for correlations.' };
-        return { chart: 'Horizontal bar chart', icon: '📶', reason: 'Best default for rankings.' };
-    }
-
-    function updateRecommendation() {
-        // Ensure all three selections are made before showing the box
-        if (selections.relationship && selections.datapoints && selections.audience) {
-            const key = `${selections.relationship}-${selections.datapoints}-${selections.audience}`;
-            const rec = recommendations[key] || getDefaultRecommendation();
-
-            const contentArea = document.getElementById('rec-content');
-            const wrapper = document.getElementById('recommendation');
-
-            if (contentArea && wrapper) {
-                contentArea.innerHTML = `
-<div class="media">
-<div class="media-left">
-<span style="font-size: 1.75rem;">${rec.icon}</span>
-</div>
-<div class="media-content">
-<p class="title is-6 mb-1">${rec.chart}</p>
-<p class="has-text-grey">${rec.reason}</p>
-<p class="has-text-grey is-size-7 mt-2"><strong>Pro tip:</strong> Use the gallery below to validate fit and steal the pattern.</p>
-</div>
-</div>
-                `;
-                wrapper.classList.remove('is-hidden');
-            }
-        }
-    }
-
-    document.querySelectorAll('.viz-options .viz-chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const group = btn.closest('.viz-options');
-            const question = group.dataset.question; // e.g., "relationship"
-
-            group.querySelectorAll('.viz-chip').forEach(b => b.classList.remove('is-selected'));
-            btn.classList.add('is-selected');
-
-            selections[question] = btn.dataset.value;
-            updateRecommendation();
-        });
-    });
-});
-</script>
 
 <div class="container">
 
@@ -307,9 +145,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Brand colors from your SASS file
 	const BRAND = {
 		orange: '#ff4d00',
+		orangeSoft: '#ff8a5c',
 		blue: '#152A49',
+		blueSoft: '#31507d',
 		black: '#141414',
-		white: '#f1f1f1'
+		darkGrey: '#2c3444',
+		grey: '#8a8a8a',
+		lightGrey: '#dfe5ee',
+		white: '#f1f1f1',
+		text: '#e8ecf4'
 	};
 
 	// Helper: hex -> rgba
@@ -336,34 +180,43 @@ document.addEventListener('DOMContentLoaded', function() {
 					label: 'Your Site',
 					data: [6, 5, 6, 8, 5],
 					fill: true,
-					backgroundColor: hexToRgba(BRAND.orange, 0.14),
+					backgroundColor: hexToRgba(BRAND.orange, 0.18),
 					borderColor: BRAND.orange,
+					borderWidth: 2.5,
 					pointBackgroundColor: BRAND.orange,
 					pointBorderColor: BRAND.white,
 					pointHoverBackgroundColor: BRAND.white,
-					pointHoverBorderColor: BRAND.orange
+					pointHoverBorderColor: BRAND.orange,
+					pointRadius: 4,
+					pointHoverRadius: 6
 				},
 				{
 					label: 'Competitor A',
 					data: [7, 8, 9, 6, 6],
 					fill: true,
-					backgroundColor: hexToRgba(BRAND.blue, 0.12),
-					borderColor: BRAND.blue,
-					pointBackgroundColor: BRAND.blue,
+					backgroundColor: hexToRgba(BRAND.blueSoft, 0.16),
+					borderColor: BRAND.blueSoft,
+					borderWidth: 2.5,
+					pointBackgroundColor: BRAND.blueSoft,
 					pointBorderColor: BRAND.white,
 					pointHoverBackgroundColor: BRAND.white,
-					pointHoverBorderColor: BRAND.blue
+					pointHoverBorderColor: BRAND.blueSoft,
+					pointRadius: 4,
+					pointHoverRadius: 6
 				},
 				{
 					label: 'Competitor B',
 					data: [8, 6, 6, 7, 8],
 					fill: true,
-					backgroundColor: hexToRgba(BRAND.black, 0.08),
-					borderColor: BRAND.black,
-					pointBackgroundColor: BRAND.black,
+					backgroundColor: hexToRgba(BRAND.darkGrey, 0.12),
+					borderColor: BRAND.darkGrey,
+					borderWidth: 2.5,
+					pointBackgroundColor: BRAND.darkGrey,
 					pointBorderColor: BRAND.white,
 					pointHoverBackgroundColor: BRAND.white,
-					pointHoverBorderColor: BRAND.black
+					pointHoverBorderColor: BRAND.darkGrey,
+					pointRadius: 4,
+					pointHoverRadius: 6
 				}
 			]
 		},
@@ -377,16 +230,20 @@ document.addEventListener('DOMContentLoaded', function() {
 					ticks: {
 						stepSize: 2,
 						showLabelBackdrop: false,
-						color: BRAND.black
+						color: BRAND.text
 					},
 					angleLines: {
-						color: hexToRgba(BRAND.black, 0.18)
+						color: 'rgba(232, 236, 244, 0.18)'
 					},
 					grid: {
-						color: hexToRgba(BRAND.black, 0.18)
+						color: 'rgba(232, 236, 244, 0.18)'
 					},
 					pointLabels: {
-						color: BRAND.black
+						color: BRAND.text,
+						font: {
+							size: 11,
+							weight: '600'
+						}
 					}
 				}
 			},
@@ -394,10 +251,17 @@ document.addEventListener('DOMContentLoaded', function() {
 				legend: {
 					position: 'bottom',
 					labels: {
-						color: BRAND.black
+						color: BRAND.text,
+						usePointStyle: true,
+						boxWidth: 11,
+						boxHeight: 11,
+						padding: 18
 					}
 				},
 				tooltip: {
+					backgroundColor: 'rgba(10, 21, 38, 0.96)',
+					titleColor: BRAND.text,
+					bodyColor: BRAND.text,
 					callbacks: {
 						label: function(context) {
 							return `${context.dataset.label}: ${context.raw}/10`;
@@ -1023,7 +887,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { x: 4.5, y: 40 }, // Outlier: Slow but low bounce
                     { x: 2.0, y: 50 }, { x: 2.3, y: 55 }, { x: 3.0, y: 65 }
                 ],
-                backgroundColor: BRAND_BLUE,
+                backgroundColor: BRAND.blueSoft,
                 pointRadius: 6,
                 pointHoverRadius: 8
             }]
@@ -1033,17 +897,24 @@ document.addEventListener('DOMContentLoaded', function() {
             maintainAspectRatio: false,
             scales: {
                 x: {
-                    title: { display: true, text: 'LCP (Seconds)' },
+                    title: { display: true, text: 'LCP (Seconds)', color: BRAND.text },
+                    ticks: { color: BRAND.text },
+                    grid: { color: 'rgba(255,255,255,0.08)' },
                     beginAtZero: true
                 },
                 y: {
-                    title: { display: true, text: 'Bounce Rate (%)' },
+                    title: { display: true, text: 'Bounce Rate (%)', color: BRAND.text },
+                    ticks: { color: BRAND.text },
+                    grid: { color: 'rgba(255,255,255,0.08)' },
                     min: 0,
                     max: 100
                 }
             },
             plugins: {
                 tooltip: {
+                    backgroundColor: 'rgba(10, 21, 38, 0.96)',
+                    titleColor: BRAND.text,
+                    bodyColor: BRAND.text,
                     callbacks: {
                         label: function(context) {
                             return ` Speed: ${context.raw.x}s, Bounce: ${context.raw.y}%`;
@@ -1172,8 +1043,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     label: 'Branded',
                     data: [2500, 2400, 2600, 2450, 2700, 2650],
-                    borderColor: BRAND.blue,
-                    backgroundColor: BRAND.blue,
+                    borderColor: BRAND.blueSoft,
+                    backgroundColor: BRAND.blueSoft,
                     borderWidth: 2,
                     borderDash: [5, 5], // Dotted line for the baseline
                     tension: 0.3,
@@ -1192,16 +1063,25 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: { display: true, text: 'Monthly Sessions' },
-                    grid: { color: 'rgba(0,0,0,0.05)' }
+                    title: { display: true, text: 'Monthly Sessions', color: BRAND.text },
+                    ticks: { color: BRAND.text },
+                    grid: { color: 'rgba(255,255,255,0.08)' }
                 },
                 x: {
+                    ticks: { color: BRAND.text },
                     grid: { display: false }
                 }
             },
             plugins: {
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    labels: {
+                        color: BRAND.text,
+                        usePointStyle: true,
+                        boxWidth: 11,
+                        boxHeight: 11,
+                        padding: 18
+                    }
                 }
             }
         }
@@ -1319,12 +1199,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 data: [12500, 8400, 5200, 4100, 2100, 1800],
                 backgroundColor: [
                     BRAND.orange,
-                    BRAND.blue,
-                    BRAND.blue,
-                    BRAND.blue,
+                    BRAND.blueSoft,
+                    BRAND.blueSoft,
+                    BRAND.blueSoft,
                     BRAND.grey,
                     BRAND.grey
                 ],
+                borderColor: 'rgba(255,255,255,0.24)',
+                borderWidth: 1,
                 borderRadius: 4
             }]
         },
@@ -1337,10 +1219,12 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: { display: true, text: 'Monthly Sessions' },
-                    grid: { color: 'rgba(0,0,0,0.05)' }
+                    title: { display: true, text: 'Monthly Sessions', color: BRAND.text },
+                    ticks: { color: BRAND.text },
+                    grid: { color: 'rgba(255,255,255,0.08)' }
                 },
                 x: {
+                    ticks: { color: BRAND.text },
                     grid: { display: false }
                 }
             }
@@ -1474,7 +1358,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     label: 'Pos 4-10',
                     data: [350, 410, 520, 210, 80],
-                    backgroundColor: BRAND.blue
+                    backgroundColor: BRAND.blueSoft
                 },
                 {
                     label: 'Pos 11-20',
@@ -1493,13 +1377,15 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 x: {
                     stacked: true,
+                    ticks: { color: BRAND.text },
                     grid: { display: false }
                 },
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    title: { display: true, text: 'Number of Keywords' },
-                    grid: { color: 'rgba(0,0,0,0.05)' }
+                    title: { display: true, text: 'Number of Keywords', color: BRAND.text },
+                    ticks: { color: BRAND.text },
+                    grid: { color: 'rgba(255,255,255,0.08)' }
                 }
             }
         }
@@ -1616,13 +1502,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 data: [35, 25, 20, 12, 8],
                 backgroundColor: [
                     BRAND.orange,
-                    BRAND.blue,
+                    BRAND.blueSoft,
                     BRAND.darkGrey,
                     BRAND.grey,
                     BRAND.lightGrey
                 ],
                 borderWidth: 2,
-                borderColor: '#ffffff'
+                borderColor: '#0a1526'
             }]
         },
         options: {
@@ -1632,11 +1518,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: {
                     position: 'bottom',
                     labels: {
+                        color: BRAND.text,
                         usePointStyle: true,
-                        padding: 20
+                        boxWidth: 11,
+                        boxHeight: 11,
+                        padding: 18
                     }
                 },
                 tooltip: {
+                    backgroundColor: 'rgba(10, 21, 38, 0.96)',
+                    titleColor: BRAND.text,
+                    bodyColor: BRAND.text,
                     callbacks: {
                         label: function(context) {
                             return ` ${context.label}: ${context.raw}% Share`;
@@ -1759,12 +1651,12 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 data: [820, 310, 110],
                 backgroundColor: [
-                    BRAND.blue,
+                    BRAND.blueSoft,
                     BRAND.grey,
                     BRAND.orange
                 ],
                 borderWidth: 2,
-                borderColor: '#ffffff',
+                borderColor: '#0a1526',
                 // cutout: '70%' // Controls the thickness of the ring
             }]
         },
@@ -1776,7 +1668,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: {
                     position: 'bottom',
                     labels: {
+                        color: BRAND.text,
                         usePointStyle: true,
+                        boxWidth: 11,
+                        boxHeight: 11,
                         padding: 15
                     }
                 }
@@ -2046,7 +1941,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     type: 'bar',
                     label: 'Organic Traffic',
                     data: [2100, 3200, 4500, 5900, 7200, 8800],
-                    backgroundColor: BRAND.blue,
+                    backgroundColor: BRAND.blueSoft,
                     yAxisID: 'y_traffic',
                     barPercentage: 0.9,
                     categoryPercentage: 0.6
@@ -2074,115 +1969,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     type: 'linear',
                     position: 'left',
                     beginAtZero: true,
-                    title: { display: true, text: 'Monthly Sessions' },
-                    grid: { color: 'rgba(0,0,0,0.05)' }
+                    title: { display: true, text: 'Monthly Sessions', color: BRAND.text },
+                    ticks: { color: BRAND.text },
+                    grid: { color: 'rgba(255,255,255,0.08)' }
                 },
                 y_cpc: {
                     type: 'linear',
                     position: 'right',
                     beginAtZero: true,
                     suggestedMax: 7,
-                    title: { display: true, text: 'CPC (USD)' },
-                    grid: { display: false },
-                    ticks: {
-                        callback: function(value) { return '$' + value; }
-                    }
+                    title: { display: true, text: 'CPC (USD)', color: BRAND.text },
+                    ticks: { color: BRAND.text, callback: function(value) { return '$' + value; } },
+                    grid: { display: false }
                 },
                 x: {
+                    ticks: { color: BRAND.text },
                     grid: { display: false }
                 }
             },
             plugins: {
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    labels: {
+                        color: BRAND.text,
+                        usePointStyle: true,
+                        boxWidth: 11,
+                        boxHeight: 11,
+                        padding: 18
+                    }
                 }
             }
         }
     });
 </script>
-
-<section class="section">
-<div class="container">
-<div class="content mb-6">
-<h2 class="title is-3 has-text-centered">Data Storytelling Best Practices for SEO</h2>
-<p class="has-text-centered has-text-grey is-size-5">How to transform raw data into executive-level narratives.</p>
-</div>
-
-<div class="columns is-multiline">
-<div class="column is-12-tablet is-4-desktop">
-<div class="card is-fullheight shadow-hover">
-<div class="card-content">
-<div class="icon-text mb-3">
-<span class="icon has-text-info is-large"><i class="fas fa-2x fa-lightbulb"></i></span>
-<h3 class="title is-5 ml-2">Lead with the Insight</h3>
-</div>
-<p class="is-size-6 mb-4">Put the takeaway in the title. Don't describe the chart; explain the conclusion.</p>
-</div>
-</div>
-</div>
-
-<div class="column is-12-tablet is-4-desktop">
-<div class="card is-fullheight shadow-hover">
-<div class="card-content">
-<div class="icon-text mb-3">
-<span class="icon has-text-info is-large"><i class="fas fa-2x fa-bullseye"></i></span>
-<h3 class="title is-5 ml-2">One Chart, One Message</h3>
-</div>
-<p class="is-size-6 mb-4">Avoid "Franken-charts." If you need to show both a trend and a breakdown, use two visualizations.</p>
-</div>
-</div>
-</div>
-
-<div class="column is-12-tablet is-4-desktop">
-<div class="card is-fullheight shadow-hover">
-<div class="card-content">
-<div class="icon-text mb-3">
-<span class="icon has-text-info is-large"><i class="fas fa-2x fa-palette"></i></span>
-<h3 class="title is-5 ml-2">Use Color Strategically</h3>
-</div>
-<p class="is-size-6 mb-4">Mute baseline data with greys and reserve your bold brand color for the metric you want them to notice.</p>
-</div>
-</div>
-</div>
-
-<div class="column is-12-tablet is-4-desktop">
-<div class="card is-fullheight shadow-hover">
-<div class="card-content">
-<div class="icon-text mb-3">
-<span class="icon has-text-info is-large"><i class="fas fa-2x fa-history"></i></span>
-<h3 class="title is-5 ml-2">Show Context</h3>
-</div>
-<p class="is-size-6 mb-4">A number without a comparison is meaningless. Always include Year-over-Year (YoY) or forecast benchmarks.</p>
-</div>
-</div>
-</div>
-
-<div class="column is-12-tablet is-4-desktop">
-<div class="card is-fullheight shadow-hover">
-<div class="card-content">
-<div class="icon-text mb-3">
-<span class="icon has-text-info is-large"><i class="fas fa-2x fa-filter"></i></span>
-<h3 class="title is-5 ml-2">Don’t Overwhelm</h3>
-</div>
-<p class="is-size-6 mb-4">Executives focus on 3–5 "North Star" metrics. Move granular data (Crawl errors, 404s) to an appendix.</p>
-</div>
-</div>
-</div>
-
-<div class="column is-12-tablet is-4-desktop">
-<div class="card is-fullheight shadow-hover">
-<div class="card-content">
-<div class="icon-text mb-3">
-<span class="icon has-text-info is-large"><i class="fas fa-2x fa-comment-dots"></i></span>
-<h3 class="title is-5 ml-2">Annotate Key Events</h3>
-</div>
-<p class="is-size-6 mb-4">Call out algorithm updates, site migrations, or PR spikes directly on the chart to explain volatility instantly.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
 
 ---
 
@@ -2191,35 +2010,6 @@ document.addEventListener('DOMContentLoaded', function() {
 The best visualization is the one that makes your insight immediately obvious.
 
 Before you finalize any chart, ask: **Can someone understand the key takeaway in 5 seconds?** If not, simplify.
-
-### Data Visualization & Storytelling FAQs
-
-#### How do I choose the right chart type for my SEO data?
-Choosing the right chart depends on the relationship you want to highlight. Use **line charts** to show trends and changes over time (like organic traffic growth), **bar charts** for comparing discrete categories (like performance by page or folder), and **scatter plots** or **bubble charts** to identify correlations between two or more numeric variables (like keyword difficulty vs. search volume). The goal is to match the visual format to the specific question your audience needs to answer.
-
-#### What is the "5-second rule" in data visualization?
-The 5-second rule is a best practice stating that a viewer should be able to grasp the primary insight or "takeaway" of a chart within five seconds of looking at it. If the viewer has to hunt for the message or decipher complex axes, the visualization is likely too cluttered. To achieve this, use descriptive titles that state the conclusion and highlight key data points with contrasting colors.
-
-#### What are the most common mistakes in data visualization?
-The most common mistakes include using inappropriate chart types (e.g., using a pie chart for more than five categories), failing to provide context through benchmarks or Year-over-Year (YoY) comparisons, and overcrowding a single visual with too many variables. Additionally, "misleading axes"—such as starting a Y-axis at a number other than zero for bar charts—can distort the perceived impact of the data and reduce trust.
-
-#### How does data storytelling differ from traditional data reporting?
-While data reporting focus on *what* happened (providing raw metrics and status updates), data storytelling explains *why* it happened and *what* should be done next. A report is a snapshot of facts; a story uses those facts to build a narrative arc—identifying a problem (conflict), showing the data-driven insight (climax), and recommending a specific business action (resolution).
-
-#### Why is context critical for SEO data storytelling?
-A number without a comparison is meaningless in SEO. Context, such as Year-over-Year (YoY) growth, industry benchmarks, or internal forecasts, allows stakeholders to understand if a metric is "good" or "bad." Providing context helps filter out seasonal "noise" and proves that your SEO efforts are driving authentic growth rather than just riding a temporary trend.
-
-#### How should color be used strategically in data visualizations?
-In data visualization, color should be used to direct attention, not just for decoration. Use neutral greys for baseline data and reserved, high-contrast colors (like your brand’s primary color) to highlight the specific metric you want the audience to notice. Additionally, ensure your color choices are accessible by avoiding red-green combinations that are difficult for color-blind users to distinguish.
-
-#### How can I simplify complex SEO data for non-technical executives?
-To make SEO data accessible for executives, focus on "North Star" metrics that tie directly to business outcomes, such as organic revenue, conversions, and market share. Avoid technical jargon like "crawl budget" or "canonicalization" in the primary visualization. Instead, lead with a "Lead with the Insight" approach: put the conclusion in the chart title so the executive understands the business impact immediately.
-
-#### What role do annotations play in data storytelling?
-Annotations act as "guideposts" that explain sudden spikes or drops in data directly on the chart. By calling out specific events—such as a Google Algorithm update, a site migration, or a major PR campaign—you prevent the audience from misinterpreting volatility. Annotations ensure the narrative remains clear even if the report is read without a live presentation.
-
-#### What is a "Franken-chart" and why should you avoid it?
-A "Franken-chart" is a visualization that tries to cram too many unrelated messages into a single graphic, often using dual axes that confuse the reader. To maintain clarity, follow the "One Chart, One Message" rule. If you need to show both a long-term trend and a granular category breakdown, it is better to use two separate, simple visualizations than one overly complex one.
 
 <script type="application/ld+json">
 {

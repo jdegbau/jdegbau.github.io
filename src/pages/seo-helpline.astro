@@ -14,14 +14,129 @@ const description = 'Have an urgent SEO or data question? Schedule a one-hour ca
     </Navigation>
   </nav>
 
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Schedule a Call</h1>
-      <p>Have an urgent SEO or data question? Schedule a one-hour call with the SEO Helpline and get an expert consultation for just $100.</p>
-      <div id="tidycal-embed" data-path="jdegbau/seo-helpline-consultation"></div>
+  <section class="jdb-hero helpline-hero">
+    <div class="jdb-container jdb-container--wide">
+      <div class="helpline-hero__layout">
+        <div class="helpline-hero__copy">
+          <span class="jdb-eyebrow">seo helpline / one-to-one consulting</span>
+          <h1>Get clear on your next SEO move.</h1>
+          <p class="jdb-hero__lede">Bring the question you can’t quite solve. Leave with a sharper diagnosis and practical next steps.</p>
+          <div class="jdb-hero__actions">
+            <a class="jdb-btn jdb-btn--primary jdb-btn--lg" href="#booking">Choose a time</a>
+            <a class="jdb-btn jdb-btn--ghost" href="/contact/">Ask a question first</a>
+          </div>
+        </div>
+
+        <aside class="helpline-rate" aria-label="Consultation details">
+          <span class="helpline-rate__label">a focused working session</span>
+          <strong class="helpline-rate__price">$100</strong>
+          <span class="helpline-rate__unit">per 60-minute call</span>
+          <div class="helpline-rate__rule"></div>
+          <p>Direct, practical guidance for SEO and data questions. No retainer or ongoing commitment.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="jdb-section helpline-booking" id="booking">
+    <div class="jdb-container jdb-container--wide">
+      <header class="helpline-booking__header">
+        <div>
+          <span class="jdb-eyebrow">book a session</span>
+          <h2>Pick a time that works.</h2>
+        </div>
+        <p>Select an available slot below to book your session. If none are available, email <a href="mailto:hello@jdegbau.com">hello@jdegbau.com</a> and we can arrange a time.</p>
+      </header>
+      <div class="helpline-booking__embed">
+        <div id="tidycal-embed" data-path="jdegbau/seo-helpline-consultation"></div>
+      </div>
       <script src="https://asset-tidycal.b-cdn.net//js/embed.js"></script>
     </div>
   </section>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .helpline-hero { border-bottom: 1px solid var(--jdb-line); }
+
+  .helpline-hero__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, .65fr);
+    align-items: center;
+    gap: clamp(2rem, 7vw, 6rem);
+  }
+
+  .helpline-hero__copy h1 {
+    max-width: 15ch;
+    font-size: var(--jdb-fs-4xl);
+  }
+
+  .helpline-hero__copy .jdb-hero__lede { max-width: 55ch; }
+
+  .helpline-rate {
+    position: relative;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid var(--jdb-line-strong);
+    border-top: 3px solid var(--jdb-orange-500);
+    border-radius: var(--jdb-r-md);
+    background: linear-gradient(145deg, rgba(21, 42, 73, .92), rgba(15, 31, 56, .82));
+    box-shadow: var(--jdb-sh-md);
+  }
+
+  .helpline-rate__label,
+  .helpline-rate__unit {
+    display: block;
+    color: var(--jdb-fg-muted);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+  }
+
+  .helpline-rate__price {
+    display: block;
+    margin: var(--jdb-s-3) 0 0;
+    color: var(--jdb-fg);
+    font-family: var(--jdb-font-mono);
+    font-size: 3.5rem;
+    line-height: 1;
+  }
+
+  .helpline-rate__rule {
+    height: 1px;
+    margin: var(--jdb-s-5) 0;
+    background: var(--jdb-line-strong);
+  }
+
+  .helpline-rate p { margin: 0; font-size: var(--jdb-fs-sm); }
+
+  .helpline-booking { scroll-margin-top: calc(var(--jdb-header-h) + var(--jdb-s-4)); }
+
+  .helpline-booking__header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--jdb-s-6);
+    margin-bottom: var(--jdb-s-6);
+  }
+
+  .helpline-booking__header h2 { margin: 0; }
+  .helpline-booking__header p { max-width: 38ch; margin: 0; }
+
+  .helpline-booking__embed {
+    overflow: hidden;
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-md);
+    background: var(--jdb-navy-900);
+    box-shadow: var(--jdb-sh-md);
+  }
+
+  @media (max-width: 52rem) {
+    .helpline-hero__layout { grid-template-columns: 1fr; }
+    .helpline-rate { max-width: 32rem; }
+  }
+
+  @media (max-width: 40rem) {
+    .helpline-hero__copy h1 { font-size: var(--jdb-fs-3xl); }
+    .helpline-booking__header { align-items: start; flex-direction: column; }
+  }
+</style>
