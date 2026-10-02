@@ -113,13 +113,15 @@ const { date, readingTime, url } = Astro.props;
     }
 
     .post-meta__group {
-      width: 100%;
+      flex-basis: 100%;
       border-right: none;
       border-bottom: 1px solid var(--jdb-line);
     }
 
     .post-meta__item {
       flex-basis: 50%;
+      min-height: 2.5rem;
+      padding: var(--jdb-s-2) var(--jdb-s-3);
     }
 
     .post-meta__item + .post-meta__item {
@@ -127,7 +129,14 @@ const { date, readingTime, url } = Astro.props;
     }
 
     .post-meta__share {
-      width: 100%;
+      flex-basis: 100%;
+      min-height: 2.5rem;
+      padding: var(--jdb-s-2) var(--jdb-s-3);
+    }
+
+    .post-meta__share a {
+      width: 1.75rem;
+      height: 1.75rem;
     }
   }
 </style>
@@ -138,7 +147,7 @@ const { date, readingTime, url } = Astro.props;
         <span><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> {date}</span>
       </div>
       <div class="post-meta__item">
-        <span><i class="fa-solid fa-clock" aria-hidden="true"></i> {readingTime} min read</span>
+        <span><i class="fa-solid fa-clock" aria-hidden="true"></i> {readingTime}</span>
       </div>
     </div>
 

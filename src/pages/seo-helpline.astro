@@ -1,19 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import Search from '../components/Search.astro';
-import Footer from '../components/Footer.astro';
 
 const seoTitle = 'Schedule a Call';
 const description = 'Have an urgent SEO or data question? Schedule a one-hour call with the SEO Helpline and get an expert consultation for just $100.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
   <section class="jdb-hero helpline-hero">
     <div class="jdb-container jdb-container--wide">
       <div class="helpline-hero__layout">
@@ -45,7 +36,7 @@ const description = 'Have an urgent SEO or data question? Schedule a one-hour ca
           <span class="jdb-eyebrow">book a session</span>
           <h2>Pick a time that works.</h2>
         </div>
-        <p>Select an available slot below to book your session. If none are available, email <a href="mailto:hello@jdegbau.com">hello@jdegbau.com</a> and we can arrange a time.</p>
+        <p>Select an available slot below to book your session. If none are available, email <a href="mailto:josh@jdegbau.com">josh@jdegbau.com</a> and we can arrange a time.</p>
       </header>
       <div class="helpline-booking__embed">
         <div id="tidycal-embed" data-path="jdegbau/seo-helpline-consultation"></div>
@@ -54,7 +45,6 @@ const description = 'Have an urgent SEO or data question? Schedule a one-hour ca
     </div>
   </section>
 
-  <Footer slot="footer" />
 </BaseLayout>
 
 <style>

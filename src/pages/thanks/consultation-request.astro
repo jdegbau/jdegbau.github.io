@@ -1,27 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navigation from '../../components/Navigation.astro';
-import Search from '../../components/Search.astro';
-import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
 
 const seoTitle = 'Thanks for Scheduling!';
 const description = 'Thanks for scheduling your consultation with Joshua DeGrasse-Baumann.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description} noindex={true}>
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
-  <section class="jdb-hero jdb-hero--intro">
-    <div class="jdb-container jdb-container--narrow jdb-center">
+  <Hero variant="intro" containerWidth="narrow">
+    <div class="jdb-center">
       <span class="jdb-eyebrow">thanks</span>
       <h1>Looking forward to chatting!</h1>
       <p class="jdb-hero__lede">Thanks for scheduling your consultation. I’ll be in touch soon to discuss next steps.</p>
       <a href="/" class="jdb-btn jdb-btn--primary jdb-btn--lg">Back to home</a>
     </div>
-  </section>
+  </Hero>
 
-  <Footer slot="footer" />
 </BaseLayout>

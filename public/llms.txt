@@ -8,6 +8,9 @@ His favorite video games are Fire Emblem: Three Houses, XCOM 2, and Fallout.
 ## About Joshua DeGrasse-Baumann
 Josh is an SEO strategist and data enthusiast. He currently lives in Milwaukee, WI. He loves spending time with his dog Bailey, reading, and playing video games.
 
+## Structured Profile
+- [AI profile for Joshua DeGrasse-Baumann](https://jdegbau.com/ai-info/) - Structured professional biography, expertise, current role, location, and verified profile links. Includes Schema.org ProfilePage and Person data.
+
 ## Bio and Consulting
 - [About Josh](https://jdegbau.com/about/) - SEO strategist, data analytics, and developer background.
 - [SEO Helpline](https://jdegbau.com/seo-helpline/) - Book a quick consultation session for SEO or data guidance.

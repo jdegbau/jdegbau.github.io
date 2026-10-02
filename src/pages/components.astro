@@ -1,8 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import Search from '../components/Search.astro';
-import Footer from '../components/Footer.astro';
 import ChartTypeAssessment from '../components/ChartTypeAssessment.astro';
 import ChartPickerQuiz from '../components/ChartPickerQuiz.astro';
 import DataStoryBestPractices from '../components/DataStoryBestPractices.astro';
@@ -64,12 +61,6 @@ const sampleMatrixRows = [
   image="/assets/img/default-blog-hero.gif"
   noindex={true}
 >
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
   <article>
     <header class="jdb-section jdb-section--tight">
       <div class="jdb-container jdb-container--narrow">
@@ -120,6 +111,18 @@ const sampleMatrixRows = [
               <div class="jdb-hero__actions">
                 <a href="/blog/" class="jdb-btn jdb-btn--primary jdb-btn--sm">View blog</a>
               </div>
+            </Hero>
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2>Hero (intro)</h2>
+            </div>
+            <Hero variant="intro" containerWidth="narrow">
+              <span class="jdb-eyebrow">about</span>
+              <h2>Compact page introduction</h2>
+              <p class="jdb-hero__lede">A concise introduction with the same structure used across informational pages.</p>
             </Hero>
           </div>
 
@@ -247,7 +250,6 @@ const sampleMatrixRows = [
     </section>
   </article>
 
-  <Footer slot="footer" />
 </BaseLayout>
 
 <style>

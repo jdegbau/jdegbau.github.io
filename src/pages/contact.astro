@@ -1,27 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import Search from '../components/Search.astro';
-import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
 import ContactForm from '../components/ContactForm.astro';
 
 const seoTitle = 'How Can I Help You?';
 const description = 'Contact Joshua DeGrasse-Baumann for SEO, analytics, and measurement consulting.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
-  <section class="jdb-hero jdb-hero--intro contact-hero">
-    <div class="jdb-container jdb-container--wide">
-      <span class="jdb-eyebrow">contact</span>
-      <h1>Let's figure out what's next.</h1>
-      <p class="jdb-hero__lede">Tell me where SEO, analytics, or measurement feels stuck. I’ll help you find a practical way forward.</p>
-    </div>
-  </section>
+  <Hero variant="intro" containerWidth="wide" class="contact-hero">
+    <span class="jdb-eyebrow">contact</span>
+    <h1>Let's figure out what's next.</h1>
+    <p class="jdb-hero__lede">Tell me where SEO, analytics, or measurement feels stuck. I’ll help you find a practical way forward.</p>
+  </Hero>
 
   <section class="jdb-section contact-section">
     <div class="jdb-container jdb-container--wide">
@@ -36,7 +26,7 @@ const description = 'Contact Joshua DeGrasse-Baumann for SEO, analytics, and mea
             <li>Web development and implementation</li>
           </ul>
           <div class="contact-context__links">
-            <a href="mailto:hello@jdegbau.com">hello@jdegbau.com</a>
+            <a href="mailto:josh@jdegbau.com">josh@jdegbau.com</a>
             <a href="/seo-helpline/">Need focused time? Book a call</a>
           </div>
         </aside>
@@ -56,7 +46,6 @@ const description = 'Contact Joshua DeGrasse-Baumann for SEO, analytics, and mea
     });
   </script>
 
-  <Footer slot="footer" />
 </BaseLayout>
 
 <style>

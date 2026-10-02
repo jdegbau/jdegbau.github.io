@@ -7,6 +7,7 @@ const {
   imageSrc,
   imageAlt = 'Hero image',
   class: className,
+  containerWidth = 'wide',
 } = Astro.props;
 
 const classes = ['jdb-hero', `jdb-hero--${variant}`];
@@ -22,7 +23,7 @@ if (className) {
     </div>
   )}
 
-  <div class="jdb-container jdb-container--wide">
+  <div class={`jdb-container jdb-container--${containerWidth}`}>
     <div class="jdb-hero__layout">
       <div class="jdb-hero__content">
         <slot />

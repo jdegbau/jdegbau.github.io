@@ -598,7 +598,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-footer__social { display: flex; flex-wrap: wrap; gap: var(--jdb-s-2); margin-top: var(--jdb-s-5); }
 .jdb-footer__social a {
   width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md); color: var(--jdb-fg-dim);
+  border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md); color: var(--jdb-fg-dim); text-decoration: none;
 }
 .jdb-footer__social a:hover { color: #fff; border-color: var(--jdb-orange-500); }
 

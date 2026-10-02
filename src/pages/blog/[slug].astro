@@ -1,10 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navigation from '../../components/Navigation.astro';
-import Search from '../../components/Search.astro';
 import AuthorBox from '../../components/AuthorBox.astro';
 import Hero from '../../components/Hero.astro';
-import Footer from '../../components/Footer.astro';
 import ChartTypeAssessment from '../../components/ChartTypeAssessment.astro';
 import ChartPickerQuiz from '../../components/ChartPickerQuiz.astro';
 import DataStoryBestPractices from '../../components/DataStoryBestPractices.astro';
@@ -100,12 +97,6 @@ const faqItems = [
   type="article"
   authorName="Joshua DeGrasse-Baumann"
 >
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
   <article>
     <Hero
       variant="full"
@@ -163,7 +154,6 @@ const faqItems = [
     </section>
   </article>
 
-  <Footer slot="footer" />
 </BaseLayout>
 
 <style>

@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import Search from '../components/Search.astro';
-import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
 import Logos from '../components/Logos.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { getAllPosts } from '../lib/posts';
@@ -12,21 +10,13 @@ const seoTitle = "About Joshua DeGrasse-Baumann";
 const description = 'About Joshua DeGrasse-Baumann, including his work in SEO, analytics, and development.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
-  <section class="jdb-hero jdb-hero--intro">
-    <div class="jdb-container jdb-container--narrow">
-      <span class="jdb-eyebrow">about</span>
-      <h1>Hello. I’m Josh.</h1>
-      <p class="jdb-hero__lede">
-        I’m an SEO strategist, data enthusiast, and developer focused on helping teams turn messy information into useful decisions and better digital experiences.
-      </p>
-    </div>
-  </section>
+  <Hero variant="intro" containerWidth="narrow">
+    <span class="jdb-eyebrow">about</span>
+    <h1>Hello. I’m Josh.</h1>
+    <p class="jdb-hero__lede">
+      I’m an SEO strategist, data enthusiast, and developer focused on helping teams turn messy information into useful decisions and better digital experiences.
+    </p>
+  </Hero>
 
   <section class="jdb-section">
     <div class="jdb-container jdb-container--narrow">
@@ -112,5 +102,4 @@ const description = 'About Joshua DeGrasse-Baumann, including his work in SEO, a
     </div>
   </section>
 
-  <Footer slot="footer" />
 </BaseLayout>

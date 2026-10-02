@@ -1,8 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import Search from '../components/Search.astro';
-import Footer from '../components/Footer.astro';
 import Logos from '../components/Logos.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { getAllPosts } from '../lib/posts';
@@ -45,12 +42,6 @@ const pageSchema = {
 };
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
   <section class="jdb-hero jdb-hero--home">
     <div class="jdb-container">
       <div class="jdb-hero__inner">
@@ -139,5 +130,4 @@ const pageSchema = {
     {JSON.stringify(pageSchema)}
   </script>
 
-  <Footer slot="footer" />
 </BaseLayout>

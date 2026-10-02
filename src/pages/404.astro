@@ -1,27 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navigation from '../components/Navigation.astro';
-import Search from '../components/Search.astro';
-import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
 
 const seoTitle = 'Page Not Found';
 const description = 'The page you are looking for cannot be found.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
-  <section class="jdb-hero jdb-hero--intro">
-    <div class="jdb-container jdb-container--narrow jdb-center">
+  <Hero variant="intro" containerWidth="narrow">
+    <div class="jdb-center">
       <span class="jdb-eyebrow">404</span>
       <h1>Page not found</h1>
       <p class="jdb-hero__lede">Sorry, the page you requested could not be found.</p>
       <a href="/" class="jdb-btn jdb-btn--primary jdb-btn--lg">Return home</a>
     </div>
-  </section>
-
-  <Footer slot="footer" />
+  </Hero>
 </BaseLayout>

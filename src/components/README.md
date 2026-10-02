@@ -88,9 +88,10 @@ Notes:
 - Shared across pages.
 
 ### Hero
-Purpose: Reusable hero section with two variants.
+Purpose: Reusable hero section with intro, full-width, and split variants.
 Location: `src/components/Hero.astro`
 Notes:
+- Supports an intro variant for compact page headings, with `containerWidth="narrow"` or `containerWidth="wide"`.
 - Supports a full-width variant with optional `backgroundImage`.
 - Supports a split hero variant with text on the left and an image on the right via `variant="split"` and `imageSrc`.
 - Use `jdb-hero__lede` and `jdb-hero__actions` within the default slot for consistent content styling.

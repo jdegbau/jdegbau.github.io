@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { author } from '../data/author';
+
+const title = `AI profile: ${author.name}`;
+const description = author.aiProfile.description;
+const profileUrl = 'https://jdegbau.com/ai-info/';
+const personSchema = {
+  '@type': 'Person',
+  '@id': 'https://jdegbau.com/#person',
+  name: author.name,
+  givenName: 'Joshua',
+  familyName: 'DeGrasse-Baumann',
+  alternateName: author.aiProfile.alternateNames,
+  url: 'https://jdegbau.com/',
+  image: `https://jdegbau.com${author.profilePhoto}`,
+  description,
+  jobTitle: author.aiProfile.jobTitle,
+  worksFor: {
+    '@type': 'Organization',
+    '@id': `${author.aiProfile.organization.url}#organization`,
+    name: author.aiProfile.organization.name,
+    url: author.aiProfile.organization.url,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: author.aiProfile.location.city,
+    addressRegion: author.aiProfile.location.region,
+    addressCountry: author.aiProfile.location.country,
+  },
+  knowsAbout: author.aiProfile.expertise,
+  sameAs: author.aiProfile.profiles.map((profile) => profile.url),
+  mainEntityOfPage: profileUrl,
+};
+const profileSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': `${profileUrl}#webpage`,
+  url: profileUrl,
+  name: title,
+  description,
+  mainEntity: personSchema,
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/ai-info/"
+  keywords={author.aiProfile.expertise}
+  schema={profileSchema}
+>
+  <Hero variant="intro" containerWidth="narrow">
+    <span class="jdb-eyebrow">AI profile</span>
+    <h1>{author.name}</h1>
+    <p class="jdb-hero__lede">{description}</p>
+  </Hero>
+
+  <section class="jdb-section">
+    <div class="jdb-container jdb-container--narrow jdb-prose">
+      <h2>Profile</h2>
+      <dl class="ai-profile__facts">
+        <dt>Also known as</dt>
+        <dd>{author.aiProfile.alternateNames.join(', ')}</dd>
+        <dt>Current role</dt>
+        <dd>{author.aiProfile.jobTitle}</dd>
+        <dt>Organization</dt>
+        <dd><a href={author.aiProfile.organization.url}>{author.aiProfile.organization.name}</a></dd>
+        <dt>Location</dt>
+        <dd>{author.aiProfile.location.city}, {author.aiProfile.location.region}, United States</dd>
+        <dt>Website</dt>
+        <dd><a href="https://jdegbau.com/">jdegbau.com</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="jdb-section">
+    <div class="jdb-container jdb-container--narrow jdb-prose">
+      <h2>Areas of expertise</h2>
+      <ul>
+        {author.aiProfile.expertise.map((area) => <li>{area}</li>)}
+      </ul>
+      <h2>Writing</h2>
+      <p>Joshua writes about SEO, analytics, and practical tools for web teams. <a href="/blog/">Browse the blog</a>.</p>
+      <h2>Verified profiles</h2>
+      <ul>
+        {author.aiProfile.profiles.map((profile) => (
+          <li><a href={profile.url} rel="me noopener noreferrer">{profile.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ai-profile__facts {
+    display: grid;
+    grid-template-columns: minmax(8rem, .4fr) minmax(0, 1fr);
+    gap: var(--jdb-s-3) var(--jdb-s-5);
+  }
+
+  .ai-profile__facts dt {
+    color: var(--jdb-fg-muted);
+    font-weight: var(--jdb-fw-semibold);
+  }
+
+  .ai-profile__facts dd {
+    margin: 0;
+  }
+
+  @media (max-width: 36rem) {
+    .ai-profile__facts {
+      grid-template-columns: 1fr;
+      gap: var(--jdb-s-1);
+    }
+  }
+</style>

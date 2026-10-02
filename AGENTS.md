@@ -2,6 +2,8 @@
 
 This repository uses Astro components in `src/components` as the shared UI building blocks for pages and blog posts.
 
+`src/layouts/BaseLayout.astro` owns the shared site navigation, search, footer, and SEO shell. Pages should use `BaseLayout` and should not recreate or pass these shared elements unless a page has an explicit, documented variation.
+
 ## First check
 Before creating a new reusable UI component, read and follow the guidance in:
 - `src/components/README.md`
@@ -20,6 +22,7 @@ Before creating a new reusable UI component, read and follow the guidance in:
 - Keep page-specific logic in pages or layouts when possible.
 - Use the existing site design tokens (`--jdb-*`) and layout classes from the current codebase.
 - Favor clear, explicit prop names over hardcoded assumptions.
+- Before building page UI, check the component catalog and reuse a component when its purpose and visual contract fit; do not force a component onto a genuinely page-specific layout.
 
 ## When to create a new component
 Create a new component only when:

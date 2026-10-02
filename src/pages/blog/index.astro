@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navigation from '../../components/Navigation.astro';
-import Search from '../../components/Search.astro';
-import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { getAllPosts } from '../../lib/posts';
 
@@ -16,19 +14,11 @@ const description = 'Check out interesting insights, tips, and guides related to
   canonical="/blog/"
   image="/assets/img/default-blog-hero.gif"
 >
-  <nav slot="nav">
-    <Navigation>
-      <Search />
-    </Navigation>
-  </nav>
-
-  <section class="jdb-hero jdb-hero--intro">
-    <div class="jdb-container jdb-container--wide">
-      <span class="jdb-eyebrow">blog</span>
-      <h1>{seoTitle}</h1>
-      <p class="jdb-hero__lede">{description}</p>
-    </div>
-  </section>
+  <Hero variant="intro" containerWidth="wide">
+    <span class="jdb-eyebrow">blog</span>
+    <h1>{seoTitle}</h1>
+    <p class="jdb-hero__lede">{description}</p>
+  </Hero>
 
   <section class="jdb-section">
     <div class="jdb-container">
@@ -40,5 +30,4 @@ const description = 'Check out interesting insights, tips, and guides related to
     </div>
   </section>
 
-  <Footer slot="footer" />
 </BaseLayout>

@@ -1,5 +1,8 @@
 ---
 import SEO from '../components/SEO.astro';
+import Navigation from '../components/Navigation.astro';
+import Search from '../components/Search.astro';
+import Footer from '../components/Footer.astro';
 const {
   title,
   description,
@@ -105,11 +108,17 @@ const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NM6JBXF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#main-content" class="skip-nav-link">Skip to main content</a>
-    <slot name="nav" />
+    <slot name="nav">
+      <Navigation>
+        <Search />
+      </Navigation>
+    </slot>
     <main id="main-content" role="main">
       <slot />
     </main>
-    <slot name="footer" />
+    <slot name="footer">
+      <Footer />
+    </slot>
     <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
     <script src="/assets/js/mobile-nav.min.js" defer></script>
     <script src="/assets/js/copy-code-block.min.js" defer></script>
