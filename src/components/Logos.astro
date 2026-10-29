@@ -10,6 +10,9 @@
       <div class="jdb-logo-item" role="listitem">
         <img src="/assets/img/logos/trk-logo.png" alt="TRK Creative" loading="lazy" decoding="async" />
       </div>
+      <div class="jdb-logo-item jdb-logo-item--ellsworth" role="listitem">
+        <img src="/assets/img/logos/ellsworth-adhesives-logo-ribbon.png" alt="Ellsworth Adhesives" loading="lazy" decoding="async" />
+      </div>
     </div>
   </div>
 </section>
@@ -17,7 +20,7 @@
 <style>
   .jdb-logo-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: clamp(var(--jdb-s-3), 4vw, var(--jdb-s-8));
     align-items: center;
   }
@@ -39,4 +42,8 @@
   }
 
   .jdb-logo-item img:hover { opacity: 1; }
+
+  .jdb-logo-item--ellsworth img {
+    filter: none;
+  }
 </style>
