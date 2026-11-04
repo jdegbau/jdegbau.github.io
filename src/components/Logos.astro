@@ -21,29 +21,44 @@
   .jdb-logo-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(var(--jdb-s-3), 4vw, var(--jdb-s-8));
-    align-items: center;
+    gap: clamp(var(--jdb-s-3), 2vw, var(--jdb-s-5));
+    align-items: stretch;
   }
 
   .jdb-logo-item {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: clamp(4.5rem, 8vw, 5.5rem);
+    padding: clamp(var(--jdb-s-3), 2vw, var(--jdb-s-4));
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   .jdb-logo-item img {
     width: 100%;
-    max-width: 14rem;
-    height: 3rem;
+    max-width: 12.5rem;
+    height: 2.5rem;
     object-fit: contain;
-    filter: grayscale(1) brightness(0) invert(1);
-    opacity: 0.72;
-    transition: opacity var(--jdb-t-fast);
+    filter: none;
+    opacity: 1;
+    transition: transform var(--jdb-t-fast), opacity var(--jdb-t-fast);
   }
 
-  .jdb-logo-item img:hover { opacity: 1; }
+  .jdb-logo-item:hover img {
+    transform: translateY(-1px);
+  }
 
   .jdb-logo-item--ellsworth img {
-    filter: none;
+    max-width: 13.5rem;
+    height: 3rem;
+  }
+
+  @media (max-width: 48rem) {
+    .jdb-logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 </style>

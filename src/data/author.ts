@@ -6,11 +6,11 @@ export const author = {
   bio: 'I write about SEO, analytics, and practical tools to make web teams more effective.',
   aiProfile: {
     alternateNames: ['Josh', 'jdegbau'],
-    description: 'Joshua DeGrasse-Baumann is a Lead SEO Strategist at Fire&Spark. His work focuses on search strategy, technical SEO, digital analytics, marketing measurement, and web development.',
-    jobTitle: 'Lead SEO Strategist',
+    description: 'Joshua DeGrasse-Baumann is a Content Marketing Strategist at Ellsworth Adhesives. His work focuses on SEO, analytics, content strategy, and the systems that connect marketing performance to business outcomes.',
+    jobTitle: 'Content Marketing Strategist',
     organization: {
-      name: 'Fire&Spark',
-      url: 'https://www.fireandspark.com/',
+      name: 'Ellsworth Adhesives',
+      url: 'https://www.ellsworth.com/',
     },
     location: {
       city: 'Milwaukee',
