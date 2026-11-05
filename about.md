@@ -135,8 +135,8 @@ permalink: /about-josh/
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-5">Previously</p>
-              <p class="subtitle is-6 has-text-grey-dark"><strong>Rocket Clicks</strong></p>
+              <p class="title is-5">SEO Manager &amp; Analytics Specialist</p>
+              <p class="subtitle is-6 has-text-grey-dark"><strong>Rocket Clicks</strong> | Previous Role</p>
             </div>
           </div>
           <div class="content">
