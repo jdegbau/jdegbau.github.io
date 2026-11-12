@@ -1,0 +1,32 @@
+name: Build and check
+
+# Runs on every pull request (and on pushes to main) so a broken build,
+# a broken internal link or a missing title/description is caught before
+# it reaches the live site. Deployment itself still happens on Cloudflare.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Check links and HTML
+        run: npm run check

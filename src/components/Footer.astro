@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 const currentYear = new Date().getFullYear();
 ---
 <footer class="jdb-footer">
@@ -13,22 +14,22 @@ const currentYear = new Date().getFullYear();
         </p>
         <div class="jdb-footer__social">
           <a href="https://www.linkedin.com/in/jdegbau/" aria-label="Follow me on LinkedIn">
-            <i class="fa-brands fa-linkedin-in"></i>
+            <Icon name="linkedin-in" />
           </a>
           <a href="https://github.com/jdegbau" aria-label="Follow me on GitHub">
-            <i class="fa-brands fa-github"></i>
+            <Icon name="github" />
           </a>
           <a href="https://www.instagram.com/jdegbau/" aria-label="Follow me on Instagram">
-            <i class="fa-brands fa-instagram"></i>
+            <Icon name="instagram" />
           </a>
           <a href="https://www.threads.net/@jdegbau" aria-label="Follow me on Threads">
-            <i class="fa-brands fa-threads"></i>
+            <Icon name="threads" />
           </a>
           <a href="https://bsky.app/profile/jdegbau.com" aria-label="Follow me on Bluesky">
-            <i class="fa-brands fa-bluesky"></i>
+            <Icon name="bluesky" />
           </a>
           <a href="https://x.com/jdegbau" aria-label="Follow me on X">
-            <i class="fa-brands fa-x-twitter"></i>
+            <Icon name="x-twitter" />
           </a>
         </div>
       </div>

@@ -11,17 +11,13 @@ const {
   imageAlt,
   noindex,
   date,
+  modified,
   seoTitle,
   type,
   authorName,
   keywords,
   schema,
 } = Astro.props;
-const siteUrl = 'https://jdegbau.com';
-const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
-const pageDescription = description ?? 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
-const pageImage = image ?? '/assets/img/default-blog-hero.gif';
-const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
 ---
 <!DOCTYPE html>
 <html lang="en" class="has-navbar-fixed-top">
@@ -30,7 +26,7 @@ const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <style>
-      /* Critical CSS to prevent FOUC */
+      /* Critical CSS: keeps the first paint on-brand while main.css loads. */
       .skip-nav-link {
         position: fixed;
         top: 0;
@@ -72,7 +68,7 @@ const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
       html, body {
         background: #0a1526;
         color: #e8ecf4;
-        font-family: "Nunito", sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-size: 16px;
         line-height: 1.5;
         margin: 0;
@@ -82,13 +78,10 @@ const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
         padding-top: 64px;
       }
     </style>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link  rel="preload" href="/assets/fonts/JetBrains_Mono.woff2"  as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" href="/assets/css/copy-code-block.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/assets/css/main.css" /></noscript>
-    <noscript><link rel="stylesheet" href="/assets/css/copy-code-block.css" /></noscript>
+    <link rel="preload" href="/assets/fonts/Inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/JetBrains_Mono.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/copy-code-block.css" />
     <SEO
       title={title}
       description={description}
@@ -97,6 +90,7 @@ const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
       imageAlt={imageAlt}
       noindex={noindex}
       date={date}
+      modified={modified}
       seoTitle={seoTitle}
       type={type}
       authorName={authorName}
@@ -119,12 +113,11 @@ const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
     <slot name="footer">
       <Footer />
     </slot>
-    <script src="https://kit.fontawesome.com/13ccd4d90b.js" crossorigin="anonymous" defer></script>
     <script src="/assets/js/mobile-nav.min.js" defer></script>
     <script src="/assets/js/copy-code-block.min.js" defer></script>
     <script src="/assets/js/copy-code-block-inline.js" defer></script>
     <script src="/assets/js/progress-bar.min.js" defer></script>
-    <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw" defer></script>
+    <script src="https://instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw" defer></script>
     <script>
       (() => {
         try {

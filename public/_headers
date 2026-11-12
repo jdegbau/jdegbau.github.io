@@ -1,3 +1,18 @@
+# Security headers for every response.
+# The CSP is intentionally limited to directives that can't break Google Tag
+# Manager or other tags it loads: it blocks plugins (<object>/<embed>), stops
+# <base> tag hijacking, prevents other sites from framing this one
+# (clickjacking), only lets forms post to known endpoints, and upgrades any
+# stray http:// subresource to https://. It does not restrict scripts, because
+# GTM injects scripts from many origins. If you add a form that posts to a
+# new service, add that origin to form-action.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://formcarry.com https://sendfox.com; upgrade-insecure-requests
+
 # The 404 template is also reachable directly at /404 (served with a 200),
 # so keep it out of search indexes at the header level too.
 /404

@@ -96,6 +96,14 @@ Notes:
 - Supports a split hero variant with text on the left and an image on the right via `variant="split"` and `imageSrc`.
 - Use `jdb-hero__lede` and `jdb-hero__actions` within the default slot for consistent content styling.
 
+### Icon
+Purpose: Inline SVG icons (social brands, calendar, clock, envelope) without a third-party icon script.
+Location: `src/components/Icon.astro`
+Notes:
+- `<Icon name="github" />` renders a 1em-tall icon in `currentColor`, so it inherits text size and color.
+- Decorative by default (`aria-hidden`). Pass `label` when the icon is the only content of a link or button and the parent has no `aria-label`.
+- Available names: `linkedin-in`, `linkedin`, `github`, `instagram`, `threads`, `bluesky`, `x-twitter`, `calendar-days`, `clock`, `envelope`. To add one, copy its path data and viewBox from Font Awesome Free (`@fortawesome/free-*-svg-icons`) into the map in the component.
+
 ### Image
 Purpose: Shared image wrapper with consistent loading attributes.
 Location: `src/components/Image.astro`
@@ -119,6 +127,7 @@ Purpose: Metadata display for posts.
 Location: `src/components/PostMeta.astro`
 Notes:
 - Intended for article metadata sections.
+- Props: `date`, `readingTime`, `url`, `title`, and optional `updated` (a formatted date shown as "Updated …" when the post was revised).
 
 ### SEO
 Purpose: Shared SEO metadata component.

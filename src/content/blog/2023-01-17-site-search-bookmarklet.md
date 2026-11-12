@@ -1,9 +1,7 @@
 ---
 title: Quick Google Site Search Bookmarklet
-SEO_title: Free Google Site Search Bookmarklet - Joshua DeGrasse-Baumann
+seo_title: Free Google Site Search Bookmarklet - Joshua DeGrasse-Baumann
 excerpt: Copy my free site search bookmarklet to make site searching a little less painful.
-redirect_from: 
-featured_image: 
 slug: /site-search-bookmarklet/
 ---
 

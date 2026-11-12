@@ -4,7 +4,7 @@ import Hero from '../../components/Hero.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { getAllPosts } from '../../lib/posts';
 
-const posts = getAllPosts();
+const posts = await getAllPosts();
 const seoTitle = "Josh's Blog";
 const description = 'Check out interesting insights, tips, and guides related to SEO, data analytics, and automation written by Joshua DeGrasse-Baumann.';
 ---
@@ -12,7 +12,6 @@ const description = 'Check out interesting insights, tips, and guides related to
   seoTitle={seoTitle}
   description={description}
   canonical="/blog/"
-  image="/assets/img/default-blog-hero.gif"
 >
   <Hero variant="intro" containerWidth="wide">
     <span class="jdb-eyebrow">blog</span>

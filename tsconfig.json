@@ -8,6 +8,7 @@
   },
   "include": [
     "src/**/*",
+    ".astro/types.d.ts",
     "astro.config.mjs",
     "./worker-configuration.d.ts"
   ]

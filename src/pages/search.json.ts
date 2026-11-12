@@ -3,7 +3,7 @@ import { getAllPosts } from '../lib/posts';
 export const prerender = true;
 
 export async function GET() {
-  const posts = getAllPosts().map((post) => ({
+  const posts = (await getAllPosts()).map((post) => ({
     title: post.title,
     excerpt: post.excerpt ?? '',
     permalink: post.url,

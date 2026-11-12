@@ -9,12 +9,13 @@ import FAQAccordion from '../../components/FAQAccordion.astro';
 import PostMeta from '../../components/PostMeta.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import QuickCompareMatrix from '../../components/QuickCompareMatrix.astro';
-import { getAllPosts, getPostBySlug } from '../../lib/posts';
+import { render } from 'astro:content';
+import { getAllPosts, getHeadings, getPostBySlug } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  return getAllPosts().flatMap((post) => {
+  return (await getAllPosts()).flatMap((post) => {
     const paths = [{ params: { slug: post.slug } }];
-    if (post.legacySlug && post.legacySlug !== post.slug) {
+    if (post.legacySlug !== post.slug) {
       paths.push({ params: { slug: post.legacySlug } });
     }
     return paths;
@@ -22,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const post = getPostBySlug(slug);
+const post = await getPostBySlug(slug);
 
 if (!post) {
   throw new Error(`Blog post not found: ${slug}`);
@@ -32,11 +33,17 @@ if (slug !== post.slug) {
   return Astro.redirect(post.url, 301);
 }
 
+const { Content } = await render(post.entry);
+const headings = getHeadings(post);
 const seoTitle = post.seoTitle ?? post.title;
 const description = post.excerpt;
-const image = post.featuredImage;
 const canonical = post.url;
-const keywords = post.keywords?.length ? post.keywords : post.tags;
+const keywords = post.keywords.length ? post.keywords : post.tags;
+const siteUrl = 'https://jdegbau.com';
+const pageUrl = `${siteUrl}${canonical}`;
+const wasUpdated = post.updated !== post.date;
+const formatDate = (value: string, month: 'short' | 'long') =>
+  new Date(`${value}T12:00:00Z`).toLocaleDateString('en-US', { month, day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
 const faqItems = [
   {
@@ -85,13 +92,50 @@ const faqItems = [
       '<p>A "Franken-chart" is a visualization that tries to cram too many unrelated messages into a single graphic, often using dual axes that confuse the reader. To maintain clarity, follow the "One Chart, One Message" rule. If you need to show both a long-term trend and a granular category breakdown, it is better to use two separate, simple visualizations than one overly complex one.</p>',
   },
 ];
+
+// The data-viz guide gets interactive extras (its FAQPage schema lives in the post's markdown).
+const isDataVizGuide = post.slug === 'seo-data-visualization-guide';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BlogPosting',
+      '@id': `${pageUrl}#article`,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+      url: pageUrl,
+      headline: post.title,
+      description,
+      inLanguage: 'en',
+      image: `${siteUrl}${post.ogImage}`,
+      datePublished: post.date,
+      dateModified: post.updated,
+      wordCount: post.entry.body?.trim().split(/\s+/).length,
+      keywords: keywords.length ? keywords.join(', ') : undefined,
+      author: { '@type': 'Person', '@id': `${siteUrl}/#person`, name: 'Joshua DeGrasse-Baumann', url: `${siteUrl}/about/` },
+      publisher: { '@type': 'Person', '@id': `${siteUrl}/#person`, name: 'Joshua DeGrasse-Baumann' },
+      isPartOf: { '@type': 'Blog', '@id': `${siteUrl}/blog/#blog`, name: 'jdegbau blog', url: `${siteUrl}/blog/` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: pageUrl },
+      ],
+    },
+  ],
+};
 ---
 <BaseLayout
   seoTitle={seoTitle}
   description={description}
-  image={image}
-  imageAlt={`Featured image for ${post.title}`}
+  image={post.ogImage}
+  imageAlt={post.title}
   date={post.date}
+  modified={post.updated}
+  schema={schema}
   canonical={canonical}
   keywords={keywords}
   type="article"
@@ -101,14 +145,14 @@ const faqItems = [
     <Hero
       variant="full"
       class="jdb-hero--blog"
-      backgroundImage={post.featuredImage ?? '/assets/img/default-blog-hero.gif'}
+      backgroundImage={post.featuredImage}
     >
       <span class="jdb-hero__eyebrow">article</span>
       <h1>{post.title}</h1>
       <div class="jdb-postheader__meta">
         <span class="jdb-postheader__metaitem">
           <span class="jdb-icon jdb-icon--check" aria-hidden="true"></span>
-          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          <time datetime={post.date}>{formatDate(post.date, 'short')}</time>
         </span>
         <span class="jdb-postheader__metaitem">
           <span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span>
@@ -118,7 +162,8 @@ const faqItems = [
     </Hero>
 
     <PostMeta
-      date={new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+      date={formatDate(post.date, 'long')}
+      updated={wasUpdated ? formatDate(post.updated, 'long') : undefined}
       readingTime={post.readingTime ? `${post.readingTime} min read` : 'Read now'}
       url={`https://jdegbau.com${canonical}`}
       title={post.title}
@@ -128,14 +173,14 @@ const faqItems = [
       <div class="jdb-container jdb-container--wide">
         <div class="jdb-blog-layout">
           <aside class="jdb-blog-layout__toc">
-            <TableOfContents items={post.headings ?? []} />
+            <TableOfContents items={headings} />
           </aside>
 
           <div class="jdb-prose jdb-blog-layout__content">
-            {slug === 'seo-data-visualization-guide' && <ChartPickerQuiz />}
-            {slug === 'seo-data-visualization-guide' && <QuickCompareMatrix />}
-            <post.component />
-            {slug === 'seo-data-visualization-guide' && (
+            {isDataVizGuide && <ChartPickerQuiz />}
+            {isDataVizGuide && <QuickCompareMatrix />}
+            <Content />
+            {isDataVizGuide && (
               <>
                 <DataStoryBestPractices />
                 <FAQAccordion items={faqItems} />
