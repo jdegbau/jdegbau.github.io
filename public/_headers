@@ -1,0 +1,6 @@
+# The 404 template is also reachable directly at /404 (served with a 200),
+# so keep it out of search indexes at the header level too.
+/404
+  X-Robots-Tag: noindex
+/404.html
+  X-Robots-Tag: noindex
