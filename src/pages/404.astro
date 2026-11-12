@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 const seoTitle = 'Page Not Found';
 const description = 'The page you are looking for cannot be found.';
 ---
-<BaseLayout seoTitle={seoTitle} description={description}>
+<BaseLayout seoTitle={seoTitle} description={description} noindex={true}>
   <Hero variant="intro" containerWidth="narrow">
     <div class="jdb-center">
       <span class="jdb-eyebrow">404</span>

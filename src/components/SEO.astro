@@ -62,7 +62,9 @@ const defaultSchema = {
       }
     : {}),
 };
-const jsonLd = schema ?? defaultSchema;
+// noindex pages (e.g. 404) shouldn't advertise a canonical URL or default
+// WebPage schema: the 404 template is served at every unmatched URL.
+const jsonLd = schema ?? (noindex ? null : defaultSchema);
 ---
 <title>{pageTitle}</title>
 <meta name="description" content={pageDescription} />
@@ -70,10 +72,10 @@ const jsonLd = schema ?? defaultSchema;
 {pageKeywords ? <meta name="keywords" content={pageKeywords} /> : null}
 <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
 <link rel="icon" href="/assets/img/favicon.gif" type="image/gif" />
-<link rel="canonical" href={pageUrl} />
+{noindex ? null : <link rel="canonical" href={pageUrl} />}
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={pageDescription} />
-<meta property="og:url" content={pageUrl} />
+{noindex ? null : <meta property="og:url" content={pageUrl} />}
 <meta property="og:image" content={pageImageUrl} />
 <meta property="og:image:alt" content={pageImageAlt} />
 <meta property="og:type" content={pageType === 'article' ? 'article' : 'website'} />
@@ -87,4 +89,4 @@ const jsonLd = schema ?? defaultSchema;
 <meta name="twitter:image" content={pageImageUrl} />
 <meta name="twitter:image:alt" content={pageImageAlt} />
 {date ? <meta property="article:published_time" content={new Date(date).toISOString()} /> : null}
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+{jsonLd ? <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} /> : null}

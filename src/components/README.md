@@ -125,6 +125,7 @@ Purpose: Shared SEO metadata component.
 Location: `src/components/SEO.astro`
 Notes:
 - Used in layout wrappers for page metadata.
+- `noindex` adds `<meta name="robots" content="noindex">` and omits the canonical link, `og:url`, and default JSON-LD schema (a custom `schema` prop is still emitted).
 
 ### Search
 Purpose: Site-wide search trigger and modal panel.
