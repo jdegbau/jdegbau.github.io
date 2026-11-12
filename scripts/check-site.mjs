@@ -8,7 +8,9 @@
  * - a same-page #anchor link with no matching id,
  * - a page with no <title>, or an indexable page with no meta description,
  * - an <img> without an alt attribute,
- * - a JSON-LD block that isn't valid JSON.
+ * - a JSON-LD block that isn't valid JSON,
+ * - a malformed or duplicate rule in public/_redirects (Cloudflare rejects
+ *   the whole deploy when any line is invalid).
  *
  * Run after `npm run build`:  npm run check
  */
@@ -20,6 +22,29 @@ if (!existsSync(root)) {
   console.error('dist/client not found. Run `npm run build` first.');
   process.exit(1);
 }
+
+const problems = [];
+
+// Cloudflare's rule format: `source destination [status]`, one per line.
+const validStatuses = new Set(['200', '301', '302', '303', '307', '308']);
+const seenSources = new Map();
+readFileSync('public/_redirects', 'utf8')
+  .split('\n')
+  .forEach((raw, index) => {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) return;
+    const where = `public/_redirects line ${index + 1}`;
+    const tokens = line.split(/\s+/);
+    if (tokens.length < 2 || tokens.length > 3) {
+      problems.push(`${where}: expected "source destination [status]", got ${tokens.length} parts: ${line}`);
+      return;
+    }
+    const [source, , status] = tokens;
+    if (!source.startsWith('/')) problems.push(`${where}: source must start with "/": ${source}`);
+    if (status && !validStatuses.has(status)) problems.push(`${where}: unsupported status "${status}"`);
+    if (seenSources.has(source)) problems.push(`${where}: duplicate source ${source} (first on line ${seenSources.get(source)})`);
+    else seenSources.set(source, index + 1);
+  });
 
 const redirectSources = new Set(
   readFileSync('public/_redirects', 'utf8')
@@ -47,7 +72,6 @@ function targetExists(urlPath) {
   );
 }
 
-const problems = [];
 const htmlFiles = walk(root).filter((file) => file.endsWith('.html'));
 
 for (const file of htmlFiles) {
