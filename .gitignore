@@ -28,3 +28,4 @@ _posts/.obsidian/plugins/templater-obsidian/styles.css
 !.dev.vars.example
 .env*
 !.env.example
+public/assets/img/og/

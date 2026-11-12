@@ -16,7 +16,7 @@ function escapeXml(value: string) {
 }
 
 export async function GET() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const updated = posts.length ? new Date(posts[0].date).toUTCString() : new Date().toUTCString();
 
   const items = posts.map((post) => `

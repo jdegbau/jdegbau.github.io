@@ -1,8 +1,7 @@
 ---
 title: Redirecting Contact Form 7 Forms
-SEO_title: (Solved) Redirecting Contact Form 7 Forms - Joshua DeGrasse-Baumann
+seo_title: (Solved) Redirecting Contact Form 7 Forms - Joshua DeGrasse-Baumann
 excerpt: Contact Form 7 has deprecated support for its built-in redirection solution. Learn how to recreate it with JavaScript and PHP.
-redirect_from: /contact-form-7-thank-you-page-redirects/
 slug: /contact-form-7-redirects/
 ---
 

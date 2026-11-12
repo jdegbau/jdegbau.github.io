@@ -4,12 +4,14 @@ import remarkGfm from 'remark-gfm';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeCopyableCode from './src/lib/rehype-copyable-code.mjs';
 import rehypeHeadingIds from './src/lib/rehype-heading-ids.mjs';
+import ogCards from './src/lib/og-cards.mjs';
 
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     site: 'https://jdegbau.com',
     session: false,
+    integrations: [ogCards()],
 
     markdown: {
         syntaxHighlight: 'shiki',

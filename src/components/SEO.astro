@@ -7,6 +7,7 @@ const {
   imageAlt,
   noindex,
   date,
+  modified,
   seoTitle,
   type,
   authorName,
@@ -17,7 +18,7 @@ const siteUrl = 'https://jdegbau.com';
 const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
 const pageDescription = description ?? 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
 const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
-const pageImage = image ?? '/assets/img/default-blog-hero.gif';
+const pageImage = image ?? '/assets/img/og/default.png';
 const pageImageUrl = pageImage.startsWith('http')
   ? pageImage
   : `${siteUrl}${pageImage.startsWith('/') ? '' : '/'}${pageImage}`;
@@ -58,7 +59,7 @@ const defaultSchema = {
   ...(date && pageType === 'article'
     ? {
         datePublished: new Date(date).toISOString(),
-        dateModified: new Date(date).toISOString(),
+        dateModified: new Date(modified ?? date).toISOString(),
       }
     : {}),
 };
@@ -89,4 +90,5 @@ const jsonLd = schema ?? (noindex ? null : defaultSchema);
 <meta name="twitter:image" content={pageImageUrl} />
 <meta name="twitter:image:alt" content={pageImageAlt} />
 {date ? <meta property="article:published_time" content={new Date(date).toISOString()} /> : null}
+{date && modified && modified !== date ? <meta property="article:modified_time" content={new Date(modified).toISOString()} /> : null}
 {jsonLd ? <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} /> : null}

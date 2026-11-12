@@ -5,7 +5,7 @@ import Logos from '../components/Logos.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { getAllPosts } from '../lib/posts';
 
-const posts = getAllPosts().slice(0, 3);
+const posts = (await getAllPosts()).slice(0, 3);
 const seoTitle = "About Joshua DeGrasse-Baumann";
 const description = 'About Joshua DeGrasse-Baumann, including his work in SEO, analytics, and development.';
 ---

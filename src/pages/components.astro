@@ -11,16 +11,11 @@ import Image from '../components/Image.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import QuickCompareMatrix from '../components/QuickCompareMatrix.astro';
 import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import { getAllPosts } from '../lib/posts';
 
-const samplePost = {
-  title: 'SEO Data Visualization Guide',
-  excerpt: 'A practical guide to choosing the right chart type for SEO reporting and storytelling.',
-  date: '2025-12-23',
-  url: '/blog/seo-data-visualization-guide/',
-  featuredImage: '/assets/img/seo-data-viz.png',
-  tags: ['SEO', 'Data Visualization'],
-  readingTime: 6,
-};
+// Use a real post so the BlogCard example always reflects live data.
+const [samplePost] = await getAllPosts();
 
 const sampleFaqs = [
   {
@@ -41,11 +36,10 @@ const sampleFaqs = [
 ];
 
 const sampleTocItems = [
-  { id: 'overview', text: 'Overview', level: 2 },
-  { id: 'what-to-measure', text: 'What to measure', level: 2 },
-  { id: 'sample-workflows', text: 'Sample workflows', level: 2 },
-  { id: 'tools-and-templates', text: 'Tools and templates', level: 3 },
-  { id: 'next-steps', text: 'Next steps', level: 2 },
+  { id: 'component-blogcard', text: 'BlogCard', level: 2 },
+  { id: 'component-hero', text: 'Hero', level: 2 },
+  { id: 'component-contactform', text: 'ContactForm', level: 2 },
+  { id: 'component-tableofcontents', text: 'TableOfContents', level: 2 },
 ];
 
 const sampleMatrixRows = [
@@ -58,7 +52,6 @@ const sampleMatrixRows = [
   title="Components"
   description="Reusable component examples used across the site."
   canonical="/components/"
-  image="/assets/img/default-blog-hero.gif"
   noindex={true}
 >
   <article>
@@ -78,7 +71,7 @@ const sampleMatrixRows = [
           <div class="component-card">
             <div class="component-card__head">
               <span class="jdb-eyebrow">component</span>
-              <h2>BlogCard</h2>
+              <h2 id="component-blogcard">BlogCard</h2>
             </div>
             <BlogCard post={samplePost} />
           </div>
@@ -100,7 +93,7 @@ const sampleMatrixRows = [
           <div class="component-card component-card--full">
             <div class="component-card__head">
               <span class="jdb-eyebrow">component</span>
-              <h2>Hero</h2>
+              <h2 id="component-hero">Hero</h2>
             </div>
             <Hero variant="full" backgroundImage="/assets/img/default-blog-hero.gif">
               <span class="jdb-hero__eyebrow">component</span>
@@ -151,7 +144,7 @@ const sampleMatrixRows = [
         <div class="component-card component-card--full">
           <div class="component-card__head">
             <span class="jdb-eyebrow">component</span>
-            <h2>ContactForm</h2>
+            <h2 id="component-contactform">ContactForm</h2>
           </div>
           <ContactForm demo />
         </div>
@@ -211,7 +204,7 @@ const sampleMatrixRows = [
         <div class="component-card component-card--full">
           <div class="component-card__head">
             <span class="jdb-eyebrow">component</span>
-            <h2>TableOfContents</h2>
+            <h2 id="component-tableofcontents">TableOfContents</h2>
           </div>
           <TableOfContents items={sampleTocItems} />
         </div>
@@ -226,6 +219,28 @@ const sampleMatrixRows = [
             <h2>QuickCompareMatrix</h2>
           </div>
           <QuickCompareMatrix rows={sampleMatrixRows} />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2>Icon</h2>
+          </div>
+          <p class="icon-demo">
+            <Icon name="linkedin-in" label="LinkedIn" />
+            <Icon name="github" label="GitHub" />
+            <Icon name="instagram" label="Instagram" />
+            <Icon name="threads" label="Threads" />
+            <Icon name="bluesky" label="Bluesky" />
+            <Icon name="x-twitter" label="X" />
+            <Icon name="calendar-days" label="Calendar" />
+            <Icon name="clock" label="Clock" />
+            <Icon name="envelope" label="Email" />
+          </p>
         </div>
       </div>
     </section>
@@ -253,6 +268,15 @@ const sampleMatrixRows = [
 </BaseLayout>
 
 <style>
+  .icon-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-4);
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--jdb-orange-400);
+  }
+
   .component-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

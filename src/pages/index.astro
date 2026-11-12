@@ -3,10 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Logos from '../components/Logos.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { getAllPosts } from '../lib/posts';
+import { author } from '../data/author';
 
 const seoTitle = 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
 const description = 'Joshua DeGrasse-Baumann is an SEO consultant and data enthusiast. Learn more about Josh and how he can help your business.';
-const posts = getAllPosts();
+const posts = await getAllPosts();
 const featuredPosts = posts.slice(0, 3);
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -14,20 +15,22 @@ const pageSchema = {
     {
       '@type': 'Person',
       '@id': 'https://jdegbau.com/#person',
-      name: 'Joshua DeGrasse-Baumann',
+      name: author.name,
       givenName: 'Joshua',
       familyName: 'DeGrasse-Baumann',
-      alternateName: ['Josh', 'jdegbau'],
+      alternateName: author.aiProfile.alternateNames,
       url: 'https://jdegbau.com/',
-      image: 'https://jdegbau.com/assets/img/joshua-degrasse-baumann.JPG',
-      description: 'SEO strategist and data enthusiast specializing in Google Analytics, Google Tag Manager, marketing measurement, and SEO strategy.',
-      jobTitle: 'Content Marketing Strategist',
+      image: `https://jdegbau.com${author.profilePhoto}`,
+      description: author.aiProfile.description,
+      jobTitle: author.aiProfile.jobTitle,
       worksFor: {
         '@type': 'Organization',
-        '@id': 'https://www.ellsworth.com/#organization',
-        name: 'Ellsworth Adhesives',
-        url: 'https://www.ellsworth.com/',
+        '@id': `${author.aiProfile.organization.url}#organization`,
+        name: author.aiProfile.organization.name,
+        url: author.aiProfile.organization.url,
       },
+      knowsAbout: author.aiProfile.expertise,
+      sameAs: author.aiProfile.profiles.map((profile) => profile.url),
     },
     {
       '@type': 'WebSite',
@@ -38,10 +41,20 @@ const pageSchema = {
       inLanguage: 'en',
       publisher: { '@id': 'https://jdegbau.com/#person' },
     },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://jdegbau.com/#webpage',
+      url: 'https://jdegbau.com/',
+      name: seoTitle,
+      description,
+      inLanguage: 'en',
+      isPartOf: { '@id': 'https://jdegbau.com/#website' },
+      about: { '@id': 'https://jdegbau.com/#person' },
+    },
   ],
 };
 ---
-<BaseLayout seoTitle={seoTitle} description={description}>
+<BaseLayout seoTitle={seoTitle} description={description} schema={pageSchema}>
   <section class="jdb-hero jdb-hero--home">
     <div class="jdb-container">
       <div class="jdb-hero__inner">
@@ -125,9 +138,5 @@ const pageSchema = {
       </div>
     </div>
   </section>
-
-  <script type="application/ld+json">
-    {JSON.stringify(pageSchema)}
-  </script>
 
 </BaseLayout>

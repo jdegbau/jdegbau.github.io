@@ -1,4 +1,71 @@
-/// <reference types="vite/client" />
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export type BlogEntry = CollectionEntry<'blog'>;
+
+export interface Post {
+  /** URL slug, e.g. `site-search-bookmarklet`. */
+  slug: string;
+  /** Filename-based id, e.g. `2023-01-17-site-search-bookmarklet`. */
+  legacySlug: string;
+  title: string;
+  seoTitle?: string;
+  excerpt: string;
+  /** Publish date, YYYY-MM-DD. */
+  date: string;
+  /** Last meaningful update, YYYY-MM-DD. Equals `date` when the post was never updated. */
+  updated: string;
+  /** On-page hero image. */
+  featuredImage: string;
+  /** Generated 1200×630 social share card (see src/lib/og-cards.mjs). */
+  ogImage: string;
+  url: string;
+  tags: string[];
+  keywords: string[];
+  readingTime: number;
+  entry: BlogEntry;
+}
+
+const DEFAULT_HERO = '/assets/img/default-blog-hero.gif';
+
+function trimSlashes(value: string) {
+  return value.trim().replace(/^\/+/, '').replace(/\/+$/, '');
+}
+
+function dateFromId(id: string) {
+  return id.match(/^(\d{4}-\d{2}-\d{2})-/)?.[1] ?? '1970-01-01';
+}
+
+function countWords(text: string) {
+  return text.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function toPost(entry: BlogEntry): Post {
+  const { data } = entry;
+  const slug = trimSlashes(data.slug) || entry.id;
+  const date = data.date ?? dateFromId(entry.id);
+  return {
+    slug,
+    legacySlug: entry.id,
+    title: data.title,
+    seoTitle: data.seo_title,
+    excerpt: data.excerpt,
+    date,
+    updated: data.updated && data.updated > date ? data.updated : date,
+    featuredImage: data.featured_image ?? DEFAULT_HERO,
+    ogImage: `/assets/img/og/${slug}.png`,
+    url: `/blog/${slug}/`,
+    tags: data.tags,
+    keywords: data.keywords ?? data.tags,
+    readingTime: data.readingTime ?? Math.max(1, Math.ceil(countWords(entry.body ?? '') / 260)),
+    entry,
+  };
+}
+
+/** All posts, newest first. */
+export async function getAllPosts(): Promise<Post[]> {
+  const entries = await getCollection('blog');
+  return entries.map(toPost).sort((a, b) => b.date.localeCompare(a.date));
+}
 
 export interface PostHeading {
   id: string;
@@ -6,157 +73,31 @@ export interface PostHeading {
   level: number;
 }
 
-export interface Post {
-  slug: string;
-  legacySlug?: string;
-  title: string;
-  seoTitle?: string;
-  excerpt?: string;
-  date: string;
-  featuredImage?: string;
-  url: string;
-  component: any;
-  tags?: string[];
-  keywords?: string[];
-  readingTime?: number;
-  headings?: PostHeading[];
+const decodeEntities = (text: string) =>
+  text
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+
+/**
+ * Headings (with ids) from the post's rendered HTML. Unlike Astro's built-in
+ * heading list, this also picks up headings written as raw HTML in markdown.
+ */
+export function getHeadings(post: Post): PostHeading[] {
+  const html = post.entry.rendered?.html ?? '';
+  return [...html.matchAll(/<h([1-6])\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/gi)].map((match) => ({
+    level: Number(match[1]),
+    id: match[2],
+    text: decodeEntities(match[3].replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim(),
+  }));
 }
 
-const modules = import.meta.glob<{
-  frontmatter?: Record<string, any>;
-  default?: any;
-}>('../content/blog/*.md', { eager: true });
-
-function parseDateFromFilename(filename: string) {
-  const match = filename.match(/(\d{4}-\d{2}-\d{2})-/);
-  return match ? match[1] : '1970-01-01';
-}
-
-function countWords(text: string) {
-  return String(text ?? '').trim().split(/\s+/).filter(Boolean).length;
-}
-
-function normalizeSlug(value: unknown, fallback: string) {
-  if (typeof value !== 'string') return fallback;
-  const trimmed = value.trim();
-  if (!trimmed) return fallback;
-  return trimmed.replace(/^\/+/, '').replace(/\/+$/, '');
-}
-
-function normalizeUrl(value: unknown, fallback: string) {
-  const normalized = normalizeSlug(value, fallback);
-  return `/blog/${normalized}/`;
-}
-
-function normalizeOptionalString(value: unknown, fallback: string) {
-  if (typeof value !== 'string') return fallback;
-  const trimmed = value.trim();
-  return trimmed ? trimmed : fallback;
-}
-
-function slugifyHeading(text: string) {
-  return String(text ?? '')
-    .trim()
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s-]/gu, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
-}
-
-function extractHeadings(rawContent: string): PostHeading[] {
-  const sanitizedContent = rawContent
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/~~~[\s\S]*?~~~/g, '');
-
-  const matches: Array<{ index: number; heading: PostHeading }> = [];
-
-  const addMatch = (heading: PostHeading | null, index: number) => {
-    if (!heading || !heading.text.trim()) {
-      return;
-    }
-
-    matches.push({
-      index,
-      heading: {
-        id: heading.id || slugifyHeading(heading.text),
-        text: heading.text.trim(),
-        level: heading.level,
-      },
-    });
-  };
-
-  for (const match of sanitizedContent.matchAll(/^(#{1,6})\s+(.+?)(?:\s+#+\s*)?$/gm)) {
-    const level = match[1].length;
-    const text = match[2].replace(/<[^>]+>/g, '').trim();
-    addMatch({ id: slugifyHeading(text), text, level }, match.index ?? 0);
-  }
-
-  for (const match of sanitizedContent.matchAll(/^([^\n]+)\r?\n(=+|-+)[ \t]*$/gm)) {
-    const level = match[2].startsWith('=') ? 1 : 2;
-    const text = match[1].replace(/<[^>]+>/g, '').trim();
-    addMatch({ id: slugifyHeading(text), text, level }, match.index ?? 0);
-  }
-
-  for (const match of sanitizedContent.matchAll(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi)) {
-    const level = Number(match[1]);
-    const openingTag = match[2] ?? '';
-    const idMatch = openingTag.match(/\s+id=["']([^"']+)["']/i);
-    const text = match[3].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-
-    addMatch({
-      id: idMatch ? idMatch[1] : slugifyHeading(text),
-      text,
-      level,
-    }, match.index ?? 0);
-  }
-
-  const seen = new Set<string>();
-  return matches
-    .sort((a, b) => a.index - b.index)
-    .filter(({ heading }) => {
-      const key = `${heading.level}:${heading.id}`;
-      if (seen.has(key)) {
-        return false;
-      }
-      seen.add(key);
-      return true;
-    })
-    .map(({ heading }) => heading);
-}
-
-const posts: Post[] = Object.entries(modules).map(([path, module]) => {
-  const filename = path.split('/').pop() ?? '';
-  const fileSlug = filename.replace(/\.md$/, '');
-  const fm = module.frontmatter ?? {};
-  const date = fm.date ?? parseDateFromFilename(filename);
-  const rawContent = typeof module.rawContent === 'function' ? module.rawContent() : '';
-  const wordCount = countWords(rawContent) || countWords(String(module.default?.render?.toString?.() ?? ''));
-  const readingTime =
-    fm.readingTime ?? fm.reading_time ?? fm.readingtime ?? Math.max(1, Math.ceil(wordCount / 260));
-  const slug = normalizeSlug(fm.slug, fileSlug);
-  const headings = extractHeadings(rawContent);
-  return {
-    slug,
-    legacySlug: fileSlug,
-    title: fm.title ?? 'Untitled',
-    seoTitle: fm.SEO_title ?? fm.seoTitle ?? fm.seo_title,
-    excerpt: fm.excerpt ?? '',
-    date,
-    featuredImage: normalizeOptionalString(fm.featured_image ?? fm.featuredImage, '/assets/img/default-blog-hero.gif'),
-    url: normalizeUrl(fm.slug, `blog/${fileSlug}`),
-    component: module.default,
-    tags: fm.tags ?? [],
-    keywords: fm.keywords ?? fm.tags ?? [],
-    readingTime,
-    headings,
-  };
-});
-
-export function getAllPosts() {
-  return posts.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-}
-
-export function getPostBySlug(slug: string) {
-  const normalized = slug.replace(/^\/+/, '').replace(/\/+$/, '');
-  return posts.find((post) => post.slug === normalized || post.legacySlug === normalized || post.url.replace(/^\/+/, '').replace(/\/+$/, '') === normalized);
+export async function getPostBySlug(slug: string): Promise<Post | undefined> {
+  const normalized = trimSlashes(slug);
+  return (await getAllPosts()).find(
+    (post) => post.slug === normalized || post.legacySlug === normalized,
+  );
 }
