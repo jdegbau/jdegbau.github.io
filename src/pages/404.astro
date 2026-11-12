@@ -2,16 +2,90 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 
-const seoTitle = 'Page Not Found';
+const seoTitle = 'Page Not Found | Joshua DeGrasse-Baumann';
 const description = 'The page you are looking for cannot be found.';
 ---
 <BaseLayout seoTitle={seoTitle} description={description} noindex={true}>
   <Hero variant="intro" containerWidth="narrow">
     <div class="jdb-center">
       <span class="jdb-eyebrow">404</span>
-      <h1>Page not found</h1>
-      <p class="jdb-hero__lede">Sorry, the page you requested could not be found.</p>
+      <h1>Nothing to crawl here</h1>
+      <p class="jdb-hero__lede">
+        I checked the sitemap, the redirects, and under the couch. <code class="jdb-404__path" data-404-path>This page</code> isn't here.
+        It may have moved, or the link might have a typo.
+      </p>
+
+      <div class="jdb-404__terminal" role="img" aria-label="HTTP response: 404 Not Found">
+        <div class="jdb-404__line"><span class="jdb-404__prompt" aria-hidden="true">$</span> curl -I https://jdegbau.com<span data-404-path-raw>/this-page</span></div>
+        <div class="jdb-404__line jdb-404__status">HTTP/2 404 Not Found</div>
+        <div class="jdb-404__line jdb-404__comment"># Googlebot didn't find it either.</div>
+      </div>
+
       <a href="/" class="jdb-btn jdb-btn--primary jdb-btn--lg">Return home</a>
     </div>
   </Hero>
 </BaseLayout>
+
+<script>
+  // The page is prerendered, so fill in the requested URL on the client.
+  // textContent keeps the path from being interpreted as HTML.
+  const rawPath = window.location.pathname + window.location.search;
+  let readablePath = rawPath;
+  try {
+    readablePath = decodeURI(rawPath);
+  } catch {
+    // Malformed escapes: show the raw path instead.
+  }
+
+  document.querySelectorAll('[data-404-path]').forEach((el) => {
+    el.textContent = readablePath;
+  });
+  document.querySelectorAll('[data-404-path-raw]').forEach((el) => {
+    el.textContent = rawPath;
+  });
+</script>
+
+<style>
+  .jdb-404__path {
+    font-family: var(--jdb-font-mono);
+    font-size: 0.9em;
+    padding: 0.1em 0.4em;
+    border-radius: var(--jdb-r-sm);
+    background: var(--jdb-orange-a10);
+    color: var(--jdb-orange-400);
+    overflow-wrap: anywhere;
+  }
+
+  .jdb-404__terminal {
+    margin: var(--jdb-s-7) auto;
+    max-width: 36rem;
+    padding: var(--jdb-s-4) var(--jdb-s-5);
+    text-align: left;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-sm);
+    line-height: var(--jdb-lh-body);
+    background: var(--jdb-navy-950);
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-lg);
+    box-shadow: var(--jdb-sh-md);
+    color: var(--jdb-fg);
+  }
+
+  .jdb-404__line {
+    overflow-wrap: anywhere;
+  }
+
+  .jdb-404__prompt {
+    color: var(--jdb-orange-500);
+    margin-right: 0.5ch;
+  }
+
+  .jdb-404__status {
+    color: var(--jdb-bad);
+    font-weight: var(--jdb-fw-bold);
+  }
+
+  .jdb-404__comment {
+    color: var(--jdb-fg-dim);
+  }
+</style>
