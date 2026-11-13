@@ -1,28 +1,71 @@
+---
+interface Logo {
+  src: string;
+  alt: string;
+  /** Optional modifier class for logos that need custom sizing. */
+  variant?: string;
+}
+
+interface Props {
+  logos?: Logo[];
+  label?: string;
+}
+
+const {
+  logos = [
+    { src: '/assets/img/logos/rocket-clicks-logo-dark.png', alt: 'Rocket Clicks' },
+    { src: '/assets/img/logos/fireandspark-logo-dark.png', alt: 'Fire&Spark' },
+    { src: '/assets/img/logos/trk-logo.png', alt: 'TRK Creative' },
+    { src: '/assets/img/logos/ellsworth-adhesives-logo-ribbon.png', alt: 'Ellsworth Adhesives', variant: 'ellsworth' },
+  ],
+  label = 'Organizations Josh has worked with',
+} = Astro.props;
+---
+
 <section class="jdb-section jdb-section--tight">
   <div class="jdb-container">
-    <div class="jdb-logo-grid" role="list" aria-label="Organizations Josh has worked with">
-      <div class="jdb-logo-item" role="listitem">
-        <img src="/assets/img/logos/rocket-clicks-logo-dark.png" alt="Rocket Clicks" loading="lazy" decoding="async" />
-      </div>
-      <div class="jdb-logo-item" role="listitem">
-        <img src="/assets/img/logos/fireandspark-logo-dark.png" alt="Fire&Spark" loading="lazy" decoding="async" />
-      </div>
-      <div class="jdb-logo-item" role="listitem">
-        <img src="/assets/img/logos/trk-logo.png" alt="TRK Creative" loading="lazy" decoding="async" />
-      </div>
-      <div class="jdb-logo-item jdb-logo-item--ellsworth" role="listitem">
-        <img src="/assets/img/logos/ellsworth-adhesives-logo-ribbon.png" alt="Ellsworth Adhesives" loading="lazy" decoding="async" />
+    <div class="jdb-logos">
+      <div class="jdb-logos__viewport">
+        <div class="jdb-logos__track">
+          <ul class="jdb-logo-grid" aria-label={label}>
+            {logos.map((logo) => (
+              <li class:list={['jdb-logo-item', logo.variant && `jdb-logo-item--${logo.variant}`]}>
+                <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+              </li>
+            ))}
+          </ul>
+          {/* Duplicate set so the narrow-screen marquee loops seamlessly. Hidden on wide screens. */}
+          <ul class="jdb-logo-grid jdb-logo-grid--clone" aria-hidden="true">
+            {logos.map((logo) => (
+              <li class:list={['jdb-logo-item', logo.variant && `jdb-logo-item--${logo.variant}`]}>
+                <img src={logo.src} alt="" loading="lazy" decoding="async" />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  .jdb-logos {
+    --jdb-logos-gap: clamp(var(--jdb-s-3), 2vw, var(--jdb-s-5));
+    container: jdb-logos / inline-size;
+  }
+
   .jdb-logo-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(var(--jdb-s-3), 2vw, var(--jdb-s-5));
+    gap: var(--jdb-logos-gap);
     align-items: stretch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .jdb-logo-grid--clone {
+    display: none;
   }
 
   .jdb-logo-item {
@@ -52,9 +95,87 @@
     height: 3rem;
   }
 
-  @media (max-width: 48rem) {
-    .jdb-logo-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  /*
+   * When the row no longer has room for every logo at a comfortable size
+   * (instead of squeezing or wrapping to a second line), switch to a
+   * continuously scrolling marquee.
+   */
+  @container jdb-logos (max-width: 46rem) {
+    .jdb-logos__viewport {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    }
+
+    .jdb-logos__track {
+      display: flex;
+      width: max-content;
+      animation: jdb-logos-scroll 28s linear infinite;
+    }
+
+    .jdb-logos__viewport:hover .jdb-logos__track,
+    .jdb-logos__viewport:focus-within .jdb-logos__track {
+      animation-play-state: paused;
+    }
+
+    .jdb-logo-grid,
+    .jdb-logo-grid--clone {
+      display: flex;
+      flex-wrap: nowrap;
+      /* Trailing gap keeps spacing even where the two sets meet. */
+      padding-inline-end: var(--jdb-logos-gap);
+    }
+
+    .jdb-logo-item {
+      flex: 0 0 auto;
+      min-height: 4rem;
+    }
+
+    .jdb-logo-item img {
+      width: 9.5rem;
+      max-width: none;
+    }
+
+    .jdb-logo-item--ellsworth img {
+      width: 10.5rem;
+    }
+  }
+
+  /* No auto-scroll for reduced motion: fall back to a swipeable row. */
+  @media (prefers-reduced-motion: reduce) {
+    @container jdb-logos (max-width: 46rem) {
+      .jdb-logos__viewport {
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+
+      .jdb-logos__viewport::-webkit-scrollbar {
+        display: none;
+      }
+
+      .jdb-logos__track {
+        animation: none;
+      }
+
+      .jdb-logo-grid--clone {
+        display: none;
+      }
+
+      .jdb-logo-item {
+        scroll-snap-align: start;
+      }
+    }
+  }
+
+  @keyframes jdb-logos-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
     }
   }
 </style>

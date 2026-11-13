@@ -12,6 +12,7 @@ import TableOfContents from '../components/TableOfContents.astro';
 import QuickCompareMatrix from '../components/QuickCompareMatrix.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
+import Logos from '../components/Logos.astro';
 import { getAllPosts } from '../lib/posts';
 
 // Use a real post so the BlogCard example always reflects live data.
@@ -147,6 +148,18 @@ const sampleMatrixRows = [
             <h2 id="component-contactform">ContactForm</h2>
           </div>
           <ContactForm demo />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2 id="component-logos">Logos</h2>
+          </div>
+          <Logos />
         </div>
       </div>
     </section>
