@@ -2003,6 +2003,211 @@ This guide helps you:
     });
 </script>
 
+<div class="container">
+
+<div class="content mb-5">
+<h2 class="title is-3">Sankey Chart</h2>
+</div>
+
+<div class="columns is-variable is-8 is-multiline">
+
+<div class="column is-12 is-6-desktop is-order-2-mobile">
+<div class="content">
+<p>
+                    A Sankey chart visualizes <strong>flow</strong> between stages. Each band connects a source to a destination, 
+                    and its thickness is proportional to the volume moving along that path. Nothing is lost or invented along the way: 
+                    what flows into a node equals what flows out.
+</p>
+
+<p>
+                    In SEO, Sankeys are the clearest way to show the <strong>organic user journey</strong>. 
+                    Instead of reporting channel traffic, landing page traffic, and conversions as three disconnected tables, 
+                    a Sankey shows <em>where each visit came from, where it landed, and what it did next</em> in one view.
+</p>
+
+<div class="columns is-variable is-6">
+<div class="column">
+<p class="mb-2"><strong>Use a Sankey chart if:</strong></p>
+<ul>
+<li>You need to show <strong>how volume moves</strong> across 2–4 stages</li>
+<li>You want to expose <strong>where the biggest leaks</strong> happen</li>
+<li>Totals must <strong>reconcile</strong> from one stage to the next</li>
+</ul>
+</div>
+<div class="column">
+<p class="mb-2"><strong>Avoid a Sankey chart if:</strong></p>
+<ul>
+<li>You have more than ~8 nodes per column (it becomes spaghetti)</li>
+<li>You need to show change over time</li>
+<li>Your audience needs exact values more than proportions</li>
+</ul>
+</div>
+</div>
+
+<h3 class="title is-5">Sample scenario: Organic Journey Mapping</h3>
+
+<p>
+                    This chart follows 10,000 organic sessions through three stages: <strong>traffic source</strong>, 
+                    <strong>landing page type</strong>, and <strong>session outcome</strong>.
+</p>
+
+<ol>
+<li><strong>Non-Brand Search</strong> drives the most volume, and most of it lands on the blog.</li>
+<li><strong>Blog posts</strong> are the largest landing page group, but only ~4% of those sessions convert.</li>
+<li><strong>Product pages</strong> receive less traffic yet convert at ~28%, making them the most valuable destination.</li>
+<li><strong>AI Referrals</strong> are small today, but split evenly between education and purchase intent.</li>
+</ol>
+
+<div class="notification is-light">
+<p class="mb-2"><strong>Decision this supports:</strong></p>
+<p>
+                        Justifies investing in <strong>internal linking and CTAs</strong> that route high-volume blog traffic toward 
+                        product and category pages, rather than simply publishing more top-of-funnel content.
+</p>
+</div>
+
+<h3 class="title is-5">Other use cases</h3>
+<ul>
+<li><strong>Site Migration Mapping:</strong> Old URL sections → new sections → status (200, 301, 404)</li>
+<li><strong>Crawl Budget Flow:</strong> Discovered URLs → crawled → indexed vs. excluded</li>
+<li><strong>Keyword Movement:</strong> Last quarter's ranking buckets → this quarter's buckets</li>
+<li><strong>Multi-Touch Attribution:</strong> First touch → assisting channel → conversion</li>
+</ul>
+</div>
+</div>
+
+<div class="column is-12 is-6-desktop is-order-1-mobile">
+<div class="viz-sticky-wrap">
+<div class="card">
+<header class="card-header">
+<p class="card-header-title">Organic Sessions: Source → Landing Page → Outcome</p>
+</header>
+
+<div class="card-content">
+<div class="viz-chart-frame" style="position: relative; height: 400px;">
+<canvas id="seoSankeyChart" role="img" aria-label="Sankey chart of 10,000 organic sessions flowing from traffic source to landing page type to session outcome"></canvas>
+</div>
+
+<hr>
+
+<p class="is-size-7 has-text-grey mb-3">
+                            Sample data: 10,000 organic sessions in one month.
+</p>
+
+<div class="notification is-light is-size-7">
+<strong>How to read this chart:</strong>
+<p class="mt-1">
+                                Read <strong>left to right</strong>. Band thickness equals session volume. 
+<span style="color:#10b981">●</span> Green bands end in a conversion, 
+<span style="color:#e11d48">●</span> red bands end in a bounce. 
+                                Look for thick bands that end in red: that is your biggest leak.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.14.0/dist/chartjs-chart-sankey.min.js" integrity="sha384-qO+UcjSHHumifg7pHEa3yM4N1NlKG5NrZoHwN0wubVR6rlaK60BjNZ3QHrSCU9Fj" crossorigin="anonymous"></script>
+
+<script>
+(function () {
+    const NODE_COLORS = {
+        nonBrand: BRAND.orange,
+        brand: BRAND.blueSoft,
+        ai: BRAND.orangeSoft,
+        blog: '#64748b',
+        category: '#64748b',
+        product: '#64748b',
+        home: '#64748b',
+        converted: '#10b981',
+        engaged: '#94a3b8',
+        bounced: '#e11d48'
+    };
+
+    const nodeColor = (key) => NODE_COLORS[key] || BRAND.grey;
+
+    new Chart(document.getElementById('seoSankeyChart'), {
+        type: 'sankey',
+        data: {
+            datasets: [{
+                label: 'Organic sessions',
+                data: [
+                    // Source -> Landing page
+                    { from: 'nonBrand', to: 'blog', flow: 3200 },
+                    { from: 'nonBrand', to: 'category', flow: 1700 },
+                    { from: 'nonBrand', to: 'product', flow: 1100 },
+                    { from: 'brand', to: 'home', flow: 1800 },
+                    { from: 'brand', to: 'product', flow: 1200 },
+                    { from: 'ai', to: 'blog', flow: 600 },
+                    { from: 'ai', to: 'product', flow: 400 },
+                    // Landing page -> Outcome
+                    { from: 'blog', to: 'converted', flow: 150 },
+                    { from: 'blog', to: 'engaged', flow: 1450 },
+                    { from: 'blog', to: 'bounced', flow: 2200 },
+                    { from: 'category', to: 'converted', flow: 300 },
+                    { from: 'category', to: 'engaged', flow: 900 },
+                    { from: 'category', to: 'bounced', flow: 500 },
+                    { from: 'product', to: 'converted', flow: 750 },
+                    { from: 'product', to: 'engaged', flow: 1150 },
+                    { from: 'product', to: 'bounced', flow: 800 },
+                    { from: 'home', to: 'converted', flow: 200 },
+                    { from: 'home', to: 'engaged', flow: 1000 },
+                    { from: 'home', to: 'bounced', flow: 600 }
+                ],
+                labels: {
+                    nonBrand: 'Non-Brand Search',
+                    brand: 'Brand Search',
+                    ai: 'AI Referrals',
+                    blog: 'Blog',
+                    category: 'Category',
+                    product: 'Product',
+                    home: 'Homepage',
+                    converted: 'Converted',
+                    engaged: 'Engaged',
+                    bounced: 'Bounced'
+                },
+                // Keep nodes in a stable, meaningful order within each column
+                priority: {
+                    nonBrand: 0, brand: 1, ai: 2,
+                    blog: 0, category: 1, product: 2, home: 3,
+                    converted: 0, engaged: 1, bounced: 2
+                },
+                colorFrom: (c) => nodeColor(c.dataset.data[c.dataIndex].from),
+                colorTo: (c) => nodeColor(c.dataset.data[c.dataIndex].to),
+                colorMode: 'gradient',
+                alpha: 0.55,
+                color: BRAND.text,
+                font: { size: 12, weight: '600' },
+                borderWidth: 0,
+                nodeWidth: 12,
+                nodePadding: 14,
+                size: 'max'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (item) => {
+                            const d = item.raw;
+                            const labels = item.dataset.labels;
+                            return ` ${labels[d.from]} → ${labels[d.to]}: ${d.flow.toLocaleString()} sessions`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+})();
+</script>
+
 ---
 
 ## Final thoughts
