@@ -191,6 +191,34 @@ const chartTypes = [
       </div>
     `,
   },
+  {
+    title: 'Sankey',
+    category: 'Flow analysis',
+    bestFor: 'User journeys',
+    summary: 'Use it when volume moves through stages and you need to show exactly where it splits, converts, or leaks.',
+    preview: `
+      <div class="chart-preview chart-preview--sankey" aria-hidden="true">
+        <svg viewBox="0 0 160 120" preserveAspectRatio="none" role="presentation">
+          <g fill-opacity="0.45">
+            <path d="M14,10 C50,10 50,8 73,8 L73,40 C50,40 50,46 14,46 Z" fill="#ff4d00" />
+            <path d="M14,46 C50,46 50,48 73,48 L73,64 C50,64 50,64 14,64 Z" fill="#ff4d00" />
+            <path d="M14,72 C50,72 50,72 73,72 L73,110 C50,110 50,110 14,110 Z" fill="#31507d" />
+            <path d="M87,8 C115,8 115,10 146,10 L146,22 C115,22 115,20 87,20 Z" fill="#10b981" />
+            <path d="M87,20 C115,20 115,40 146,40 L146,68 C115,68 115,48 87,48 Z" fill="#8a8a8a" />
+            <path d="M87,48 C115,48 115,80 146,80 L146,110 C115,110 115,110 87,110 Z" fill="#e11d48" />
+          </g>
+          <g>
+            <rect x="8" y="10" width="6" height="54" rx="1" fill="#ff4d00" />
+            <rect x="8" y="72" width="6" height="38" rx="1" fill="#31507d" />
+            <rect x="73" y="8" width="14" height="102" rx="1" fill="#64748b" />
+            <rect x="146" y="10" width="6" height="12" rx="1" fill="#10b981" />
+            <rect x="146" y="40" width="6" height="28" rx="1" fill="#8a8a8a" />
+            <rect x="146" y="80" width="6" height="30" rx="1" fill="#e11d48" />
+          </g>
+        </svg>
+      </div>
+    `,
+  },
 ];
 ---
 
