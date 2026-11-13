@@ -111,10 +111,12 @@ Notes:
 - Use this instead of raw `<img>` tags where consistent handling is needed.
 
 ### Logos
-Purpose: Shared logo-related UI.
+Purpose: Row of brand or partner logos.
 Location: `src/components/Logos.astro`
 Notes:
 - Reusable when displaying brand or partner logos.
+- Props: optional `logos` (array of `{ src, alt, variant? }`; defaults to the site's client logos) and optional `label` (accessible list label).
+- Shows a single row on wide containers. When the container is too narrow to fit every logo on one line (≤ 46rem, via a container query), it becomes an auto-scrolling marquee that pauses on hover/focus. With `prefers-reduced-motion`, it becomes a swipeable horizontal row instead.
 
 ### Navigation
 Purpose: Site-wide top navigation and mobile drawer.
