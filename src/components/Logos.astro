@@ -102,6 +102,8 @@ const {
    */
   @container jdb-logos (max-width: 46rem) {
     .jdb-logos__viewport {
+      /* Logos sit in a single scrolling row here, so give them more air. */
+      --jdb-logos-gap: var(--jdb-s-8);
       overflow: hidden;
       -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
       mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
@@ -132,12 +134,14 @@ const {
     }
 
     .jdb-logo-item img {
-      width: 9.5rem;
+      width: 8.5rem;
       max-width: none;
+      height: 2.25rem;
     }
 
     .jdb-logo-item--ellsworth img {
-      width: 10.5rem;
+      width: 9.5rem;
+      height: 2.75rem;
     }
   }
 
