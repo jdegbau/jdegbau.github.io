@@ -1,0 +1,48 @@
+---
+/**
+ * One panel inside <Tabs>. Its `label` becomes the tab button.
+ * Without JavaScript, panels stack and the label shows as a small heading.
+ */
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<section class="jdb-tabpanel" data-tab-label={label}>
+  <p class="jdb-tabpanel__label">{label}</p>
+  <div class="jdb-tabpanel__body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .jdb-tabpanel + .jdb-tabpanel {
+    margin-top: var(--jdb-s-5);
+    padding-top: var(--jdb-s-5);
+    border-top: 1px solid var(--jdb-line);
+  }
+
+  .jdb-tabpanel__label {
+    margin: 0 0 var(--jdb-s-3);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-sm);
+    font-weight: var(--jdb-fw-semibold);
+    color: var(--jdb-orange-400);
+  }
+
+  .jdb-tabpanel__body > :global(:first-child) { margin-top: 0; }
+  .jdb-tabpanel__body > :global(:last-child) { margin-bottom: 0; }
+
+  /* Once Tabs has enhanced the group, the buttons replace the inline labels. */
+  :global(.jdb-tabset.is-enhanced) .jdb-tabpanel + .jdb-tabpanel {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  :global(.jdb-tabset.is-enhanced) .jdb-tabpanel__label {
+    display: none;
+  }
+</style>

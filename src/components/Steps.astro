@@ -1,0 +1,89 @@
+---
+/**
+ * Visual wrapper for a numbered how-to. Put an ordered list in the default
+ * slot (a normal markdown `1.` list in MDX); each item becomes a numbered step
+ * on a connecting rail. Images and code inside items are fine.
+ */
+interface Props {
+  /** Accessible name for the steps, e.g. "How to read a Sankey chart". */
+  label?: string;
+  class?: string;
+}
+
+const { label, class: className } = Astro.props;
+---
+
+<div class:list={['jdb-steps', className]} role={label ? 'group' : undefined} aria-label={label}>
+  <slot />
+</div>
+
+<style>
+  .jdb-steps {
+    margin: var(--jdb-s-5) 0;
+  }
+
+  .jdb-steps > :global(ol) {
+    list-style: none;
+    counter-reset: jdb-step;
+    margin: 0;
+    padding: 0;
+  }
+
+  .jdb-steps > :global(ol > li) {
+    counter-increment: jdb-step;
+    position: relative;
+    margin: 0;
+    padding: 0 0 var(--jdb-s-5) 3.25rem;
+    color: var(--jdb-fg-dim);
+  }
+
+  /* The number badge. */
+  .jdb-steps > :global(ol > li::before) {
+    content: counter(jdb-step);
+    position: absolute;
+    left: 0;
+    top: -0.1rem;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 2px solid var(--jdb-orange-500);
+    background: var(--jdb-navy-950);
+    color: var(--jdb-fg);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-sm);
+    font-weight: var(--jdb-fw-bold);
+  }
+
+  /* The rail connecting one badge to the next. */
+  .jdb-steps > :global(ol > li:not(:last-child)::after) {
+    content: '';
+    position: absolute;
+    left: calc(1.125rem - 1px);
+    top: 2.4rem;
+    bottom: 0.2rem;
+    width: 2px;
+    background: var(--jdb-line-strong);
+  }
+
+  .jdb-steps > :global(ol > li:last-child) {
+    padding-bottom: 0;
+  }
+
+  .jdb-steps > :global(ol > li + li) {
+    margin-top: 0;
+  }
+
+  .jdb-steps > :global(ol > li strong:first-child) {
+    color: var(--jdb-fg);
+  }
+
+  .jdb-steps > :global(ol > li img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: var(--jdb-s-3);
+    border-radius: var(--jdb-r-md);
+  }
+</style>

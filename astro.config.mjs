@@ -7,11 +7,13 @@ import rehypeHeadingIds from './src/lib/rehype-heading-ids.mjs';
 import ogCards from './src/lib/og-cards.mjs';
 
 import cloudflare from '@astrojs/cloudflare';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
     site: 'https://jdegbau.com',
     session: false,
-    integrations: [ogCards()],
+    // MDX inherits the markdown config below, so .mdx posts get the same plugins.
+    integrations: [mdx(), ogCards()],
 
     markdown: {
         syntaxHighlight: 'shiki',

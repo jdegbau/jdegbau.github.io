@@ -9,6 +9,7 @@ import FAQAccordion from '../../components/FAQAccordion.astro';
 import PostMeta from '../../components/PostMeta.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import QuickCompareMatrix from '../../components/QuickCompareMatrix.astro';
+import PostSeriesNav from '../../components/PostSeriesNav.astro';
 import { render } from 'astro:content';
 import { getAllPosts, getHeadings, getPostBySlug } from '../../lib/posts';
 
@@ -33,8 +34,8 @@ if (slug !== post.slug) {
   return Astro.redirect(post.url, 301);
 }
 
-const { Content } = await render(post.entry);
-const headings = getHeadings(post);
+const { Content, headings: renderedHeadings } = await render(post.entry);
+const headings = getHeadings(post, renderedHeadings);
 const seoTitle = post.seoTitle ?? post.title;
 const description = post.excerpt;
 const canonical = post.url;
@@ -45,56 +46,10 @@ const wasUpdated = post.updated !== post.date;
 const formatDate = (value: string, month: 'short' | 'long') =>
   new Date(`${value}T12:00:00Z`).toLocaleDateString('en-US', { month, day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
-const faqItems = [
-  {
-    question: 'How do I choose the right chart type for my SEO data?',
-    answer:
-      '<p>Choosing the right chart depends on the relationship you want to highlight. Use <strong>line charts</strong> to show trends and changes over time (like organic traffic growth), <strong>bar charts</strong> for comparing discrete categories (like performance by page or folder), and <strong>scatter plots</strong> or <strong>bubble charts</strong> to identify correlations between two or more numeric variables (like keyword difficulty vs. search volume). The goal is to match the visual format to the specific question your audience needs to answer.</p>',
-  },
-  {
-    question: 'What is the "5-second rule" in data visualization?',
-    answer:
-      '<p>The 5-second rule is a best practice stating that a viewer should be able to grasp the primary insight or "takeaway" of a chart within five seconds of looking at it. If the viewer has to hunt for the message or decipher complex axes, the visualization is likely too cluttered. To achieve this, use descriptive titles that state the conclusion and highlight key data points with contrasting colors.</p>',
-  },
-  {
-    question: 'What are the most common mistakes in data visualization?',
-    answer:
-      '<p>The most common mistakes include using inappropriate chart types (e.g., using a pie chart for more than five categories), failing to provide context through benchmarks or Year-over-Year (YoY) comparisons, and overcrowding a single visual with too many variables. Additionally, "misleading axes"—such as starting a Y-axis at a number other than zero for bar charts—can distort the perceived impact of the data and reduce trust.</p>',
-  },
-  {
-    question: 'How does data storytelling differ from traditional data reporting?',
-    answer:
-      '<p>While data reporting focuses on <em>what</em> happened (providing raw metrics and status updates), data storytelling explains <em>why</em> it happened and <em>what</em> should be done next. A report is a snapshot of facts; a story uses those facts to build a narrative arc—identifying a problem, showing the insight, and recommending a specific business action.</p>',
-  },
-  {
-    question: 'Why is context critical for SEO data storytelling?',
-    answer:
-      '<p>A number without a comparison is meaningless in SEO. Context, such as Year-over-Year (YoY) growth, industry benchmarks, or internal forecasts, allows stakeholders to understand if a metric is "good" or "bad." Providing context helps filter out seasonal noise and proves that your SEO efforts are driving authentic growth rather than just riding a temporary trend.</p>',
-  },
-  {
-    question: 'How should color be used strategically in data visualizations?',
-    answer:
-      '<p>In data visualization, color should be used to direct attention, not just for decoration. Use neutral greys for baseline data and reserved, high-contrast colors (like your brand’s primary color) to highlight the specific metric you want the audience to notice. Additionally, ensure your color choices are accessible by avoiding red-green combinations that are difficult for color-blind users to distinguish.</p>',
-  },
-  {
-    question: 'How can I simplify complex SEO data for non-technical executives?',
-    answer:
-      '<p>To make SEO data accessible for executives, focus on "North Star" metrics that tie directly to business outcomes, such as organic revenue, conversions, and market share. Avoid technical jargon like "crawl budget" or "canonicalization" in the primary visualization. Instead, lead with a "Lead with the Insight" approach: put the conclusion in the chart title so the executive understands the business impact immediately.</p>',
-  },
-  {
-    question: 'What role do annotations play in data storytelling?',
-    answer:
-      '<p>Annotations act as "guideposts" that explain sudden spikes or drops in data directly on the chart. By calling out specific events—such as a Google Algorithm update, a site migration, or a major PR campaign—you prevent the audience from misinterpreting volatility. Annotations ensure the narrative remains clear even if the report is read without a live presentation.</p>',
-  },
-  {
-    question: 'What is a "Franken-chart" and why should you avoid it?',
-    answer:
-      '<p>A "Franken-chart" is a visualization that tries to cram too many unrelated messages into a single graphic, often using dual axes that confuse the reader. To maintain clarity, follow the "One Chart, One Message" rule. If you need to show both a long-term trend and a granular category breakdown, it is better to use two separate, simple visualizations than one overly complex one.</p>',
-  },
-];
-
-// The data-viz guide gets interactive extras (its FAQPage schema lives in the post's markdown).
+// The data-viz guide gets interactive extras around its markdown.
 const isDataVizGuide = post.slug === 'seo-data-visualization-guide';
+// Post FAQs come from front matter; the same items drive the accordion and the FAQPage schema.
+const faqTitle = isDataVizGuide ? undefined : 'Frequently asked questions';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -125,6 +80,19 @@ const schema = {
         { '@type': 'ListItem', position: 3, name: post.title, item: pageUrl },
       ],
     },
+    ...(post.faq.length
+      ? [
+          {
+            '@type': 'FAQPage',
+            '@id': `${pageUrl}#faq`,
+            mainEntity: post.faq.map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: { '@type': 'Answer', text: item.answer },
+            })),
+          },
+        ]
+      : []),
   ],
 };
 ---
@@ -180,13 +148,10 @@ const schema = {
             {isDataVizGuide && <ChartPickerQuiz />}
             {isDataVizGuide && <QuickCompareMatrix />}
             <Content />
-            {isDataVizGuide && (
-              <>
-                <DataStoryBestPractices />
-                <FAQAccordion items={faqItems} />
-                <ChartTypeAssessment />
-              </>
-            )}
+            {isDataVizGuide && <DataStoryBestPractices />}
+            {post.faq.length > 0 && <FAQAccordion items={post.faq} title={faqTitle} />}
+            {isDataVizGuide && <ChartTypeAssessment />}
+            {post.series && <PostSeriesNav series={post.series} current={post.slug} />}
           </div>
         </div>
       </div>

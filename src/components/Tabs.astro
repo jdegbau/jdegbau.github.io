@@ -1,0 +1,185 @@
+---
+/**
+ * Accessible tabs. Wrap one or more <TabPanel label="…"> children.
+ *
+ *   <Tabs label="Build it in" group="build-tool">
+ *     <TabPanel label="Excel">…</TabPanel>
+ *     <TabPanel label="Python">…</TabPanel>
+ *   </Tabs>
+ *
+ * Without JavaScript the panels simply stack. With it, a tablist is built from
+ * the panel labels (arrow keys, Home and End move between tabs). Tabs sharing a
+ * `group` stay in sync on the page, and the choice is remembered for next time.
+ */
+interface Props {
+  /** Accessible name for the tablist. */
+  label: string;
+  /** Sync key. Tab groups with the same `group` switch together and remember the choice. */
+  group?: string;
+  class?: string;
+}
+
+const { label, group, class: className } = Astro.props;
+---
+
+<div class:list={['jdb-tabset', className]} data-tabs data-tabs-label={label} data-tabs-group={group}>
+  <slot />
+</div>
+
+<style>
+  .jdb-tabset {
+    margin: var(--jdb-s-5) 0;
+    padding: var(--jdb-s-5);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-tabset :global(.jdb-tabset__list) {
+    display: flex;
+    gap: var(--jdb-s-1);
+    /* Many tabs scroll sideways rather than wrapping into a second row. */
+    overflow-x: auto;
+    scrollbar-width: thin;
+    margin: calc(var(--jdb-s-5) * -1) calc(var(--jdb-s-5) * -1) var(--jdb-s-5);
+    padding: var(--jdb-s-2) var(--jdb-s-3) 0;
+    background: var(--jdb-navy-900);
+    border-bottom: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg) var(--jdb-r-lg) 0 0;
+  }
+
+  .jdb-tabset :global(.jdb-tabset__tab) {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin-bottom: -1px;
+    padding: var(--jdb-s-2) var(--jdb-s-4);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: var(--jdb-r-md) var(--jdb-r-md) 0 0;
+    cursor: pointer;
+  }
+
+  .jdb-tabset :global(.jdb-tabset__tab:hover) {
+    color: var(--jdb-fg);
+  }
+
+  .jdb-tabset :global(.jdb-tabset__tab[aria-selected='true']) {
+    color: var(--jdb-fg);
+    background: var(--jdb-surface);
+    border-color: var(--jdb-line);
+    border-bottom-color: var(--jdb-orange-500);
+  }
+
+  .jdb-tabset :global(.jdb-tabset__tab:focus-visible) {
+    outline: 2px solid var(--jdb-orange-400);
+    outline-offset: -2px;
+  }
+</style>
+
+<script>
+  const STORAGE_PREFIX = 'jdb-tabs:';
+
+  const readChoice = (group: string) => {
+    try {
+      return localStorage.getItem(STORAGE_PREFIX + group);
+    } catch {
+      return null;
+    }
+  };
+
+  const saveChoice = (group: string, value: string) => {
+    try {
+      localStorage.setItem(STORAGE_PREFIX + group, value);
+    } catch {
+      /* Storage can be unavailable (private mode, blocked); the tabs still work. */
+    }
+  };
+
+  type TabGroup = { root: HTMLElement; select: (label: string, focus?: boolean) => boolean };
+  const groups: TabGroup[] = [];
+
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root, groupIndex) => {
+    const panels = [...root.children].filter(
+      (el): el is HTMLElement => el instanceof HTMLElement && el.hasAttribute('data-tab-label'),
+    );
+    if (panels.length < 2) return;
+
+    const list = document.createElement('div');
+    list.className = 'jdb-tabset__list';
+    list.setAttribute('role', 'tablist');
+    list.setAttribute('aria-label', root.dataset.tabsLabel ?? 'Tabs');
+
+    const tabs = panels.map((panel, index) => {
+      const id = `jdb-tabset-${groupIndex}-${index}`;
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'jdb-tabset__tab';
+      tab.id = `${id}-tab`;
+      tab.textContent = panel.dataset.tabLabel ?? `Tab ${index + 1}`;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', `${id}-panel`);
+      panel.id = `${id}-panel`;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      panel.tabIndex = 0;
+      list.append(tab);
+      return tab;
+    });
+
+    const activate = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[i].hidden = !selected;
+      });
+      if (focus) tabs[index].focus();
+    };
+
+    const select = (label: string, focus = false) => {
+      const index = panels.findIndex((panel) => panel.dataset.tabLabel === label);
+      if (index === -1) return false;
+      activate(index, focus);
+      return true;
+    };
+
+    const choose = (index: number, focus = false) => {
+      activate(index, focus);
+      const group = root.dataset.tabsGroup;
+      const label = panels[index].dataset.tabLabel;
+      if (!group || !label) return;
+      saveChoice(group, label);
+      groups
+        .filter((other) => other.root !== root && other.root.dataset.tabsGroup === group)
+        .forEach((other) => other.select(label));
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => choose(index));
+      tab.addEventListener('keydown', (event) => {
+        const last = tabs.length - 1;
+        const next =
+          event.key === 'ArrowRight' ? (index === last ? 0 : index + 1)
+          : event.key === 'ArrowLeft' ? (index === 0 ? last : index - 1)
+          : event.key === 'Home' ? 0
+          : event.key === 'End' ? last
+          : -1;
+        if (next === -1) return;
+        event.preventDefault();
+        choose(next, true);
+      });
+    });
+
+    root.prepend(list);
+    root.classList.add('is-enhanced');
+
+    const remembered = root.dataset.tabsGroup ? readChoice(root.dataset.tabsGroup) : null;
+    if (!remembered || !select(remembered)) activate(0);
+
+    groups.push({ root, select });
+  });
+</script>

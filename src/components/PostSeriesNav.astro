@@ -1,0 +1,158 @@
+---
+/**
+ * Navigation for a multi-part series: previous/next links plus the full,
+ * numbered list of parts. Posts join a series through front matter:
+ *
+ *   series: Chart by Chart
+ *   seriesOrder: 2
+ *
+ * Renders nothing when the series has only one published post.
+ */
+import { getAllPosts } from '../lib/posts';
+
+interface Props {
+  series: string;
+  /** Slug of the post being viewed. */
+  current: string;
+  class?: string;
+}
+
+const { series, current, class: className } = Astro.props;
+
+const parts = (await getAllPosts())
+  .filter((post) => post.series === series)
+  .sort((a, b) => (a.seriesOrder ?? Infinity) - (b.seriesOrder ?? Infinity) || a.date.localeCompare(b.date));
+
+const index = parts.findIndex((post) => post.slug === current);
+const previous = index > 0 ? parts[index - 1] : undefined;
+const next = index >= 0 && index < parts.length - 1 ? parts[index + 1] : undefined;
+---
+
+{parts.length > 1 && (
+  <nav class:list={['jdb-series', className]} aria-label={`${series} series`}>
+    <p class="jdb-series__eyebrow">series</p>
+    <p class="jdb-series__title">
+      {series}
+      {index >= 0 && <span class="jdb-series__count">part {index + 1} of {parts.length}</span>}
+    </p>
+
+    <div class="jdb-series__pager">
+      {previous ? (
+        <a class="jdb-series__link" href={previous.url} rel="prev">
+          <span class="jdb-series__dir">← previous</span>
+          <span>{previous.title}</span>
+        </a>
+      ) : <span />}
+      {next && (
+        <a class="jdb-series__link jdb-series__link--next" href={next.url} rel="next">
+          <span class="jdb-series__dir">next →</span>
+          <span>{next.title}</span>
+        </a>
+      )}
+    </div>
+
+    <details class="jdb-series__all">
+      <summary>All {parts.length} parts</summary>
+      <ol>
+        {parts.map((post) => (
+          <li>
+            {post.slug === current ? (
+              <span aria-current="page">{post.title}</span>
+            ) : (
+              <a href={post.url}>{post.title}</a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </details>
+  </nav>
+)}
+
+<style>
+  .jdb-series {
+    margin: var(--jdb-s-7) 0 var(--jdb-s-5);
+    padding: var(--jdb-s-5);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-series__eyebrow {
+    margin: 0;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-orange-400);
+  }
+
+  .jdb-series__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--jdb-s-3);
+    margin: var(--jdb-s-1) 0 var(--jdb-s-4);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-lg);
+    font-weight: var(--jdb-fw-bold);
+    color: var(--jdb-fg);
+  }
+
+  .jdb-series__count {
+    font-size: var(--jdb-fs-xs);
+    font-weight: var(--jdb-fw-normal);
+    color: var(--jdb-fg-muted);
+  }
+
+  .jdb-series__pager {
+    display: grid;
+    gap: var(--jdb-s-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  }
+
+  .jdb-series__link {
+    display: grid;
+    gap: var(--jdb-s-1);
+    padding: var(--jdb-s-3) var(--jdb-s-4);
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-md);
+    color: var(--jdb-fg);
+    text-decoration: none;
+    transition: border-color var(--jdb-t-fast), background var(--jdb-t-fast);
+  }
+
+  .jdb-series__link:hover {
+    border-color: var(--jdb-orange-500);
+    background: var(--jdb-orange-a10);
+  }
+
+  .jdb-series__link--next {
+    text-align: right;
+  }
+
+  .jdb-series__dir {
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-orange-400);
+  }
+
+  .jdb-series__all {
+    margin-top: var(--jdb-s-4);
+    font-size: var(--jdb-fs-sm);
+  }
+
+  .jdb-series__all summary {
+    cursor: pointer;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-fg-muted);
+  }
+
+  .jdb-series__all ol {
+    margin: var(--jdb-s-3) 0 0;
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-series__all [aria-current] {
+    color: var(--jdb-fg);
+    font-weight: var(--jdb-fw-semibold);
+  }
+</style>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" font-family="Inter, Arial, sans-serif">
+<rect width="640" height="360" fill="#0f1f38"/>
+<text x="24" y="40" fill="#e8ecf4" font-size="20" font-weight="700">Visits by channel</text>
+<text x="138" y="112" fill="#aab4c8" font-size="14" text-anchor="end">Email</text>
+<rect x="150" y="94" width="176" height="28" rx="3" fill="#e74c3c"/>
+<text x="138" y="158" fill="#aab4c8" font-size="14" text-anchor="end">Search</text>
+<rect x="150" y="140" width="370" height="28" rx="3" fill="#3498db"/>
+<text x="138" y="204" fill="#aab4c8" font-size="14" text-anchor="end">Social</text>
+<rect x="150" y="186" width="130" height="28" rx="3" fill="#f1c40f"/>
+<text x="138" y="250" fill="#aab4c8" font-size="14" text-anchor="end">Direct</text>
+<rect x="150" y="232" width="239" height="28" rx="3" fill="#2ecc71"/>
+<text x="138" y="296" fill="#aab4c8" font-size="14" text-anchor="end">Referral</text>
+<rect x="150" y="278" width="80" height="28" rx="3" fill="#9b59b6"/>
+<line x1="150" y1="90" x2="150" y2="320" stroke="#ffffff" stroke-opacity=".35"/>
+<text x="150" y="338" fill="#8b97b0" font-size="11" text-anchor="middle">0</text>
+<line x1="234" y1="90" x2="234" y2="320" stroke="#ffffff" stroke-opacity=".35"/>
+<text x="234" y="338" fill="#8b97b0" font-size="11" text-anchor="middle">20</text>
+<line x1="318" y1="90" x2="318" y2="320" stroke="#ffffff" stroke-opacity=".35"/>
+<text x="318" y="338" fill="#8b97b0" font-size="11" text-anchor="middle">40</text>
+<line x1="402" y1="90" x2="402" y2="320" stroke="#ffffff" stroke-opacity=".35"/>
+<text x="402" y="338" fill="#8b97b0" font-size="11" text-anchor="middle">60</text>
+<line x1="486" y1="90" x2="486" y2="320" stroke="#ffffff" stroke-opacity=".35"/>
+<text x="486" y="338" fill="#8b97b0" font-size="11" text-anchor="middle">80</text>
+<line x1="570" y1="90" x2="570" y2="320" stroke="#ffffff" stroke-opacity=".35"/>
+<text x="570" y="338" fill="#8b97b0" font-size="11" text-anchor="middle">100</text>
+<rect x="530" y="90" width="10" height="10" fill="#e74c3c"/><text x="546" y="99" fill="#aab4c8" font-size="11">Email</text>
+<rect x="530" y="110" width="10" height="10" fill="#3498db"/><text x="546" y="119" fill="#aab4c8" font-size="11">Search</text>
+<rect x="530" y="130" width="10" height="10" fill="#f1c40f"/><text x="546" y="139" fill="#aab4c8" font-size="11">Social</text>
+<rect x="530" y="150" width="10" height="10" fill="#2ecc71"/><text x="546" y="159" fill="#aab4c8" font-size="11">Direct</text>
+<rect x="530" y="170" width="10" height="10" fill="#9b59b6"/><text x="546" y="179" fill="#aab4c8" font-size="11">Referral</text>
+</svg>

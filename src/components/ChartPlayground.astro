@@ -1,0 +1,269 @@
+---
+/**
+ * Live Chart.js chart with optional toggles that change it, so readers can
+ * see what a design choice does (sorting, labels, highlight, too many series…).
+ *
+ * Each control is a checkbox. When it is on, its `patch` is deep-merged into
+ * the base config (objects merge, arrays and values replace). Colours can be
+ * site tokens written as "var(--jdb-orange-500)".
+ *
+ * Chart.js and plugins load lazily, once per page, when the chart scrolls into view.
+ * Always pass `alt`; add `table` for a screen-reader friendly copy of the data.
+ */
+import type { ChartPluginName } from '../lib/chart-loader';
+
+interface Control {
+  label: string;
+  patch: Record<string, unknown>;
+  /** Start switched on. */
+  checked?: boolean;
+}
+
+interface Props {
+  id: string;
+  /** Chart.js chart type, e.g. "bar", "line", "sankey", "treemap". */
+  type: string;
+  data: Record<string, unknown>;
+  options?: Record<string, unknown>;
+  plugins?: ChartPluginName[];
+  controls?: Control[];
+  /** Text description of what the chart shows (used as the canvas label). */
+  alt: string;
+  caption?: string;
+  /** Optional data table shown in a collapsible "View the data" panel. */
+  table?: { columns: string[]; rows: (string | number)[][] };
+  /** Chart height in px. Width always fills the column. */
+  height?: number;
+  class?: string;
+}
+
+const {
+  id,
+  type,
+  data,
+  options = {},
+  plugins = [],
+  controls = [],
+  alt,
+  caption,
+  table,
+  height = 360,
+  class: className,
+} = Astro.props;
+
+const config = { type, data, options: { responsive: true, maintainAspectRatio: false, ...options } };
+const payload = { config, plugins, patches: controls.map((control) => control.patch) };
+---
+
+<figure class:list={['jdb-playground', className]} data-playground id={id}>
+  {controls.length > 0 && (
+    <fieldset class="jdb-playground__controls">
+      <legend>Try it</legend>
+      {controls.map((control, index) => (
+        <label class="jdb-playground__toggle">
+          <input type="checkbox" data-playground-control={index} checked={control.checked} />
+          <span>{control.label}</span>
+        </label>
+      ))}
+    </fieldset>
+  )}
+  <div class="jdb-playground__canvas" style={`height:${height}px`}>
+    <canvas role="img" aria-label={alt}>{alt}</canvas>
+    <p class="jdb-playground__status" data-playground-status>Loading chart…</p>
+  </div>
+  {caption && <figcaption class="jdb-playground__caption">{caption}</figcaption>}
+  {table && (
+    <details class="jdb-playground__data">
+      <summary>View the data</summary>
+      <div class="jdb-playground__table">
+        <table>
+          <thead>
+            <tr>{table.columns.map((column) => <th scope="col">{column}</th>)}</tr>
+          </thead>
+          <tbody>
+            {table.rows.map((row) => (
+              <tr>{row.map((cell, index) => (index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  )}
+  <script type="application/json" data-playground-config set:html={JSON.stringify(payload)} />
+</figure>
+
+<style>
+  .jdb-playground {
+    margin: var(--jdb-s-6) 0;
+    padding: var(--jdb-s-4);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-playground__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-2) var(--jdb-s-4);
+    margin: 0 0 var(--jdb-s-4);
+    padding: 0 0 var(--jdb-s-3);
+    border: 0;
+    border-bottom: 1px solid var(--jdb-line);
+  }
+
+  .jdb-playground__controls legend {
+    float: left;
+    margin-right: var(--jdb-s-2);
+    padding: 0;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-orange-400);
+    line-height: 1.9;
+  }
+
+  .jdb-playground__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--jdb-s-2);
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+    cursor: pointer;
+  }
+
+  .jdb-playground__toggle input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--jdb-orange-500);
+  }
+
+  .jdb-playground__canvas {
+    position: relative;
+  }
+
+  .jdb-playground__status {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-fg-muted);
+  }
+
+  .jdb-playground__status[hidden] {
+    display: none;
+  }
+
+  .jdb-playground__caption {
+    margin-top: var(--jdb-s-3);
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-playground__data {
+    margin-top: var(--jdb-s-3);
+    font-size: var(--jdb-fs-sm);
+  }
+
+  .jdb-playground__data summary {
+    cursor: pointer;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-fg-muted);
+  }
+
+  .jdb-playground__table {
+    overflow-x: auto;
+    margin-top: var(--jdb-s-2);
+  }
+
+  .jdb-playground__table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .jdb-playground__table th,
+  .jdb-playground__table td {
+    padding: var(--jdb-s-2) var(--jdb-s-3);
+    text-align: left;
+    border-bottom: 1px solid var(--jdb-line);
+  }
+
+  .jdb-playground__table thead th {
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-fg-muted);
+  }
+</style>
+
+<script>
+  import { loadChart, resolveCssVars, type ChartPluginName } from '../lib/chart-loader';
+
+  type Payload = {
+    config: Record<string, unknown>;
+    plugins: ChartPluginName[];
+    patches: Record<string, unknown>[];
+  };
+
+  const isObject = (value: unknown): value is Record<string, unknown> =>
+    Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+
+  // Objects merge key by key; arrays and plain values replace.
+  const merge = (base: unknown, patch: unknown): unknown => {
+    if (!isObject(base) || !isObject(patch)) return structuredClone(patch);
+    const result: Record<string, unknown> = { ...base };
+    for (const [key, value] of Object.entries(patch)) result[key] = merge(base[key], value);
+    return result;
+  };
+
+  const start = async (figure: HTMLElement) => {
+    const source = figure.querySelector('[data-playground-config]');
+    const canvas = figure.querySelector('canvas');
+    const status = figure.querySelector<HTMLElement>('[data-playground-status]');
+    if (!source?.textContent || !canvas) return;
+
+    const payload: Payload = JSON.parse(source.textContent);
+    const toggles = [...figure.querySelectorAll<HTMLInputElement>('[data-playground-control]')];
+
+    try {
+      const Chart = await loadChart(payload.plugins);
+      let chart: { destroy(): void } | undefined;
+
+      const render = () => {
+        const config = toggles
+          .filter((toggle) => toggle.checked)
+          .reduce((current, toggle) => merge(current, payload.patches[Number(toggle.dataset.playgroundControl)]), structuredClone(payload.config));
+        chart?.destroy();
+        chart = new Chart(canvas, resolveCssVars(config));
+      };
+
+      toggles.forEach((toggle) => toggle.addEventListener('change', render));
+      render();
+      if (status) status.hidden = true;
+    } catch (error) {
+      if (status) {
+        const hasTable = Boolean(figure.querySelector('.jdb-playground__data'));
+        status.textContent = `The interactive chart could not load.${hasTable ? ' Use “View the data” below.' : ''}`;
+      }
+      console.error(error);
+    }
+  };
+
+  const figures = document.querySelectorAll<HTMLElement>('[data-playground]');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          start(entry.target as HTMLElement);
+        });
+      },
+      { rootMargin: '200px 0px' },
+    );
+    figures.forEach((figure) => observer.observe(figure));
+  } else {
+    figures.forEach(start);
+  }
+</script>

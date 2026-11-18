@@ -1,12 +1,24 @@
 ---
-const { items = [] } = Astro.props;
+interface Props {
+  items?: { question: string; answer: string }[];
+  /** Section heading. */
+  title?: string;
+  /** Small label above the heading. */
+  eyebrow?: string;
+}
+
+const {
+  items = [],
+  title = 'Data visualization & storytelling FAQs',
+  eyebrow = 'common questions',
+} = Astro.props;
 ---
 
 <section class="jdb-section jdb-section--tight">
   <div class="jdb-container jdb-container--narrow">
     <div class="jdb-section__head jdb-section__head--center">
-      <p class="jdb-eyebrow">common questions</p>
-      <h2 class="jdb-section__title">Data visualization & storytelling FAQs</h2>
+      {eyebrow && <p class="jdb-eyebrow">{eyebrow}</p>}
+      <h2 class="jdb-section__title">{title}</h2>
     </div>
 
     {items.length > 0 && (

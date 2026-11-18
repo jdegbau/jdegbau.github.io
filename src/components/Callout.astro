@@ -1,0 +1,72 @@
+---
+/**
+ * Highlighted aside for tips, warnings, notes, and "why this works" insights.
+ * Uses the shared `.jdb-callout` styles in main.css (section 22).
+ * Body content goes in the default slot (markdown works inside MDX).
+ */
+type CalloutType = 'insight' | 'tip' | 'warning' | 'note';
+
+interface Props {
+  type?: CalloutType;
+  /** Optional heading. Defaults to a label based on `type`. */
+  title?: string;
+  class?: string;
+}
+
+// Maps each type to its main.css variant (insight uses the default orange box).
+const variants: Record<CalloutType, { modifier?: string; title: string; glyph: string }> = {
+  insight: { title: 'Why this works', glyph: '→' },
+  tip: { modifier: 'jdb-callout--tip', title: 'Tip', glyph: '✓' },
+  warning: { modifier: 'jdb-callout--warn', title: 'Watch out', glyph: '!' },
+  note: { modifier: 'jdb-callout--quiet', title: 'Note', glyph: 'i' },
+};
+
+const { type = 'note', title, class: className } = Astro.props;
+const variant = variants[type];
+const heading = title ?? variant.title;
+---
+
+<aside class:list={['jdb-callout', 'jdb-callout-block', variant.modifier, className]} aria-label={heading}>
+  <span class="jdb-callout__icon jdb-callout-block__glyph" aria-hidden="true">{variant.glyph}</span>
+  <div class="jdb-callout-block__content">
+    <p class="jdb-callout__title">{heading}</p>
+    <div class="jdb-callout-block__body">
+      <slot />
+    </div>
+  </div>
+</aside>
+
+<style>
+  .jdb-callout-block {
+    margin: var(--jdb-s-5) 0;
+  }
+
+  .jdb-callout-block__glyph {
+    display: grid;
+    place-items: center;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    font-family: var(--jdb-font-mono);
+    font-size: 0.7rem;
+    font-weight: var(--jdb-fw-bold);
+    line-height: 1;
+  }
+
+  .jdb-callout-block__content {
+    min-width: 0;
+  }
+
+  .jdb-callout-block__body {
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-callout-block__body > :global(* + *) {
+    margin-top: var(--jdb-s-2);
+  }
+
+  .jdb-callout-block__body :global(ul),
+  .jdb-callout-block__body :global(ol) {
+    margin-bottom: 0;
+  }
+</style>
