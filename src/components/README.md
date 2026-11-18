@@ -8,6 +8,23 @@ This folder contains the reusable Astro UI components for the site.
 - If a component already exists but needs a new variant, extend it carefully rather than creating a duplicate.
 - Add new components here and also show them on the components showcase page at `src/pages/components.astro`.
 
+## Writing posts with components (MDX)
+Plain `.md` posts can't contain components. A post that embeds components is a `.mdx` file in `src/content/blog/`, with the same front matter as any other post. Import components at the top, below the front matter:
+
+```mdx
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip">
+Markdown works **inside** components.
+</Callout>
+```
+
+Leave a blank line between a component tag and the markdown inside it, as in the `Steps` example below.
+
+Front matter options handled by the post template (`src/pages/blog/[slug].astro`), so they need no import:
+- `faq`: a list of `{ question, answer }` (answers may contain simple HTML). Renders `FAQAccordion` at the end of the post and adds matching FAQPage schema.
+- `series` + `seriesOrder`: renders `PostSeriesNav` at the end of the post.
+
 ## Current components
 
 ### AuthorBox
@@ -50,7 +67,9 @@ Purpose: Reusable FAQ accordion for post-level or site-wide Q&A sections.
 Location: `src/components/FAQAccordion.astro`
 Notes:
 - Accepts an `items` prop with `question` and `answer` fields.
+- Optional `title` and `eyebrow` props set the heading text (defaults keep the data-viz guide wording).
 - Uses native `<details>/<summary>` for accessible, theme-consistent expansion.
+- On blog posts, prefer the `faq` front matter field: the template renders this component and the FAQPage schema from the same items.
 
 ### CodeBlock
 Purpose: Styling wrapper for code snippets.
@@ -143,6 +162,107 @@ Purpose: Site-wide search trigger and modal panel.
 Location: `src/components/Search.astro`
 Notes:
 - Shared across pages.
+
+### SummaryCard
+Purpose: At-a-glance summary block: title, one-line definition, and labeled rows.
+Location: `src/components/SummaryCard.astro`
+Notes:
+- Props: `title`, `definition?`, `eyebrow?` (default `tl;dr`), `items?: { label, value, tone? }[]`.
+- `tone` is `good | warn | bad | neutral` and colors the row with the status tokens. `value` accepts simple HTML.
+- Optional default slot (a mini chart, image) sits beside the text when there's room and stacks below it when there isn't.
+- Examples: Use it when / Avoid it when / Best alternative; Pros / Cons / Verdict.
+
+### Callout
+Purpose: Aside for tips, warnings, notes, and "why this works" insights.
+Location: `src/components/Callout.astro`
+Notes:
+- Props: `type?: insight | tip | warning | note` (default `note`), `title?`.
+- Wraps the existing `.jdb-callout` styles in `main.css` (section 22): insight uses the default orange box, tip uses `--tip`, warning uses `--warn`, note uses `--quiet`.
+- Body is the default slot; markdown works inside it in MDX.
+
+### Steps
+Purpose: Numbered how-to steps on a connecting rail.
+Location: `src/components/Steps.astro`
+Notes:
+- Wrap a normal ordered list (a markdown `1.` list in MDX). A bold phrase at the start of an item reads as the step title.
+- Optional `label` names the group for screen readers.
+- Images inside items get spacing and rounded corners.
+
+```mdx
+<Steps label="How to read a Sankey chart">
+
+1. **Start at the left.** Each node is a starting group.
+2. **Follow the widest band.** Width is quantity.
+
+</Steps>
+```
+
+### Tabs + TabPanel
+Purpose: Accessible tabbed content (instructions per tool, code in several languages).
+Location: `src/components/Tabs.astro`, `src/components/TabPanel.astro`
+Notes:
+- `<Tabs label="Build it in" group="build-tool">` wraps `<TabPanel label="Excel">…</TabPanel>` children.
+- Without JavaScript the panels stack under their labels. With it, an ARIA tablist is built (arrow keys, Home, End).
+- Tab groups that share a `group` switch together, and the choice is remembered in `localStorage` (safe if storage is blocked).
+- CSS classes use the `jdb-tabset` prefix; `jdb-tabs` belongs to the header navigation.
+
+### BeforeAfter
+Purpose: Before/after comparison of any two visuals, with a "What changed" caption.
+Location: `src/components/BeforeAfter.astro`
+Notes:
+- Images: `before` / `after` props as `{ src, alt, width?, height? }`. Other content (charts, code): the `before` and `after` named slots.
+- `beforeLabel` / `afterLabel` default to Before / After. `caption` explains the change.
+- `layout="slider"` (images only) overlays the two images with a draggable, keyboard-accessible divider. It falls back to side by side without JavaScript. Use two images of the same size.
+- Side by side when each pane gets about 16rem, stacked otherwise.
+
+### AnnotatedFigure
+Purpose: Figure with numbered callout markers and a matching numbered legend.
+Location: `src/components/AnnotatedFigure.astro`
+Notes:
+- Props: `src` + `alt` (alt is required when `src` is set), or a default slot for inline SVG; `callouts: { x, y, title, text? }[]`; `caption?`.
+- `x` and `y` are percentages from the visual's top-left corner. The legend carries the meaning, so markers are decorative for screen readers.
+- Use for chart anatomy, UI teardowns, annotated screenshots.
+
+### DownloadCard
+Purpose: Card offering one or more downloads (cheat sheets, datasets, templates).
+Location: `src/components/DownloadCard.astro`
+Notes:
+- Props: `title`, `description?`, `files: { label, href, format, size? }[]`. The first file gets the primary button.
+- Local files go in `public/assets/downloads/` and get the `download` attribute. External links (e.g. a Google Sheets copy link) open in a new tab.
+
+### VideoEmbed
+Purpose: Privacy-friendly, click-to-load YouTube embed with VideoObject schema.
+Location: `src/components/VideoEmbed.astro`
+Notes:
+- Props: `youtubeId`, `title`, `description`, `uploadDate` (ISO date), `duration?` (ISO 8601, e.g. `PT8M30S`), `chapters?: { start, title }[]` (start in seconds).
+- Shows the thumbnail until clicked, then loads a `youtube-nocookie.com` iframe. Chapter buttons start playback at that time.
+- Emits its own VideoObject JSON-LD, with chapters as `Clip` parts.
+
+### PostSeriesNav
+Purpose: Previous/next links and the numbered list of parts for a multi-part series.
+Location: `src/components/PostSeriesNav.astro`
+Notes:
+- Props: `series`, `current` (slug of the post being viewed).
+- Posts join a series with `series` + `seriesOrder` front matter. The post template renders this automatically.
+- Renders nothing until two or more posts share the series.
+
+### RelatedPosts
+Purpose: Grid of related posts ranked by shared tags.
+Location: `src/components/RelatedPosts.astro`
+Notes:
+- Props: `current?` (slug to exclude), `tags?` (defaults to the current post's tags), `limit?` (default 3), `title?` (default "Keep reading").
+- Falls back to the newest posts when nothing matches. Renders `BlogCard`.
+
+### ChartPlayground
+Purpose: Live Chart.js chart with toggles that show what a design choice does. (Chart-specific.)
+Location: `src/components/ChartPlayground.astro`, loader in `src/lib/chart-loader.ts`
+Notes:
+- Props: `id`, `type`, `data`, `options?`, `plugins?: ('sankey' | 'treemap')[]`, `controls?: { label, patch, checked? }[]`, `alt` (required text description), `caption?`, `table?: { columns, rows }`, `height?` (px, default 360).
+- Each control is a checkbox; when it's on, its `patch` is deep-merged into the config (objects merge, arrays replace, so patch a whole `datasets` array).
+- Config is plain JSON: no functions or scriptable options. Colors can be site tokens written as `"var(--jdb-orange-500)"`.
+- Chart.js 4.6.1 and plugins load once per page from jsDelivr with SRI, lazily when the chart nears the viewport. The site's dark theme defaults are applied, and animation is off for `prefers-reduced-motion`.
+- To upgrade a library, edit the pinned URL and hash in `src/lib/chart-loader.ts` (instructions are in the file).
+- `table` adds a "View the data" panel for screen readers, and as a fallback if the chart can't load.
 
 ## Component creation checklist
 When adding a new component:

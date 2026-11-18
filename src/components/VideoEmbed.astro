@@ -1,0 +1,243 @@
+---
+/**
+ * Privacy-friendly, lazy YouTube embed. Shows the thumbnail and a play button;
+ * the youtube-nocookie iframe only loads after a click. Emits VideoObject
+ * structured data (with chapters as Clip parts when given).
+ */
+interface Chapter {
+  /** Start time in seconds. */
+  start: number;
+  title: string;
+}
+
+interface Props {
+  youtubeId: string;
+  title: string;
+  description: string;
+  /** ISO date the video was published, e.g. 2026-12-01. */
+  uploadDate: string;
+  /** ISO 8601 duration, e.g. PT8M30S. */
+  duration?: string;
+  chapters?: Chapter[];
+  class?: string;
+}
+
+const { youtubeId, title, description, uploadDate, duration, chapters = [], class: className } = Astro.props;
+
+if (!/^[\w-]{11}$/.test(youtubeId)) {
+  throw new Error(`VideoEmbed: "${youtubeId}" is not a YouTube video id`);
+}
+
+const watchUrl = `https://www.youtube.com/watch?v=${youtubeId}`;
+const embedUrl = `https://www.youtube-nocookie.com/embed/${youtubeId}`;
+const thumbnail = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+const sorted = [...chapters].sort((a, b) => a.start - b.start);
+
+const formatTime = (seconds: number) => {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+  return h ? `${h}:${m.toString().padStart(2, '0')}:${s}` : `${m}:${s}`;
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: title,
+  description,
+  thumbnailUrl: [thumbnail],
+  uploadDate,
+  duration,
+  embedUrl,
+  contentUrl: watchUrl,
+  hasPart: sorted.length
+    ? sorted.map((chapter, index) => ({
+        '@type': 'Clip',
+        name: chapter.title,
+        startOffset: chapter.start,
+        endOffset: sorted[index + 1]?.start,
+        url: `${watchUrl}&t=${chapter.start}`,
+      }))
+    : undefined,
+};
+---
+
+<figure class:list={['jdb-video', className]} data-video={youtubeId} data-video-title={title}>
+  <div class="jdb-video__frame">
+    <button class="jdb-video__play" type="button" data-video-start="0">
+      <img src={thumbnail} alt="" width="480" height="360" loading="lazy" decoding="async" />
+      <span class="jdb-video__icon" aria-hidden="true"></span>
+      <span class="jdb-video__sr">Play video: {title}</span>
+    </button>
+  </div>
+  <figcaption class="jdb-video__caption">
+    <span>{title}</span>
+    <a href={watchUrl} target="_blank" rel="noopener" class="jdb-video__external">Watch on YouTube</a>
+  </figcaption>
+  {sorted.length > 0 && (
+    <ol class="jdb-video__chapters" aria-label="Chapters">
+      {sorted.map((chapter) => (
+        <li>
+          <button type="button" data-video-start={chapter.start}>
+            <span class="jdb-video__time">{formatTime(chapter.start)}</span>
+            {chapter.title}
+          </button>
+        </li>
+      ))}
+    </ol>
+  )}
+</figure>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .jdb-video {
+    margin: var(--jdb-s-6) 0;
+  }
+
+  .jdb-video__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--jdb-navy-900);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-video__frame :global(iframe),
+  .jdb-video__play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .jdb-video__play {
+    padding: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .jdb-video__play img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity var(--jdb-t-fast);
+  }
+
+  .jdb-video__play:hover img,
+  .jdb-video__play:focus-visible img {
+    opacity: 1;
+  }
+
+  .jdb-video__play:focus-visible {
+    outline: 3px solid var(--jdb-orange-400);
+    outline-offset: -3px;
+  }
+
+  .jdb-video__icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4.5rem;
+    height: 3.25rem;
+    transform: translate(-50%, -50%);
+    border-radius: var(--jdb-r-lg);
+    background: var(--jdb-orange-500);
+    box-shadow: var(--jdb-sh-sm);
+  }
+
+  .jdb-video__icon::after {
+    content: '';
+    position: absolute;
+    left: 54%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 0.7rem 0 0.7rem 1.15rem;
+    border-color: transparent transparent transparent var(--jdb-on-orange);
+  }
+
+  .jdb-video__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .jdb-video__caption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--jdb-s-2);
+    margin-top: var(--jdb-s-2);
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-video__external {
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+  }
+
+  .jdb-video__chapters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-2);
+    margin: var(--jdb-s-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .jdb-video__chapters li {
+    margin: 0;
+  }
+
+  .jdb-video__chapters button {
+    display: inline-flex;
+    gap: var(--jdb-s-2);
+    padding: var(--jdb-s-1) var(--jdb-s-3);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-fg-dim);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-pill);
+    cursor: pointer;
+  }
+
+  .jdb-video__chapters button:hover {
+    color: var(--jdb-fg);
+    border-color: var(--jdb-orange-500);
+  }
+
+  .jdb-video__time {
+    font-family: var(--jdb-font-mono);
+    color: var(--jdb-orange-400);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-video]').forEach((figure) => {
+    const id = figure.dataset.video;
+    const frame = figure.querySelector<HTMLElement>('.jdb-video__frame');
+    if (!id || !frame) return;
+
+    const load = (start: number) => {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&start=${start}`;
+      iframe.title = figure.dataset.videoTitle ?? 'YouTube video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.replaceChildren(iframe);
+      iframe.focus();
+    };
+
+    figure.querySelectorAll<HTMLButtonElement>('[data-video-start]').forEach((button) => {
+      button.addEventListener('click', () => load(Number(button.dataset.videoStart) || 0));
+    });
+  });
+</script>

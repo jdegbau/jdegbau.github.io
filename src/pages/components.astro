@@ -13,6 +13,18 @@ import QuickCompareMatrix from '../components/QuickCompareMatrix.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import Logos from '../components/Logos.astro';
+import SummaryCard from '../components/SummaryCard.astro';
+import Callout from '../components/Callout.astro';
+import Steps from '../components/Steps.astro';
+import Tabs from '../components/Tabs.astro';
+import TabPanel from '../components/TabPanel.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import AnnotatedFigure from '../components/AnnotatedFigure.astro';
+import DownloadCard from '../components/DownloadCard.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import PostSeriesNav from '../components/PostSeriesNav.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+import ChartPlayground from '../components/ChartPlayground.astro';
 import { getAllPosts } from '../lib/posts';
 
 // Use a real post so the BlogCard example always reflects live data.
@@ -42,6 +54,40 @@ const sampleTocItems = [
   { id: 'component-contactform', text: 'ContactForm', level: 2 },
   { id: 'component-tableofcontents', text: 'TableOfContents', level: 2 },
 ];
+
+// Sample flows for the ChartPlayground demo: traffic source → landing page → outcome.
+const sankeyFlows = [
+  { from: 'Search', to: 'Blog', flow: 320 },
+  { from: 'Search', to: 'Pricing', flow: 120 },
+  { from: 'Search', to: 'Home', flow: 80 },
+  { from: 'Social', to: 'Blog', flow: 140 },
+  { from: 'Social', to: 'Home', flow: 40 },
+  { from: 'Email', to: 'Pricing', flow: 90 },
+  { from: 'Email', to: 'Home', flow: 50 },
+  { from: 'Direct', to: 'Home', flow: 110 },
+  { from: 'Direct', to: 'Pricing', flow: 50 },
+  { from: 'Blog', to: 'Signed up', flow: 60 },
+  { from: 'Blog', to: 'Left', flow: 400 },
+  { from: 'Pricing', to: 'Signed up', flow: 140 },
+  { from: 'Pricing', to: 'Left', flow: 120 },
+  { from: 'Home', to: 'Signed up', flow: 50 },
+  { from: 'Home', to: 'Left', flow: 230 },
+];
+const tinyFlows = ['Referral', 'Partners', 'Podcast', 'Ads'].flatMap((source) => [
+  { from: source, to: 'Blog', flow: 12 },
+  { from: source, to: 'Home', flow: 9 },
+]);
+const sankeyDataset = (flows: typeof sankeyFlows, colors: Record<string, string>) => ({
+  label: 'Visitors',
+  data: flows,
+  color: 'var(--jdb-fg)',
+  borderWidth: 0,
+  nodeWidth: 12,
+  nodePadding: 18,
+  ...colors,
+});
+const calmColors = { colorFrom: 'var(--jdb-navy-600)', colorTo: 'var(--jdb-navy-600)', colorMode: 'from', alpha: 0.45 };
+const loudColors = { colorFrom: 'var(--jdb-orange-500)', colorTo: 'var(--jdb-good)', colorMode: 'gradient', alpha: 0.6 };
 
 const sampleMatrixRows = [
   { chartType: 'Line', trends: 'Ideal', compare: 'Capable', composition: 'Poor', distribution: 'Poor', bestFor: 'Traffic over time, ranking trends' },
@@ -276,6 +322,212 @@ const sampleMatrixRows = [
         </div>
       </div>
     </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="jdb-section__head">
+          <span class="jdb-eyebrow">content building blocks</span>
+          <h2 id="content-building-blocks">Post components</h2>
+          <p class="jdb-section__sub">Generic pieces for long-form posts. Use them in <code>.mdx</code> posts; see the README for props.</p>
+        </div>
+        <div class="component-grid">
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-summarycard">SummaryCard</h2>
+            </div>
+            <SummaryCard
+              title="Sankey chart"
+              definition="A flow diagram where band width shows how much moves from one stage to the next."
+              items={[
+                { label: 'Use it when', value: 'You need to show where a total goes, and where it is lost.', tone: 'good' },
+                { label: 'Avoid it when', value: 'Flows loop back or there are more than ~25 of them.', tone: 'bad' },
+                { label: 'Best alternative', value: 'A <strong>funnel</strong> for a single path, a stacked bar for shares.', tone: 'neutral' },
+              ]}
+            />
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-callout">Callout</h2>
+            </div>
+            <Callout type="insight">
+              <p>One highlighted flow among grey ones is found instantly. The odd one out gets remembered (the Von Restorff effect).</p>
+            </Callout>
+            <Callout type="tip"><p>Sort nodes by size to reduce crossing bands.</p></Callout>
+            <Callout type="warning"><p>Never use two colours that differ only in red versus green.</p></Callout>
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-steps">Steps</h2>
+            </div>
+            <Steps label="How to read a Sankey chart">
+              <ol>
+                <li><strong>Start at the left.</strong> Each node is a starting group, sized by its total.</li>
+                <li><strong>Follow the widest band.</strong> Width is quantity, so the biggest flow is the main story.</li>
+                <li><strong>Check where flows end.</strong> The right-hand nodes are outcomes; compare their sizes.</li>
+              </ol>
+            </Steps>
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-tabs">Tabs + TabPanel</h2>
+            </div>
+            <Tabs label="Build it in" group="demo-tool">
+              <TabPanel label="Python">
+                <p>Use <code>plotly.graph_objects.Sankey</code> with lists of source, target and value.</p>
+              </TabPanel>
+              <TabPanel label="Google Sheets">
+                <p>Sheets has no native Sankey. Use a free add-on, or export the data to a no-code tool.</p>
+              </TabPanel>
+              <TabPanel label="No-code">
+                <p>Paste the three columns into Flourish or RAWGraphs and pick the Sankey template.</p>
+              </TabPanel>
+            </Tabs>
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-downloadcard">DownloadCard</h2>
+            </div>
+            <DownloadCard
+              title="Practice dataset"
+              description="Five channels and their visits, ready to chart in any tool."
+              files={[
+                { label: 'Download CSV', href: '/assets/downloads/sample-channel-visits.csv', format: 'CSV', size: '1 KB' },
+              ]}
+            />
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-postseriesnav">PostSeriesNav</h2>
+            </div>
+            <p class="jdb-section__sub">Renders previous/next and the full list of parts when two or more posts share a <code>series</code> in front matter. No series is published yet, so nothing shows below.</p>
+            <PostSeriesNav series="Chart by Chart" current="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-grid">
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-beforeafter">BeforeAfter</h2>
+            </div>
+            <BeforeAfter
+              before={{ src: '/assets/img/components/sample-chart-before.svg', alt: 'Unsorted rainbow bar chart of visits by channel with heavy gridlines and a legend', width: 640, height: 360 }}
+              after={{ src: '/assets/img/components/sample-chart-after.svg', alt: 'Sorted bar chart of visits by channel with Search highlighted in orange and direct labels', width: 640, height: 360 }}
+              caption="Sorted the bars, removed the legend and gridlines, labeled values directly, and highlighted the one bar the title talks about."
+            />
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2>BeforeAfter (slider)</h2>
+            </div>
+            <BeforeAfter
+              layout="slider"
+              before={{ src: '/assets/img/components/sample-chart-before.svg', alt: 'Cluttered version of the channel chart', width: 640, height: 360 }}
+              after={{ src: '/assets/img/components/sample-chart-after.svg', alt: 'Clean version of the channel chart', width: 640, height: 360 }}
+              caption="Drag, or focus the slider and use the arrow keys."
+            />
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-annotatedfigure">AnnotatedFigure</h2>
+            </div>
+            <AnnotatedFigure
+              src="/assets/img/components/sample-chart-after.svg"
+              alt="Bar chart of visits by channel, sorted, with Search highlighted"
+              width={640}
+              height={360}
+              callouts={[
+                { x: 57, y: 10, title: 'Insight title', text: 'States the takeaway, not the topic.' },
+                { x: 5, y: 50, title: 'Sorted bars', text: 'Largest first, so rank reads top to bottom.' },
+                { x: 95, y: 31, title: 'Direct labels', text: 'Values sit on the bars; no legend lookup.' },
+              ]}
+              caption="Anatomy of a clean bar chart."
+            />
+          </div>
+
+          <div class="component-card">
+            <div class="component-card__head">
+              <span class="jdb-eyebrow">component</span>
+              <h2 id="component-videoembed">VideoEmbed</h2>
+            </div>
+            <VideoEmbed
+              youtubeId="aqz-KE-bpKQ"
+              title="Sample video embed"
+              description="Demonstrates the click-to-load YouTube embed with chapters."
+              uploadDate="2014-11-10"
+              duration="PT10M34S"
+              chapters={[
+                { start: 0, title: 'Intro' },
+                { start: 95, title: 'The meadow' },
+                { start: 420, title: 'Finale' },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component · chart-specific</span>
+            <h2 id="component-chartplayground">ChartPlayground</h2>
+          </div>
+          <div class="playground-demo">
+            <ChartPlayground
+              id="demo-sankey"
+              type="sankey"
+              plugins={['sankey']}
+              data={{ datasets: [sankeyDataset(sankeyFlows, calmColors)] }}
+              controls={[
+                { label: 'Add 8 tiny flows', patch: { data: { datasets: [sankeyDataset([...sankeyFlows, ...tinyFlows], calmColors)] } } },
+                { label: 'Rainbow gradient', patch: { data: { datasets: [sankeyDataset(sankeyFlows, loudColors)] } } },
+              ]}
+              alt="Sankey chart of 1,000 visitors flowing from four traffic sources to three landing pages, then to signed up or left. Blog gets the most visitors but Pricing produces the most sign-ups."
+              caption="Toggle the clutter on and off to see why a Sankey needs few, meaningful flows."
+              table={{
+                columns: ['From', 'To', 'Visitors'],
+                rows: sankeyFlows.map((flow) => [flow.from, flow.to, flow.flow]),
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2 id="component-relatedposts">RelatedPosts</h2>
+          </div>
+          <div class="playground-demo">
+            <RelatedPosts current={samplePost?.slug} />
+          </div>
+        </div>
+      </div>
+    </section>
   </article>
 
 </BaseLayout>
@@ -331,6 +583,10 @@ const sampleMatrixRows = [
 
   .component-card h2 {
     margin: 0;
+  }
+
+  .playground-demo {
+    padding: 0 var(--jdb-s-5) var(--jdb-s-5);
   }
 
   .image-demo {

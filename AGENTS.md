@@ -19,6 +19,8 @@ Before creating a new reusable UI component, read and follow the guidance in:
 
 ## File conventions
 - Place reusable UI in `src/components/*.astro`.
+- Blog posts live in `src/content/blog/`. Use `.mdx` for a post that embeds components and plain `.md` otherwise (see "Writing posts with components" in `src/components/README.md`).
+- Check `public/assets/css/main.css` for an existing class or pattern before adding styles, and avoid reusing its class names (e.g. `jdb-tabs` is the header nav).
 - Keep page-specific logic in pages or layouts when possible.
 - Use the existing site design tokens (`--jdb-*`) and layout classes from the current codebase.
 - Favor clear, explicit prop names over hardcoded assumptions.

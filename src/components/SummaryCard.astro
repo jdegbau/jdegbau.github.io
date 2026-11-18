@@ -1,0 +1,127 @@
+---
+/**
+ * At-a-glance summary: a title, a one-line definition, and labeled rows
+ * (e.g. Use it when / Avoid it when / Best alternative, or Pros / Cons / Verdict).
+ * The default slot is optional extra content such as a mini demo or image.
+ */
+type Tone = 'good' | 'warn' | 'bad' | 'neutral';
+
+interface Props {
+  title: string;
+  definition?: string;
+  /** Small label above the title. */
+  eyebrow?: string;
+  items?: { label: string; value: string; tone?: Tone }[];
+  class?: string;
+}
+
+const { title, definition, eyebrow = 'tl;dr', items = [], class: className } = Astro.props;
+const hasSlot = Astro.slots.has('default');
+---
+
+<section class:list={['jdb-summary', { 'jdb-summary--media': hasSlot }, className]} aria-label={title}>
+  <div class="jdb-summary__body">
+    {eyebrow && <p class="jdb-summary__eyebrow">{eyebrow}</p>}
+    <p class="jdb-summary__title">{title}</p>
+    {definition && <p class="jdb-summary__definition">{definition}</p>}
+    {items.length > 0 && (
+      <dl class="jdb-summary__items">
+        {items.map((item) => (
+          <div class={`jdb-summary__item jdb-summary__item--${item.tone ?? 'neutral'}`}>
+            <dt>{item.label}</dt>
+            <dd set:html={item.value} />
+          </div>
+        ))}
+      </dl>
+    )}
+  </div>
+  {hasSlot && (
+    <div class="jdb-summary__media">
+      <slot />
+    </div>
+  )}
+</section>
+
+<style>
+  /* Body and optional media sit side by side when there is room, and stack in narrow columns. */
+  .jdb-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--jdb-s-5);
+    margin: var(--jdb-s-6) 0;
+    padding: var(--jdb-s-5);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-top: 3px solid var(--jdb-orange-500);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-summary__body {
+    flex: 1.2 1 18rem;
+    min-width: 0;
+  }
+
+  .jdb-summary__media {
+    flex: 1 1 16rem;
+    min-width: 0;
+  }
+
+  .jdb-summary__eyebrow {
+    margin: 0 0 var(--jdb-s-1);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-orange-400);
+  }
+
+  .jdb-summary__title {
+    margin: 0;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-lg);
+    font-weight: var(--jdb-fw-bold);
+    line-height: var(--jdb-lh-snug);
+    color: var(--jdb-fg);
+  }
+
+  .jdb-summary__definition {
+    margin: var(--jdb-s-2) 0 0;
+    font-size: var(--jdb-fs-md);
+    color: var(--jdb-fg);
+  }
+
+  .jdb-summary__items {
+    display: grid;
+    gap: var(--jdb-s-3);
+    margin: var(--jdb-s-4) 0 0;
+  }
+
+  .jdb-summary__item {
+    --_tone: var(--jdb-fg-muted);
+    padding-left: var(--jdb-s-3);
+    border-left: 3px solid var(--_tone);
+  }
+
+  .jdb-summary__item--good { --_tone: var(--jdb-good); }
+  .jdb-summary__item--warn { --_tone: var(--jdb-warn); }
+  .jdb-summary__item--bad { --_tone: var(--jdb-bad); }
+
+  .jdb-summary__item dt {
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--_tone);
+  }
+
+  .jdb-summary__item dd {
+    margin: 2px 0 0;
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-summary__media :global(img),
+  .jdb-summary__media :global(svg),
+  .jdb-summary__media :global(canvas) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

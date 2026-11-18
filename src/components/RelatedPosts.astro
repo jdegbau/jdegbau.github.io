@@ -1,0 +1,61 @@
+---
+/**
+ * Grid of related posts, ranked by how many tags they share with `tags`
+ * (newest first on ties). Falls back to the newest posts when nothing matches.
+ * Renders each post with BlogCard.
+ */
+import BlogCard from './BlogCard.astro';
+import { getAllPosts } from '../lib/posts';
+
+interface Props {
+  /** Slug of the post being viewed, so it is left out. */
+  current?: string;
+  /** Tags to match. Defaults to the current post's tags. */
+  tags?: string[];
+  limit?: number;
+  title?: string;
+  class?: string;
+}
+
+const { current, tags, limit = 3, title = 'Keep reading', class: className } = Astro.props;
+
+const posts = await getAllPosts();
+const self = posts.find((post) => post.slug === current);
+const wanted = new Set((tags ?? self?.tags ?? []).map((tag) => tag.toLowerCase()));
+
+const related = posts
+  .filter((post) => post.slug !== current)
+  .map((post) => ({ post, score: post.tags.filter((tag) => wanted.has(tag.toLowerCase())).length }))
+  .sort((a, b) => b.score - a.score || b.post.date.localeCompare(a.post.date))
+  .slice(0, limit)
+  .map(({ post }) => post);
+---
+
+{related.length > 0 && (
+  <section class:list={['jdb-related', className]} aria-label={title}>
+    <p class="jdb-related__title">{title}</p>
+    <div class="jdb-related__grid">
+      {related.map((post) => <BlogCard post={post} />)}
+    </div>
+  </section>
+)}
+
+<style>
+  .jdb-related {
+    margin: var(--jdb-s-7) 0;
+  }
+
+  .jdb-related__title {
+    margin: 0 0 var(--jdb-s-4);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-lg);
+    font-weight: var(--jdb-fw-bold);
+    color: var(--jdb-fg);
+  }
+
+  .jdb-related__grid {
+    display: grid;
+    gap: var(--jdb-s-5);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  }
+</style>

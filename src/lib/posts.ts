@@ -22,6 +22,9 @@ export interface Post {
   tags: string[];
   keywords: string[];
   readingTime: number;
+  series?: string;
+  seriesOrder?: number;
+  faq: { question: string; answer: string }[];
   entry: BlogEntry;
 }
 
@@ -57,6 +60,9 @@ function toPost(entry: BlogEntry): Post {
     tags: data.tags,
     keywords: data.keywords ?? data.tags,
     readingTime: data.readingTime ?? Math.max(1, Math.ceil(countWords(entry.body ?? '') / 260)),
+    series: data.series,
+    seriesOrder: data.seriesOrder,
+    faq: data.faq ?? [],
     entry,
   };
 }
@@ -86,8 +92,15 @@ const decodeEntities = (text: string) =>
  * Headings (with ids) from the post's rendered HTML. Unlike Astro's built-in
  * heading list, this also picks up headings written as raw HTML in markdown.
  */
-export function getHeadings(post: Post): PostHeading[] {
+export function getHeadings(
+  post: Post,
+  /** Headings from `render()`. Used for MDX posts, which have no pre-rendered HTML. */
+  fallback: { depth: number; slug: string; text: string }[] = [],
+): PostHeading[] {
   const html = post.entry.rendered?.html ?? '';
+  if (!html) {
+    return fallback.map((heading) => ({ level: heading.depth, id: heading.slug, text: heading.text }));
+  }
   return [...html.matchAll(/<h([1-6])\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/gi)].map((match) => ({
     level: Number(match[1]),
     id: match[2],

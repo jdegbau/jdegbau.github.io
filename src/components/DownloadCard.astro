@@ -1,0 +1,117 @@
+---
+/**
+ * Card offering one or more downloads: cheat sheets, datasets, templates.
+ * Local files belong in public/assets/downloads/. External links (e.g. a
+ * Google Sheets "make a copy" URL) open in a new tab.
+ */
+interface DownloadFile {
+  label: string;
+  href: string;
+  /** Short format tag shown on the button, e.g. "PDF", "CSV", "Sheets". */
+  format: string;
+  /** Optional human-readable size, e.g. "120 KB". */
+  size?: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  files: DownloadFile[];
+  class?: string;
+}
+
+const { title, description, files, class: className } = Astro.props;
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+<section class:list={['jdb-download', className]} aria-label={title}>
+  <div class="jdb-download__text">
+    <p class="jdb-download__eyebrow">free download</p>
+    <p class="jdb-download__title">{title}</p>
+    {description && <p class="jdb-download__description">{description}</p>}
+  </div>
+  <ul class="jdb-download__files">
+    {files.map((file, index) => (
+      <li>
+        <a
+          class:list={['jdb-btn', 'jdb-btn--sm', index === 0 ? 'jdb-btn--primary' : 'jdb-btn--outline', { 'jdb-btn--outbound': isExternal(file.href) }]}
+          href={file.href}
+          download={isExternal(file.href) ? undefined : ''}
+          target={isExternal(file.href) ? '_blank' : undefined}
+          rel={isExternal(file.href) ? 'noopener' : undefined}
+        >
+          <span class="jdb-download__format">{file.format}</span>
+          <span>{file.label}</span>
+          {file.size && <span class="jdb-download__size">{file.size}</span>}
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  /* Text and buttons sit side by side when there is room, and stack in narrow columns. */
+  .jdb-download {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--jdb-s-4) var(--jdb-s-5);
+    margin: var(--jdb-s-6) 0;
+    padding: var(--jdb-s-5);
+    background: linear-gradient(135deg, var(--jdb-orange-a10), transparent 60%), var(--jdb-surface);
+    border: 1px solid var(--jdb-line-strong);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-download__text {
+    flex: 1 1 18rem;
+    min-width: 0;
+  }
+
+  .jdb-download__eyebrow {
+    margin: 0;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-orange-400);
+  }
+
+  .jdb-download__title {
+    margin: var(--jdb-s-1) 0 0;
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-lg);
+    font-weight: var(--jdb-fw-bold);
+    color: var(--jdb-fg);
+  }
+
+  .jdb-download__description {
+    margin: var(--jdb-s-2) 0 0;
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-download__files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .jdb-download__files li {
+    margin: 0;
+  }
+
+  .jdb-download__format {
+    padding: 1px 6px;
+    border-radius: var(--jdb-r-sm);
+    background: rgba(0, 0, 0, 0.18);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+
+  .jdb-download__size {
+    opacity: 0.75;
+    font-weight: var(--jdb-fw-normal);
+  }
+</style>

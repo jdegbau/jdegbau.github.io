@@ -1,0 +1,219 @@
+---
+/**
+ * Before/after comparison of any two visuals.
+ *
+ * Images:  <BeforeAfter before={{ src, alt }} after={{ src, alt }} caption="…" />
+ * Anything else (charts, code, SVG): use the `before` and `after` named slots.
+ *
+ * `layout="slider"` overlays two same-size images with a draggable,
+ * keyboard-accessible divider. Without JavaScript, and for slotted content,
+ * it falls back to side by side.
+ */
+interface Visual {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+interface Props {
+  before?: Visual;
+  after?: Visual;
+  beforeLabel?: string;
+  afterLabel?: string;
+  /** What changed, in one or two sentences. */
+  caption?: string;
+  layout?: 'side' | 'slider';
+  class?: string;
+}
+
+const {
+  before,
+  after,
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+  caption,
+  layout = 'side',
+  class: className,
+} = Astro.props;
+
+const canSlide = layout === 'slider' && Boolean(before && after);
+---
+
+<figure class:list={['jdb-beforeafter', className]} data-beforeafter={canSlide ? 'slider' : undefined}>
+  <div class="jdb-beforeafter__panes">
+    <div class="jdb-beforeafter__pane jdb-beforeafter__pane--before">
+      <span class="jdb-beforeafter__label">{beforeLabel}</span>
+      {before ? (
+        <img src={before.src} alt={before.alt} width={before.width} height={before.height} loading="lazy" decoding="async" />
+      ) : (
+        <slot name="before" />
+      )}
+    </div>
+    <div class="jdb-beforeafter__pane jdb-beforeafter__pane--after">
+      <span class="jdb-beforeafter__label">{afterLabel}</span>
+      {after ? (
+        <img src={after.src} alt={after.alt} width={after.width} height={after.height} loading="lazy" decoding="async" />
+      ) : (
+        <slot name="after" />
+      )}
+    </div>
+  </div>
+  {caption && <figcaption class="jdb-beforeafter__caption"><strong>What changed:</strong> {caption}</figcaption>}
+</figure>
+
+<style>
+  .jdb-beforeafter {
+    margin: var(--jdb-s-6) 0;
+  }
+
+  /* Two columns when each pane gets at least ~16rem; otherwise stacked. */
+  .jdb-beforeafter__panes {
+    display: grid;
+    gap: var(--jdb-s-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+
+  .jdb-beforeafter__pane {
+    position: relative;
+    min-width: 0;
+    padding: var(--jdb-s-3);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-top: 3px solid var(--jdb-bad);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-beforeafter__pane--after {
+    border-top-color: var(--jdb-good);
+  }
+
+  .jdb-beforeafter__label {
+    display: inline-block;
+    margin-bottom: var(--jdb-s-2);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    font-weight: var(--jdb-fw-semibold);
+    color: var(--jdb-bad);
+  }
+
+  .jdb-beforeafter__pane--after .jdb-beforeafter__label {
+    color: var(--jdb-good);
+  }
+
+  .jdb-beforeafter__pane :global(img),
+  .jdb-beforeafter__pane :global(svg),
+  .jdb-beforeafter__pane :global(canvas) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--jdb-r-md);
+  }
+
+  .jdb-beforeafter__caption {
+    margin-top: var(--jdb-s-3);
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-beforeafter__caption strong {
+    color: var(--jdb-fg);
+  }
+
+  /* Slider mode (added by the script below). */
+  .jdb-beforeafter.is-slider .jdb-beforeafter__panes {
+    --pos: 50%;
+    position: relative;
+    display: block;
+    padding: var(--jdb-s-3);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-beforeafter.is-slider .jdb-beforeafter__pane {
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .jdb-beforeafter.is-slider .jdb-beforeafter__pane--after {
+    position: absolute;
+    inset: var(--jdb-s-3);
+    clip-path: inset(0 0 0 var(--pos));
+  }
+
+  .jdb-beforeafter.is-slider .jdb-beforeafter__label {
+    position: absolute;
+    top: var(--jdb-s-2);
+    left: var(--jdb-s-2);
+    z-index: 1;
+    margin: 0;
+    padding: 2px var(--jdb-s-2);
+    background: var(--jdb-navy-950);
+    border-radius: var(--jdb-r-sm);
+  }
+
+  .jdb-beforeafter.is-slider .jdb-beforeafter__pane--after .jdb-beforeafter__label {
+    left: auto;
+    right: var(--jdb-s-2);
+  }
+
+  .jdb-beforeafter :global(.jdb-beforeafter__divider) {
+    position: absolute;
+    top: var(--jdb-s-3);
+    bottom: var(--jdb-s-3);
+    left: calc(var(--jdb-s-3) + (100% - 2 * var(--jdb-s-3)) * var(--pos-num, 0.5));
+    width: 2px;
+    background: var(--jdb-orange-500);
+    pointer-events: none;
+  }
+
+  .jdb-beforeafter :global(.jdb-beforeafter__range) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+
+  .jdb-beforeafter :global(.jdb-beforeafter__range:focus-visible + .jdb-beforeafter__divider) {
+    outline: 3px solid var(--jdb-orange-400);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-beforeafter="slider"]').forEach((figure) => {
+    const panes = figure.querySelector<HTMLElement>('.jdb-beforeafter__panes');
+    if (!panes) return;
+
+    const before = figure.querySelector('.jdb-beforeafter__pane--before .jdb-beforeafter__label')?.textContent ?? 'Before';
+    const after = figure.querySelector('.jdb-beforeafter__pane--after .jdb-beforeafter__label')?.textContent ?? 'After';
+
+    const range = document.createElement('input');
+    range.type = 'range';
+    range.min = '0';
+    range.max = '100';
+    range.value = '50';
+    range.className = 'jdb-beforeafter__range';
+    range.setAttribute('aria-label', `Drag to compare ${before} and ${after}`);
+
+    const divider = document.createElement('span');
+    divider.className = 'jdb-beforeafter__divider';
+    divider.setAttribute('aria-hidden', 'true');
+
+    const update = () => {
+      panes.style.setProperty('--pos', `${range.value}%`);
+      panes.style.setProperty('--pos-num', String(Number(range.value) / 100));
+      // The "after" image is clipped from the left, so it shows on the right-hand side of the divider.
+      range.setAttribute('aria-valuetext', `${100 - Number(range.value)}% ${after} visible`);
+    };
+
+    range.addEventListener('input', update);
+    panes.append(range, divider);
+    figure.classList.add('is-slider');
+    update();
+  });
+</script>

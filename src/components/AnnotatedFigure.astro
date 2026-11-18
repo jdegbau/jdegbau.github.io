@@ -1,0 +1,146 @@
+---
+/**
+ * A figure with numbered callouts: markers placed over an image (or any slotted
+ * visual) plus a matching numbered legend underneath. The legend carries the
+ * meaning, so it works for screen readers and small screens too.
+ *
+ *   <AnnotatedFigure src="/assets/img/x.png" alt="…" callouts={[{ x: 20, y: 35, title: 'Node', text: '…' }]} />
+ *
+ * `x` and `y` are percentages from the top-left corner of the visual.
+ */
+interface Callout {
+  x: number;
+  y: number;
+  title: string;
+  text?: string;
+}
+
+interface Props {
+  src?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  callouts?: Callout[];
+  caption?: string;
+  class?: string;
+}
+
+const { src, alt, width, height, callouts = [], caption, class: className } = Astro.props;
+
+if (src && alt === undefined) {
+  throw new Error(`AnnotatedFigure: add alt text for ${src}`);
+}
+
+const clamp = (value: number) => Math.min(100, Math.max(0, value));
+---
+
+<figure class:list={['jdb-annotated', className]}>
+  <div class="jdb-annotated__stage">
+    {src ? <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" /> : <slot />}
+    {callouts.map((callout, index) => (
+      <span
+        class="jdb-annotated__marker"
+        style={`left:${clamp(callout.x)}%;top:${clamp(callout.y)}%`}
+        aria-hidden="true"
+        title={callout.title}
+      >
+        {index + 1}
+      </span>
+    ))}
+  </div>
+  {callouts.length > 0 && (
+    <ol class="jdb-annotated__legend">
+      {callouts.map((callout) => (
+        <li>
+          <strong>{callout.title}</strong>
+          {callout.text && <span set:html={` — ${callout.text}`} />}
+        </li>
+      ))}
+    </ol>
+  )}
+  {caption && <figcaption class="jdb-annotated__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .jdb-annotated {
+    margin: var(--jdb-s-6) 0;
+    padding: var(--jdb-s-4);
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-line);
+    border-radius: var(--jdb-r-lg);
+  }
+
+  .jdb-annotated__stage {
+    position: relative;
+  }
+
+  .jdb-annotated__stage :global(img),
+  .jdb-annotated__stage :global(svg),
+  .jdb-annotated__stage :global(canvas) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--jdb-r-md);
+  }
+
+  .jdb-annotated__marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--jdb-orange-500);
+    color: var(--jdb-on-orange);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    font-weight: var(--jdb-fw-bold);
+    box-shadow: 0 0 0 3px var(--jdb-navy-950);
+  }
+
+  .jdb-annotated__legend {
+    list-style: none;
+    counter-reset: jdb-callout;
+    margin: var(--jdb-s-4) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--jdb-s-2);
+  }
+
+  .jdb-annotated__legend li {
+    counter-increment: jdb-callout;
+    position: relative;
+    margin: 0;
+    padding-left: 2.25rem;
+    font-size: var(--jdb-fs-sm);
+    color: var(--jdb-fg-dim);
+  }
+
+  .jdb-annotated__legend li::before {
+    content: counter(jdb-callout);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--jdb-orange-500);
+    color: var(--jdb-on-orange);
+    font-family: var(--jdb-font-mono);
+    font-size: var(--jdb-fs-xs);
+    font-weight: var(--jdb-fw-bold);
+  }
+
+  .jdb-annotated__legend strong {
+    color: var(--jdb-fg);
+  }
+
+  .jdb-annotated__caption {
+    margin-top: var(--jdb-s-3);
+    font-size: var(--jdb-fs-xs);
+    color: var(--jdb-fg-muted);
+  }
+</style>

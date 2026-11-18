@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" font-family="Inter, Arial, sans-serif">
+<rect width="640" height="360" fill="#0f1f38"/>
+<text x="24" y="40" fill="#e8ecf4" font-size="20" font-weight="700">Search drives the most visits</text>
+<text x="24" y="64" fill="#aab4c8" font-size="13">Visits (thousands), last 30 days</text>
+<text x="138" y="112" fill="#aab4c8" font-size="14" text-anchor="end">Search</text>
+<rect x="150" y="94" width="370" height="28" rx="3" fill="#ff4d00"/>
+<text x="528" y="113" fill="#e8ecf4" font-size="13">88k</text>
+<text x="138" y="158" fill="#aab4c8" font-size="14" text-anchor="end">Direct</text>
+<rect x="150" y="140" width="239" height="28" rx="3" fill="#33547e"/>
+<text x="397" y="159" fill="#e8ecf4" font-size="13">57k</text>
+<text x="138" y="204" fill="#aab4c8" font-size="14" text-anchor="end">Email</text>
+<rect x="150" y="186" width="176" height="28" rx="3" fill="#33547e"/>
+<text x="334" y="205" fill="#e8ecf4" font-size="13">42k</text>
+<text x="138" y="250" fill="#aab4c8" font-size="14" text-anchor="end">Social</text>
+<rect x="150" y="232" width="130" height="28" rx="3" fill="#33547e"/>
+<text x="288" y="251" fill="#e8ecf4" font-size="13">31k</text>
+<text x="138" y="296" fill="#aab4c8" font-size="14" text-anchor="end">Referral</text>
+<rect x="150" y="278" width="80" height="28" rx="3" fill="#33547e"/>
+<text x="238" y="297" fill="#e8ecf4" font-size="13">19k</text>
+</svg>
