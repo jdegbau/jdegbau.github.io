@@ -1,4 +1,5 @@
 ---
+import Logotype from './Logotype.astro';
 const navPages = [
   { href: '/', label: 'Home' },
   { href: '/about/', label: 'About' },
@@ -13,50 +14,6 @@ function isActive(href) {
 }
 ---
 <style>
-  .jdb-logo {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0;
-    font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-    font-variant-ligatures: contextual;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: normal;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .jdb-logo em,
-  .jdb-logo b,
-  .jdb-logo i {
-    font-style: normal;
-  }
-
-  .jdb-logo em {
-    color: var(--jdb-navy-600);
-  }
-
-  .jdb-logo b {
-    color: var(--jdb-fg);
-    font-weight: 600;
-  }
-
-  .jdb-logo i {
-    color: var(--jdb-orange-500);
-    margin-inline: 0.15em;
-  }
-
-  .jdb-logo__cursor {
-    display: inline-block;
-    width: 0.38em;
-    height: 0.9em;
-    background: currentColor;
-    border-radius: 0.08em;
-    transform: translateY(0.08em);
-    animation: jdb-logo-cursor-blink 1s steps(1) infinite;
-    opacity: 0.9;
-  }
-
   .jdb-header {
     position: fixed;
     top: 0;
@@ -93,17 +50,11 @@ function isActive(href) {
     min-height: calc(var(--jdb-header-h) - 8px);
   }
 
-  @keyframes jdb-logo-cursor-blink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
 </style>
 
 <header class="jdb-header" data-jdb-header>
   <div class="jdb-container jdb-header__inner">
-    <a class="jdb-logo" href="/" aria-label="Joshua DeGrasse-Baumann home">
-      <em>(</em><b>jdegbau</b><em>)</em><i> =&gt; </i><b>&#123;</b><span class="jdb-logo__cursor" aria-hidden="true"></span><b>&#125;</b>
-    </a>
+    <Logotype />
 
     <nav class="jdb-tabs" aria-label="Main navigation">
       <ul class="jdb-tabs__list">
@@ -136,9 +87,7 @@ function isActive(href) {
   <div class="jdb-drawer__scrim" data-jdb-close></div>
   <aside class="jdb-drawer__panel" aria-label="Mobile navigation panel">
     <div class="jdb-drawer__head">
-      <a class="jdb-logo" href="/" aria-label="Joshua DeGrasse-Baumann home">
-        <em>(</em><b>jdegbau</b><em>)</em><i> =&gt; </i><b>&#123;</b><span class="jdb-logo__cursor" aria-hidden="true"></span><b>&#125;</b>
-      </a>
+      <Logotype />
       <button class="jdb-drawer__close" type="button" aria-label="Close navigation" data-jdb-close>
         <span class="jdb-icon jdb-icon--close" aria-hidden="true"></span>
       </button>

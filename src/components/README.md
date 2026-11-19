@@ -129,6 +129,16 @@ Location: `src/components/Image.astro`
 Notes:
 - Use this instead of raw `<img>` tags where consistent handling is needed.
 
+### Logotype
+Purpose: The `(jdegbau)=>{}` text logo — the only place the brand mark's markup and styles are defined.
+Location: `src/components/Logotype.astro`
+Notes:
+- Always render `<Logotype />` for the logo. Don't hand-write the `<em>(</em><b>jdegbau</b>…` markup or restyle `.jdb-logo` elsewhere; that duplication is how the header and footer drifted apart (different weights) before this component existed.
+- Brand spec it enforces: JetBrains Mono at weight 500 throughout; parentheses and braces in `--jdb-navy-600`; the word in `--jdb-fg`; the arrow in `--jdb-orange-400` (orange *text* tone, not the `#ff4d00` fill colour).
+- Props: `href` (default `/`; pass `null` for an unlinked mark, which then gets `role="img"`), `size` (`sm` | `md` | `lg` | `xl`, default `md` = 1.05rem as used in the header/footer), `cursor` (blinking block cursor between the braces, default `true`), `theme` (`dark` | `light`), `label` (link's accessible name), `class`.
+- The cursor stops blinking under `prefers-reduced-motion`. When printed, the logo switches to the light colours and drops the cursor.
+- Used by `Navigation` (header and mobile drawer) and `Footer`.
+
 ### Logos
 Purpose: Row of brand or partner logos.
 Location: `src/components/Logos.astro`
