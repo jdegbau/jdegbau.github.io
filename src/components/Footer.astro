@@ -1,14 +1,13 @@
 ---
 import Icon from './Icon.astro';
+import Logotype from './Logotype.astro';
 const currentYear = new Date().getFullYear();
 ---
 <footer class="jdb-footer">
   <div class="jdb-container">
     <div class="jdb-footer__main">
       <div>
-        <a class="jdb-logo" href="/" aria-label="Joshua DeGrasse-Baumann home">
-          <em>(</em><b>jdegbau</b><em>)</em><i> =&gt; </i><b>&#123;</b><span class="jdb-logo__cursor" aria-hidden="true"></span><b>&#125;</b>
-        </a>
+        <Logotype />
         <p class="jdb-footer__blurb">
           I help teams improve search visibility, analytics quality, and technical execution through thoughtful strategy and practical implementation.
         </p>

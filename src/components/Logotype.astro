@@ -1,0 +1,119 @@
+---
+/**
+ * Logotype — the single source of truth for the `(jdegbau) => {}` text logo.
+ *
+ * Brand spec (jdegbau brand guidelines → Logo):
+ * - JetBrains Mono, weight 500 throughout.
+ * - Parentheses + braces in dim navy (--jdb-navy-600, #33547e).
+ * - The word "jdegbau" in primary text (--jdb-fg).
+ * - The arrow in orange TEXT tone (--jdb-orange-400, #ff7a3d). Brand orange
+ *   #ff4d00 is a fill colour and drops under 4.5:1 on navy surfaces at this size.
+ * - Light/print: parens/braces #8b97b0, arrow --jdb-orange-600, word in ink.
+ * - Never redraw it in another font, recolour the arrow, or rebuild the markup
+ *   by hand — render this component instead.
+ */
+interface Props {
+  /** Link target. Pass `null` to render the mark without a link (e.g. in a showcase). */
+  href?: string | null;
+  /** sm = 0.9rem, md = 1.05rem (header/footer default), lg = 1.5rem, xl = 2.25rem. */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  /** Show the blinking block cursor between the braces. */
+  cursor?: boolean;
+  /** Use the light-background colour treatment. */
+  theme?: 'dark' | 'light';
+  /** Accessible name for the link. */
+  label?: string;
+  class?: string;
+}
+
+const {
+  href = '/',
+  size = 'md',
+  cursor = true,
+  theme = 'dark',
+  label = 'Joshua DeGrasse-Baumann home',
+  class: className,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'span';
+const classes = ['jdb-logo', `jdb-logo--${size}`, theme === 'light' && 'jdb-logo--light', className];
+const a11y = href ? { href, 'aria-label': label } : { role: 'img', 'aria-label': '(jdegbau) => {}' };
+---
+<Tag class:list={classes} {...a11y}><em>(</em><b>jdegbau</b><em>)</em><i>=&gt;</i><em>&#123;</em>{cursor && <span class="jdb-logo__cursor" aria-hidden="true"></span>}<em>&#125;</em></Tag>
+
+<style>
+  .jdb-logo {
+    --jdb-logo-punct: var(--jdb-navy-600);
+    --jdb-logo-word: var(--jdb-fg);
+    --jdb-logo-arrow: var(--jdb-orange-400);
+    --jdb-logo-cursor: var(--jdb-orange-500);
+
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--jdb-font-mono);
+    font-variant-ligatures: contextual;
+    font-size: 1.05rem;
+    font-weight: var(--jdb-fw-medium);
+    line-height: 1;
+    letter-spacing: normal;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .jdb-logo:hover,
+  .jdb-logo:focus-visible {
+    text-decoration: none;
+  }
+
+  .jdb-logo em,
+  .jdb-logo b,
+  .jdb-logo i {
+    font-style: normal;
+    font-weight: inherit;
+  }
+
+  .jdb-logo em { color: var(--jdb-logo-punct); }
+  .jdb-logo b { color: var(--jdb-logo-word); }
+  .jdb-logo i { color: var(--jdb-logo-arrow); margin-inline: 0.15em; }
+
+  .jdb-logo__cursor {
+    display: inline-block;
+    width: 0.5ch;
+    height: 0.85em;
+    margin-inline: 0.1em;
+    background: var(--jdb-logo-cursor);
+    border-radius: 0.08em;
+    transform: translateY(0.08em);
+    animation: jdb-logo-cursor-blink 1.05s steps(1) infinite;
+  }
+
+  .jdb-logo--sm { font-size: 0.9rem; }
+  .jdb-logo--md { font-size: 1.05rem; }
+  .jdb-logo--lg { font-size: 1.5rem; }
+  .jdb-logo--xl { font-size: 2.25rem; }
+
+  .jdb-logo--light {
+    --jdb-logo-punct: #8b97b0;
+    --jdb-logo-word: var(--jdb-navy-950);
+    --jdb-logo-arrow: var(--jdb-orange-600);
+  }
+
+  @keyframes jdb-logo-cursor-blink {
+    50% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jdb-logo__cursor { animation: none; }
+  }
+
+  @media print {
+    .jdb-logo {
+      --jdb-logo-punct: #8b97b0;
+      --jdb-logo-word: #111;
+      --jdb-logo-arrow: var(--jdb-orange-600);
+      text-decoration: none !important;
+    }
+    .jdb-logo__cursor { display: none; }
+  }
+</style>

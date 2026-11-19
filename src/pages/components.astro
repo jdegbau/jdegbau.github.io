@@ -12,6 +12,7 @@ import TableOfContents from '../components/TableOfContents.astro';
 import QuickCompareMatrix from '../components/QuickCompareMatrix.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
+import Logotype from '../components/Logotype.astro';
 import Logos from '../components/Logos.astro';
 import SummaryCard from '../components/SummaryCard.astro';
 import Callout from '../components/Callout.astro';
@@ -194,6 +195,27 @@ const sampleMatrixRows = [
             <h2 id="component-contactform">ContactForm</h2>
           </div>
           <ContactForm demo />
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2 id="component-logotype">Logotype</h2>
+          </div>
+          <div class="component-logotype">
+            <Logotype href={null} size="sm" />
+            <Logotype href={null} />
+            <Logotype href={null} size="lg" />
+            <Logotype href={null} size="xl" />
+            <Logotype href={null} size="lg" cursor={false} />
+            <div class="component-logotype__light">
+              <Logotype href={null} size="lg" theme="light" cursor={false} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -533,6 +555,19 @@ const sampleMatrixRows = [
 </BaseLayout>
 
 <style>
+  .component-logotype {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--jdb-s-5) var(--jdb-s-7);
+  }
+
+  .component-logotype__light {
+    padding: var(--jdb-s-3) var(--jdb-s-4);
+    background: #fff;
+    border-radius: var(--jdb-r-md);
+  }
+
   .icon-demo {
     display: flex;
     flex-wrap: wrap;
