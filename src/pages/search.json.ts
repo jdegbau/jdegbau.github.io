@@ -8,6 +8,7 @@ export async function GET() {
     excerpt: post.excerpt ?? '',
     permalink: post.url,
     date: post.date,
+    tags: post.tags ?? [],
   }));
 
   return new Response(JSON.stringify(posts, null, 2), {

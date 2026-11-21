@@ -40,6 +40,7 @@ Location: `src/components/BlogCard.astro`
 Notes:
 - Expects a `post` prop.
 - Used in blog listing and landing pages.
+- The whole card is clickable: the title link stretches over the card (`.jdb-post h3 a::after`). The image link is removed from the tab order so keyboard users get one stop per card. Don't add other links inside the card body; they'd sit under the stretched link.
 
 ### ChartTypeAssessment
 Purpose: Showcase of chart types and usage guidance for the SEO visualization post.
@@ -94,6 +95,7 @@ Notes:
 - Supports a `demo` prop that disables submission for component-library examples.
 - Includes the Formcarry honeypot and reCAPTCHA response fields used by the contact page.
 - Fields: `name`, `email`, `message`. Keep it short: every extra field lowers completion.
+- Fields carry `autocomplete`/`inputmode` hints so browsers can fill them. The email is trimmed before submitting, invalid fields turn red only after the visitor has interacted with them (`:user-invalid`), and the button switches to "Sending…" and blocks double submits.
 
 ### TableOfContents
 Purpose: Sticky sidebar table of contents for long-form posts.
@@ -161,6 +163,9 @@ Purpose: Site-wide top navigation and mobile drawer.
 Location: `src/components/Navigation.astro`
 Notes:
 - Shared across pages.
+- Contact stays last and is marked `cta: true`, which renders it as an outlined button. Keep the list to five items or fewer.
+- External items (`external: true`) open in a new tab and show an external-link icon plus screen-reader text.
+- The drawer sets `aria-expanded` on the menu button, closes with Escape, and moves focus into the panel and back to the button.
 
 ### PostMeta
 Purpose: Metadata display for posts.
@@ -181,6 +186,10 @@ Purpose: Site-wide search trigger and modal panel.
 Location: `src/components/Search.astro`
 Notes:
 - Shared across pages.
+- Opens with `/` or Ctrl/⌘+K, closes with Escape or a click outside. The `/` hint is hidden on touch devices.
+- The index (`/search.json`: title, excerpt, tags) is prefetched when someone hovers, focuses, or touches the trigger.
+- Matching ignores case, accents, and punctuation; every word must appear in the title, excerpt, or tags, and title matches rank first. Matches are highlighted, a result count is shown, and the three newest posts are suggested before anything is typed.
+- Arrow keys move between results; Enter in the field opens the top result.
 
 ### SummaryCard
 Purpose: At-a-glance summary block: title, one-line definition, and labeled rows.
@@ -282,6 +291,21 @@ Notes:
 - Chart.js 4.6.1 and plugins load once per page from jsDelivr with SRI, lazily when the chart nears the viewport. The site's dark theme defaults are applied, and animation is off for `prefers-reduced-motion`.
 - To upgrade a library, edit the pinned URL and hash in `src/lib/chart-loader.ts` (instructions are in the file).
 - `table` adds a "View the data" panel for screen readers, and as a fallback if the chart can't load.
+
+## Interaction guidelines (UX principles)
+These rules come from established UX research (the "Laws of UX" collection at lawsofux.com). They shape the components; **don't name them in site copy**, just follow them.
+
+- **Big, close targets (Fitts's Law).** Anything clicked or tapped on its own is at least `--jdb-target` (44px). Make whole cards clickable instead of tiny links inside them.
+- **Fewer, clearer choices (Hick's Law, Choice Overload).** One primary button per view, at most one secondary. Keep the main nav to five items.
+- **Follow conventions (Jakob's Law).** The logo goes home, `/` and Ctrl/⌘+K open search, Escape closes overlays, external links are marked, visited links in prose look visited, and posts show breadcrumbs.
+- **Respond fast (Doherty Threshold).** Give feedback in under 400ms: press states on buttons, "Sending…" on submit, data prefetched on intent.
+- **Hover means clickable (Similarity, Uniform Connectedness).** Only links lift on hover (`--jdb-lift`). Static cards and non-link tags don't react.
+- **Group by proximity and region (Proximity, Common Region).** Use the spacing scale: tight inside a group, larger between groups, and a card or section surface for content that belongs together.
+- **Make the important thing stand out (Von Restorff).** Reserve orange fills and outlines for the main action.
+- **End well (Peak-End Rule).** Confirmation, empty, and error states say what happens next and offer one next step.
+- **Be forgiving with input (Postel's Law, Tesler's Law).** Use `autocomplete`/`inputmode`, trim whitespace, match search terms in any order, and only flag errors after interaction.
+- **Chunk information (Miller's Law, Chunking).** Cap lists of results, use subheads every few paragraphs, and keep prose at about 68ch.
+- **Respect reduced motion.** Decorative animation is disabled under `prefers-reduced-motion`.
 
 ## Content guidelines (Orbit Media approach)
 The site follows Andy Crestodina and Orbit Media's approach to content and conversion (see *Content Chemistry* and the Orbit blog). Apply these when writing pages or posts.

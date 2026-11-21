@@ -47,7 +47,7 @@ const currentYear = new Date().getFullYear();
         <h3 class="jdb-footer__heading">Areas</h3>
         <ul class="jdb-footer__list">
           <li><a class="jdb-footer__link" href="/seo-fetcher/">SEO Fetcher</a></li>
-          <li><a class="jdb-footer__link" href="https://store.jdegbau.com/" target="_blank" rel="noopener noreferrer">GTM Templates</a></li>
+          <li><a class="jdb-footer__link" href="https://store.jdegbau.com/" target="_blank" rel="noopener noreferrer">GTM Templates <span class="jdb-icon jdb-icon--external jdb-tabs__ext" aria-hidden="true"></span><span class="jdb-sr-only">(opens in a new tab)</span></a></li>
           <li><a class="jdb-footer__link" href="/links/">Favorite Links</a></li>
         </ul>
       </div>
@@ -71,11 +71,11 @@ const currentYear = new Date().getFullYear();
         <div class="jdb-form__row">
           <div class="jdb-field">
             <label for="sendfox_form_name">First name</label>
-            <input class="jdb-input" type="text" id="sendfox_form_name" placeholder="First name" name="first_name" required />
+            <input class="jdb-input" type="text" id="sendfox_form_name" placeholder="First name" name="first_name" autocomplete="given-name" autocapitalize="words" required />
           </div>
           <div class="jdb-field">
             <label for="sendfox_form_email">Email</label>
-            <input class="jdb-input" type="email" id="sendfox_form_email" placeholder="Email" name="email" required />
+            <input class="jdb-input" type="email" id="sendfox_form_email" placeholder="you@example.com" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required />
           </div>
         </div>
         <div class="jdb-newsletter__row">

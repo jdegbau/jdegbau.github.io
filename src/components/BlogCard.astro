@@ -3,7 +3,9 @@ import Image from './Image.astro';
 const { post } = Astro.props;
 ---
 <article class="jdb-post">
-  <a href={post.url} class="jdb-post__media" aria-label={`Read ${post.title}`}>
+  <!-- The title link covers the whole card (see .jdb-post in main.css), so this
+       image link is skipped by keyboard and screen readers to avoid a duplicate stop. -->
+  <a href={post.url} class="jdb-post__media" tabindex="-1" aria-hidden="true">
     <Image
       src={post.featuredImage ?? '/assets/img/default-blog-hero.gif'}
       alt={post.title}

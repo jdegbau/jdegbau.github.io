@@ -46,17 +46,18 @@ const questions = [
 
     <article class="jdb-quiz" data-chart-picker>
       {questions.map((question, index) => (
-        <div class="jdb-quiz__q">
+        <div class="jdb-quiz__q" data-chart-picker-question={question.id}>
           <div class="jdb-quiz__qnum">Q{index + 1}</div>
-          <h3 class="jdb-quiz__qtitle">{question.label}</h3>
+          <h3 class="jdb-quiz__qtitle" id={`chart-picker-${question.id}`}>{question.label}</h3>
 
-          <div class="jdb-quiz__options">
+          <div class="jdb-quiz__options" role="group" aria-labelledby={`chart-picker-${question.id}`}>
             {question.options.map((option) => (
               <button
                 type="button"
                 class="jdb-quiz__option"
                 data-question={question.id}
                 data-value={option.value}
+                aria-pressed="false"
               >
                 {option.label}
               </button>
@@ -65,7 +66,7 @@ const questions = [
         </div>
       ))}
 
-      <div class="jdb-quiz__result" id="chart-picker-result">
+      <div class="jdb-quiz__result" id="chart-picker-result" aria-live="polite">
         <div class="jdb-quiz__result-label">Recommended visualization</div>
         <div class="jdb-quiz__result-value" id="chart-picker-result-value"></div>
         <p id="chart-picker-result-copy"></p>
@@ -85,6 +86,7 @@ const questions = [
     const resultCopy = document.getElementById('chart-picker-result-copy');
 
     const buttons = [...picker.querySelectorAll('.jdb-quiz__option')];
+
 
     function getRecommendation() {
       const relationship = selections.relationship;
@@ -157,6 +159,7 @@ const questions = [
 
         optionGroup.querySelectorAll('.jdb-quiz__option').forEach((option) => {
           option.classList.toggle('is-selected', option === button);
+          option.setAttribute('aria-pressed', String(option === button));
         });
 
         selections[question] = value;

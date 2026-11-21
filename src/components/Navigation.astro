@@ -1,11 +1,13 @@
 ---
 import Logotype from './Logotype.astro';
+// Contact (the main next step) closes the list and is styled as a button.
+// Keep this list short.
 const navPages = [
   { href: '/about/', label: 'About' },
   { href: '/blog/', label: 'Blog' },
   { href: '/seo-helpline/', label: 'SEO Helpline' },
   { href: 'https://store.jdegbau.com/', label: 'GTM Templates', external: true },
-  { href: '/contact/', label: 'Contact' },
+  { href: '/contact/', label: 'Contact', cta: true },
 ];
 const currentPath = Astro.url.pathname;
 function isActive(href) {
@@ -59,15 +61,21 @@ function isActive(href) {
     <nav class="jdb-tabs" aria-label="Main navigation">
       <ul class="jdb-tabs__list">
         {navPages.map((item) => (
-          <li>
+          <li class:list={[{ 'jdb-tabs__item--cta': item.cta }]}>
             <a
               href={item.href}
-              class="jdb-tabs__link"
+              class:list={['jdb-tabs__link', { 'jdb-tabs__link--cta': item.cta }]}
               aria-current={isActive(item.href) ? 'page' : undefined}
               target={item.external ? '_blank' : undefined}
               rel={item.external ? 'noopener noreferrer' : undefined}
             >
               {item.label}
+              {item.external && (
+                <>
+                  <span class="jdb-icon jdb-icon--external jdb-tabs__ext" aria-hidden="true"></span>
+                  <span class="jdb-sr-only">(opens in a new tab)</span>
+                </>
+              )}
             </a>
           </li>
         ))}
@@ -76,7 +84,7 @@ function isActive(href) {
 
     <div class="jdb-header__actions">
       <slot />
-      <button class="jdb-menu-btn" type="button" aria-label="Open navigation" data-jdb-menu-btn>
+      <button class="jdb-menu-btn" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="jdb-drawer-panel" data-jdb-menu-btn>
         <span class="jdb-icon jdb-icon--menu" aria-hidden="true"></span>
       </button>
     </div>
@@ -85,7 +93,7 @@ function isActive(href) {
 
 <div class="jdb-drawer" data-jdb-drawer>
   <div class="jdb-drawer__scrim" data-jdb-close></div>
-  <aside class="jdb-drawer__panel" aria-label="Mobile navigation panel">
+  <aside class="jdb-drawer__panel" id="jdb-drawer-panel" aria-label="Mobile navigation panel">
     <div class="jdb-drawer__head">
       <Logotype />
       <button class="jdb-drawer__close" type="button" aria-label="Close navigation" data-jdb-close>
@@ -103,6 +111,12 @@ function isActive(href) {
             rel={item.external ? 'noopener noreferrer' : undefined}
           >
             {item.label}
+            {item.external && (
+              <>
+                <span class="jdb-icon jdb-icon--external jdb-tabs__ext" aria-hidden="true"></span>
+                <span class="jdb-sr-only">(opens in a new tab)</span>
+              </>
+            )}
           </a>
         </li>
       ))}
@@ -120,13 +134,23 @@ function isActive(href) {
   const header = document.querySelector('[data-jdb-header]');
 
   if (drawer && menuButton) {
-    const toggleDrawer = () => {
-      drawer.classList.toggle('is-open');
-      document.body.classList.toggle('jdb-noscroll', drawer.classList.contains('is-open'));
+    const closeButton = drawer.querySelector('button[data-jdb-close]');
+
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      document.body.classList.toggle('jdb-noscroll', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      // Move focus into the panel on open and back to the trigger on close,
+      // so keyboard users never lose their place.
+      if (open) closeButton?.focus();
+      else menuButton.focus();
     };
 
-    menuButton.addEventListener('click', toggleDrawer);
-    closeButtons.forEach((button) => button.addEventListener('click', toggleDrawer));
+    menuButton.addEventListener('click', () => setDrawer(true));
+    closeButtons.forEach((button) => button.addEventListener('click', () => setDrawer(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && drawer.classList.contains('is-open')) setDrawer(false);
+    });
   }
 
   if (header) {

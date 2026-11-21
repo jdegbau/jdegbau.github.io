@@ -61,6 +61,12 @@ const a11y = href ? { href, 'aria-label': label } : { role: 'img', 'aria-label':
     text-decoration: none;
   }
 
+  /* As a link, pad the mark out to a comfortable click/tap height without
+     changing how it looks. */
+  a.jdb-logo {
+    padding-block: calc((var(--jdb-target, 44px) - 1em) / 2);
+  }
+
   .jdb-logo:hover,
   .jdb-logo:focus-visible {
     text-decoration: none;
