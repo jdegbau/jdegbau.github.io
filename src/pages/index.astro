@@ -5,8 +5,8 @@ import BlogCard from '../components/BlogCard.astro';
 import { getAllPosts } from '../lib/posts';
 import { author } from '../data/author';
 
-const seoTitle = 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
-const description = 'Joshua DeGrasse-Baumann is an SEO consultant and data enthusiast. Learn more about Josh and how he can help your business.';
+const seoTitle = 'Joshua DeGrasse-Baumann | Content, Data Visualization, and Measurement Strategy';
+const description = 'Joshua DeGrasse-Baumann is a content strategist focused on data visualization, measurement strategy, and SEO. Learn how Josh helps teams publish with purpose and prove what works.';
 const posts = await getAllPosts();
 const featuredPosts = posts.slice(0, 3);
 const pageSchema = {
@@ -36,7 +36,7 @@ const pageSchema = {
       '@type': 'WebSite',
       '@id': 'https://jdegbau.com/#website',
       url: 'https://jdegbau.com/',
-      name: 'Joshua DeGrasse-Baumann | SEO, Data, and Development',
+      name: 'Joshua DeGrasse-Baumann | Content, Data Visualization, and Measurement Strategy',
       alternateName: 'jdegbau',
       inLanguage: 'en',
       publisher: { '@id': 'https://jdegbau.com/#person' },
@@ -65,9 +65,9 @@ const pageSchema = {
         <h1>
           Hi! I'm Josh.<span class="jdb-cursor" aria-hidden="true"></span>
         </h1>
-        <p class="jdb-hero__role">SEO Strategist • Data Enthusiast • Developer</p>
+        <p class="jdb-hero__role">Content Strategy • Data Visualization • Measurement Strategy</p>
         <p class="jdb-hero__lede">
-          I help businesses improve search visibility, data quality, and digital execution through thoughtful strategy, clean implementation, and practical experimentation.
+          I help teams decide what to publish, measure whether it worked, and turn the numbers into charts and stories people actually understand. Search is part of the picture, but the goal is content that earns its place.
         </p>
         <div class="jdb-hero__actions">
           <a href="/seo-helpline/" class="jdb-btn jdb-btn--primary jdb-btn--lg">Book a consultation</a>
@@ -83,28 +83,28 @@ const pageSchema = {
     <div class="jdb-container">
       <div class="jdb-section__head">
         <span class="jdb-eyebrow">what I do</span>
-        <h2 class="jdb-section__title">Focused on the parts that move the needle</h2>
+        <h2 class="jdb-section__title">Content that's planned, measured, and easy to read</h2>
       </div>
       <div class="jdb-grid jdb-grid--2">
         <article class="jdb-service">
-          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--search" aria-hidden="true"></span></div>
-          <h3>SEO Strategy</h3>
-          <p>Technical audits, keyword direction, content systems, and practical plans that improve visibility and quality.</p>
-        </article>
-        <article class="jdb-service">
-          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span></div>
-          <h3>Analytics &amp; Measurement</h3>
-          <p>Google Analytics, Tag Manager, and reporting systems that help teams make better, faster decisions.</p>
-        </article>
-        <article class="jdb-service">
           <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--check" aria-hidden="true"></span></div>
-          <h3>Web Development</h3>
-          <p>Clean, performant websites and tooling that support content, conversion, and sustainable growth.</p>
+          <h3>Content Strategy</h3>
+          <p>Audience research, content audits, editorial planning, and governance that tie every piece of content to a clear business goal.</p>
         </article>
         <article class="jdb-service">
           <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--external" aria-hidden="true"></span></div>
-          <h3>Programmatic SEO</h3>
-          <p>Data-driven systems and automation ideas that let content teams scale with quality and control.</p>
+          <h3>Data Visualization</h3>
+          <p>Dashboards, reports, and charts designed around the question being asked, so stakeholders get the point at a glance.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--branch" aria-hidden="true"></span></div>
+          <h3>Measurement Strategy</h3>
+          <p>KPI frameworks, measurement plans, and GA4 and Tag Manager implementations that capture the data you need to make decisions.</p>
+        </article>
+        <article class="jdb-service">
+          <div class="jdb-service__icon"><span class="jdb-icon jdb-icon--search" aria-hidden="true"></span></div>
+          <h3>SEO</h3>
+          <p>Technical audits, search-informed content planning, and practical fixes that help the right people find your work.</p>
         </article>
       </div>
     </div>
@@ -115,7 +115,7 @@ const pageSchema = {
       <div class="jdb-section__head jdb-section__head--center">
         <span class="jdb-eyebrow">recent work</span>
         <h2 class="jdb-section__title">Featured writing</h2>
-        <p class="jdb-section__sub">Notes on SEO, analytics, web development, and digital strategy.</p>
+        <p class="jdb-section__sub">Notes on content strategy, data visualization, measurement, and SEO.</p>
       </div>
       <div class="jdb-postgrid">
         {featuredPosts.map((post) => (

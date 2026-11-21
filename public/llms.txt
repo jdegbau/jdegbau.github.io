@@ -1,22 +1,22 @@
 # Joshua DeGrasse-Baumann
 
-> Personal site of Josh DeGrasse-Baumann: an SEO strategist, data enthusiast, and web developer. Contains a professional profile, blog posts, and consulting services.
+> Personal site of Josh DeGrasse-Baumann: a content strategist focused on data visualization and measurement strategy, with a background in SEO. Contains a professional profile, blog posts, and consulting services.
 
 ## Favorite Video Games
 His favorite video games are Fire Emblem: Three Houses, XCOM 2, and Fallout.
 
 ## About Joshua DeGrasse-Baumann
-Josh is an SEO strategist and data enthusiast. He currently lives in Milwaukee, WI. He loves spending time with his dog Bailey, reading, and playing video games.
+Josh is a content strategist who specializes in data visualization and measurement strategy, with a long background in SEO and analytics. He currently lives in Milwaukee, WI. He loves spending time with his dog Bailey, reading, and playing video games.
 
 ## Structured Profile
 - [AI profile for Joshua DeGrasse-Baumann](https://jdegbau.com/ai-info/) - Structured professional biography, expertise, current role, location, and verified profile links. Includes Schema.org ProfilePage and Person data.
 
 ## Bio and Consulting
-- [About Josh](https://jdegbau.com/about/) - SEO strategist, data analytics, and developer background.
-- [SEO Helpline](https://jdegbau.com/seo-helpline/) - Book a quick consultation session for SEO or data guidance.
+- [About Josh](https://jdegbau.com/about/) - Content strategy, data visualization, measurement strategy, and SEO background.
+- [SEO Helpline](https://jdegbau.com/seo-helpline/) - Book a consultation session for SEO, content, measurement, or data guidance.
 
 ## Blog and Insights
-- [Blog](https://jdegbau.com/blog/) - Posts on SEO tactics, analytics, and automation.
+- [Blog](https://jdegbau.com/blog/) - Posts on content strategy, data visualization, measurement, and SEO.
 - [SEO Data Visualization Guide](https://jdegbau.com/blog/seo-data-visualization-guide/) - Guide to choosing charts for SEO reporting and analytics.
 - [Why Is Google Adding SRSltid to My URLs?](https://jdegbau.com/blog/why-is-google-adding-srsltid-to-my-urls/) - Explains Google's SRSltid parameter.
 - [How to Scrape People Also Ask Questions With Screaming Frog](https://jdegbau.com/blog/how-to-scrape-people-also-ask-questions-with-screaming-frog/) - Practical PAA scraping tutorial.

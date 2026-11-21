@@ -15,8 +15,8 @@ const {
   schema,
 } = Astro.props;
 const siteUrl = 'https://jdegbau.com';
-const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
-const pageDescription = description ?? 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
+const pageTitle = seoTitle ?? title ?? 'Joshua DeGrasse-Baumann | Content, Data Visualization, and Measurement Strategy';
+const pageDescription = description ?? 'Content strategist writing about data visualization, measurement strategy, analytics, and SEO.';
 const pageUrl = `${siteUrl}${canonical ?? Astro.url.pathname}`;
 const pageImage = image ?? '/assets/img/og/default.png';
 const pageImageUrl = pageImage.startsWith('http')
@@ -29,7 +29,7 @@ const pageKeywords = Array.isArray(keywords)
   ? keywords.join(', ')
   : typeof keywords === 'string'
   ? keywords
-  : 'SEO, analytics, Google Analytics, Google Tag Manager, measurement';
+  : 'content strategy, data visualization, measurement strategy, analytics, SEO';
 const pageAuthor = authorName ?? 'Joshua DeGrasse-Baumann';
 const twitterSite = '@jdegbau';
 const twitterCreator = pageAuthor.startsWith('@') ? pageAuthor : '@jdegbau';
@@ -80,7 +80,7 @@ const jsonLd = schema ?? (noindex ? null : defaultSchema);
 <meta property="og:image" content={pageImageUrl} />
 <meta property="og:image:alt" content={pageImageAlt} />
 <meta property="og:type" content={pageType === 'article' ? 'article' : 'website'} />
-<meta property="og:site_name" content="Joshua DeGrasse-Baumann | SEO, Data, and Development" />
+<meta property="og:site_name" content="Joshua DeGrasse-Baumann | Content, Data Visualization, and Measurement Strategy" />
 <meta property="og:locale" content={pageLocale} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content={twitterSite} />
