@@ -151,6 +151,17 @@
 
   --jdb-t-fast: 120ms ease;
   --jdb-t:      200ms cubic-bezier(.4, 0, .2, 1);
+
+  /* === Interaction ========================================================
+     --jdb-target: minimum hit area for anything tapped or clicked on its
+       own (icon buttons, chips, standalone links). 44px matches the
+       platform touch guidelines; smaller targets measurably slow people
+       down and cause mis-taps.
+     --jdb-lift: the one hover "raise" distance. Only elements that are
+       actually clickable lift on hover, so lift reads as "you can click
+       this" everywhere on the site, never as decoration. */
+  --jdb-target: 44px;
+  --jdb-lift:   -2px;
 }
 
 @media (min-width: 48rem) { :root { --jdb-gutter: 2rem; } }
@@ -202,6 +213,11 @@ p:last-child { margin-bottom: 0; }
 
 a { color: var(--jdb-c-link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--jdb-t-fast); }
 a:hover { color: var(--jdb-c-link-hover); }
+
+/* Visited links in long-form copy shift slightly toward the body text color,
+   so readers can see which references they've already opened. */
+.jdb-prose a:visited { color: color-mix(in srgb, var(--jdb-c-link) 72%, var(--jdb-fg-dim)); }
+.jdb-prose a:visited:hover { color: var(--jdb-c-link-hover); }
 
 /* Card-surface components re-scope the link token to the card-safe tint
    (see --jdb-c-link-oncard note in tokens) — any plain <a> nested inside
@@ -311,15 +327,14 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   transition: border-color var(--jdb-t-fast), box-shadow var(--jdb-t-fast), transform var(--jdb-t-fast);
 }
 
-.jdb-panel:hover,
-.jdb-post:hover,
-.jdb-authorcard:hover,
-.jdb-quote:hover,
-.jdb-chartcard:hover,
-.jdb-quiz:hover {
+/* Hover feedback is reserved for surfaces that are links. Static panels
+   (author card, quote, chart card, quiz) stay put, so a lifting card
+   always means "this whole thing is clickable". */
+a.jdb-panel:hover,
+.jdb-post:hover {
   border-color: var(--jdb-orange-500);
   box-shadow: var(--jdb-sh-md);
-  transform: translateY(-1px);
+  transform: translateY(var(--jdb-lift));
 }
 
 .jdb-sr-only {
@@ -392,7 +407,8 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
               box-shadow var(--jdb-t-fast);
 }
 .jdb-btn:hover { transform: translateY(-1px); }
-.jdb-btn:active { transform: translateY(0); }
+.jdb-btn:active { transform: translateY(0) scale(.98); transition-duration: 60ms; }
+.jdb-btn[aria-busy="true"] { cursor: progress; opacity: .8; }
 .jdb-btn[aria-disabled="true"], .jdb-btn:disabled { opacity: .5; pointer-events: none; }
 
 /* Primary — orange fill, NAVY text (see token note on --jdb-on-orange).
@@ -409,11 +425,11 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-btn--outline { background: transparent; color: var(--jdb-fg); border-color: var(--jdb-line-strong); }
 .jdb-btn--outline:hover { border-color: var(--jdb-orange-500); color: #fff; background: var(--jdb-orange-a10); }
 
-.jdb-btn--ghost { background: transparent; color: var(--jdb-orange-400); border-color: transparent; padding-inline: var(--jdb-s-2); min-height: auto; }
+.jdb-btn--ghost { background: transparent; color: var(--jdb-orange-400); border-color: transparent; padding-inline: var(--jdb-s-2); min-height: var(--jdb-target); }
 .jdb-btn--ghost:hover { color: #fff; text-decoration: underline; }
 
 .jdb-btn--lg { font-size: var(--jdb-fs-base); padding: 1.1rem 2rem; min-height: 56px; }
-.jdb-btn--sm { font-size: var(--jdb-fs-xs); padding: 0.55rem 0.9rem; min-height: 38px; }
+.jdb-btn--sm { font-size: var(--jdb-fs-xs); padding: 0.55rem 0.9rem; min-height: var(--jdb-target); }
 .jdb-btn--block { display: flex; width: 100%; }
 
 /* Outbound mode — links off jdegbau.com (LinkedIn, GitHub, the store subdomain) */
@@ -467,6 +483,20 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   border-bottom-color: var(--jdb-orange-500);
 }
 .jdb-tabs__link .jdb-tabs__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--jdb-orange-500); }
+.jdb-tabs__ext { width: .7em; height: .7em; opacity: .7; }
+
+/* The last tab is the site's main conversion point, so it's set apart from
+   the plain tabs as an outlined button. */
+.jdb-tabs__item--cta { display: flex; align-items: center; margin-left: var(--jdb-s-2); }
+.jdb-tabs__link--cta {
+  height: auto; min-height: 40px;
+  color: var(--jdb-fg);
+  border: 1px solid var(--jdb-orange-500);
+  border-radius: var(--jdb-r-md);
+  background: var(--jdb-orange-a10);
+}
+.jdb-tabs__link--cta:hover { color: #fff; background: var(--jdb-orange-a20); }
+.jdb-tabs__link--cta[aria-current="page"] { background: var(--jdb-orange-a20); border-bottom-color: var(--jdb-orange-500); }
 
 .jdb-header__actions {
   position: relative; margin-left: auto; display: flex; align-items: center; gap: var(--jdb-s-2); flex: 0 0 auto;
@@ -477,6 +507,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-sm); color: var(--jdb-fg-muted);
   background: rgba(255,255,255,.04); border: 1px solid var(--jdb-line-strong);
   border-radius: var(--jdb-r-md); padding: .5rem .75rem; cursor: pointer;
+  min-height: var(--jdb-target);
   transition: border-color var(--jdb-t), color var(--jdb-t), background var(--jdb-t), box-shadow var(--jdb-t);
 }
 .jdb-search-trigger:hover,
@@ -488,9 +519,11 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   font-family: var(--jdb-font-mono); font-size: .7rem; color: var(--jdb-fg-muted);
   border: 1px solid var(--jdb-line-strong); border-radius: 4px; padding: .1rem .35rem;
 }
+/* Keyboard hints mean nothing on touch screens; hide them there. */
+@media (hover: none) { .jdb-search-trigger kbd { display: none; } }
 
 .jdb-menu-btn {
-  display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center;
+  display: inline-flex; width: var(--jdb-target); height: var(--jdb-target); align-items: center; justify-content: center;
   background: transparent; border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md);
   color: var(--jdb-fg); cursor: pointer;
 }
@@ -526,6 +559,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-searchpanel__result a:focus-visible {
   background: rgba(255,255,255,.03); color: var(--jdb-fg);
 }
+.jdb-searchpanel__result a:focus-visible { box-shadow: inset 2px 0 0 var(--jdb-orange-500); outline: none; }
 .jdb-searchpanel__result strong {
   display: block; font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-sm); color: var(--jdb-fg);
 }
@@ -537,6 +571,14 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 }
 .jdb-searchpanel__result--empty strong {
   display: block; margin-bottom: .15rem; color: var(--jdb-fg);
+}
+.jdb-searchpanel__result--empty a { color: var(--jdb-orange-400); }
+.jdb-searchpanel__label {
+  padding: var(--jdb-s-2) var(--jdb-gutter);
+  font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-xs); color: var(--jdb-fg-muted);
+}
+.jdb-searchpanel__result mark {
+  background: var(--jdb-orange-a20); color: inherit; border-radius: 2px; padding: 0 .1em;
 }
 
 /* --------------------------------------------------------------------------
@@ -562,7 +604,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-drawer.is-open .jdb-drawer__panel { transform: translateX(0); }
 .jdb-drawer__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--jdb-s-6); }
 .jdb-drawer__close {
-  width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
+  width: var(--jdb-target); height: var(--jdb-target); display: inline-flex; align-items: center; justify-content: center;
   background: transparent; border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md);
   color: var(--jdb-fg); cursor: pointer;
 }
@@ -574,6 +616,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 }
 .jdb-drawer__link::before { content: "//"; color: var(--jdb-navy-600); font-size: var(--jdb-fs-sm); }
 .jdb-drawer__link[aria-current="page"] { color: var(--jdb-orange-500); }
+.jdb-drawer__link .jdb-tabs__ext { margin-left: auto; }
 .jdb-drawer__foot { margin-top: auto; padding-top: var(--jdb-s-5); }
 
 /* --------------------------------------------------------------------------
@@ -586,12 +629,12 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-footer__blurb { color: var(--jdb-fg-muted); max-width: 32ch; }
 .jdb-footer__heading { font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-sm); color: var(--jdb-fg-muted); text-transform: none; margin-bottom: var(--jdb-s-4); }
 .jdb-footer__heading::before { content: "# "; color: var(--jdb-navy-600); }
-.jdb-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--jdb-s-3); }
-.jdb-footer__link { color: var(--jdb-fg-dim); text-decoration: none; font-size: var(--jdb-fs-sm); }
+.jdb-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--jdb-s-1); }
+.jdb-footer__link { display: inline-block; padding-block: var(--jdb-s-2); color: var(--jdb-fg-dim); text-decoration: none; font-size: var(--jdb-fs-sm); }
 .jdb-footer__link:hover { color: var(--jdb-orange-400); text-decoration: underline; }
 .jdb-footer__social { display: flex; flex-wrap: wrap; gap: var(--jdb-s-2); margin-top: var(--jdb-s-5); }
 .jdb-footer__social a {
-  width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
+  width: var(--jdb-target); height: var(--jdb-target); display: inline-flex; align-items: center; justify-content: center;
   border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md); color: var(--jdb-fg-dim); text-decoration: none;
 }
 .jdb-footer__social a:hover { color: #fff; border-color: var(--jdb-orange-500); }
@@ -663,7 +706,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-hero--home h1 { font-size: var(--jdb-fs-4xl); max-width: 16ch; }
 .jdb-hero--home h1 .jdb-cursor {
   display: inline-block; width: .5ch; height: .85em; background: var(--jdb-orange-500);
-  margin-left: .1em; animation: jdb-blink 1.05s steps(1) infinite; vertical-align: -0.1em;
+  margin-left: .1em; animation: jdb-blink 1.05s steps(1) 6; vertical-align: -0.1em;
 }
 @keyframes jdb-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .jdb-cursor { animation: none; } }
@@ -758,7 +801,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   padding: var(--jdb-s-6); height: 100%;
   transition: border-color var(--jdb-t-fast), transform var(--jdb-t-fast);
 }
-.jdb-service:hover { border-color: var(--jdb-line-strong); transform: translateY(-2px); }
+/* Service cards aren't links, so they don't react to hover (see --jdb-lift). */
 .jdb-service__icon {
   width: 2.75rem; height: 2.75rem; border-radius: var(--jdb-r-md);
   background: var(--jdb-orange-a10); color: var(--jdb-orange-500);
@@ -822,7 +865,13 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   background: var(--jdb-surface); border: 1px solid var(--jdb-line); border-radius: var(--jdb-r-lg);
   overflow: hidden; transition: border-color var(--jdb-t-fast), transform var(--jdb-t-fast);
 }
-.jdb-post:hover { border-color: var(--jdb-orange-500); transform: translateY(-2px); }
+.jdb-post { position: relative; }
+.jdb-post:hover { border-color: var(--jdb-orange-500); transform: translateY(var(--jdb-lift)); }
+/* The title link stretches over the whole card, so the card is one big
+   target instead of two small ones (image + title). */
+.jdb-post h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.jdb-post:has(h3 a:focus-visible) { outline: 2px solid var(--jdb-orange-500); outline-offset: 2px; }
+.jdb-post:hover h3 a { color: var(--jdb-orange-400); }
 .jdb-post__media { display: block; flex: 0 0 auto; aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(135deg, var(--jdb-navy-700), var(--jdb-navy-900)); position: relative; }
 .jdb-post__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .jdb-post__media::after {
@@ -848,7 +897,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
   color: var(--jdb-orange-400); background: var(--jdb-orange-a10); border: 1px solid rgba(255,77,0,.25);
   padding: .2em .65em; border-radius: var(--jdb-r-pill); text-decoration: none;
 }
-.jdb-tag:hover { background: var(--jdb-orange-a20); color: #fff; }
+a.jdb-tag:hover { background: var(--jdb-orange-a20); color: #fff; }
 .jdb-tag--muted { color: var(--jdb-fg-muted); background: rgba(255,255,255,.04); border-color: var(--jdb-line-strong); }
 
 /* --------------------------------------------------------------------------
@@ -883,7 +932,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-share { display: flex; align-items: center; gap: var(--jdb-s-2); margin-left: auto; }
 .jdb-share span { font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-xs); color: var(--jdb-fg-muted); margin-right: .25rem; }
 .jdb-share a {
-  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  width: var(--jdb-target); height: var(--jdb-target); display: inline-flex; align-items: center; justify-content: center;
   border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md); color: var(--jdb-fg-dim);
 }
 .jdb-share a:hover { color: #fff; border-color: var(--jdb-orange-500); }
@@ -1019,10 +1068,15 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-quiz__option {
   font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-sm); color: var(--jdb-fg-dim);
   background: var(--jdb-navy-900); border: 1px solid var(--jdb-line-strong); border-radius: var(--jdb-r-md);
-  padding: .65rem 1.1rem; cursor: pointer; transition: all var(--jdb-t-fast);
+  padding: .65rem 1.1rem; min-height: var(--jdb-target); cursor: pointer; transition: all var(--jdb-t-fast);
 }
 .jdb-quiz__option:hover { border-color: var(--jdb-orange-500); color: #fff; }
 .jdb-quiz__option.is-selected { background: var(--jdb-orange-a10); border-color: var(--jdb-orange-500); color: #fff; }
+.jdb-quiz__option.is-selected::before { content: "\2713\00a0"; color: var(--jdb-orange-400); }
+.jdb-quiz__progress { display: flex; align-items: center; gap: var(--jdb-s-3); margin-bottom: var(--jdb-s-6); font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-xs); color: var(--jdb-fg-muted); }
+.jdb-quiz__progress-track { flex: 1; height: 4px; border-radius: var(--jdb-r-pill); background: rgba(255,255,255,.08); overflow: hidden; }
+.jdb-quiz__progress-fill { display: block; height: 100%; width: var(--_p, 0%); background: var(--jdb-orange-500); border-radius: inherit; transition: width var(--jdb-t); }
+.jdb-quiz__q.is-answered .jdb-quiz__qnum::after { content: " \2713"; color: var(--jdb-good); }
 .jdb-quiz__result {
   margin-top: var(--jdb-s-6); padding-top: var(--jdb-s-6); border-top: 1px dashed var(--jdb-line-strong);
   display: none;
@@ -1059,6 +1113,7 @@ hr { border: 0; border-top: 1px solid var(--jdb-line); margin: var(--jdb-s-7) 0;
 .jdb-input::placeholder, .jdb-textarea::placeholder { color: var(--jdb-fg-muted); }
 .jdb-input:focus, .jdb-textarea:focus { outline: none; border-color: var(--jdb-orange-500); box-shadow: var(--jdb-glow); }
 .jdb-textarea { resize: vertical; min-height: 8rem; }
+.jdb-input:user-invalid, .jdb-textarea:user-invalid { border-color: var(--jdb-bad); }
 .jdb-form__row { display: grid; gap: var(--jdb-s-4); grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
 
 /* --------------------------------------------------------------------------

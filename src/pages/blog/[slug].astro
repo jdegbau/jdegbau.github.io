@@ -117,7 +117,11 @@ const schema = {
       class="jdb-hero--blog"
       backgroundImage={post.featuredImage}
     >
-      <span class="jdb-hero__eyebrow">article</span>
+      <nav class="jdb-crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="jdb-crumbs__sep" aria-hidden="true">/</span>
+        <a href="/blog/">Blog</a>
+      </nav>
       <h1>{post.title}</h1>
       <div class="jdb-postheader__meta">
         <span class="jdb-postheader__metaitem">

@@ -61,6 +61,12 @@ const a11y = href ? { href, 'aria-label': label } : { role: 'img', 'aria-label':
     text-decoration: none;
   }
 
+  /* As a link, pad the mark out to a comfortable click/tap height without
+     changing how it looks. */
+  a.jdb-logo {
+    padding-block: calc((var(--jdb-target, 44px) - 1em) / 2);
+  }
+
   .jdb-logo:hover,
   .jdb-logo:focus-visible {
     text-decoration: none;
@@ -85,7 +91,9 @@ const a11y = href ? { href, 'aria-label': label } : { role: 'img', 'aria-label':
     background: var(--jdb-logo-cursor);
     border-radius: 0.08em;
     transform: translateY(0.08em);
-    animation: jdb-logo-cursor-blink 1.05s steps(1) infinite;
+    /* Blinks a few times on load, then rests solid, so it greets without
+       competing with the page for attention. */
+    animation: jdb-logo-cursor-blink 1.05s steps(1) 6;
   }
 
   .jdb-logo--sm { font-size: 0.9rem; }

@@ -45,18 +45,24 @@ const questions = [
     </div>
 
     <article class="jdb-quiz" data-chart-picker>
-      {questions.map((question, index) => (
-        <div class="jdb-quiz__q">
-          <div class="jdb-quiz__qnum">Q{index + 1}</div>
-          <h3 class="jdb-quiz__qtitle">{question.label}</h3>
+      <div class="jdb-quiz__progress" data-chart-picker-progress>
+        <span data-chart-picker-count>0 of {questions.length} answered</span>
+        <span class="jdb-quiz__progress-track" aria-hidden="true"><span class="jdb-quiz__progress-fill"></span></span>
+      </div>
 
-          <div class="jdb-quiz__options">
+      {questions.map((question, index) => (
+        <div class="jdb-quiz__q" data-chart-picker-question={question.id}>
+          <div class="jdb-quiz__qnum">Q{index + 1}</div>
+          <h3 class="jdb-quiz__qtitle" id={`chart-picker-${question.id}`}>{question.label}</h3>
+
+          <div class="jdb-quiz__options" role="group" aria-labelledby={`chart-picker-${question.id}`}>
             {question.options.map((option) => (
               <button
                 type="button"
                 class="jdb-quiz__option"
                 data-question={question.id}
                 data-value={option.value}
+                aria-pressed="false"
               >
                 {option.label}
               </button>
@@ -65,7 +71,7 @@ const questions = [
         </div>
       ))}
 
-      <div class="jdb-quiz__result" id="chart-picker-result">
+      <div class="jdb-quiz__result" id="chart-picker-result" aria-live="polite">
         <div class="jdb-quiz__result-label">Recommended visualization</div>
         <div class="jdb-quiz__result-value" id="chart-picker-result-value"></div>
         <p id="chart-picker-result-copy"></p>
@@ -85,6 +91,18 @@ const questions = [
     const resultCopy = document.getElementById('chart-picker-result-copy');
 
     const buttons = [...picker.querySelectorAll('.jdb-quiz__option')];
+    const total = picker.querySelectorAll('[data-chart-picker-question]').length;
+    const progress = picker.querySelector('[data-chart-picker-progress]');
+    const count = picker.querySelector('[data-chart-picker-count]');
+
+    // Show how close the visitor is to their recommendation.
+    function updateProgress() {
+      const answered = Object.keys(selections).length;
+      count.textContent = answered === total
+        ? 'All set: here’s your recommendation'
+        : `${answered} of ${total} answered`;
+      progress.style.setProperty('--_p', `${(answered / total) * 100}%`);
+    }
 
     function getRecommendation() {
       const relationship = selections.relationship;
@@ -146,7 +164,13 @@ const questions = [
       const recommendation = getRecommendation();
       resultValue.textContent = `${recommendation.icon} ${recommendation.chart}`;
       resultCopy.textContent = recommendation.reason;
+      const firstReveal = !result.classList.contains('is-visible');
       result.classList.add('is-visible');
+      // Bring the answer into view the first time it appears, if it's off screen.
+      if (firstReveal && result.getBoundingClientRect().bottom > window.innerHeight) {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        result.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+      }
     }
 
     buttons.forEach((button) => {
@@ -157,9 +181,12 @@ const questions = [
 
         optionGroup.querySelectorAll('.jdb-quiz__option').forEach((option) => {
           option.classList.toggle('is-selected', option === button);
+          option.setAttribute('aria-pressed', String(option === button));
         });
+        button.closest('.jdb-quiz__q')?.classList.add('is-answered');
 
         selections[question] = value;
+        updateProgress();
         updateRecommendation();
       });
     });

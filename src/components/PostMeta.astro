@@ -74,8 +74,9 @@ const { date, updated, readingTime, url } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-block: -.25rem;
     color: var(--jdb-orange-400);
     text-decoration: none;
     border-radius: var(--jdb-r-sm);
@@ -97,13 +98,14 @@ const { date, updated, readingTime, url } = Astro.props;
   }
 
   .post-meta__progress-bar {
+    /* Fills left to right like any progress bar, and brightens as it nears
+       the end, so the finish line feels close. */
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 0;
     height: 100%;
     width: 0;
-    background: linear-gradient(to right, var(--jdb-orange-500), var(--jdb-navy-800), var(--jdb-orange-500));
-    transform: translateX(-50%);
+    background: linear-gradient(to right, rgba(255, 77, 0, .55), var(--jdb-orange-500));
   }
 
   @media (max-width: 48rem) {
@@ -136,8 +138,8 @@ const { date, updated, readingTime, url } = Astro.props;
     }
 
     .post-meta__share a {
-      width: 1.75rem;
-      height: 1.75rem;
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 </style>

@@ -7,6 +7,7 @@
     data-jdb-search-trigger
     aria-expanded="false"
     aria-controls="jdb-searchpanel"
+    aria-keyshortcuts="/ Control+K Meta+K"
   >
     <span class="jdb-icon jdb-icon--search" aria-hidden="true"></span>
     Search
@@ -19,7 +20,16 @@
     <div class="jdb-searchpanel__inner">
       <span class="jdb-icon jdb-icon--search" aria-hidden="true"></span>
       <label class="jdb-sr-only" for="search-input">Search posts</label>
-      <input type="search" id="search-input" aria-label="Search posts" aria-controls="results-container" placeholder="Search posts..." />
+      <input
+        type="search"
+        id="search-input"
+        aria-label="Search posts"
+        aria-controls="results-container"
+        placeholder="Search posts..."
+        autocomplete="off"
+        spellcheck="false"
+        enterkeyhint="go"
+      />
     </div>
     <ul id="results-container" class="jdb-searchpanel__results" aria-live="polite" aria-atomic="true"></ul>
   </div>
@@ -32,72 +42,189 @@
   const resultsContainer = document.getElementById('results-container');
 
   if (searchPanel && searchTrigger && searchInput && resultsContainer) {
-    searchTrigger.addEventListener('click', () => {
-      const isOpen = searchPanel.classList.toggle('is-open');
-      searchTrigger.setAttribute('aria-expanded', String(isOpen));
-      if (isOpen) {
-        searchInput.focus();
+    const MAX_RESULTS = 8;
+    const SUGGESTIONS = 3;
+    let posts = [];
+    let loading = null;
+
+    // Start fetching the index as soon as someone shows intent (hover, focus,
+    // touch), so results are ready by the time they type.
+    function loadPosts() {
+      if (!loading) {
+        loading = fetch('/search.json')
+          .then((response) => {
+            if (!response.ok) throw new Error('Failed to load search data');
+            return response.json();
+          })
+          .then((data) => { posts = data; return posts; })
+          .catch((error) => { console.error(error); loading = null; return []; });
+      }
+      return loading;
+    }
+    ['pointerenter', 'focus', 'touchstart'].forEach((type) =>
+      searchTrigger.addEventListener(type, loadPosts, { once: true, passive: true }),
+    );
+
+    const isOpen = () => searchPanel.classList.contains('is-open');
+
+    function openSearch() {
+      searchPanel.classList.add('is-open');
+      searchTrigger.setAttribute('aria-expanded', 'true');
+      searchInput.focus();
+      searchInput.select();
+      loadPosts().then(() => render(searchInput.value));
+    }
+
+    function closeSearch({ returnFocus = true } = {}) {
+      if (!isOpen()) return;
+      searchPanel.classList.remove('is-open');
+      searchTrigger.setAttribute('aria-expanded', 'false');
+      if (returnFocus) searchTrigger.focus();
+    }
+
+    searchTrigger.addEventListener('click', () => (isOpen() ? closeSearch() : openSearch()));
+
+    // Familiar shortcuts: "/" (as on GitHub and YouTube) and Ctrl/Cmd+K open
+    // search; Escape closes it.
+    document.addEventListener('keydown', (event) => {
+      const target = event.target;
+      const typing = target instanceof HTMLElement &&
+        (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+      if ((event.key === 'k' || event.key === 'K') && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        isOpen() ? closeSearch() : openSearch();
+      } else if (event.key === '/' && !typing && !event.metaKey && !event.ctrlKey && !event.altKey) {
+        event.preventDefault();
+        openSearch();
+      } else if (event.key === 'Escape' && isOpen()) {
+        closeSearch();
       }
     });
 
-    let posts = [];
+    // Clicking anywhere outside the panel closes it.
+    document.addEventListener('pointerdown', (event) => {
+      if (!isOpen()) return;
+      const target = event.target;
+      if (searchPanel.contains(target) || searchTrigger.contains(target)) return;
+      closeSearch({ returnFocus: false });
+    });
 
-    async function loadPosts() {
-      if (posts.length > 0) return posts;
-      try {
-        const response = await fetch('/search.json');
-        if (!response.ok) throw new Error('Failed to load search data');
-        posts = await response.json();
-      } catch (error) {
-        console.error(error);
-        posts = [];
-      }
-      return posts;
+    // Forgiving matching: case, accents, and punctuation are ignored, and
+    // every word must appear somewhere (title, excerpt, or tags) in any order.
+    const normalize = (value) =>
+      String(value || '')
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+
+    const escapeHtml = (value) =>
+      String(value || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+    const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    function highlight(text, terms) {
+      const safe = escapeHtml(text);
+      if (!terms.length) return safe;
+      const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
+      return safe.replace(pattern, '<mark>$1</mark>');
     }
 
-    function formatResult(post) {
+    function search(query) {
+      const terms = normalize(query).split(' ').filter(Boolean);
+      if (!terms.length) return { terms, results: [] };
+      const scored = posts
+        .map((post) => {
+          const title = normalize(post.title);
+          const body = normalize(`${post.excerpt} ${(post.tags || []).join(' ')}`);
+          let score = 0;
+          for (const term of terms) {
+            if (title.includes(term)) score += 3;
+            else if (body.includes(term)) score += 1;
+            else return null;
+          }
+          return { post, score };
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.score - a.score);
+      return { terms, results: scored.map((item) => item.post) };
+    }
+
+    function formatResult(post, terms) {
       return `
         <li class="jdb-searchpanel__result">
-          <a href="${post.permalink}">
-            <strong>${post.title}</strong>
-            <span>${post.excerpt || ''}</span>
+          <a href="${escapeHtml(post.permalink)}">
+            <strong>${highlight(post.title, terms)}</strong>
+            <span>${highlight(post.excerpt, terms)}</span>
           </a>
         </li>
       `;
     }
 
-    function renderResults(results) {
+    function render(query) {
+      const trimmed = (query || '').trim();
+
+      if (!trimmed) {
+        // Before anything is typed, offer the newest posts instead of a blank panel.
+        const recent = posts.slice(0, SUGGESTIONS);
+        resultsContainer.innerHTML = recent.length
+          ? `<li class="jdb-searchpanel__label">Recent posts</li>${recent.map((post) => formatResult(post, [])).join('')}`
+          : '';
+        return;
+      }
+
+      const { terms, results } = search(trimmed);
       if (!results.length) {
         resultsContainer.innerHTML = `
           <li class="jdb-searchpanel__result jdb-searchpanel__result--empty">
-            <strong>Oops! You stumped me!</strong>
-            <span>No matching results found.</span>
+            <strong>No posts match “${escapeHtml(trimmed)}”</strong>
+            <span>Try a shorter or broader word, or <a href="/blog/">browse all posts</a>.</span>
           </li>
         `;
         return;
       }
 
-      resultsContainer.innerHTML = results.map(formatResult).join('');
+      const shown = results.slice(0, MAX_RESULTS);
+      const label = results.length === 1 ? '1 post' : `${results.length} posts`;
+      resultsContainer.innerHTML =
+        `<li class="jdb-searchpanel__label">${label}${results.length > shown.length ? `, showing the top ${shown.length}` : ''}</li>` +
+        shown.map((post) => formatResult(post, terms)).join('');
     }
 
-    async function handleSearch(event) {
-      const query = (event.target.value || '').trim().toLowerCase();
+    searchInput.addEventListener('input', async (event) => {
       await loadPosts();
+      render(event.target.value);
+    });
 
-      if (!query) {
-        resultsContainer.innerHTML = '';
-        return;
-      }
-
-      const filtered = posts.filter((post) => {
-        const title = (post.title || '').toLowerCase();
-        const excerpt = (post.excerpt || '').toLowerCase();
-        return title.includes(query) || excerpt.includes(query);
-      });
-
-      renderResults(filtered.slice(0, 8));
+    // Arrow keys move through results; Enter in the field opens the first one.
+    function resultLinks() {
+      return [...resultsContainer.querySelectorAll('.jdb-searchpanel__result a')];
     }
 
-    searchInput.addEventListener('input', handleSearch);
+    searchInput.addEventListener('keydown', (event) => {
+      const links = resultLinks();
+      if (event.key === 'ArrowDown' && links.length) {
+        event.preventDefault();
+        links[0].focus();
+      } else if (event.key === 'Enter' && links.length) {
+        event.preventDefault();
+        links[0].click();
+      }
+    });
+
+    resultsContainer.addEventListener('keydown', (event) => {
+      const links = resultLinks();
+      const index = links.indexOf(document.activeElement);
+      if (index === -1) return;
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        links[Math.min(index + 1, links.length - 1)].focus();
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        if (index === 0) searchInput.focus();
+        else links[index - 1].focus();
+      }
+    });
   }
 </script>
