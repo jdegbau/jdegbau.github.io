@@ -9,6 +9,9 @@ Before creating a new reusable UI component, read and follow the guidance in:
 - `src/components/README.md`
 - `src/pages/components.astro`
 
+## Content and messaging
+The site follows Andy Crestodina / Orbit Media's content and conversion philosophy. Before writing or rewriting page copy or blog posts, read "Content guidelines (Orbit Media approach)" in `src/components/README.md`. In short: use descriptive headlines; answer questions, address objections, and add evidence (never invent proof); end every page with one clear next step (`CallToAction`).
+
 ## Component rules
 1. Prefer reusing an existing component over creating a new one.
 2. If a component already exists that covers the pattern, update that component rather than duplicating behavior.

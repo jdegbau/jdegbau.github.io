@@ -16,6 +16,7 @@ import Logotype from '../components/Logotype.astro';
 import Logos from '../components/Logos.astro';
 import SummaryCard from '../components/SummaryCard.astro';
 import Callout from '../components/Callout.astro';
+import CallToAction from '../components/CallToAction.astro';
 import Steps from '../components/Steps.astro';
 import Tabs from '../components/Tabs.astro';
 import TabPanel from '../components/TabPanel.astro';
@@ -183,6 +184,25 @@ const sampleMatrixRows = [
               </div>
             </Hero>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jdb-section jdb-section--tight">
+      <div class="jdb-container jdb-container--wide">
+        <div class="component-card component-card--full">
+          <div class="component-card__head">
+            <span class="jdb-eyebrow">component</span>
+            <h2 id="component-calltoaction">CallToAction</h2>
+          </div>
+          <CallToAction
+            title="Stuck on a content or measurement question?"
+            text="Book a focused one-hour call and leave with practical next steps."
+            primary={{ href: '/seo-helpline/', label: 'Book a call' }}
+            secondary={{ href: '/contact/', label: 'Send a note' }}
+            price={{ amount: '$100', unit: 'per 60-minute call' }}
+            headingLevel="h3"
+          />
         </div>
       </div>
     </section>

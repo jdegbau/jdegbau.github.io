@@ -12,15 +12,9 @@ const { action, demo = false } = Astro.props;
     <span class="contact-form__index" aria-hidden="true">01 / 01</span>
   </header>
 
-  <div class="jdb-grid jdb-grid--2 contact-form__names">
-    <div class="contact-form__field">
-      <label for="firstName">First name</label>
-      <input id="firstName" type="text" name="firstName" autocomplete="given-name" placeholder="Your first name" required />
-    </div>
-    <div class="contact-form__field">
-      <label for="lastName">Last name</label>
-      <input id="lastName" type="text" name="lastName" autocomplete="family-name" placeholder="Your last name" required />
-    </div>
+  <div class="contact-form__field">
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" autocomplete="name" placeholder="Your name" required />
   </div>
 
   <div class="contact-form__field">
@@ -94,8 +88,6 @@ const { action, demo = false } = Astro.props;
     font-family: var(--jdb-font-mono);
     font-size: var(--jdb-fs-xs);
   }
-
-  .contact-form__names { gap: var(--jdb-s-4); }
 
   .contact-form__field {
     display: grid;

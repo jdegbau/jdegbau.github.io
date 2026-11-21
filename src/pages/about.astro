@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Logos from '../components/Logos.astro';
 import BlogCard from '../components/BlogCard.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { getAllPosts } from '../lib/posts';
 
 const posts = (await getAllPosts()).slice(0, 3);
@@ -61,6 +62,33 @@ const description = 'About Joshua DeGrasse-Baumann, including his work in conten
     </div>
   </section>
 
+  <section class="jdb-section jdb-section--raised">
+    <div class="jdb-container">
+      <div class="jdb-section__head">
+        <span class="jdb-eyebrow">how I think about content</span>
+        <h2 class="jdb-section__title">Four principles behind the work</h2>
+      </div>
+      <div class="jdb-grid jdb-grid--2">
+        <article class="jdb-service">
+          <h3>Start with the audience’s questions</h3>
+          <p>The best content answers what people are already asking. Research comes before writing, every time.</p>
+        </article>
+        <article class="jdb-service">
+          <h3>Publish fewer, better pieces</h3>
+          <p>One genuinely useful guide beats ten thin posts. Depth, original insight, and clear visuals are what earn attention and links.</p>
+        </article>
+        <article class="jdb-service">
+          <h3>Measure what matters</h3>
+          <p>Decide what success looks like before you publish, then track it honestly, even when the numbers aren’t flattering.</p>
+        </article>
+        <article class="jdb-service">
+          <h3>Show the data plainly</h3>
+          <p>A report is only useful if people understand it. The right chart, clearly labeled, beats a crowded dashboard.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="jdb-section">
     <div class="jdb-container">
       <div class="jdb-section__head">
@@ -107,6 +135,13 @@ const description = 'About Joshua DeGrasse-Baumann, including his work in conten
           <BlogCard post={post} />
         ))}
       </div>
+      <CallToAction
+        prompt="let's talk"
+        title="Want to work through a content or measurement problem together?"
+        text="Book a focused one-hour call, or send a short note about what you’re working on."
+        primary={{ href: '/seo-helpline/', label: 'Book a consultation' }}
+        secondary={{ href: '/contact/', label: 'Get in touch' }}
+      />
     </div>
   </section>
 

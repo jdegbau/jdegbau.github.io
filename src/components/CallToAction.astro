@@ -1,0 +1,85 @@
+---
+/**
+ * End-of-page call to action: a short prompt, a headline, one sentence of
+ * context, and one or two buttons. Every page should end with a clear next
+ * step (see "Content guidelines" in src/components/README.md).
+ * Uses the shared `.jdb-cta` styles in main.css (section 31).
+ */
+interface Action {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  /** Small terminal-style line above the headline, e.g. "next step". */
+  prompt?: string;
+  title: string;
+  /** One sentence of supporting copy. */
+  text?: string;
+  /** Primary button. */
+  primary: Action;
+  /** Optional secondary button. */
+  secondary?: Action;
+  /** Optional price line, e.g. { amount: '$100', unit: 'per 60-minute call' }. */
+  price?: { amount: string; unit: string };
+  /** Heading level for `title`. Defaults to h2. */
+  headingLevel?: 'h2' | 'h3';
+  class?: string;
+}
+
+const {
+  prompt = 'next step',
+  title,
+  text,
+  primary,
+  secondary,
+  price,
+  headingLevel = 'h2',
+  class: className,
+} = Astro.props;
+const Heading = headingLevel;
+---
+
+<aside class:list={['jdb-cta', 'jdb-cta-block', className]} aria-label={title}>
+  <div>
+    {prompt && <p class="jdb-cta__prompt">{prompt}</p>}
+    <Heading class="jdb-cta-block__title">{title}</Heading>
+    {text && <p>{text}</p>}
+    {price && (
+      <p class="jdb-cta__price"><strong>{price.amount}</strong> {price.unit}</p>
+    )}
+  </div>
+  <div class="jdb-cta-block__actions">
+    <a class="jdb-btn jdb-btn--primary jdb-btn--lg" href={primary.href}>{primary.label}</a>
+    {secondary && <a class="jdb-btn jdb-btn--outline jdb-btn--lg" href={secondary.href}>{secondary.label}</a>}
+  </div>
+</aside>
+
+<style>
+  .jdb-cta-block {
+    margin: var(--jdb-s-6) 0;
+  }
+
+  .jdb-cta-block__title {
+    font-size: var(--jdb-fs-xl);
+    margin: 0 0 var(--jdb-s-2);
+    max-width: 26ch;
+  }
+
+  .jdb-cta-block__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jdb-s-3);
+  }
+
+  @media (max-width: 36rem) {
+    .jdb-cta-block {
+      padding: var(--jdb-s-6);
+    }
+
+    .jdb-cta-block__actions,
+    .jdb-cta-block__actions .jdb-btn {
+      width: 100%;
+    }
+  }
+</style>

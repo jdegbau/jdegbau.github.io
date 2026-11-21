@@ -2,10 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import CallToAction from '../../components/CallToAction.astro';
 import { getAllPosts } from '../../lib/posts';
 
 const posts = await getAllPosts();
 const seoTitle = "Josh's Blog";
+// Content mission statement: who the blog is for, what they get, and why it helps.
+const mission = 'This is where marketers and analysts get practical guides on content strategy, data visualization, measurement, and SEO, so they can make better decisions and prove the value of their work.';
 const description = 'Insights, tips, and guides on content strategy, data visualization, measurement, and SEO, written by Joshua DeGrasse-Baumann.';
 ---
 <BaseLayout
@@ -16,7 +19,10 @@ const description = 'Insights, tips, and guides on content strategy, data visual
   <Hero variant="intro" containerWidth="wide">
     <span class="jdb-eyebrow">blog</span>
     <h1>{seoTitle}</h1>
-    <p class="jdb-hero__lede">{description}</p>
+    <p class="jdb-hero__lede">{mission}</p>
+    <div class="jdb-hero__actions">
+      <a href="#newsletter" class="jdb-btn jdb-btn--primary">Get new posts by email</a>
+    </div>
   </Hero>
 
   <section class="jdb-section">
@@ -26,6 +32,13 @@ const description = 'Insights, tips, and guides on content strategy, data visual
           <BlogCard post={post} />
         ))}
       </div>
+      <CallToAction
+        prompt="need a second opinion?"
+        title="Want help applying this to your own content?"
+        text="Book a one-hour call to talk through your content, reporting, or SEO question."
+        primary={{ href: '/seo-helpline/', label: 'Book a consultation' }}
+        secondary={{ href: '#newsletter', label: 'Subscribe by email' }}
+      />
     </div>
   </section>
 

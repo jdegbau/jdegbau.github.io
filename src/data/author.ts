@@ -3,7 +3,7 @@ export const author = {
   profilePhotoWidth: 200,
   profilePhotoHeight: 250,
   name: 'Joshua DeGrasse-Baumann',
-  bio: 'I write about content strategy, data visualization, measurement, and SEO.',
+  bio: 'Josh is a Content Marketing Strategist at Ellsworth Adhesives and a former Lead SEO Strategist at Fire&Spark. He writes practical guides on content strategy, data visualization, measurement, and SEO.',
   aiProfile: {
     alternateNames: ['Josh', 'jdegbau'],
     description: 'Joshua DeGrasse-Baumann is a Content Marketing Strategist at Ellsworth Adhesives. His work focuses on content strategy, data visualization, and measurement strategy, along with SEO, connecting content performance to business outcomes.',

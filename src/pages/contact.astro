@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ContactForm from '../components/ContactForm.astro';
+import Steps from '../components/Steps.astro';
 
 const seoTitle = 'How Can I Help You?';
 const description = 'Contact Joshua DeGrasse-Baumann for content strategy, data visualization, measurement strategy, and SEO consulting.';
@@ -26,6 +27,14 @@ const description = 'Contact Joshua DeGrasse-Baumann for content strategy, data 
             <li>Measurement plans, analytics, and attribution</li>
             <li>SEO strategy and technical issues</li>
           </ul>
+          <h3 class="contact-context__next">What happens next</h3>
+          <Steps label="What happens after you send a message">
+            <ol>
+              <li><strong>I read your note.</strong> I usually reply within two business days.</li>
+              <li><strong>We figure out the right fit.</strong> Sometimes a quick email answer is enough. Sometimes a focused call makes more sense.</li>
+              <li><strong>You get practical next steps.</strong> No pressure, and no long-term commitment required.</li>
+            </ol>
+          </Steps>
           <div class="contact-context__links">
             <a href="mailto:josh@jdegbau.com">josh@jdegbau.com</a>
             <a href="/seo-helpline/">Need focused time? Book a call</a>
@@ -83,6 +92,11 @@ const description = 'Contact Joshua DeGrasse-Baumann for content strategy, data 
     color: var(--jdb-good);
     content: '>';
     font-family: var(--jdb-font-mono);
+  }
+
+  .contact-context__next {
+    margin: 0 0 var(--jdb-s-2);
+    font-size: var(--jdb-fs-lg);
   }
 
   .contact-context__links {
