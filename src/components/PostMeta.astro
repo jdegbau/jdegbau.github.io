@@ -98,14 +98,13 @@ const { date, updated, readingTime, url } = Astro.props;
   }
 
   .post-meta__progress-bar {
-    /* Fills left to right like any progress bar, and brightens as it nears
-       the end, so the finish line feels close. */
     position: absolute;
-    left: 0;
+    left: 50%;
     top: 0;
     height: 100%;
     width: 0;
-    background: linear-gradient(to right, rgba(255, 77, 0, .55), var(--jdb-orange-500));
+    background: linear-gradient(to right, var(--jdb-orange-500), var(--jdb-navy-800), var(--jdb-orange-500));
+    transform: translateX(-50%);
   }
 
   @media (max-width: 48rem) {

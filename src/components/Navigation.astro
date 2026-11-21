@@ -1,12 +1,11 @@
 ---
 import Logotype from './Logotype.astro';
-// Order matters: the first and last items are the ones people remember, so
-// the guides lead and Contact (the main next step) closes the list and is
-// styled as a button. Keep this list short.
+// Contact (the main next step) closes the list and is styled as a button.
+// Keep this list short.
 const navPages = [
+  { href: '/about/', label: 'About' },
   { href: '/blog/', label: 'Blog' },
   { href: '/seo-helpline/', label: 'SEO Helpline' },
-  { href: '/about/', label: 'About' },
   { href: 'https://store.jdegbau.com/', label: 'GTM Templates', external: true },
   { href: '/contact/', label: 'Contact', cta: true },
 ];

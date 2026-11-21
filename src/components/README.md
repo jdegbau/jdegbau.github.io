@@ -147,7 +147,7 @@ Notes:
 - Always render `<Logotype />` for the logo. Don't hand-write the `<em>(</em><b>jdegbau</b>…` markup or restyle `.jdb-logo` elsewhere; that duplication is how the header and footer drifted apart (different weights) before this component existed.
 - Brand spec it enforces: JetBrains Mono at weight 500 throughout; parentheses and braces in `--jdb-navy-600`; the word in `--jdb-fg`; the arrow in `--jdb-orange-400` (orange *text* tone, not the `#ff4d00` fill colour).
 - Props: `href` (default `/`; pass `null` for an unlinked mark, which then gets `role="img"`), `size` (`sm` | `md` | `lg` | `xl`, default `md` = 1.05rem as used in the header/footer), `cursor` (blinking block cursor between the braces, default `true`), `theme` (`dark` | `light`), `label` (link's accessible name), `class`.
-- The cursor blinks six times on load and then rests solid, so it doesn't pull attention away from the page; it doesn't blink at all under `prefers-reduced-motion`. When printed, the logo switches to the light colours and drops the cursor.
+- The cursor stops blinking under `prefers-reduced-motion`. When printed, the logo switches to the light colours and drops the cursor.
 - Used by `Navigation` (header and mobile drawer) and `Footer`.
 
 ### Logos
@@ -163,7 +163,7 @@ Purpose: Site-wide top navigation and mobile drawer.
 Location: `src/components/Navigation.astro`
 Notes:
 - Shared across pages.
-- Order: Blog first and Contact last (the positions people remember best); Contact is marked `cta: true` and renders as an outlined button. Keep the list to five items or fewer.
+- Contact stays last and is marked `cta: true`, which renders it as an outlined button. Keep the list to five items or fewer.
 - External items (`external: true`) open in a new tab and show an external-link icon plus screen-reader text.
 - The drawer sets `aria-expanded` on the menu button, closes with Escape, and moves focus into the panel and back to the button.
 
@@ -301,12 +301,11 @@ These rules come from established UX research (the "Laws of UX" collection at la
 - **Respond fast (Doherty Threshold).** Give feedback in under 400ms: press states on buttons, "Sending…" on submit, data prefetched on intent.
 - **Hover means clickable (Similarity, Uniform Connectedness).** Only links lift on hover (`--jdb-lift`). Static cards and non-link tags don't react.
 - **Group by proximity and region (Proximity, Common Region).** Use the spacing scale: tight inside a group, larger between groups, and a card or section surface for content that belongs together.
-- **Make the important thing stand out (Von Restorff, Serial Position).** Reserve orange fills and outlines for the main action. Put the most important nav items first and last.
-- **Show progress (Goal-Gradient, Zeigarnik).** Multi-step UI shows how far along someone is (quiz progress, reading bar, series "part 2 of 4").
+- **Make the important thing stand out (Von Restorff).** Reserve orange fills and outlines for the main action.
 - **End well (Peak-End Rule).** Confirmation, empty, and error states say what happens next and offer one next step.
 - **Be forgiving with input (Postel's Law, Tesler's Law).** Use `autocomplete`/`inputmode`, trim whitespace, match search terms in any order, and only flag errors after interaction.
 - **Chunk information (Miller's Law, Chunking).** Cap lists of results, use subheads every few paragraphs, and keep prose at about 68ch.
-- **Limit motion (Selective Attention, Cognitive Load).** Decorative animation stops after a few cycles and is disabled under `prefers-reduced-motion`.
+- **Respect reduced motion.** Decorative animation is disabled under `prefers-reduced-motion`.
 
 ## Content guidelines (Orbit Media approach)
 The site follows Andy Crestodina and Orbit Media's approach to content and conversion (see *Content Chemistry* and the Orbit blog). Apply these when writing pages or posts.

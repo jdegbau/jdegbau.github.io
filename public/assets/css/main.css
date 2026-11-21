@@ -706,7 +706,7 @@ a.jdb-panel:hover,
 .jdb-hero--home h1 { font-size: var(--jdb-fs-4xl); max-width: 16ch; }
 .jdb-hero--home h1 .jdb-cursor {
   display: inline-block; width: .5ch; height: .85em; background: var(--jdb-orange-500);
-  margin-left: .1em; animation: jdb-blink 1.05s steps(1) 6; vertical-align: -0.1em;
+  margin-left: .1em; animation: jdb-blink 1.05s steps(1) infinite; vertical-align: -0.1em;
 }
 @keyframes jdb-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .jdb-cursor { animation: none; } }
@@ -1072,11 +1072,7 @@ a.jdb-tag:hover { background: var(--jdb-orange-a20); color: #fff; }
 }
 .jdb-quiz__option:hover { border-color: var(--jdb-orange-500); color: #fff; }
 .jdb-quiz__option.is-selected { background: var(--jdb-orange-a10); border-color: var(--jdb-orange-500); color: #fff; }
-.jdb-quiz__option.is-selected::before { content: "\2713\00a0"; color: var(--jdb-orange-400); }
-.jdb-quiz__progress { display: flex; align-items: center; gap: var(--jdb-s-3); margin-bottom: var(--jdb-s-6); font-family: var(--jdb-font-mono); font-size: var(--jdb-fs-xs); color: var(--jdb-fg-muted); }
-.jdb-quiz__progress-track { flex: 1; height: 4px; border-radius: var(--jdb-r-pill); background: rgba(255,255,255,.08); overflow: hidden; }
-.jdb-quiz__progress-fill { display: block; height: 100%; width: var(--_p, 0%); background: var(--jdb-orange-500); border-radius: inherit; transition: width var(--jdb-t); }
-.jdb-quiz__q.is-answered .jdb-quiz__qnum::after { content: " \2713"; color: var(--jdb-good); }
+
 .jdb-quiz__result {
   margin-top: var(--jdb-s-6); padding-top: var(--jdb-s-6); border-top: 1px dashed var(--jdb-line-strong);
   display: none;
