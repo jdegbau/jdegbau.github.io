@@ -3,8 +3,8 @@ import { getAllPosts } from '../lib/posts';
 export const prerender = true;
 
 const siteUrl = 'https://jdegbau.com';
-const siteTitle = 'Joshua DeGrasse-Baumann | SEO, Data, and Development';
-const siteDescription = 'SEO consultant, data enthusiast, and developer writing about analytics, SEO, and measurement.';
+const siteTitle = 'Joshua DeGrasse-Baumann | Content, Data Visualization, and Measurement Strategy';
+const siteDescription = 'Content strategist writing about data visualization, measurement strategy, analytics, and SEO.';
 
 function escapeXml(value: string) {
   return value
