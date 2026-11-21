@@ -1,8 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Logos from '../components/Logos.astro';
+import Steps from '../components/Steps.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
 
 const seoTitle = 'Schedule a Call';
-const description = 'Have an urgent SEO or data question? Schedule a one-hour call with the SEO Helpline and get an expert consultation for just $100.';
+const description = 'Have an urgent SEO, content, or measurement question? Schedule a one-hour call with the SEO Helpline and get an expert consultation for just $100.';
+const faq = [
+  {
+    question: 'Is this a sales call?',
+    answer: 'No. It’s a working session focused on your question. There’s no retainer and no obligation to buy anything else.',
+  },
+  {
+    question: 'Is it only for SEO questions?',
+    answer: 'SEO is the most common topic, but content strategy, analytics, GA4 and Tag Manager tracking, measurement plans, and reporting questions are all welcome.',
+  },
+  {
+    question: 'How should I prepare?',
+    answer: 'Write down the question and the outcome you want, and gather any links, screenshots, or data that help explain it. Sharing them ahead of time lets us spend the hour on answers, not setup.',
+  },
+  {
+    question: 'What if I need more than one call?',
+    answer: 'You can book another session anytime, or <a href="/contact/">send a note</a> if you think you need ongoing help.',
+  },
+];
 ---
 <BaseLayout seoTitle={seoTitle} description={description}>
   <section class="jdb-hero helpline-hero">
@@ -23,8 +44,40 @@ const description = 'Have an urgent SEO or data question? Schedule a one-hour ca
           <strong class="helpline-rate__price">$100</strong>
           <span class="helpline-rate__unit">per 60-minute call</span>
           <div class="helpline-rate__rule"></div>
-          <p>Direct, practical guidance for SEO and data questions. No retainer or ongoing commitment.</p>
+          <p>Direct, practical guidance for SEO, content, and measurement questions. No retainer or ongoing commitment.</p>
         </aside>
+      </div>
+    </div>
+  </section>
+
+  <Logos />
+
+  <section class="jdb-section jdb-section--raised">
+    <div class="jdb-container jdb-container--wide">
+      <div class="jdb-grid jdb-grid--2 helpline-details">
+        <div>
+          <span class="jdb-eyebrow">good fits for a call</span>
+          <h2>Bring a specific question</h2>
+          <ul class="helpline-topics">
+            <li>Traffic dropped and you don’t know why</li>
+            <li>A site migration or redesign is coming up</li>
+            <li>You need a content plan or a second opinion on one</li>
+            <li>Your GA4 or Tag Manager data doesn’t look right</li>
+            <li>You need a report or dashboard that people will actually read</li>
+          </ul>
+        </div>
+        <div>
+          <span class="jdb-eyebrow">what to expect</span>
+          <h2>How the session works</h2>
+          <Steps label="How an SEO Helpline session works">
+            <ol>
+              <li><strong>Book a time below.</strong> Payment is handled when you book.</li>
+              <li><strong>Share context ahead of time.</strong> Send your question, links, and any data you have.</li>
+              <li><strong>Meet for an hour.</strong> We dig into the problem together and prioritize what to do.</li>
+              <li><strong>Leave with next steps.</strong> You’ll know what to fix first and why.</li>
+            </ol>
+          </Steps>
+        </div>
       </div>
     </div>
   </section>
@@ -44,6 +97,8 @@ const description = 'Have an urgent SEO or data question? Schedule a one-hour ca
       <script src="https://asset-tidycal.b-cdn.net//js/embed.js"></script>
     </div>
   </section>
+
+  <FAQAccordion items={faq} title="Questions before you book" eyebrow="faq" />
 
 </BaseLayout>
 
@@ -98,6 +153,30 @@ const description = 'Have an urgent SEO or data question? Schedule a one-hour ca
   }
 
   .helpline-rate p { margin: 0; font-size: var(--jdb-fs-sm); }
+
+  .helpline-details { gap: clamp(2rem, 5vw, 4rem); }
+  .helpline-details h2 { font-size: var(--jdb-fs-2xl); }
+
+  .helpline-topics {
+    display: grid;
+    gap: var(--jdb-s-3);
+    margin: var(--jdb-s-5) 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--jdb-fg-dim);
+  }
+
+  .helpline-topics li {
+    display: flex;
+    gap: var(--jdb-s-3);
+    align-items: baseline;
+  }
+
+  .helpline-topics li::before {
+    color: var(--jdb-good);
+    content: '>';
+    font-family: var(--jdb-font-mono);
+  }
 
   .helpline-booking { scroll-margin-top: calc(var(--jdb-header-h) + var(--jdb-s-4)); }
 

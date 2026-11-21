@@ -71,6 +71,14 @@ Notes:
 - Uses native `<details>/<summary>` for accessible, theme-consistent expansion.
 - On blog posts, prefer the `faq` front matter field: the template renders this component and the FAQPage schema from the same items.
 
+### CallToAction
+Purpose: End-of-page call to action with a headline, one line of context, and one or two buttons.
+Location: `src/components/CallToAction.astro`
+Notes:
+- Props: `title`, `primary: { href, label }`, optional `secondary`, `text`, `prompt` (terminal-style line, default "next step"), `price: { amount, unit }`, `headingLevel` (`h2` default or `h3`).
+- Uses the shared `.jdb-cta` styles in `main.css` (section 31).
+- Every page should end with a clear next step; use this instead of hand-building a CTA section.
+
 ### CodeBlock
 Purpose: Styling wrapper for code snippets.
 Location: `src/components/CodeBlock.astro`
@@ -85,6 +93,7 @@ Notes:
 - Requires an `action` prop for the form submission endpoint.
 - Supports a `demo` prop that disables submission for component-library examples.
 - Includes the Formcarry honeypot and reCAPTCHA response fields used by the contact page.
+- Fields: `name`, `email`, `message`. Keep it short: every extra field lowers completion.
 
 ### TableOfContents
 Purpose: Sticky sidebar table of contents for long-form posts.
@@ -273,6 +282,24 @@ Notes:
 - Chart.js 4.6.1 and plugins load once per page from jsDelivr with SRI, lazily when the chart nears the viewport. The site's dark theme defaults are applied, and animation is off for `prefers-reduced-motion`.
 - To upgrade a library, edit the pinned URL and hash in `src/lib/chart-loader.ts` (instructions are in the file).
 - `table` adds a "View the data" panel for screen readers, and as a fallback if the chart can't load.
+
+## Content guidelines (Orbit Media approach)
+The site follows Andy Crestodina and Orbit Media's approach to content and conversion (see *Content Chemistry* and the Orbit blog). Apply these when writing pages or posts.
+
+**Every page**
+- **Say what you do, for whom, in the header.** Use a descriptive headline, not a clever one. A visitor should get it in five seconds.
+- **Answer questions, address objections, add evidence.** Answer what visitors want to know, cover their hesitations (FAQs work well), and back up claims with proof such as logos, specifics, and testimonials. Never invent proof.
+- **End with one clear next step.** Use `CallToAction`. Primary action: the SEO Helpline or the contact form. Secondary: the newsletter or the blog.
+- **Use descriptive labels.** Use labels like "SEO Helpline", not vague ones like "Solutions". Keep the main nav short with Contact last.
+- **Make it scannable.** Write short paragraphs, use a meaningful subhead every few paragraphs, use bullets for lists, and bold sparingly.
+
+**Blog posts**
+- **Fit the content mission.** The blog is where marketers and analysts get practical guides on content strategy, data visualization, measurement, and SEO, so they can make better decisions and prove the value of their work. Skip topics that don't fit.
+- **Target a real question.** Pick a topic with a clear search or audience need, put the key phrase in the title, H1, URL, and excerpt, and answer the question early.
+- **Go deeper than what already ranks.** Add something new: original data or research, a framework, worked examples, visuals, or quotes from contributors (ally-based content).
+- **Show the work.** Use charts, screenshots, and annotated figures (`ChartPlayground`, `AnnotatedFigure`, `BeforeAfter`). Every visual needs alt text.
+- **Link internally.** Link to related posts. The template adds `RelatedPosts`, a subscribe prompt, and the author box automatically.
+- **Promote every post.** Plan the email, social, and ally outreach (people quoted or mentioned) before you publish. Update and re-promote strong older posts rather than letting them decay. Set `updated` in the front matter when you do.
 
 ## Component creation checklist
 When adding a new component:

@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Logos from '../components/Logos.astro';
 import BlogCard from '../components/BlogCard.astro';
+import Steps from '../components/Steps.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { getAllPosts } from '../lib/posts';
 import { author } from '../data/author';
 
@@ -9,6 +12,25 @@ const seoTitle = 'Joshua DeGrasse-Baumann | Content, Data Visualization, and Mea
 const description = 'Joshua DeGrasse-Baumann is a content strategist focused on data visualization, measurement strategy, and SEO. Learn how Josh helps teams publish with purpose and prove what works.';
 const posts = await getAllPosts();
 const featuredPosts = posts.slice(0, 3);
+// Answers the questions and objections a visitor has before reaching out.
+const faq = [
+  {
+    question: 'Who do you work with?',
+    answer: 'Marketing teams, content teams, and business owners who publish content and need to know whether it’s working. If you have content, data, or both and aren’t sure what to do next, we should talk.',
+  },
+  {
+    question: 'What’s the difference between content strategy and measurement strategy?',
+    answer: 'Content strategy decides what to publish, for whom, and why. Measurement strategy decides how you’ll know it worked: which KPIs matter, what to track, and how to report it. They work best together, which is why I do both.',
+  },
+  {
+    question: 'Do you still do SEO?',
+    answer: 'Yes. Search is one of the most reliable ways for useful content to find its audience, so SEO is part of almost every content plan I build. You can also book the <a href="/seo-helpline/">SEO Helpline</a> for a focused one-hour session on an SEO problem.',
+  },
+  {
+    question: 'How do we get started?',
+    answer: 'Book a one-hour <a href="/seo-helpline/">consultation call</a> if you have a specific question, or <a href="/contact/">send a short note</a> describing your goal and where you’re stuck. I usually reply within two business days.',
+  },
+];
 const pageSchema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -60,10 +82,10 @@ const pageSchema = {
       <div class="jdb-hero__inner">
         <div class="jdb-hero__kicker">
           <span class="jdb-icon jdb-icon--check" aria-hidden="true"></span>
-          Joshua DeGrasse-Baumann
+          Hi, I'm Josh DeGrasse-Baumann
         </div>
         <h1>
-          Hi! I'm Josh.<span class="jdb-cursor" aria-hidden="true"></span>
+          Content strategy and measurement that prove what works.<span class="jdb-cursor" aria-hidden="true"></span>
         </h1>
         <p class="jdb-hero__role">Content Strategy • Data Visualization • Measurement Strategy</p>
         <p class="jdb-hero__lede">
@@ -71,7 +93,7 @@ const pageSchema = {
         </p>
         <div class="jdb-hero__actions">
           <a href="/seo-helpline/" class="jdb-btn jdb-btn--primary jdb-btn--lg">Book a consultation</a>
-          <a href="/blog/" class="jdb-btn jdb-btn--outline jdb-btn--lg">Read my writing</a>
+          <a href="/blog/" class="jdb-btn jdb-btn--outline jdb-btn--lg">Read the guides</a>
         </div>
       </div>
     </div>
@@ -111,9 +133,27 @@ const pageSchema = {
   </section>
 
   <section class="jdb-section jdb-section--raised">
+    <div class="jdb-container jdb-container--narrow">
+      <div class="jdb-section__head">
+        <span class="jdb-eyebrow">how I work</span>
+        <h2 class="jdb-section__title">From question to answer in four steps</h2>
+        <p class="jdb-section__sub">Good content programs start with research and end with a clear report. Here’s what working together looks like.</p>
+      </div>
+      <Steps label="How a content and measurement engagement works">
+        <ol>
+          <li><strong>Understand the audience and the goal.</strong> We start with the questions your audience is asking and the business outcome the content needs to support.</li>
+          <li><strong>Plan the content.</strong> Audit what exists, find the gaps, and build a focused plan for what to create, update, or retire.</li>
+          <li><strong>Define how success is measured.</strong> Agree on KPIs, then set up the tracking (GA4, Tag Manager, Search Console) to capture them.</li>
+          <li><strong>Report and refine.</strong> Turn the data into clear visuals that show what’s working, then double down on it.</li>
+        </ol>
+      </Steps>
+    </div>
+  </section>
+
+  <section class="jdb-section">
     <div class="jdb-container">
       <div class="jdb-section__head jdb-section__head--center">
-        <span class="jdb-eyebrow">recent work</span>
+        <span class="jdb-eyebrow">practical guides</span>
         <h2 class="jdb-section__title">Featured writing</h2>
         <p class="jdb-section__sub">Notes on content strategy, data visualization, measurement, and SEO.</p>
       </div>
@@ -122,21 +162,29 @@ const pageSchema = {
           <BlogCard post={post} />
         ))}
       </div>
+      <div class="jdb-center home-more">
+        <a href="/blog/" class="jdb-btn jdb-btn--outline">Browse all posts</a>
+      </div>
     </div>
   </section>
 
+  <FAQAccordion items={faq} title="Questions people ask before reaching out" eyebrow="faq" />
+
   <section class="jdb-section">
     <div class="jdb-container">
-      <div class="jdb-section__head jdb-section__head--center">
-        <span class="jdb-eyebrow">all posts</span>
-        <h2 class="jdb-section__title">A full archive of ideas and experiments</h2>
-      </div>
-      <div class="jdb-postgrid">
-        {posts.map((post) => (
-          <BlogCard post={post} />
-        ))}
-      </div>
+      <CallToAction
+        prompt="ready when you are"
+        title="Have a content or measurement question?"
+        text="Book a focused one-hour call and leave with a clear diagnosis and practical next steps. No retainer required."
+        primary={{ href: '/seo-helpline/', label: 'Book a consultation' }}
+        secondary={{ href: '/contact/', label: 'Send a note first' }}
+        price={{ amount: '$100', unit: 'per 60-minute call' }}
+      />
     </div>
   </section>
 
 </BaseLayout>
+
+<style>
+  .home-more { margin-top: var(--jdb-s-6); }
+</style>

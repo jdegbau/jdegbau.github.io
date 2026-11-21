@@ -10,6 +10,8 @@ import PostMeta from '../../components/PostMeta.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import QuickCompareMatrix from '../../components/QuickCompareMatrix.astro';
 import PostSeriesNav from '../../components/PostSeriesNav.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import CallToAction from '../../components/CallToAction.astro';
 import { render } from 'astro:content';
 import { getAllPosts, getHeadings, getPostBySlug } from '../../lib/posts';
 
@@ -152,6 +154,15 @@ const schema = {
             {post.faq.length > 0 && <FAQAccordion items={post.faq} title={faqTitle} />}
             {isDataVizGuide && <ChartTypeAssessment />}
             {post.series && <PostSeriesNav series={post.series} current={post.slug} />}
+            <CallToAction
+              prompt="found this useful?"
+              title="Get the next guide in your inbox"
+              text="Practical notes on content strategy, data visualization, measurement, and SEO, sent when they’re published."
+              primary={{ href: '#newsletter', label: 'Subscribe by email' }}
+              secondary={{ href: '/seo-helpline/', label: 'Book a consultation' }}
+              headingLevel="h2"
+            />
+            <RelatedPosts current={post.slug} />
           </div>
         </div>
       </div>

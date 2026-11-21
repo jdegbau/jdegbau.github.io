@@ -57,15 +57,16 @@ const currentYear = new Date().getFullYear();
         <ul class="jdb-footer__list">
           <li><a class="jdb-footer__link" href="mailto:josh@jdegbau.com">josh@jdegbau.com</a></li>
           <li><a class="jdb-footer__link" href="/seo-helpline/">Book a consultation</a></li>
+          <li><a class="jdb-footer__link" href="#newsletter">Subscribe by email</a></li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="jdb-container">
-    <div class="jdb-newsletter">
-      <h3 class="jdb-newsletter__title">Join my newsletter</h3>
-      <p>Short notes on content strategy, data visualization, measurement, and SEO.</p>
+    <div class="jdb-newsletter" id="newsletter">
+      <h3 class="jdb-newsletter__title">Get practical content and measurement tips by email</h3>
+      <p>New guides on content strategy, data visualization, measurement, and SEO, sent when they’re published. No spam, and you can unsubscribe anytime.</p>
       <form method="post" action="https://sendfox.com/form/3odzg9/mp8k5q" class="sendfox-form" id="mp8k5q" data-async="true" data-recaptcha="true">
         <div class="jdb-form__row">
           <div class="jdb-field">
@@ -73,16 +74,12 @@ const currentYear = new Date().getFullYear();
             <input class="jdb-input" type="text" id="sendfox_form_name" placeholder="First name" name="first_name" required />
           </div>
           <div class="jdb-field">
-            <label for="sendfox_form_last_name">Last name</label>
-            <input class="jdb-input" type="text" id="sendfox_form_last_name" placeholder="Last name" name="last_name" required />
-          </div>
-          <div class="jdb-field">
             <label for="sendfox_form_email">Email</label>
             <input class="jdb-input" type="email" id="sendfox_form_email" placeholder="Email" name="email" required />
           </div>
         </div>
         <div class="jdb-newsletter__row">
-          <button class="jdb-btn jdb-btn--primary" type="submit">Sign me up</button>
+          <button class="jdb-btn jdb-btn--primary" type="submit">Send me new guides</button>
         </div>
       </form>
     </div>
